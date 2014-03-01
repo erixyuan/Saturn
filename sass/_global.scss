@@ -1,0 +1,1359 @@
+// 雅黑字體
+$font-yahei: "Microsoft YaHei", "微软雅黑", "\5FAE\8F6F\96C5\9ED1", "Microsoft JhengHei", STHeiti;
+$font-mingliu: Tahoma, Mingliu, sans-serif;
+$font-simsun: Tahoma, Simsun, sans-serif;
+$font-base: Arial, Tahoma, sans-serif;
+$font-code: Menlo, Monaco, Consolas, "Courier New", monospace;
+$g-border-radius: 2px;
+
+
+// box內陰影
+@mixin g-box-shadow-inset {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+// box外陰影
+@mixin g-box-shadow {
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+}
+
+
+
+
+
+// btn內陰影（按下）
+@mixin g-btn-shadow-inset {
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+}
+
+
+// 劃過動畫
+@mixin g-transition-background {
+    -webkit-transition-property: background;
+    -moz-transition-property: background;
+    -o-transition-property: background;
+    transition-property: background;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+
+
+// 不当前文本或元素被选中。
+// 如果有必要多浏览器兼容，可以在IE6-9中执行这段JS。
+// document.body.onselectstart = document.body.ondrag = function(){
+//     return false;
+// }
+@mixin disableSelect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+
+// 用于锁住文本宽度，多出的用...代替，使用时，记得加个width。
+@mixin hiddenText {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+
+
+
+
+
+
+
+// 全局 链接样式
+a {
+    color: #06c;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+
+//的工具类 Fn
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+
+.fn-hide {
+    display: none;
+}
+
+.fn-left,.fn-right {
+    display:inline;
+    @media screen and (max-width: 1024px) {
+        .g-btn {
+            margin-bottom: .5em;
+        }
+    }
+}
+
+.fn-left {
+    float: left;
+}
+
+.fn-right {
+    float: right;
+}
+
+.fn-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
+// 一块东西 白色底 有灰色边框
+.layout-block {
+    display: block;
+    position: relative;
+    clear: both;
+    overflow: visible;
+    padding: 3px 10px;
+    margin-bottom: .5em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: $g-border-radius;
+    color: #868686;
+    font-size: 14px;
+
+    span {
+        margin-right: 1em;
+    }
+    .input-text {
+        margin: 0 .5em;
+    }
+}
+
+
+// 设置页面和其他简单页面的通用样式
+.m-block {
+    position: relative;
+    overflow: hidden;
+    margin: 1em;
+
+    @media screen and (max-width: 1024px) {
+        margin: 0 0 1em 0;
+    }
+    //页面的标题栏
+    h2.page-title {
+        overflow: hidden;
+        *zoom: 1;
+
+        //标题栏右边的按钮
+        .header-btns {
+            float: right;
+            font-size: 12px;
+            font-weight: normal;
+            // 手机版的时候要独立一排 并设且让按钮变得巨大
+            @media screen and (max-width: 1024px) {}
+        }
+    }
+
+
+
+     // 每个大块 通常相关的东西都会放在同一个大块里
+    .section {
+        position: relative;
+        overflow: hidden;
+        @media screen and (max-width: 1024px) {
+            overflow: auto;
+        }
+        *zoom: 1;
+        // background-color: #fff;
+        // border: 1px solid #ccc;
+        margin: 0 0 3em 0;
+        clear: both;
+
+        //大块的标题
+        h2 {
+            margin: 0 0 0.5em 0;
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+            font-size: 20px;
+            font-family: $font-mingliu;
+            font-weight: bold;
+        }
+    }
+
+    // 每一行 / 栏位
+    .field {
+        padding: 1em 0;
+        font-size: 14px;
+
+        // 最后一个栏位不要分割线
+
+        &:last-child {
+            border: 0;
+        }
+
+        &:hover em {
+            color: #555;
+        }
+
+        //里面的全部东西都要垂直居中
+        * {
+            vertical-align: middle;
+        }
+
+        // 栏位的 标签
+        label {
+            display: inline-block;
+            zoom: 1;
+            width: 10em;
+            font-weight: bold;
+            text-align: right;
+            margin-right: 10px;
+
+            @media screen and (max-width: 1024px) {
+                display: block;
+                margin-bottom: .5em;
+                width: auto;
+                text-align: left;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .input-text, .g-select {
+                display: block;
+                margin-left: 0;
+                margin-bottom: 1em;
+            }
+        }
+
+
+        //栏位的注释 不要斜体
+        em {
+            display: inline-block;
+            zoom: 1;
+            font-size: 10px;
+            font-style: normal;
+            font-family: $font-code;
+            margin-left: 5px;
+            color: #f7f7f7;
+            @include g-transition-background;
+
+            input {
+                margin-right: .5em;
+            }
+
+            @media screen and (max-width: 1024px) {
+                display: none;
+            }
+        }
+    }
+
+    // 页脚 通常是用来存放保存按钮 或者翻页这些东西
+    .w-page-footer {
+        margin-top: 1.5em;
+        margin-bottom: 3em;
+        overflow: hidden;
+        *zoom: 1;
+        // 通常用来存放一些批量操作的 按钮和选项的
+        .m-function {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            float: left;
+            vertical-align: middle;
+            margin-right: 1em;
+        }
+
+        //分页器
+        .g-pagination {
+            float: right;
+        }
+    }
+}
+
+
+
+//按钮
+//
+//定義常規按鈕padding的變量，ud是上下，lr是左右。
+$g-btn-padding-ud: 6px;
+$g-btn-padding-lr: 20px;
+
+.g-btn, a.g-btn, button.g-btn, input.g-btn {
+    display: inline-block;
+    zoom: 1;
+    text-decoration: none;
+    color: #333;
+    background-color: #f2f2f2;
+    border: 1px solid #9e9e9e;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: $g-border-radius;
+    padding: $g-btn-padding-ud $g-btn-padding-lr;
+
+    // 去除虚框
+    outline: none;
+    cursor:pointer;
+
+    @include g-transition-background;
+
+
+    &:hover {
+        background-color: #fbfbfb;
+    }
+
+    &:active {
+        background: #a1a6a9;
+        @include g-btn-shadow-inset;
+    }
+
+    // 最小的按钮
+    &.g-btn-mini {
+        font-size: 11px;
+        font-weight: normal;
+        font-family: $font-mingliu;
+        padding: 0 $g-btn-padding-lr/10;
+    }
+
+    // 最大的按钮
+    &.g-btn-large {
+        font-size: 16px;
+        font-weight: bold;
+        padding: $g-btn-padding-ud*1.2 $g-btn-padding-lr*1.8;
+    }
+
+    // 行按钮
+    &.g-btn-block{
+        display: block;
+        clear: both;
+        margin: .5em 0;
+        text-align: center;
+    }
+
+    //确认按钮
+    &.g-btn-primary {
+        background-color: #0eb966;
+        color: #fff;
+        border-color: #04954f;
+
+        &:hover {
+            background-color: #12d576;
+        }
+
+        &:active {
+            background: #16a085;
+        }
+    }
+
+
+    // 删除按钮
+    &.g-btn-delete {
+        background: #e54028;
+        color: #fff;
+        border: 1px solid #aa1600;
+
+        &:hover {
+            background: #f55e48;
+        }
+
+        &:active {
+            background: #cd5240;
+        }
+    }
+}
+
+
+input.g-btn {
+    *zoom: 1;
+}
+
+// 修复IE按下按钮的时候背景偏移的问题
+input.g-btn:active, button.g-btn:active {
+    -ms-background-position-x: 1px;
+    -ms-background-position-y: -29px;
+    *background-position: 1px -29px;
+}
+
+
+
+
+// 按钮组
+.g-btn-group {
+    overflow: hidden;
+    zoom: 1;
+    display: inline-block;
+    border-radius: $g-border-radius;
+
+    @media screen and (max-width: 1024px) {
+        display: block;
+        width: 100%;
+        margin-bottom: .5em;
+    }
+
+    .g-btn {
+        float: left;
+        border-right: 0;
+        border-radius: 0;
+
+        @media screen and (max-width: 1024px) {
+            //改成竖排
+            float: none;
+            display: block;
+            border-right: 1px solid #9e9e9e;
+        }
+
+        &.active {
+            background-color: #0fb866;
+            color: #fff;
+            border-color: #04954f;
+        }
+    }
+
+    .g-btn:last-child {
+        border-right: 1px solid #9e9e9e;
+    }
+}
+
+
+//选择框
+//
+//定義常規按鈕padding的變量，ud是上下，lr是左右。
+$g-select-padding-ud: 6px;
+$g-select-padding-lr: 10px;
+
+.g-select {
+    padding: $g-select-padding-ud $g-select-padding-lr;
+    font-size: 12px;
+    @include g-box-shadow-inset;
+    border: 1px solid #c6c6c6;
+}
+
+// 样式化 选择框
+label.g-select {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #c6c6c6;
+    width: auto!important;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    @include g-box-shadow-inset;
+
+    &:before {
+        position: absolute;
+        content: '';
+        width: 20px;
+        height: 20px;
+        top: 5px;
+        right: 5px;
+        background: #ececec;
+         pointer-events: none;
+    }
+
+    &:after {
+        position: absolute;
+        top: 13px;
+        right: 10px;
+        content: '';
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 5px 5px 0 5px;
+        border-color: #999 transparent transparent transparent;
+        line-height: 0px;
+        _border-color: #999 #000 #000 #000;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+        pointer-events: none;
+    }
+
+    select {
+        margin-top: 4px;
+        padding-right: 20px;
+        width: 100%;
+        padding-left: 0;
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+    }
+}
+
+
+// 小的选择框
+.g-select-mini {
+    padding: .2em;
+    font-size: 80%;
+    font-family: $font-mingliu;
+}
+
+// 大的选择框
+.g-select-large {
+    padding: 8px 5px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+// 样式化组合输入框
+label.g-combo {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #c6c6c6;
+    width: auto!important;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    padding: 3px;
+    @include g-box-shadow-inset;
+
+    &:before {
+        position: absolute;
+        content: '';
+        width: 20px;
+        height: 20px;
+        top: 5px;
+        right: 5px;
+        background: #ececec;
+         pointer-events: none;
+    }
+
+    &:after {
+        position: absolute;
+        top: 13px;
+        right: 10px;
+        content: '';
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 5px 5px 0 5px;
+        border-color: #999 transparent transparent transparent;
+        line-height: 0px;
+        _border-color: #999 #000 #000 #000;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+        pointer-events: none;
+    }
+
+    input {
+        padding-left: 3px;
+        padding-right: 23px;
+        margin-top: 2px;
+        padding-left: 0;
+        border: none;
+        outline: none;
+    }
+
+    // 下拉出来的选项
+    ul {
+        position: absolute!important;
+        left: 0;
+        right: 0;
+        top: 19px;
+        list-style-type: none;
+        padding: 0;
+        background: #fff;
+        border: 1px solid #1488e4;
+        border-top-width: 0;
+        display: none;
+
+        &.open {
+            display: block;
+        }
+
+        li {
+            padding-left: 1em;
+        }
+        li:hover {
+            background-color: #1488e4;
+        }
+    }
+}
+
+
+
+//radio选项 勾选项
+.g-checkbox, .g-checkbox {
+    color: #3b3b3b;
+    input {
+        margin-right: .1em;
+        vertical-align: middle;
+    }
+}
+
+// 输入框
+.input-text, textarea {
+    padding: 7px 5px;
+    color: #34495e;
+    border: 1px solid #ccc;
+    border-radius: $g-border-radius;
+    outline: 0;
+    @include g-box-shadow-inset;
+}
+
+// 修复HTML5 时间选择器被剃头的BUG
+input[type="date"]::-webkit-inner-spin-button, input[type="month"].input-text-mini::-webkit-inner-spin-button {
+    height: 20px;
+}
+
+.input-text-mini {
+    padding: 3px;
+    font-size: 11px;
+    font-family: $font-mingliu;
+}
+
+input[type="date"].input-text-mini::-webkit-inner-spin-button, input[type="month"].input-text-mini::-webkit-inner-spin-button {
+    height: 20px;
+}
+
+
+// 错误的输入框
+.input-text-error {
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+}
+
+.input-text-success {
+    color: #2ecc71;
+    border: 2px solid #2ecc71;
+}
+
+.input-text[disabled] {
+    border-color: #d5dbdb;
+    color: #d5dbdb;
+    background-color: #f4f6f6;
+}
+
+//数字输入框
+.input-num {
+    width: 2em;
+}
+
+//选中框
+.input-checkbox {
+    vertical-align: middle;
+    margin-right: .2em;
+}
+
+// 分页器
+.g-pagination {
+    overflow: hidden;
+    zoom: 1;
+    color: #999;
+    font-family: $font-simsun;
+    font-size: 14px;
+
+    @media screen and (max-width: 1024px) {
+        float: none!important;
+        clear: both;
+    }
+
+    a {
+        font-family: $font-simsun;
+    }
+
+    //去第几页
+    .goto {
+        overflow: hidden;
+        zoom: 1;
+        display: inline-block;
+        margin-right: .5em;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+
+         input {
+            box-sizing: content-box;
+            padding: .1em 0;
+            margin: 0 .5em;
+            width: 3em;
+            text-align: center;
+         }
+
+         .g-btn-mini {
+            margin-left: .5em;
+            // padding: 3px 5px;
+            background: #fff;
+
+         }
+    }
+
+
+
+
+    .prev, .next, .num {
+        display: inline-block;
+        zoom: 1;
+        color: #9d9d9d;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #dfdfdf;
+        cursor: pointer;
+        margin: 0 .2em;
+
+
+        a {
+            color: #9d9d9d;
+            text-decoration: none;
+            display: block;
+            padding: $g-btn-padding-ud $g-btn-padding-lr/2;
+            font-size: 14px;
+            line-height: 1;
+
+            &:hover {
+                background-color: #0fb866;
+                color: #fff;
+                border-color: #04954f;
+            }
+        }
+
+
+
+        //当前的页码
+        &.current {
+            background-color: #0fb866;
+            color: #fff;
+            border-color: #04954f;
+            cursor: default;
+
+            a {
+                cursor: default;
+                color: #fff;
+                font-weight: bold;
+            }
+        }
+
+
+    }
+
+    .prev, .next {
+        position: relative;
+        top: -8px;
+
+        a {
+            font-weight: bold;
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        .prev {
+            margin-left: 1em;
+            float: left;
+        }
+
+        .next {
+            margin-right: 1em;
+            float: right;
+        }
+    }
+
+
+    .numbers{
+        display: inline-block;
+        overflow: hidden;
+        zoom: 1;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+
+        li {
+            position: relative;
+            margin-right: .1em;
+
+            //被省略的点点点
+            &.dot {
+                display: inline-block;
+                vertical-align: bottom;
+            }
+        }
+    }
+}
+
+
+// 表格
+.g-table {
+    width: 100%;
+
+    //表头
+    thead {
+        background: #fff;
+        border: 1px solid #ccc;
+        border-top: 2px solid #555;
+        font-weight: bold;
+        font-size: 12px;
+
+        th {
+            padding: 10px 5px;
+            border-bottom: 1px solid #888;
+            font-family: $font-simsun;
+        }
+    }
+
+    // 表体
+    tbody {
+
+        tr {
+            background-color: #fff;
+            border: 1px solid #ccc;
+
+            &:hover {
+                background-color: #f4fff2;
+
+                @include g-transition-background;
+            }
+
+            td {
+                padding: 9px 5px;
+                font-size: 14px;
+                text-align: center;
+                a {
+                    color: #000;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+
+
+            &:nth-child(odd), &.odd {
+                background-color: #fcfcfc;
+
+                &:hover {
+                    background-color: #f4fff2;
+                }
+            }
+        }
+    }
+
+    // 颜色配置
+    .warning {
+        background-color: #ffc;
+    }
+
+    .success {
+        background-color: #dff0d8;
+    }
+
+    .active {
+        background-color: #f5f5f5;
+    }
+
+    .danger {
+        background-color: #dff0d8;
+    }
+
+    // 全选的宽度
+    .col-checkbox {
+        width: 25px;
+    }
+
+    // 升序和降序符号
+    .order-asc, .order-desc {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        vertical-align: middle;
+    }
+
+    .order-desc {
+        border-width: 5px 5px 0 5px;
+        border-color: #000000 transparent transparent transparent;
+        line-height: 0px;
+        _border-color: #000000 #ffffff #ffffff #ffffff;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#ffffff');
+    }
+
+    .order-asc {
+        border-width: 0 5px 5px 5px;
+        border-color: transparent transparent #000000 transparent;
+        line-height: 0px;
+        _border-color: #ffffff #ffffff #000000 #ffffff;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#ffffff');
+    }
+
+
+    .mobile-hide {
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+    }
+}
+
+
+// 单列列表
+.g-list {
+    position: relative;
+    overflow: hidden;
+    *zoom: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #c6ced6;
+    font-size: 14px;
+    .child, .list-header {
+        padding: .4em;
+    }
+
+    .list-header {
+        background: #ededed;
+        font-weight: bold;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .child {
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+
+        &:nth-child(odd) {
+            background-color: #fbfffa;
+            &:hover {
+                background-color: #e7ffe0;
+            }
+        }
+
+        &:hover {
+            background-color: #e7ffe0;
+        }
+    }
+
+}
+
+
+// 多选+自定义选项组件，以後不知道，現在就手機模塊會用到。還是放出來吧。
+.multiple-select {
+    vertical-align: top;
+    width: 110px;
+    h3 {
+        font-size: 14px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    select {
+        width: 110px;
+        height: 140px;
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-family: Tahoma, Mingliu;
+    }
+
+    input {
+        display: none;
+        //visibility: hidden;
+        width: 105px;
+        height: 20px;
+        line-height: 18px;
+        margin-bottom: 5px;
+    }
+
+    .g-btn-block {
+        width: 90%;
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/////       swfupload-list-file 是swf 上传空间产生
+///////////////////////////////////////////////////////////////////////////////////////////////////
+.swfupload-list-file {
+    position: relative;
+    overflow: hidden;
+    *zoom: 1;
+    list-style: none;
+    margin: .5em 0 1em 0;
+    padding: 0;
+    font-size: 11px;
+    font-family: $font-mingliu;
+    //已经上传的文件
+    .swfupload-list-file {
+        margin-bottom: .2em;
+        padding: .5em;
+        background: #eee;
+
+        .icon-upload {
+            margin-right: .5em;
+        }
+        // 删除 等按钮
+        .actions {
+            margin-left: 1em;
+        }
+    }
+}
+
+
+.attachment-list {
+    position: relative;
+    overflow: hidden;
+    *zoom: 1;
+    margin: 0;
+    padding: .5em;
+    background: #fff;
+    border: 1px solid #ccc;
+
+    //单张缩略图
+    li {
+        position: relative;
+        float: left;
+        overflow: hidden;
+        width: 150px;
+        *height: 150px;
+        min-height: 80px;
+        padding: .5em;
+        background: #eee;
+        cursor: pointer;
+        margin-right: 1em;
+        margin-bottom: 1em;
+        font-size: 11px;
+        font-family: $font-mingliu;
+
+        &:active ,&:hover, &.active {
+            background-color: #ffb23d;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        // 文件名 与删除
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #fff;
+            padding: .5em;
+            background-color: rgba(0,0,0,0.7);
+            .filename {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-bottom: .5em;
+            }
+        }
+    }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Modal 弹框
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.g-modal {
+    // 隐藏
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1024;
+   overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(0,0,0,.6);
+
+
+    //隐藏
+    &.show {
+        display: block;
+        opacity: 1;
+    }
+
+    // Modal 主体
+    .g-modal-dialog {
+        position: relative;
+        top: 10%;
+        left: 50%;
+        padding: 20px;
+        width: 600px;
+        margin-left: -300px;
+        background: #fff;
+        border-radius: 4px;
+        @include g-box-shadow-inset;
+
+        margin-top: 3em;
+        @media screen and (max-width: 1024px) {
+                margin-top: 1em;
+                top: 0;
+                left: 0;
+                margin-left: 1em;
+                margin-right: 1em;
+                width: auto;
+
+        }
+
+
+        //关闭 按钮
+        &>.close {
+            margin: -10px -10px 0 0;
+            float: right;
+            font-size: 12px;
+            color: #666;
+            border: 0;
+            text-decoration: none;
+            &:hover {
+                color: #999;
+            }
+        }
+
+        //标题
+        &>h1 {
+            margin: 0 0 15px 0;
+            font-weight: 400;
+            font-size: 26px;
+            line-height: 42px;
+            border-bottom: 1px solid #bbb;
+        }
+
+        // 内容
+        &>p {
+            color: #666;
+            line-height: 1.6em;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            margin: 1em 0;
+            text-align: right;
+            .g-btn {
+                margin-left: .5em;
+            }
+        }
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//      样式化警告窗口
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.g-alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    padding: 10px 30px 10px 10px;
+    background-color: #0f6cd3;
+    font-family: $font-yahei;
+    text-align: center;
+    color: #fff;
+    border-bottom: 3px solid #aab1b9;
+    @include g-box-shadow;
+
+
+    //显示
+    &.show {
+        display: block;
+    }
+
+    //关闭按钮
+    .close {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10001;
+        color: #fff;
+    }
+}
+
+// 信息 - 警告窗口
+.g-alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-bottom-color: #3ec6e2;
+    .close {
+        color: #31708f;
+    }
+}
+
+// 成功 - 警告窗口
+.g-alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-bottom-color: #6ad80e;
+    .close {
+        color: #3c763d;
+    }
+}
+
+// 警告 - 警告窗口
+.g-alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-bottom-color: #ffac00;
+    .close {
+        color: #8a6d3b;
+    }
+}
+
+//   严重错误 - 警告
+.g-alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-bottom-color: #fa3454;
+    .close {
+        color: #a94442;
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  载入 提示
+/// 添加 use-progress 这个class的话表明要显示载入进度,
+/// 给里面的use-progress元素设置宽度百分比代表当前的进度
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.g-loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    padding: 5px;
+    background-color: #fff;
+    text-align: center;
+    font-family: $font-yahei;
+    border-bottom: 3px solid #3283eb;
+    @include g-box-shadow;
+
+    .img-loading {
+        display: inline-block;
+        *display:inline;
+        *zoom: 1;
+        width: 25px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: .5em;
+        background-image: url(../img/loading.gif);
+    }
+
+    &.show {
+        display: block;
+    }
+
+    // 使用百分比进度条
+    &.use-progress {
+        border-bottom: 0;
+        padding-bottom: 13px;
+        .progress-bar {
+            position: absolute;
+            left: 0;
+            bottom:0;
+            height: 3px;
+            background-color: #3283eb;
+        }
+    }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  悬浮在顶部的 过滤工具条
+.g-filter-toolbar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 30px 10px 10px;
+    background: #fff;
+    z-index: 8000;
+    text-align: center;
+    @include g-box-shadow;
+    border-bottom: 3px solid #e5650f;
+    overflow: hidden;
+
+    @media screen and (max-width: 1024px) {
+        text-align: left;
+    }
+    &.show {
+        display: block;
+    }
+
+    .close {
+        position: absolute;
+        top: 10;
+        right: 10px;
+        color: #333;
+        z-index: 8001;
+        text-decoration: none;
+    }
+
+    .input-text {
+        margin: 0;
+    }
+
+    .field {
+        border-bottom: 0;
+        display: inline-block;
+        margin-right: 1em;
+        @media screen and (max-width: 1024px) {
+            display: block;
+            margin-right: 0;
+            margin-bottom: .5em;
+            clear: both;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: .5em;
+            @media screen and (max-width: 1024px) {
+                width: 8em;
+                text-align: right;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1024px) {
+        //确定 按钮
+        .g-btn-primary {
+            float: right;
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  定義swf上傳的控件樣式
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.swfupload {
+    height: 21px;
+    background: #eee;
+    vertical-align: top !important;
+}

@@ -1,0 +1,2294 @@
+@charset "UTF-8";
+
+//载入全局设置 和  组件样式
+@import "global";
+@import "font-awesome";
+
+
+html, body {
+    background-color: #fefefe;
+    font-family: $font-base;
+    -webkit-text-size-adjust: none;
+}
+
+// ####################################################################
+// 管理面板的总页头
+// ####################################################################
+.r-header {
+    @media screen and (max-width: 1024px) {
+        background-color: #000;
+        padding-top: 30px;
+    }
+
+    .w-inner{
+        position: relative;
+        height: 52px;
+        background: #445363;
+        padding: 0 1em;
+        color: #e3e3e3;
+        box-shadow: 0px 1px 1px rgba(11, 11, 11, 0.5);
+        border-bottom: 1px solid #34404b;
+
+
+        // Logo
+        .w-logo {
+            float: left;
+            @media screen and (max-width: 1024px) {
+               float: none;
+               position: absolute;
+               top: -30px;
+            }
+            a {
+                display: block;
+                border: 0;
+                width: 126px;
+                height: 52px;
+                background-image: url(../img/logo.png);
+                @media screen and (max-width: 1024px) {
+                    width: 101px;
+                    height: 26px;
+                    background-image: url(../img/logo-mobile.png);
+                }
+            }
+        }
+
+
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 顶级分类
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        .m-top-tabs {
+            margin: 0 1em;
+            padding: 0;
+            overflow: hidden;
+            list-style-type: none;
+            height: 52px;
+            line-height: 52px;
+            float: left;
+            margin-left: 40px;
+
+            @media screen and (max-width: 1024px) {
+                margin-left: 0;
+            }
+
+            li {
+                float: left;
+                color:#8c96a0;
+                vertical-align: middle;
+
+                a {
+                    display: block;
+                    width: 60px;
+                    height: 52px;
+                    border: 0;
+                    color:#8c96a0;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 28px;
+                    margin-right: 12px;
+                    text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+                    @include g-transition-background;
+                    @include disableSelect;
+
+
+                     span, i {
+                        display: block;
+                        padding-top: 5px;
+                     }
+
+                     strong {
+                        display: block;
+                        // display: none;
+                        clear: both;
+                        margin-top: 1px;
+                        line-height: 1em;
+                        font-size: 11px;
+                        font-weight: normal;
+                        font-family: $font-mingliu;
+                     }
+
+                     // hover 上去的时候改变背景
+
+                     &:active, &:focus, &:hover, &.active {
+                        color: #05da73;
+                        background-image: url(../img/header_bg.jpg);
+                        @include disableSelect;
+                     }
+
+                     &:hover {
+                        background-image: none;
+                     }
+
+                     &.active:hover {
+                        background-image: url(../img/header_bg.jpg);
+                     }
+
+
+                 }
+            }
+        }
+        // 顶级分类结束
+
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // 右端的功能栏
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        .w-func {
+            float: right;
+            @media screen and (max-width: 1024px) {
+                float: none;
+                position: absolute;
+                top: -30px;
+                right: 0;
+            }
+
+            //页头的下拉菜单
+            .dropdown {
+                float: left;
+                position: relative;
+                .title {
+                    a {
+                        display: block;
+                        height: 52px;
+                        line-height: 52px;
+                        padding: 0 1em;
+                        color: #eee;
+                        text-decoration: none;
+                        @media screen and (max-width: 1024px) {
+                            height: 30px;
+                            line-height: 30px;
+                        }
+                        img {
+                            vertical-align: middle;
+                            margin-right: .5em;
+                        }
+                    }
+                }
+
+                //  下拉框内容
+                .dropdown-menu {
+                    display: none;
+                    position: absolute;
+                    top: 52px;
+                    right: 0;
+                    z-index: 100;
+                    padding: 1em .5em;
+                    background: #333;
+                    min-width: 170px;
+                    color: #eee;
+                    @media screen and (max-width: 1024px) {
+                        top: 30px;
+                    }
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style-type: none;
+                        li {
+                            a {
+                                display: block;
+                                border: 0;
+                                padding: .5em 1em;
+                                font-size: 16px;
+                                color: #888;
+                                text-decoration: none;
+                                &:hover {
+                                    background: #222;
+                                    color: #fff;
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                // hover 上去的时候
+                &.hover {
+                    .title {
+                        background: #333;
+                    }
+                    .dropdown-menu {
+                        display: block;
+                    }
+                }
+
+
+            }
+
+
+            // 个人信息面板开始
+            .m-profile {
+                // 显示在工具栏上的标题
+                .title {
+                    a {
+                        display: block;
+                        border: 0;
+                        img {
+                            width: 32px;
+                            height: 32px;
+                            @media screen and (max-width: 1024px) {
+                                width: 25px;
+                                height: 25px;
+                            }
+                        }
+                    }
+                }
+
+            }
+            // 个人信息面板结束
+        }
+        // 右端的功能栏结束
+    } // w-inner结束
+}
+
+// ####################################################################
+// 管理面板的总页脚
+// ####################################################################
+.r-footer{
+    padding: 15px 0;
+    background: #000;
+    color: #fff;
+    font-family: $font-mingliu;
+    font-size: 11px;
+    text-align: center;
+}
+
+// ####################################################################
+// 页面中部
+// ####################################################################
+// 以最低优先级设置 内容的默认高度
+.w-main {
+    min-height: 700px;
+     @media screen and (max-width: 1024px) {
+        min-height: 0;
+     }
+}
+.r-container {
+    overflow: hidden;
+    position: relative;
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // 左侧栏
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    .w-sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+        width: 180px;
+        background-color: #2d3740;
+
+
+
+        @media screen and (max-width: 1024px) {
+            position: static;
+            width: 100%;
+        }
+        // 导航栏开始
+        .m-sidebar {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            color: #fff;
+            font-size: 14px;
+
+            li {
+                border:0;
+                // background: url(../img/sidebar-line.png) repeat-x left bottom;
+
+                a {
+                    position: relative;
+                    display: block;
+                    text-decoration: none;
+                    color: #fff;
+                    border: 0;
+                    padding: 16px 0;
+                    padding-left: 20px;
+                    border-top: 1px solid #353d46;
+                    border-bottom: 1px solid #20272e;
+
+                    //渐变动画
+                    -webkit-transition-property: background;
+                    -moz-transition-property: background;
+                    -o-transition-property: background;
+                    transition-property: background;
+                    -webkit-transition-duration: 0.3s;
+                    -moz-transition-duration: 0.3s;
+                    -o-transition-duration: 0.3s;
+                    transition-duration: 0.3s;
+
+                    //当前或者被hover上去
+                      &.active, &:hover, &:focus {
+                        color: #05da73;
+                        background: #20272e;
+
+                        &:after {
+                            display: block;
+                            position: absolute;
+                            top: 14px;
+                            right: -1px;
+                            height: 31px;
+                            width: 15px;
+                            font-weight: bold;
+                            background-image: url(../img/arrow-left.png);
+                             content: '';
+
+                            @media screen and (max-width: 1024px) {
+                                display: none;
+                            }
+                        }
+                    }
+                    &:hover {
+                        border-bottom: 1px solid #353d46;
+                        border-top: 1px solid #353d46;
+                    }
+
+                    &.active {
+                        font-weight: bold;
+                        border-bottom: 1px solid #20272e;
+                        border-top: 1px solid #20272e;
+                    }
+
+                }
+            }
+
+            li:first-child a {
+                border-top: none;
+            }
+        }
+        // 导航栏结束
+    }
+    // 左侧栏结束
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // 页面内容 与右侧挂件栏(如果有) 的套层
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    .wrap {
+        position: relative;
+        margin-left: 175px;
+        padding-left: 25px;
+        min-width: 800px;
+        margin-top: 1.3em; // 25/14
+        margin-right: 1.3em;
+        @media screen and (max-width: 1024px) {
+            margin-left: 0;
+            padding-left: .5em;
+            min-width: 0;
+        }
+
+
+        // -----------------------------------------------------------------------------------------------------------
+        // 页面的标题( 通常还会有一些按钮)
+        // -----------------------------------------------------------------------------------------------------------
+        .page-title {
+            margin-right: 14px;
+            font-size: 2em;
+            overflow: hidden;
+            .header-btns {
+                float: right;
+                font-size: 12px;
+            }
+        }
+
+        // -----------------------------------------------------------------------------------------------------------
+        // 工具栏 ( 可以放在w-mian 外面也可以放在w-main里)
+        // -----------------------------------------------------------------------------------------------------------
+        .m-toolbar {
+            overflow: hidden;
+            zoom: 1;
+            margin-bottom: 1em;
+            font-size: 12px;
+
+
+            .g-btn-group {
+                margin-right: 1em;
+                .g-btn {
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                }
+            }
+
+            @media screen and (max-width: 1024px) {
+                .fn-left, .fn-right {
+                    float: none;
+                }
+            }
+        }
+
+        // -----------------------------------------------------------------------------------------------------------
+        // 页面的主要内容
+        // -----------------------------------------------------------------------------------------------------------
+        .w-main {
+            @media screen and (max-width: 1024px) {
+                min-width: 0;
+            }
+
+            // #############################################################
+            //  一些会在w-main 出现的组件的默认样式
+            // #############################################################
+        }
+        // 页面的主要内容 结束
+        // -----------------------------------------------------------------------------------------------------------
+        // 右侧的挂件容器
+        // -----------------------------------------------------------------------------------------------------------
+        .w-widget-box-container {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            width: 300px;
+            @media screen and (max-width: 1024px) {
+                position: static;
+                width: 100%;
+                margin: 1em 0;
+            }
+        }
+        // 右侧的挂件容器 结束
+
+        // 内容页脚
+        .w-page-footer  {
+            overflow: hidden;
+            margin: 1em 0;
+             // #############################################################
+            //  左边的功能组件 多半是 全选操作
+            // ############################################################
+            .m-function {
+                float: left;
+                overflow: hidden;
+
+            }
+            // #############################################################
+            //  一些会在内容页脚 出现的组件的默认样式
+            // ############################################################
+            .g-pagination {
+                float: right;
+                 @media screen and (max-width: 1024px) {
+                    padding: 1em;
+                    float: none;
+                 }
+            }
+        }
+        // 内容页脚 结束
+
+        &.has-widget{
+            .w-main {
+                clear: both;
+                margin-right: 345px;
+                @media screen and (max-width: 1024px) {
+                    margin-right: 0;
+                }
+            }
+
+            .w-page-footer {
+
+            }
+
+            @media screen and (max-width: 1024px) {
+                .w-page-footer {
+                    position: absolute;
+                    bottom: -132px;
+                    z-index: 99;
+                    left: 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                    padding: 1em;
+                 }
+
+                 .w-widget-box-container {
+                    margin-bottom: 200px;
+                 }
+            }
+
+        }
+    }
+
+    // 除了第一个wrap之外 上边距要调整
+    .wrap + .wrap {
+        margin-top: .5em;
+    }
+
+    // 页面内容 与右侧挂件栏(如果有) 的套层 结束
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             文章列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-atricle-list {
+    .g-btn-group  {
+        float: left;
+    }
+
+    .form-search {
+        float: right;
+        .input-text {
+            width: 10em;
+        }
+    }
+
+    .m-filter {
+        clear: both;
+        padding-top: .5em;
+        margin-bottom: .5em;
+        font-size: 12px;
+        .input-text {
+            margin: 0 .2em;
+        }
+        .limit {
+            width: 2em;
+        }
+    }
+
+    .g-table {
+        .col-actions {
+            width: 110px;
+            text-align: center;
+        }
+    }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////              创建文章
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-article-create {
+    /// 左边内容区域 START
+    .w-main {
+        @media screen and (max-width: 1024px) {
+            min-height: 0;
+        }
+
+        //文章标题
+        .w-article-title {
+            position: relative;
+            margin-bottom: 1em;
+
+            &:after {
+                position: absolute;
+                top: 15px;
+                right: 18px;
+                content: '';
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 5px 5px 0 5px;
+                border-color: #999999 transparent transparent transparent;
+                line-height: 0px;
+                _border-color: #999999 #000000 #000000 #000000;
+                _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+                z-index: 2;
+            }
+
+            .article-title {
+                display: block;
+                margin: 0;
+                width: 96%;
+                font-size: 16px;
+                padding: 8px 2%;
+                font-weight: normal;
+                color: #000;
+            }
+        }
+
+
+        .w-description {
+            position: relative;
+            overflow: hidden;
+            font-size: 14px;
+
+            label {
+                display: block;
+                margin-bottom: .5em;
+            }
+
+            em {
+                color: #888;
+                margin-left: 5px;
+                font-style: normal;
+            }
+
+            textarea {
+                width: 100%;
+                *width: 99%;
+                max-width: 100%;
+                box-sizing: border-box;
+                height: 4em;
+                max-height: 4em;
+                margin-bottom: 1em;
+            }
+        }
+
+
+        // 编辑器区域
+        .w-editor {
+            position: relative;
+            border: 1px solid #ccc;
+            // overflow: hidden;
+            margin-bottom: 6px;
+            // padding-right: .5em;
+
+
+            .ke-container, .ace_editor {
+                border: none !important;
+            }
+
+            textarea {
+                width: 100%;
+                display: block;
+                min-height: 34em;
+                *height: 3em;
+                border-color: #bbb;
+            }
+        }
+
+        //水印位置
+        .layout-block {
+            padding: 5px 10px;
+            margin-bottom: 27px;
+            .input-text {
+                font-size: 12px;
+                width: 3em;
+                text-align: center;
+            }
+        }
+        // 页脚
+        .w-page-footer {
+            @media screen and (max-width: 1024px) {
+                text-align: center;
+            }
+
+            .g-btn {
+                margin-right: .5em;
+            }
+            .g-btn {
+                padding: 9px 21px;
+                margin-right: 6px;
+            }
+            //发布按钮要长一点
+            .g-btn-primary {
+                width: 4em;
+                text-align: center;
+                padding: 9px 47px;
+
+                @media screen and (max-width: 1024px) {
+                    display: block;
+                    width: 100%;
+                    box-sizing: border-box;
+                    text-align: center;
+                    margin-bottom: .5em;
+                }
+            }
+        }
+    }
+    //// 左边内容区域 END
+
+    //// 右边侧栏 START
+    .w-widget-box-container {
+        //缩略图选择
+        .selector-thumb {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 22px;
+            width: 300px;
+            height: 140px;
+            border: 1px solid #181818;
+            border-radius: 3px;
+
+            @media screen and (max-width: 1024px) {
+                display: none;
+            }
+
+            .action {
+                position: absolute;
+                z-index: 2;
+                bottom: 5px;
+                right: 8px;
+
+                .g-btn-mini {
+                    font-size: 11px;
+                    font-family: $font-mingliu;
+                    padding: 2px 10px;
+                    background: #fff;
+                }
+
+                .lable-input {
+                    font-size: 12px;
+                    display: inline-block;
+                    zoom: 1;
+                    overflow: hidden;
+                    vertical-align: top;
+                    border: 1px solid #9e9e9e;
+                    border-radius: $g-border-radius;
+                    background: #fff;
+                    padding: 1px 8px;
+                    color: #333;
+
+                    .input-text {
+                        width: 1em;
+                        padding: 0 4px;
+                        text-align: center;
+                        font-size: 12px;
+                        line-height: 1em;
+                        margin: 0 0 0 .2em;
+                    }
+                }
+            }
+        }
+
+
+        // 侧栏挂件公共属性
+        .widget {
+            position: relative;
+            overflow: visible;
+            margin-bottom: 10px;
+            color: #333;
+            //挂件标题
+            h4 {
+                line-height: 1em;
+                font-size: 14px;
+                font-weight: bold;
+                margin: 0 0 6px 0;
+                color: #000;
+            }
+
+            a {
+                color: #333;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .g-btn:hover {
+                text-decoration: none;
+            }
+
+            //盒子的设置-> 改变内边距为1em
+            .layout-block {
+               padding: 4px 12px;
+                font-family: $font-base;
+            }
+
+            ul,ol {
+                position: relative;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .input-checkbox {
+                margin-right: .2em;
+            }
+        }
+
+        /// 评级挂件
+        .widget-level {
+            font-size: 12px;
+            margin-bottom: 19px;
+            h4 {
+                line-height: 1em;
+            }
+
+            .layout-block {
+                line-height: 25px;
+                font-size: 12px;
+            }
+
+            strong {
+                color: #000;
+                font-size: 14px;
+            }
+
+            //日期
+            .date {
+                border-left: 1px solid #ccc;
+                padding-left: .5em;
+                margin-left: .5em;
+                color: #000;
+                font-weight: bold;
+                font-size: 11px;
+                margin-right: 0;
+                display: inline-block;
+                line-height: 23px;
+            }
+
+            //等级
+            .level {
+                float: right;
+                margin-right: 4px;
+                font-family: $font-yahei;
+                color: #10ba20;
+                 font-size: 20px;
+            }
+        }
+
+
+        /// 引言
+        .widget-description {
+            h4 {
+                em {
+                    font-size: 11px;
+                    font-weight: normal;
+                    font-family: $font-mingliu;
+                    font-style: normal;
+                    margin-left: .5em;
+                }
+            }
+
+            textarea {
+                width: 100%;
+                max-width: 100%;
+                height: 5em;
+            }
+        }
+
+
+        /// 关联应用
+        .widget-app {
+            margin-bottom: 23px;
+            .layout-block {
+                padding-top: 14px;
+                padding-bottom: 15px;
+                line-height: 0px;
+            }
+            span {
+                margin: 0;
+            }
+
+            .layout-block {
+                padding-left: 1em;
+                padding-right: 1em;
+            }
+
+            //应用按钮
+            .btn-app {
+                display: inline-block;
+                zoom: 1;
+                overflow: hidden;
+                width: 40px;
+                height: 40px;
+                margin-right: 8px;
+                background-color: #ebebeb;
+                border: 1px solid #b7b7b7;
+                border-radius: 2px;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+
+
+                &:hover {
+                    background-color: #fff;
+                }
+            }
+
+            // 添加应用的按钮
+            .add-app {
+                font-size: 22px;
+                color: #b4b0b0;
+                line-height: 40px;
+                text-align: center;
+                text-decoration: none;
+                vertical-align: top;
+
+                span {
+                    height: 40px;
+                    line-height: 40px;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+
+        /// 分类与定时器
+        .widget-cat-timer {
+            margin-bottom: 20px;
+            .layout-block {
+                padding: 16px 14px;
+            }
+            // 分类
+            .category {
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 14px;
+
+                // 添加分类
+                .w-add-category {
+                    float: left;
+                    margin-right: 7px;
+                    .add-category {
+                        padding: 7px 13px;
+                        font-weight: bold;
+                        margin-right: 3px;
+                    }
+                }
+
+                //分类名称列表
+                .list-category {
+                    float: left;
+                    overflow: hidden;
+                    li {
+                        float: left;
+                        a {
+                            @extend .g-btn;
+
+                            display: block;
+                            border: 0;
+                            padding: 7px 21px;
+                            margin-right: .5em;
+                            border: 1px solid #ccc;
+                            //防止底部的线显示不出来
+                            margin-bottom: 2px;
+                            color: #000;
+                            font-size: 12px;
+                            background-color: #fff;
+                            &:hover {
+                                text-decoration: none;
+                                background-color: #eee;
+                            }
+
+                        }
+                    }
+                }
+                //分类名称列表 END
+            } //分类 END
+
+            // 定时器
+            .timer {
+                color: #000;
+                .input-text {
+                    margin-left: 0;
+                    margin-right: 5px;
+                    padding-top: 6px;
+                    padding-bottom: 6px;
+                    line-height: 17px;
+                    width: 180px;
+                }
+
+                .input-checkbox {
+                    margin-right: 3px;
+                }
+            }
+
+        }
+        /// 分类与定时器 END
+
+        /// 文章TAGs
+        .widget-tags {
+            margin-bottom: 26px;
+
+            .layout-block {
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
+            .list-tags {
+                overflow: hidden;
+                margin-bottom: 11px;
+                li {
+                    float: left;
+                    a {
+                        @extend .g-btn;
+                        display: block;
+                        border: 0;
+                        padding: 6px 6px;
+                        margin-right: .5em;
+                        border: 1px solid #ccc;
+                        //防止底部的线显示不出来
+                        margin-bottom: 2px;
+                        color: #000;
+                        background-color: #fff;
+                        &:hover {
+                            text-decoration: none;
+                            background-color: #eee;
+                        }
+
+                    }
+                }
+            }
+
+            .g-combo {
+                height: 20px;
+                width: 199px!important;
+                margin-right: 5px;
+                &:before {
+                    top: 3px;
+                    right: 3px;
+                }
+                &:after {
+                    top: 11px;
+                    right: 8px;
+                }
+            }
+        }
+        /// 文章标签END
+
+
+        // 更多选项 显示开关
+        .w-more-btn {
+            margin-bottom: 12px;
+            .g-btn {
+                padding: 7px 10px;
+                font-weight: normal;
+                font-size: 14px;
+            }
+            .arrow-open {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: .5em;
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 5px 5px 0 5px;
+                border-color: #000000 transparent transparent transparent;
+                line-height: 0px;
+                _border-color: #000000 #ffffff #ffffff #ffffff;
+                _filter: progid:DXImageTransform.Microsoft.Chroma(color='#ffffff');
+            }
+        }
+
+        /// 更多文章相关的设置
+        .widget-article-info {
+            color: #000;
+            .layout-block{
+                color: #000;
+                padding-top: 17px;
+                padding-bottom: 15px;
+            }
+
+            .section {
+                position: relative;
+                overflow: hidden;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 17px;
+                margin-bottom: 15px;
+
+                .input-text {
+                    vertical-align: top; //让文本框向上对齐
+                }
+            }
+
+            // 文章来源源
+            .info-src {
+                .input-text {
+                    width: 84px;
+                    font-size: 11px;
+                    padding: 5px 9px;
+                    margin-left: 0;
+                    margin-right: 4px;
+                    line-height: 15px;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    @media screen and (max-width: 1024px) {
+                        margin-right: 1px;
+                    }
+                }
+            }
+
+            // 文章设置
+            .article-setting {
+                padding-bottom: 6px;
+                .field {
+                    margin-bottom: 7px;
+                    label {
+                        display: inline-block;
+                        *display: inline;
+                        *zoom: 1;
+                        width: 6em;
+                    }
+                    .input-text {
+                        margin-left: 3px;
+                        margin-right: 0;
+                        width: 175px;
+                    }
+
+                   .g-select {
+                        padding: .2em 4px;
+                        width: 165px!important;
+                    }
+                }
+            }
+
+            /// 文章属性
+            .more-opt {
+                overflow: hidden;
+                padding: 0 5px;
+                *zoom: 1;
+                li {
+                    float: left;
+                    width: 50%;
+                    margin-bottom: 6px;
+                    .input-checkbox {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+    //// 右边侧栏 END
+
+
+    //选择应用弹框
+    .select-app {
+        // 搜索栏
+        .search-app {
+            overflow: hidden;
+            margin-bottom: .5em;
+            .input-text {
+                margin-right: 3px;
+            }
+        }
+    }
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             分类管理-列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.m-category {
+    .g-table {
+        .input-text {
+            width: 98%;
+            margin: 0;
+        }
+
+        .col-id, .col-valid {
+            width: 5%;
+        }
+
+        .col-name, .col-slug {
+            // width: 20%;
+        }
+
+        .col-type{
+            // width: 20%;
+        }
+
+        .col-actions {
+            width: 150px;
+            @media screen and (max-width: 1024px) {
+                width: 90px;
+                .g-btn {
+                    width: 1em;
+                    height: 1em;
+                    line-height: 14px;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             CMS 管理面板的首页
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-system-home {
+    .g-table {
+        text-align: left;
+        th,td {
+            text-align: left;
+        }
+
+        // 防止第一列缩小的时候被压扁
+        th:first-child {
+            width: 6em;
+        }
+    }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             APP应用-编辑
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-application-panel-edit {
+    // APP图标 tags 分类
+    .w-app-header {
+        overflow: hidden;
+        position: relative;
+        overflow: hidden;
+        // background-color: #fff;
+        // border: 1px solid #ccc;
+        padding: 1em;
+        margin-bottom: 1em;
+        clear: both;
+        font-size: .9em;
+        *font-size: 12px;
+
+        @media screen and (max-width: 1024px) {
+            padding: 0;
+        }
+        //图标上传
+        .w-icon-update {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            margin-right: 1em;
+            width: 150px;
+
+            @media screen and (max-width: 1024px) {
+                // 手机版的话变成一列 图标居中
+                position: static;
+                top: 0;
+                left: 0;
+                margin-bottom: 1em;
+                text-align: center;
+                width: auto;
+            }
+
+            // 图标
+            .m-t {
+                width: 128px;
+                height: 128px;
+                overflow: hidden;
+                @media screen and (max-width: 1024px) {
+                    width: 100%;
+                    text-align: center;
+                }
+                img {
+                    width: 128px;
+                    height: 128px;
+                }
+            }
+
+            // 上传按钮
+            .m-b {
+                margin-top: 1em;
+                -webkit-text-size-adjust: none;
+                font-size: 11px;
+                font-family: $font-mingliu;
+            }
+        }
+
+        // 基础APP信息 名字 TAG
+        .base-app-info {
+            position: relative;
+            overflow: hidden;
+            *zoom: 1;
+            margin-left: 170px;
+
+            @media screen and (max-width: 1024px) {
+                margin-left: 0;
+            }
+
+            .field {
+
+                padding-bottom: 1em;
+                margin-bottom: 1em;
+                border-bottom: 1px solid #ddd;
+                font-size: 12px;
+                &:last-child {
+                    border-bottom: 0;
+                }
+                label {
+                    width: inherit;
+                }
+                @media screen and (max-width: 1024px) {
+                    // 手机版的输入框全部都 独占一行
+                    label {
+                        display: block;
+                        margin-bottom: .5em;
+                    }
+                }
+            }
+
+            //app的名字
+            .app-name {
+                width: 90%;
+                height: 35px;
+                font-size: 1.6em;
+                color: #bbb;
+                padding-left: .5em;
+                padding-right: .5em;
+                margin-left: 0;
+                @media screen and (max-width: 1024px) {
+                    margin: 0;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+            }
+
+            // 已选的分类和标签
+            .category, .tag {
+                vertical-align: middle;
+                padding: .4em .7em;
+                margin-right: .5em;
+                font-size: .8em;
+                font-family: $font-mingliu;
+                border: 1px solid #ccc;
+                margin-bottom: 2px;
+                color: #000;
+                cursor: pointer;
+                line-height: 2.5em;
+                &:hover {
+                    background-color: #eee;
+                }
+            }
+
+            .w-tags {
+                position: relative;
+                overflow: hidden;
+                *zoom: 1;
+                // 标签列表
+                .list-tags {
+                    margin: 1em 0;
+                }
+
+                // 手写标签的区域
+                .m-m {
+                    margin: 1em 0;
+                    .input-text {
+                        margin-left: 0;
+                        width: 20em;
+                         @media screen and (max-width: 1024px) {
+                            margin-bottom: 1em;
+                            box-sizing: border-box;
+                            width: 100%;
+                         }
+                    }
+                }
+            } //  .w-tags END
+
+        } // base-app-info END
+    }// w-app-header END
+
+
+
+    // 应用简介
+    .m-app-desc {
+        .field{
+            textarea {
+                width: 554px;
+                height: 84px;
+                max-width: 554px;
+                max-height: 84px;
+                @media screen and (max-width: 1024px) {
+                    width: 100%;
+                    max-width: 100%;
+                    height: 5em;
+                    max-height: inherit;
+                }
+            }
+
+            em {
+                display: block;
+                font-size: 1.3em;
+                margin-left: 0;
+                margin-bottom: 1em;
+            }
+        }
+    }
+
+
+    // 自动填写APK包信息
+    .m-auto-attr {
+        .field{
+            .w-upload-file {
+                display: inline-block;
+                *display: inline;
+                *zoom: 1;
+
+                .g-btn {
+                    margin-right: 1em;
+                    @media screen and (max-width: 1024px) {
+                        display: block;
+                    }
+                }
+
+                .g-btn,em, input[type="file"] {
+                    @media screen and (max-width: 1024px) {
+                            margin-bottom: .5em;
+                    }
+                }
+
+                em {
+                    @media screen and (max-width: 1024px) {
+                        margin-left: 0;
+                    }
+                }
+            }// .w-upload-file
+
+        }// .field
+    } // end m-auto-attr
+
+    // 应用截图
+    .m-app-screenshot {
+        //缩略图列表
+        .app-screenshot-list {
+            position: relative;
+            overflow: hidden;
+            *zoom: 1;
+            margin: 0;
+            padding: .5em;
+            background: #fff;
+            border: 1px solid #ccc;
+
+            //单张缩略图
+            li {
+                position: relative;
+                float: left;
+                overflow: hidden;
+                width: 150px;
+                *height: 150px;
+                min-height: 80px;
+                padding: .5em;
+                background: #eee;
+                cursor: pointer;
+                margin-right: 1em;
+                margin-bottom: 1em;
+                font-size: 11px;
+                font-family: $font-mingliu;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+
+                // 文件名 与删除
+                .bottom {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    color: #fff;
+                    padding: .5em;
+                    background-color: rgba(0,0,0,0.7);
+                    .filename {
+                        display: block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        margin-bottom: .5em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             APP应用-列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.m-application-list {
+    .g-table {
+        .col-id {
+            width: 4%;
+        }
+
+        .col-category {
+            width: 8%;
+        }
+
+        .col-added {
+            width: 8%;
+        }
+
+        .col-package {
+            width: 10%;
+        }
+
+        .col-platform {
+            width: 10%;
+        }
+
+        .col-creat-at {
+            width: 10%;
+        }
+
+        .col-order {
+            width: 4%;
+        }
+
+        .col-actions {
+            width: 60px;
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             APP应用-应用
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-comment-list {
+    .g-table {
+
+        .col-title {
+            width: 15%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .col-username {
+            width: 10%;
+        }
+        .col-status {
+            width: 3em;
+        }
+        .col-create-at {
+            width: 10%;
+        }
+        .col-actions {
+            width: 90px;
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             角色列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-role-index {
+    .g-table {
+        .col-all {
+            width: 5%;
+            text-align: left;
+        }
+        .col-role, .col-name {
+            width: 30%;
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             编辑用户
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-user-add {
+    .user-avatar {
+        margin-top: .5em;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             模板列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-list-theme {
+    position: relative;
+    *zoom: 1;
+
+
+    // 主题列表
+    .list-theme {
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        // 主题
+        li {
+            position: relative;
+            overflow: hidden;
+            width: 300px;
+            height: 194px;
+            margin-bottom: .5em;
+            margin-left: .5em;
+            border: 1px solid #eee;
+            float: left;
+            cursor: pointer;
+
+            @media screen and (max-width: 1024px) {
+                float: none;
+                margin: 0 0 1em 0;
+                width: 100%;
+                height: auto;
+            }
+            // 缩略图
+            .theme-screenshot {
+                position: relative;
+                overflow: hidden;
+                background: #fff;
+                -webkit-transition: opacity .2s ease-in-out;
+                transition: opacity .2s ease-in-out;
+                width: 100%;
+                height: 145px;
+                @media screen and (max-width: 1024px) {
+                    height: auto;
+                    line-height: 0;
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            } // end theme-screenshot;
+
+            // 主题详情
+            .more-details {
+                display: none;
+                position: absolute;
+                top: 25%;
+                right: 25%;
+                left: 25%;
+                background: rgba(0,0,0,.7);
+                color: #fff;
+                font-size: 15px;
+                text-shadow: 0 1px 0 rgba(0,0,0,.6);
+                font-weight: 600;
+                padding: 15px 12px;
+                text-align: center;
+                border-radius: 3px;
+                opacity: 1;
+
+                @media screen and (max-width: 1024px) {
+                    top: 35%;
+                }
+            }
+
+            // 主题 名字
+            .theme-name {
+                padding: 15px;
+                -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
+                box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
+                background: #fff;
+            }
+
+            // 按钮
+            .theme-actions {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                display: none;
+                height: 38px;
+                padding: 9px 10px 0;
+                background: rgba(244,244,244,.7);
+                border-left: 1px solid rgba(0,0,0,.05);
+                // 隐藏自定义
+                .btn-customize {
+                    display: none;
+                }
+
+            }
+            // 悬浮在主题上面的时候
+            &:hover {
+                .theme-screenshot {
+                    opacity: 0.5;
+                }
+
+                .theme-actions {
+                    display: block;
+                }
+
+                .more-details {
+                    display: block;
+                }
+            } // li:hover
+
+            // 已启用
+            &.active {
+                .theme-name {
+                    color: #fff;
+                    background: #2f2f2f;
+                }
+
+                .theme-actions {
+                    display: block;
+                    background: none;
+                    border-left: 0;
+
+                    // 隐藏除了自定义之外的按钮
+                    &>* {
+                        display: none;
+                    }
+
+                    .btn-customize {
+                        display: block;
+                    }
+
+                }
+            }
+
+        }
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             模板编辑器
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-theme-editor {
+    position: relative;
+    *zoom: 1;
+
+    // 当前编辑的文件
+    .current-file {
+        overflow: hidden;
+        margin: 0 14px .5em 0;
+        font-size: .8em;
+        .g-btn {
+            margin-bottom: 1px;
+        }
+
+        .g-select {
+            width: 10em;
+        }
+    }
+
+    // 文件内容
+    .m-editor {
+        textarea {
+            display: block;
+            clear: both;
+            box-sizing: border-box;
+            min-width: 99%;
+            width: 99%;
+            max-width: 99%;
+            min-height: 400px;
+            height: 400px;
+        }
+    }
+
+    //文件列表
+    .m-list-files {
+        //文件类型
+        h4 {
+            margin: 0 0 .5em 0;
+        }
+
+        //文件列表
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 .5em 1em;
+
+            li {
+                a {
+                    display: block;
+                    border: 0;
+                    text-decoration: none;
+                    color: #0074a2;
+                    &:hover {
+                        color: #2ea2cc;
+                    }
+
+                    em {
+                        display: block;
+                        color: #666;
+                        padding-left: 1em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             插件管理
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-list-plugin {
+    position: relative;
+    *zoom: 1;
+
+    .g-table {
+        tr {
+            &:hover {
+                background: none;
+            }
+            th, td {
+                text-align: left;
+            }
+
+            // 正在使用的插件
+            &.active td {
+                background-color: #f7fcfe;
+            }
+
+            &.inactive td {
+                background-color: #f7ecec;
+            }
+        }
+
+        a {
+            color: #2ea2cc;
+            &:hover {
+                color: #35B3E0;
+            }
+        }
+        .col-check {
+            width: 5%;
+            padding-left: .5em;
+        }
+
+        //如果是内容的 名字栏位
+        td.col-name {
+            vertical-align: top;
+            padding-top: .5em;
+        }
+        .col-name {
+            width: 25%;
+            strong {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .actions {
+                font-size: .9em;
+                .act-remove , .act-uninstall {
+                    color: #a00;
+                }
+            }
+        }
+        .col-description {
+            color: #333;
+            p {
+                margin: 0 0 1em 0;
+            }
+            .info {
+                font-size: .9em;
+            }
+        }
+    }
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             系统设置
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-setting {
+    .input-text {
+        margin-right: .5em;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             统计-访问量
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+%m-statistics-base {
+    .m-toolbar {
+        .input-text, .g-select {
+            margin-right: .5em;
+        }
+    }
+}
+
+.m-statistics-pv {
+    @extend %m-statistics-base;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             统计- API
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.m-statistics-api {
+    @extend %m-statistics-base;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             统计- 营业厅统计
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-statistics-awhall {
+        @extend %m-statistics-base;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             统计- 分类统计
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-statistics-appdown {
+        @extend %m-statistics-base;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             统计- 平台统计
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-statistics-appplatform {
+        @extend %m-statistics-base;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             统计- 文章绩效
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-statistics-quality {
+        @extend %m-statistics-base;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             手机 - 列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-phone-list {
+    .g-table {
+        // 设定表格宽度 在手机下可能会出现滚动条
+        min-width: 800px;
+        .col-actions {
+            width: 300px;
+            text-align: center;
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             手机 - 编辑与新建
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-phone-edit {
+    //右侧栏
+    .w-widget-box-container {
+        //缩略图选择
+        .selector-thumb {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 22px;
+            width: 300px;
+            height: 140px;
+            @media screen and (max-width: 1024px) {
+                display: none;
+            }
+
+            .actions {
+                position: absolute;
+                z-index: 2;
+                bottom: 5px;
+                right: 8px;
+
+                .g-btn-mini {
+                    padding: 3px 10px;
+                    margin-right: 3px;
+                    background: #fff;
+                    font-size: 11px;
+                    font-family: $font-mingliu;
+                }
+            }
+        }
+    }
+
+    //主要内容部分
+    .w-main {
+        .section {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .g-table {
+            .col-actions {
+                width: 115px;
+            }
+
+            .input-text {
+                width: 98%;
+            }
+        }
+
+        .field-intor {
+            textarea {
+                width: 40em;
+                height: 10em;
+            }
+        }
+        // 评测文章
+        .phone-ui-article-list {
+            .g-table {
+                .col-id {
+                    width: 2em;
+                }
+
+                .col-title {
+                    width: 20%;
+                }
+            }
+        }
+
+
+        //手机UI特色功能
+        .uifunction {
+            .col-func-name {
+                width: 30%;
+            }
+        }
+
+        // 手机合约购机
+        .phone-ui-article-list {
+            textarea {
+                height: 20em;
+                width: 99%;
+                min-width: 99%;
+                max-width: 99%;
+            }
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             手机 - 教程列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.m-phone-listexample {
+    .g-table {
+        .col-actions {
+            width: 135px;
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             手机 - 教程步骤
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-phone-steps {
+    .g-table {
+        .col-img {
+            width: 180px;
+            text-align: center;
+        }
+
+        td.col-img {
+                font-size: 12px;
+                img {
+                    width: 100px;
+                    display: block;
+                    margin: 0 auto .5em auto;
+                }
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             手机 - 外壳
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-phone-model {
+    //外壳图片
+    .field-model-pic {
+        img {
+            max-width: 640px;
+            @media screen and (max-width: 1024px) {
+                max-width: 100%;
+                width: 100%;
+            }
+            display: block;
+            margin-bottom: .5em;
+        }
+
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             手机 - 3D
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-phone-3d {
+    //图片列表
+    .list-pic {
+        list-style-type: none;
+        padding: .5em;
+        margin: 0 0 1em 0;
+        overflow: hidden;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        li {
+            float: left;
+            margin-right: .5em;
+            margin-bottom: .5em;
+            width: 150px;
+            @media screen and (max-width: 1024px) {
+                width: 30px;
+            }
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             同步 - APP 和 文章
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.m-sync-app, .m-sync-post {
+    .g-table {
+        .col-actions {
+            width: 100px;
+            text-align: center;
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             广告管理 - 列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-slidemanager-list {
+    .g-table {
+        .col-name, .col-key, .col-status {
+            text-align: left;
+        }
+
+        .col-name {
+            @media screen and (max-width: 1024px) {
+
+            }
+        }
+
+        .col-status {
+            width: 2em;
+        }
+        .col-actions {
+            width: 200px;
+            text-align: center;
+            @media screen and (max-width: 1024px) {
+                width: 100px;
+                .g-btn {
+                    overflow: hidden;
+                    height: 1em;
+                    line-height: 1.4em;
+                    width: 1em;
+                }
+            }
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             广告管理 - 编辑项目里的广告条目
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-slidemanager-edit {
+    .g-table {
+        th,td {
+            text-align: left;
+            vertical-align: top;
+            textarea, .input-text {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        td.col-pic {
+            font-size: 12px;
+        }
+
+        .col-link {
+            width: 50%;
+            textarea {
+                height: 4em;
+            }
+        }
+        .col-order {
+            width: 2em;
+        }
+
+        .col-actions {
+            width: 150px;
+        }
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             Appkey设置 - 列表
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-appkey-list {
+    .g-table {
+        .col-actions {
+            width: 150px;
+            text-align: center;
+        }
+    }
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////             登陆页面
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.m-login-page {
+    .w-form {
+        position: relative;
+        width: 320px;
+        margin: 3em auto 3em auto;
+        background: #fff;
+        border: 1px solid #ccc;
+        overflow: visible;
+
+        box-shadow: 5px 5px 39px rgba(0,0,0,.5);
+
+        @media screen and (max-width: 1024px) {
+            margin-top:  0;
+        }
+        // 登陆框标题
+        .banner {
+            margin: 20px -1px 0 -18px;
+            padding: 8px 10px 10px 40px;
+            background: #424242;
+            position: relative;
+
+            @media screen and (max-width: 1024px) {
+                margin-top:  0;
+                margin-bottom: 15px;
+            }
+
+            h2 {
+                color: #fff;
+                font-size: 24px;
+                margin: 0 0 0 .5em;
+            }
+        }
+
+        //标题的折角
+        .darkbannerwrap {
+            background: url(../img/aiwrap.png);
+            width: 18px;
+            height: 10px;
+            margin: 0 0 20px -18px;
+            position: relative;
+            @media screen and (max-width: 1024px) {
+                display: none;
+            }
+        }
+
+        // 输入栏位的通用样式
+        .field {
+            border: 0;
+            text-align: center;
+            padding-bottom: 0;
+            @media screen and (max-width: 1024px) {
+                padding: 0 1em;
+            }
+            label {
+                width: 77px;
+                font-weight: bold;
+            }
+
+            .input-text {
+                width: 200px;
+                @media screen and (max-width: 1024px) {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+            }
+
+            // 记住密码框
+            .remember {
+                width: 155px;
+                margin-left: .5em;
+                font-weight: normal;
+                @media screen and (max-width: 1024px) {
+                    display: inline-block;
+                }
+            }
+
+            //登陆按钮
+            .g-btn-primary {
+                padding-left: 2em;
+                padding-right: 2em;
+            }
+        }
+
+        // 版权
+        .copyright {
+            text-align: center;
+            color: #C0C0C0;
+            font-family: Tahoma;
+            font-style: 11px;
+        }
+    }
+}

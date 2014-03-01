@@ -1,0 +1,121 @@
+
+    <!-- 中栏或(中栏+右侧栏) 开始-->
+    <div class="wrap">
+        <!-- 主要内容开始 -->
+        <div class="w-main m-block" >
+            <form action="" id="js_userEditForm" enctype="multipart/form-data" method="POST">
+                <div class="section">
+                    <h2>用户基本信息</h2>
+                    <div class="field">
+                        <label>用户名</label>
+                        <input placeholder="请输入用户名..." class="input-text" type="text" id="js_username" value="{{data.username}}" >
+                    </div>
+
+                    <div class="field" id="js_userRole">
+                        <label>角色</label>
+                        {{each allRole as role index}}
+                            <input type="checkbox" class="input-checkbox" value="{{role.id}}" name="{{role.role}}">{{role.remark}}
+                        {{/each}}
+                   </div>
+
+                    <div class="field">
+                        <label>密码</label>
+                        <input type="password" placeholder="请输入密码..." name="password" class="input-text" value="" id="js_password1">
+                        <em>不修改密码请留空，最少6位</em>
+                    </div>
+
+                    <div class="field">
+                        <label>重复密码</label>
+                        <input type="password" placeholder="请重复上面的密码..." name="password2" class="input-text" value="" id="js_password2">
+                        <em>不修改密码请留空</em>
+                    </div>
+
+                    <div class="field">
+                        <label>邮箱</label>
+                        <input placeholder="请输入用户名..." type="text" name="email" class="input-text" value="{{data.email}}" id="js_email">
+                    </div>
+
+                    <div class="field" id="js_enabled">
+                        <label>是否可用</label>
+                        <input type="radio" name="enabled" value="1">是
+                        <input type="radio" name="enabled" value="0">否
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>用户详细资料</h2>
+                    <div class="field">
+                        <label>昵称</label>
+                        <input type="text" id="js_nickname" class="input-text" value="{{nickname}}">
+                    </div>
+
+                    <div class="field">
+                        <label>手机</label>
+                        <input type="text" id="js_telphone" class="input-text" value="{{telphone}}">
+                    </div>
+
+                    <div class="field" id="js_sex">
+                        <label>性别</label>
+                        <input checked="checked" type="radio" id="js_unknownSex" name="sex" value="unknown">未知
+                        <input type="radio" id="js_male" name="sex" value="male">男
+                        <input type="radio" id="js_female" name="sex" value="female">女
+                    </div>
+
+                    <div class="field">
+                        <label>地址</label>
+                        <input id="js_address" class="input-text" value="{{address}}">
+                    </div>
+
+                    <div class="field">
+                        <label>邮编</label>
+                        <input id="js_zipcode" class="input-text" value="{{zipcode}}">
+                    </div>
+
+                    <div class="field">
+                        <label>真实姓名</label>
+                        <input id="js_realname" class="input-text" value="{{realname}}">
+                    </div>
+
+                    <div class="field">
+                        <label>支付宝</label>
+                        <input id="js_alipay" class="input-text" value="{{alipay}}">
+                    </div>
+
+                    <div class="field">
+                        <label>职业</label>
+                        <input class="input-text" name="job" id="js_job" value="{{job}}">
+                    </div>
+
+                    <div class="field">
+                        <label>新浪微博</label>
+                        <input type="text" name="weibo" id="js_weibo" class="input-text" value="{{weibo}}">
+                    </div>
+
+                    <div class="field">
+                        <label>QQ号码</label>
+                        <input type="text" class="input-text" name="qq" id="js_qq" value="{{qq}}">
+                    </div>
+
+                    <div class="field">
+                        <label>个人说明</label>
+                        <textarea name="bio" cols="80" class="input-text" rows="3" id="js_bio">{{bio}}</textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>头像</label>
+                        <!-- <input type="file" name="avatar"> -->
+                        <span id="js_avatar"></span>
+                        <div class="user-avatar">
+                            <label><input type="checkbox" class="input-checkbox" name="remove_avatar" value="1"> 删除</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-page-footer">
+                    <span class="g-btn g-btn-primary" type="" id="js_submit">提交</span>
+                </div>
+            </form>
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+    <!-- 中栏或(中栏+右侧栏) 结束-->

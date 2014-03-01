@@ -1,0 +1,60 @@
+<div class="wrap">
+    <!-- 主要内容开始 -->
+    <div class="w-main m-block">
+        <div class="m-toolbar">
+            <div class="fn-right">
+                <a href="#category/create" class="g-btn g-btn-primary">添加</a>
+            </div>
+        </div>
+        <div class="section">
+            <table class="g-table">
+                <thead>
+                    <tr>
+                        <th class="col-checkbox"><input type="checkbox" class="input-checkbox"></th>
+                        <th class="col-id mobile-hide">ID</th>
+                        <th class="col-name" style="">名称</th>
+                        <th class="col-slug mobile-hide">别名</th>
+                        <th class="col-type mobile-hide">类型</th>
+                        <th class="col-order" width="5%">排序</th>
+                        <th class="col-valid">有效</th>
+                        <th class="col-actions">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="js_categoryListContent">
+                    {{each}}
+                    <tr>
+                        <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                        <td class="col-id mobile-hide">{{$value.id}}</td>
+                        <td class="col-name" style="text-align: left; padding-left:5%">
+                            <span style="position: relative; left:{{$value.layerNum*30}}px;">{{$value.otherName}}</span>
+                        </td>
+                        <td class="col-slug mobile-hide">{{$value.slug}}</td>
+                        <td class="col-type mobile-hide">{{$value.status}}</td>
+                        <td class="col-order"><input type="text" class="input-text input-text-mini" value="{{$value.order}}"></td>
+                        <td class="col-valid"><input type="checkbox" class="input-checkbox"></td>
+                        <td class="col-actions" style="width: 140px;">
+                            <a href="" class="g-btn g-btn-mini">文章列表</a>
+                            <a href="#article/category/{{$value.id}}" class="g-btn g-btn-mini">编</a>
+                            <span class="g-btn g-btn-mini g-btn-delete" operate='delete' operateid="js_{{$value.id}}">删</span>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="w-page-footer" >
+            <div class="m-function">
+                    <select name="" id="js_" class="g-select">
+                        <option value="">请选择操作</option>
+                        <option value="">删除</option>
+                        <option value="">排序</option>
+                    </select>
+                    <a href="#" class="g-btn g-btn-primary">提交</a>
+            </div>
+        </div>
+    </div>
+    <!-- 主要内容结束 -->
+    <!-- 右侧栏结束 -->
+</div>

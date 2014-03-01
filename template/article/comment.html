@@ -1,0 +1,60 @@
+
+<!-- 左侧导航栏结束 -->
+<!-- 中栏或(中栏+右侧栏) 开始-->
+<div class="wrap">
+    <!-- 主要内容开始 -->
+    <div class="w-main m-block">
+        <div class="section">
+            <table class="g-table">
+                <thead>
+                    <tr>
+                        <th class="col-checkbox"><input type="checkbox" class="input-checkbox"></th>
+                        <th class="col-title mobile-hide">文章标题</th>
+                        <th class="col-username mobile-hide">评论用户</th>
+                        <th class="col-content">评论内容</th>
+                        <th class="col-status">状态</th>
+                        <th class="col-create-at mobile-hide">发表时间</th>
+                        <th class="col-actions">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="js_commentListContent">
+                    {{each data as comment index}}
+                    <tr>
+                        <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                        <th class="col-title mobile-hide">
+                            <a href="#comment?id={{comment.id}}">{{comment.post_title}}</a>
+                        </td>
+                        <td class="col-username mobile-hide">{{comment.author}}</td>
+                        <td class="col-content">{{comment.content}}</td>
+                        <td class="col-status">{{comment.status}}</td>
+                        <td class="col-create-at mobile-hide">{{comment.created}}</td>
+                        <td class="col-actions">
+                            <span class="g-btn g-btn-mini" operateid="js_{{comment.id}}" operate="pass">通</span>
+                            <span class="g-btn g-btn-mini" operateid="js_{{comment.id}}" operate="refuse">拒</span>
+                            <span class="g-btn g-btn-mini g-btn-delete" operateid="js_{{comment.id}}" operate="delete">删</span>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="w-page-footer">
+            <div class="m-function">
+                    <select name="" id="js_" class="g-select">
+                        <option value="">请选择操作</option>
+                        <option value="">通过</option>
+                        <option value="">删除</option>
+                        <option value="">拒绝</option>
+                    </select>
+                    <a href="#" class="g-btn  g-btn-primary">提交</a>
+            </div>
+            <!-- 分页器 START-->
+            <div class="g-pagination" id="js_page"></div>
+            <!-- 分页器 end-->
+        </div>
+    </div>
+    <!-- 主要内容结束 -->
+</div>
+<!-- 中栏或(中栏+右侧栏) 结束-->

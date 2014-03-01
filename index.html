@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Saturn</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/Saturn.js"></script>
+        <script data-main="js/main" src="js/lib/require.js"></script>
+    </head>
+
+    <body>
+        <!-- 头部开始 -->
+        <div class="r-header" id="js_mainHeader">
+            <div class="w-inner">
+                <!-- logo -->
+                <div class="w-logo"><a href="" class="w-login" id="js_logoUrl"></a></div>
+
+                <!-- 顶级分类 -->
+                <ul class="m-top-tabs" id="js_topNav"></ul>
+                <!-- 顶级分类结束 -->
+
+                <!-- 顶栏右端 -->
+                <div class="w-func">
+                        <!-- 个人信息 添加hover class 就显示 -->
+                        <div class="dropdown m-profile ">
+                            <div class="title">
+                                <a href="#">
+                                    <img src="http://sspai.com/avatar/user/b/081/000/000/81.jpg" alt="" class="avater" id="js_avater" />
+                                    <span id="js_userName"></span>
+                                </a>
+                            </div>
+                            <!-- 用户菜单 -->
+                            <div class="dropdown-menu">
+                                <ul>
+                                    <li><a href="">1</a></li>
+                                    <li><a href="">3</a></li>
+                                    <li><a href="">4</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 个人信息 结束 -->
+                </div>
+                <!-- 顶栏右端结束 -->
+            </div>
+        </div>
+        <!-- 头部结束 -->
+        <div class="r-container">
+            <div class="w-sidebar">
+                <ul class="m-sidebar" id="js_sidebar">
+                </ul>
+            </div>
+            <div class='w-mian' id="js_mainContent">
+            </div>
+        </div>
+
+        <div class="r-footer" id="js_mainFooter">
+            Copyright © Saturn All Rights Reserved
+        </div>
+    </body>
+</html>

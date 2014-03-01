@@ -1,0 +1,55 @@
+
+    <!-- 中栏或(中栏+右侧栏) 开始-->
+    <div class="wrap">
+        <!-- 主要内容开始 -->
+        <div class="w-main m-block">
+            <div class="m-toolbar">
+                <div class="fn-right">
+                    <strong>条件</strong>
+                    起始日期:
+                    <input type="date" class="input-text">
+                    结束日期:
+                    <input type="date" class="input-text">
+                    分组:
+                    <select name="" id="js_" class="g-select">
+                        <option value="">天</option>
+                        <option value="">周</option>
+                        <option value="">月</option>
+                    </select>
+                     <button class="g-btn">确定</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th>分类ID</th>
+                            <th>分类</th>
+                            {{each dates as date index}}
+                            <th>
+                                {{date.begin}}
+                                <div>~</div>
+                                {{date.begin}}
+                            </th>
+                            {{/each}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each data as dt index}}
+                        <tr>
+                            <td>{{dt.id}}</td>
+                            <td>{{dt.name}}</td>
+                            {{each dt.data}}
+                                <td class="{{if $value == 0}}warning{{/if}}">{{$value}}</td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+    <!-- 中栏或(中栏+右侧栏) 结束-->

@@ -1,0 +1,82 @@
+        <!-- 中栏或(中栏+右侧栏) 开始-->
+    <div class="wrap">
+        <!-- 主要内容开始 -->
+        <div class="w-main m-block">
+            <div class="m-toolbar">
+                <div class="fn-right">
+                    <strong>条件</strong>
+                    起始日期:
+                    <input type="date" class="input-text" id="js_from">
+                    结束日期:
+                    <input type="date" class="input-text" id="js_to">
+                    分组:
+                    <select name="" class="g-select" id="js_group_by">
+                        <option value="day">天</option>
+                        <option value="weekly">周</option>
+                        <option value="month">月</option>
+                    </select>
+                     <button class="g-btn" id="js_update">确定</button>
+                </div>
+            </div>
+            <div class="section">
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th>平台</th>
+
+                            {{each dates as date index}}
+                            <th>
+                                {{date.begin}}
+                                <div>~</div>
+                                {{date.end}}
+                            </th>
+                            {{/each}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each data as dt index}}
+                            {{if index !== 'total'}}
+                            <tr>
+                                {{each data[index]}}
+                                <th>{{$value}}</th>
+                                {{/each}}
+                            </tr>
+                            {{/if}}
+                        {{/each}}
+                        <tr>
+                            {{each data.total}}
+                                <th>{{$value}}</th>
+                            {{/each}}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <div class="section">
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th>平台</th>
+                            <th>总下载次数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each count as value key}}
+                            {{if key !== 'total'}}
+                            <tr>
+                                <td>{{key}}</td>
+                                <td>{{value}}</td>
+                            </tr>
+                            {{/if}}
+                        {{/each}}
+                        <tr>
+                            <td>total</td>
+                            <td>{{count.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+    <!-- 中栏或(中栏+右侧栏) 结束-->

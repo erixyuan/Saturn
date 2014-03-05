@@ -79,7 +79,6 @@ function($, template, Backbone, tpl,model,swfupload,attachment,PaginationView){
             'click span[operate=deleteItem]' : 'deleteItem',
         },
         render: function() {
-            $('body').removeClass().addClass('m-appkey-edit');
             var html = template.compile(this.template)(this.model.attributes);
             Saturn.renderToDom(html,'#js_mainContent');
             this.adImgLoadInit();
@@ -169,7 +168,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,PaginationView){
         },
         adImgLoadInit:function(){
             var settings = {
-                flash_url : Saturn.cmsPath+'manageV2/js/lib/swfupload/swfupload.swf',
+                flash_url : Saturn.cmsPath+'manageV3/js/lib/swfupload/swfupload.swf',
                 upload_url: Saturn.cmsPath + "ipa/attachment",
                 file_post_name : "file",
                 post_params: {
@@ -185,7 +184,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,PaginationView){
                 },
                 debug: false,
                 // Button settings
-                button_image_url: Saturn.cmsPath+'manageV2/js/lib/swfupload/upload-pic-btn.png',
+                button_image_url: Saturn.cmsPath+'manageV3/js/lib/swfupload/upload-pic-btn.png',
                 button_width: "90",
                 button_height: "22",
                 button_placeholder_id: 'js_adImgBtn',

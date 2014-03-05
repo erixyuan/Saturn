@@ -3,7 +3,7 @@ define([
     'template',
     'backbone',
     'text!../../../template/set/setSynchronous.html',
-    '../../model/article/syncList',
+    //'../../model/article/syncList',
     ],
 
 function($, template, Backbone, tpl,model){
@@ -17,10 +17,8 @@ function($, template, Backbone, tpl,model){
             this.render();
         },
         events:{
-            "click span[operate=delete]" : 'delete',
         },
         render: function() {
-            $('body').removeClass().addClass('m-list-plugin');
             var html = template.compile(this.template)({});
             Saturn.renderToDom(html,'#js_mainContent');
         }

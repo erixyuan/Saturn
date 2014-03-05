@@ -1,61 +1,81 @@
-<!doctype html>
-<html lang="zh">
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="zh"> <!--<![endif]-->
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Saturn</title>
-        <link rel="stylesheet" href="css/normalize.css">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css">
         <script src="js/Saturn.js"></script>
         <script data-main="js/main" src="js/lib/require.js"></script>
     </head>
 
     <body>
-        <!-- 头部开始 -->
-        <div class="r-header" id="js_mainHeader">
+
+
+
+        <!-- ★ HEADER //////////////////// -->
+        <div class="r-header fn-clear" id="js_mainHeader">
             <div class="w-inner">
-                <!-- logo -->
-                <div class="w-logo"><a href="" class="w-login" id="js_logoUrl"></a></div>
 
-                <!-- 顶级分类 -->
-                <ul class="m-top-tabs" id="js_topNav"></ul>
-                <!-- 顶级分类结束 -->
-
-                <!-- 顶栏右端 -->
-                <div class="w-func">
-                        <!-- 个人信息 添加hover class 就显示 -->
-                        <div class="dropdown m-profile ">
-                            <div class="title">
-                                <a href="#">
-                                    <img src="http://sspai.com/avatar/user/b/081/000/000/81.jpg" alt="" class="avater" id="js_avater" />
-                                    <span id="js_userName"></span>
-                                </a>
-                            </div>
-                            <!-- 用户菜单 -->
-                            <div class="dropdown-menu">
-                                <ul>
-                                    <li><a href="">1</a></li>
-                                    <li><a href="">3</a></li>
-                                    <li><a href="">4</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- 个人信息 结束 -->
+                <div class="w-logo">
+                    <a href="" class="w-login" id="js_logoUrl"></a>
                 </div>
-                <!-- 顶栏右端结束 -->
-            </div>
-        </div>
-        <!-- 头部结束 -->
-        <div class="r-container">
-            <div class="w-sidebar">
-                <ul class="m-sidebar" id="js_sidebar">
+
+                <ul class="m-top-tabs" id="js_topNav">
                 </ul>
-            </div>
-            <div class='w-mian' id="js_mainContent">
+
+                <div class="w-func">
+                    <div class="dropdown m-profile ">
+                        <div class="title">
+                            <a href="#">
+                                <img src="img/pic_i.jpg" alt="" class="avater" id="js_avater" />
+                                <span id="js_userName"></span>
+                            </a>
+                        </div>
+
+                        <div class="dropdown-menu">
+                            <ul class="g-list-ul">
+                                <li><a href="">1</a></li>
+                                <li><a href="">3</a></li>
+                                <li><a href="">4</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="gotohome">
+                        <a href="../" target="_blank">
+                            查看网站
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="r-footer" id="js_mainFooter">
+
+
+        <!-- ★★★★★ CONTAINER START ★★★★★ //////////////////// -->
+        <div class="r-container fn-clear">
+            <div class="w-sidebar">
+                <ul class="m-sidebar" id="js_sidebar"></ul>
+            </div>
+            <div class='w-container' id="js_mainContent"></div>
+        </div>
+        <!-- ★★★★★ CONTAINER END ★★★★★ //////////////////// -->
+
+
+
+        <!-- ★ FOOTER //////////////////// -->
+        <div class="r-footer fn-clear" id="js_mainFooter">
             Copyright © Saturn All Rights Reserved
         </div>
+
+
+
+
     </body>
 </html>

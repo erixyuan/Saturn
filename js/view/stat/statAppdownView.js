@@ -28,7 +28,6 @@ function($, template, Backbone, tpl,model){
         },
         render: function() {
 
-            $('body').removeClass().addClass('m-article-create');
 
             var ranges = this.model.get('ranges').map(function(obj){
                 return {

@@ -185,7 +185,7 @@ function(_, Backbone){
                         {
                             parent:'stat',
                             name:'文章绩效统计',
-                            module:'api'
+                            module:'quality'
                         }
                     ]
                 },

@@ -27,7 +27,6 @@ function($, template, Backbone, tpl,model){
             'click #js_update':'update',
         },
         render: function() {
-            $('body').removeClass().addClass('m-setting');
             var html = template.compile(this.template)(this.model.attributes);
             Saturn.renderToDom(html,'#js_mainContent');
 

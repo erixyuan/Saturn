@@ -30,7 +30,6 @@ function($, template, Backbone, tpl,model,systemModel){
         },
         render: function() {
 
-            $('body').removeClass().addClass('m-statistics-appplatform');
 
             var ranges = this.model.get('ranges').map(function(obj){
                 return {

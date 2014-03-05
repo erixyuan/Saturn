@@ -131,7 +131,7 @@ function($, template, Backbone, paginationTpl){
         },
         events:{
             'click #js_jumpPageBtn': 'jumpPage',//失去焦点事件
-
+            'keypress #js_jumpPageValue' : 'jumpPageKeyPress'
         },
         render: function(obj) {
             var context = obj.data;     // 分页数据,包括最后一页，当前页，当前状态状态
@@ -147,7 +147,7 @@ function($, template, Backbone, paginationTpl){
             // 第一种是，url模式，跳转的
             // 第二种是按钮触发事件模式,只是把page属性丢到触发dom上面，dom操作在view里面写
             if (obj.url) {
-                numberBoxs.url = obj.url+context.status;
+                numberBoxs.url = obj.url;
             }
             var html = template.render('js_pageTpl',numberBoxs);
             $('#js_pagination').html(html);
@@ -157,6 +157,11 @@ function($, template, Backbone, paginationTpl){
             var url = $('#js_jumpPageBtn').attr('attr')
             window.location.hash = url+v;
 
+        },
+        jumpPageKeyPress:function(e){
+            if(e.keyCode == 13){
+                this.jumpPage();
+            }
         }
     });
     // 模块现在返回实例化后的view

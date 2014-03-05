@@ -15,21 +15,21 @@ KindEditor.plugin('pagebreak', function(K) {
 	var pagebreakTag = K.undef(self.pagebreakTag, '##page_break_tag##');;
 
 	self.changePagebeak = function(){
-		var textContent = KindEditor.query('#editor_textarea').value;
+		var textContent = KindEditor.query('#js_editor_textarea').value;
 		//因为切换的时候，这个函数先跑，所以点击source的时候，这里的模式还是当前模式，没有切换
 		if(self.designMode == true){
 			//当现在是设计模式，把textarea的内容正则改变
 			//var reg = /<div style="[^"]*" class="ke-pagebreak" >(.*)<\/div><br>/ig;
 			//var reg1 = /<div style="[^"]*" class="ke-pagebreak" >(((?!<\/div>).)*)<\/div>/ig;
 			var reg1 = /<div.*?pagebreak.*?>(.*?)<\/div>/ig;
-			KindEditor.query('#editor_textarea').value = textContent.replace(reg1,
+			KindEditor.query('#js_editor_textarea').value = textContent.replace(reg1,
 				function(){
 					return '<!--' + pagebreakTag +arguments[1] +pagebreakTag + '-->'
 				}
 			);
 		}else{
 			var reg = new RegExp( '<\!\-\-' + pagebreakTag + '(((?!' + pagebreakTag + ').)*)' + pagebreakTag + '\-\-\>', 'igm' );
-			KindEditor.query('#editor_textarea').value = textContent.replace(reg, function($1){
+			KindEditor.query('#js_editor_textarea').value = textContent.replace(reg, function($1){
 				var _reg = new RegExp( '<\!\-\-' + pagebreakTag + '(((?!' + pagebreakTag + ').)*)' + pagebreakTag + '\-\-\>', 'im' );
 				return pagebreakHtml.replace('PageTitle', $1.match(_reg)[1] );
 			});

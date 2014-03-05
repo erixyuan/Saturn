@@ -1,86 +1,88 @@
-<script id="js_articleList" type="text/html">
-<!-- 中栏或(中栏+右侧栏) 开始-->
-<div class="wrap">
-    <!-- 主要内容开始 -->
-    <div class="w-main" >
-        <div class="m-toolbar">
-            <div class="g-btn-group" id="js_secondNav">
-                <a href="#article/list/all/1"  class="g-btn" status="all" >全部()</a>
-                <a href="#article/list/publish/1" class="g-btn" status="publish">已发布()</a>
-                <a href="#article/list/pending/1" class="g-btn" status="pending">未审核()</a>
-                <a href="#article/list/draft/1" class="g-btn" status="draft">草稿()</a>
-                <a href="#article/list/contribution/1"  class="g-btn" status="contribution">投稿()</a>
-                <a href="#article/list/refuse/1" class="g-btn" status="refuse">拒绝()</a>
-                <a href="#article/list/recycle/1"  class="g-btn" status="recycle">回收站()</a>
-                <a href="#article/list/page/1" class="g-btn" status="page">页面()</a>
-            </div>
+<div class="wrap g-moudel-list m-article m-article-list">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left g-btn-group" id="js_secondNav">
+            <a href="#article/list/all{{if keyword}}/{{keyword}}{{/if}}/1"  class="g-btn" status="all" >全部({{count.all}})</a>
+            <a href="#article/list/publish{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="publish">已发布({{count.publish}})</a>
+            <a href="#article/list/pending{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="pending">未审核({{count.draft}})</a>
+            <a href="#article/list/draft{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="draft">草稿({{count.pending}})</a>
+            <a href="#article/list/contribution{{if keyword}}/{{keyword}}{{/if}}/1"  class="g-btn" status="contribution">投稿({{count.contribution}})</a>
+            <a href="#article/list/refuse{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="refuse">拒绝({{count.refuse}})</a>
+            <a href="#article/list/recycle{{if keyword}}/{{keyword}}{{/if}}/1"  class="g-btn" status="recycle">回收站({{count.recycle}})</a>
+            <a href="#article/list/page{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="page">页面({{count.page}})</a>
         </div>
-
-         <table class="g-table">
-            <thead>
-                <tr>
-                    <th class="col-checkbox"><input type="checkbox" class="input-checkbox" id="js_operateCheckBox"></th>
-                    <th  class="col-title">标题</th>
-                    <th class="col-category mobile-hide">分类</th>
-                    <th class="col-author mobile-hide">作者</th>
-                    <th class="col-status">状态</th>
-                    <th class="col-view mobile-hide">浏览</th>
-                    <th class="col-comment mobile-hide">评论</th>
-                    <th class="col-creat-at mobile-hide">发布日期</th>
-                    <th class="col-actions">操作</th>
-                </tr>
-            </thead>
-            <tbody id="js_articleListContent">
-                <!-- 模板 START -->
-
-                {{each data as article index}}
-                    <tr>
-                        <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
-                        <td class="col-title"><a href="#article/edit/{{article.id}}">{{article.title}}</a></td>
-                        <td class="col-category">
-                            {{each article.categories as categorie index}}
-                                <a href="#">{{categorie.name}}</a>
-                            {{/each}}
-                        </td>
-                        <td class="col-author">{{article.author}}</td>
-                        <td class="col-status" id="js_status">{{article.status}}</td>
-                        <td class="col-view mobile-hide">{{article.views}}</td>
-                        <td class="col-comment mobile-hide">{{article.comments}}</td>
-                        <td class="col-creat-at mobile-hide">{{article.formatPublished}}</td>
-                        <td class="col-actions">
-                            <a href="javascript:void(0)" class="g-btn g-btn-mini" operate="check">查</a>
-                            <a href="#article/edit/{{article.id}}" class="g-btn g-btn-mini">编</a>
-                            <span class="g-btn g-btn-mini g-btn-delete" operateid="js_{{article.id}}" operate="delete">删</span>
-                        </td>
-                    </tr>
-                {{/each}}
-            </tbody>
-        </table>
-
-        <div class="w-page-footer" >
-                <div class="m-function">
-                    <select name="" id="js_" class="g-select">
-                        <option value="">请选择操作</option>
-                        <option value="">批量移动</option>
-                        <option value="">通过</option>
-                        <option value="">拒绝</option>
-                        <option value="">待审核</option>
-                        <option value="">删除</option>
-                        <option value="">导出</option>
-                    </select>
-                    <a href="#" class="g-btn g-btn-primary">提交</a>
-                </div>
-                <!-- 分页器 START-->
-                <div class="g-pagination" id="js_pagination">
-
-                </div>
-                <!-- 分页器 end-->
-            </div>
+        <div class="fn-right">
+            <input type="text" class="input-text" id="searchKeyWord">
+            <span class="g-btn" id="searchBtn">搜索</span>
+            <a href="#article/create" class="g-btn g-btn-primary">添加</a>
         </div>
     </div>
-    <!-- 主要内容结束 -->
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox">
+                    <input type="checkbox" class="input-checkbox" id="js_operateCheckBox">
+                </th>
+                <th  class="col-title">标题</th>
+                <th class="col-category mobile-hide">分类</th>
+                <th class="col-author mobile-hide">作者</th>
+                <th class="col-status">状态</th>
+                <th class="col-view mobile-hide">浏览</th>
+                <th class="col-comment mobile-hide">评论</th>
+                <th class="col-creat-at mobile-hide">发布日期</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+        <tbody id="js_articleListContent">
+            {{each data as article index}}
+                <tr>
+                    <td class="col-checkbox">
+                        <input type="checkbox" class="input-checkbox" operateId="{{article.id}}">
+                    </td>
+                    <td class="col-title"><a href="#article/edit/{{article.id}}">{{article.title}}</a></td>
+                    <td class="col-category">
+                        {{each article.categories as categorie index}}
+                            <a href="#">{{categorie.name}}</a>
+                        {{/each}}
+                    </td>
+                    <td class="col-author">{{article.author}}</td>
+                    <td class="col-status" id="js_status">{{article.status}}</td>
+                    <td class="col-view mobile-hide">{{article.views}}</td>
+                    <td class="col-comment mobile-hide">{{article.comments}}</td>
+                    <td class="col-creat-at mobile-hide">{{article.formatPublished}}</td>
+                    <td class="col-actions">
+                        <a href="javascript:void(0)" class="g-btn g-btn-mini" operate="check">查</a>
+                        <a href="#article/edit/{{article.id}}" class="g-btn g-btn-mini">编</a>
+                        <span class="g-btn g-btn-mini g-btn-delete" operateid="{{article.id}}" operate="delete">删</span>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer" >
+        <div class="fn-left m-function">
+            <select name="" id="js_batchOperateSelect" class="g-select">
+                <option value="">请选择操作</option>
+                <option value="publish">通过</option>
+                <option value="refuse">拒绝</option>
+                <option value="pending">待审核</option>
+                <option value="delete">删除</option>
+                <option value="">导出</option>
+            </select>
+            <span class="g-btn g-btn-primary" id="js_batchOperate">提交</span>
+        </div>
+        <!-- 分页器 START-->
+        <div class="fn-right g-pagination" id="js_pagination">
+
+        </div>
+        <!-- 分页器 end-->
+    </div>
+
 </div>
-</script>
-                <!-- 模板 END -->
 
 

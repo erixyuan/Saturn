@@ -7,15 +7,16 @@ define([
 function(_, Backbone,$){
     return Backbone.Model.extend({
         initialize:function(status,page){
-            this.url = Saturn.cmsPath+'ipa/comment';
+            if(status && page){
+                this.url = Saturn.cmsPath+'ipa/comment?status='+status+'&page='+page;
+            }else{
+                this.url = Saturn.cmsPath+'ipa/comment';
+            }
         },
         defaults: {
             //name: "Harry Potter"
         },
-        validate:function(attributes,func){
-
-        },
-        refuse: function(id,func){
+        operate:function(type,id,callback){
             var data = [];
             if(id instanceof Array){
                 data = id;
@@ -23,46 +24,20 @@ function(_, Backbone,$){
                 data.push(id);
             }
             $.ajax({
-                url:Saturn.cmsPath+'ipa/comment/refuse',
-                type:"POST",
-                data:{ids:data},
+                url:Saturn.cmsPath+'ipa/comment/'+type,
+                data:JSON.stringify({ids:data}),
+                type:"put",
                 contentType : 'application/json',
                 dataType: 'json',
-                success: func ? func : function(){},
+                beforeSend:function(){
+                    Saturn.beginLoading('处理中...');
+                },
+                success:function(data){
+                    callback && callback(data);
+                    Saturn.afterLoading();
+                }
             })
         },
-        delete:function(id,func){
-            var data = [];
-            if(id instanceof Array){
-                data = id;
-            }else{
-                data.push(id);
-            }
-            $.ajax({
-                url:Saturn.cmsPath+'ipa/comment',
-                type:"DELETE",
-                data:{ids:data},
-                contentType : 'application/json',
-                dataType: 'json',
-                success: func ? func : function(){},
-            })
-        },
-        pass:function(id,func){
-            var data = [];
-            if(id instanceof Array){
-                data = id;
-            }else{
-                data.push(id);
-            }
-            $.ajax({
-                url:Saturn.cmsPath+'ipa/comment/publish',
-                type:"POST",
-                data:{ids:data},
-                contentType : 'application/json',
-                dataType: 'json',
-                success: func ? func : function(){},
-            })
-        }
     });
 }
 

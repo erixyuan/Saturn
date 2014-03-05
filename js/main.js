@@ -10,6 +10,7 @@ require.config({
          'KindEditor' : "lib/kindeditor/kindeditor",
          'lang' : "lib/kindeditor/lang/zh_CN",
          'swfupload' : 'lib/swfupload/swfupload',
+         'swfuploadQueue' : 'lib/swfupload/plugins/swfupload.queue',
          'attament' : 'lib/attachment_0.2'
      },
      shim:{
@@ -35,7 +36,10 @@ require.config({
         'swfupload':{
             'exports':'swfupload'
         },
-    'attament':{
+        'swfuploadQueue':{
+            deps:['swfupload'],
+        },
+        'attament':{
             'exports':'attament'
         }
      }
@@ -93,12 +97,14 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 // ************文章 start*********************
                 "article":                          "article_list",
                 "article/list":                     "article_list",
-                "article/list/:status/:page":       "article_list",
+                "article/list/:status/:page":            "article_list",
+                "article/list/:status/:keyword/:page":   "article_list",
                 "article/edit/:id":                 "article_edit",
                 "article/create":                   "article_edit",
                 "article/category":                 "article_category",
                 "article/category/:id":             "category_edit",
                 "article/comment":                  "article_comment",
+                "article/comment/:status/:page":    "article_comment",
                 "article/articleSyn":               "article_articleSyn",
                 "article/articleSyn/:page":         "article_articleSyn",
                 // ************文章 end*********************
@@ -107,6 +113,7 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 "application":                      "app_list",
                 "application/list":                 "app_list",
                 "application/list/:status/:page":   "app_list",
+                "application/list/:status/:keyword/:page":   "app_list",
                 "application/edit/:id":             "app_edit",
                 "application/create":               "app_edit",
                 "application/category":             "app_category",
@@ -118,6 +125,9 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 "stat/pv":         "stat_pv",
                 "stat/appdown":         "stat_appdown",
                 "stat/platform":         "stat_platform",
+                "stat/halls":         "stat_halls",
+                "stat/api":         "stat_api",
+                "stat/quality":         "stat_quality",
                 // ************统计 start*********************
 
                 // ************用户 start*********************
@@ -189,12 +199,21 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
             },
 
             //**********************************article start*********************************
-            article_list: function(status,page) {
-                loadView(function(){
-                    require(['view/article/articleList'],function(ArticleListView){
-                        Saturn.currentView = new ArticleListView({status:status,page:page});
+            article_list: function(status,keyword,page) {
+                if(arguments.length >2){
+                    loadView(function(){
+                        require(['view/article/articleList'],function(ArticleListView){
+                            Saturn.currentView = new ArticleListView({status:status,page:page,keyword:keyword});
+                        });
                     });
-                });
+                }else{
+                    loadView(function(){
+                        require(['view/article/articleList'],function(ArticleListView){
+                            Saturn.currentView = new ArticleListView({status:status,page:keyword});
+                        });
+                    });
+                }
+
                 Saturn.navModel.set({currentModule:'article',secondModule:'list'});
             },
             article_edit: function(id) {
@@ -213,10 +232,10 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 })
                 Saturn.navModel.set({currentModule:'article',secondModule:'category'});
             },
-            article_comment:function(){
+            article_comment:function(status,page){
                 loadView(function(){
                     require(['view/article/articleCommentView'],function(articleCommentView){
-                        Saturn.currentView = new articleCommentView();
+                        Saturn.currentView = new articleCommentView({status:status,page:page});
                     });
                 })
                 Saturn.navModel.set({currentModule:'article',secondModule:'comment'});
@@ -234,12 +253,21 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
 
 
             //**********************************application start*********************************
-            app_list:function(status,page){
-                loadView(function(){
-                    require(['view/application/ListView'],function(ListView){
-                        Saturn.currentView = new ListView({status:status,page:page});
+            app_list:function(status,keyword,page){
+                if(arguments.length >2){
+                    loadView(function(){
+                        require(['view/application/ListView'],function(ListView){
+                            Saturn.currentView = new ListView({status:status,page:page,keyword:keyword});
+                        });
                     });
-                });
+                }else{
+                    loadView(function(){
+                        require(['view/application/ListView'],function(ListView){
+                            Saturn.currentView = new ListView({status:status,page:page});
+                        });
+                    });
+                }
+
                 Saturn.navModel.set({currentModule:'application',secondModule:'list'});
             },
             app_edit: function(id) {
@@ -297,6 +325,30 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 });
                 Saturn.navModel.set({currentModule:'stat',secondModule:'platform'});
             },
+            stat_halls:function(){
+                loadView(function(){
+                    require(['view/stat/statHallsView'],function(statHallsView){
+                        Saturn.currentView = new statHallsView();
+                    });
+                });
+                Saturn.navModel.set({currentModule:'stat',secondModule:'halls'});
+            },
+            stat_api:function(){
+                loadView(function(){
+                    require(['view/stat/statApiView'],function(statApiView){
+                        Saturn.currentView = new statApiView();
+                    });
+                });
+                Saturn.navModel.set({currentModule:'stat',secondModule:'api'});
+            },
+            stat_quality:function(){
+                loadView(function(){
+                    require(['view/stat/statQualityView'],function(statQualityView){
+                        Saturn.currentView = new statQualityView();
+                    });
+                });
+                Saturn.navModel.set({currentModule:'stat',secondModule:'api'});
+            },
             //**********************************统计 end*********************************
 
 
@@ -312,10 +364,10 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 });
                 Saturn.navModel.set({currentModule:'userManage',secondModule:'role/list'});
             },
-            role_edit:function(){
+            role_edit:function(id){
                 loadView(function(){
                     require(['view/role/RoleEditView'],function(RoleEditView){
-                        Saturn.currentView = new RoleEditView();
+                        Saturn.currentView = new RoleEditView({id:id});
                     });
                 });
                 Saturn.navModel.set({currentModule:'userManage',secondModule:'role/create'});

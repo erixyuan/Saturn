@@ -1,44 +1,64 @@
+<form class="wrap g-moudel-edit m-article m-article-edit" id="js_formTplContent">
 
-<form class="wrap has-widget" id="js_formTplContent">
-        <!-- 主要内容开始 -->
+        <!-- 主區域 START -->
         <div class="w-main">
-             <!-- 文章编辑 区域 START -->
-            <!-- 文章标题 -->
-            <div class="w-article-title">
-                <input type="text" class="input-text article-title" id="js_title" value="{{title}}">
-            </div>
-            <!-- 文章标题 -->
 
-            <div class="w-description">
+
+            <!-- 標題 -->
+            <div class="fn-clear m-title">
+                <input type="text" class="input-text" id="js_title" placeholder="请输入文章标题..." value="{{title}}">
+            </div>
+
+
+            <!-- 引言 -->
+            <div class="fn-clear m-description">
                 <label>引言<em>(微博分享，<font>还可以输入<strong id="js_residue-counter">90</strong>字</font><font style="display: none;color:red">已超出<strong id="exceed-counter">90</strong>字</font> )</em></label>
                 <textarea name="" id="js_description">{{description}}</textarea>
             </div>
 
-            <!-- 编辑器：START-->
-            <div class="w-editor">
-                <textarea name="" id="js_editor_textarea" class="m-editor">{{content}}</textarea>
-                <div id="js_aceEditor" style="width: 100%; height: 500px; display: block; border: 1px solid rgb(204, 204, 204);"></div>
-            </div>
-            <!-- 编辑器：END-->
 
-            <div class="layout-block">
+            <!-- 編輯器 -->
+            <div class="fn-clear m-editor">
+                <textarea name="" id="js_editor_textarea">{{content}}</textarea>
+                <div id="js_aceEditor"></div>
+            </div>
+
+
+            <!-- 編輯器擴展項目 -->
+            <div class="fn-clear m-editor-ext">
                 <span>水印位置：<input type="text" class="input-text input-num" id="js_content_wmp" value="{{content_wmp}}"></span>
                 <span>使用第<input type="text" class="input-text input-num" id="js_banner_index" value="{{banner_index}}">张图片做banner图 </span>
                 <span><input type="checkbox" class="input-checkbox" id="js_cleanthumbs">生成缩略图</span>
             </div>
-            <div class="w-page-footer">
-                    <a href="javascript:void(0)" class="g-btn g-btn-primary" id="js_publicBtn" type="public">发布</a>
-                    <a href="javascript:void(0)" class="g-btn" id="js_draftBtn" type="draft">草稿</a>
-                    <a href="javascript:void(0)" class="g-btn" id="js_pendingBtn" type="pending">审核</a>
-                    <a href="javascript:void(0)" class="g-btn" id="js_previewBtn" id="autosave">预览</a>
+
+
+            <!-- 各種功能按鈕 -->
+            <div class="fn-clear m-func">
+                <a href="javascript:void(0)" class="g-btn g-btn-primary" id="js_publicBtn" type="public">发布</a>
+                <a href="javascript:void(0)" class="g-btn" id="js_draftBtn" type="draft">草稿</a>
+                <a href="javascript:void(0)" class="g-btn" id="js_pendingBtn" type="pending">审核</a>
+                <a href="javascript:void(0)" class="g-btn" id="js_previewBtn" id="autosave">预览</a>
             </div>
-             <!-- 文章编辑 区域 END -->
+
+
         </div>
-        <!-- 主要内容结束 -->
-        <!-- 右侧栏开始 -->
-        <div class="w-widget-box-container" >
-            <!-- 缩略图 START -->
-            <div class="selector-thumb" id="js_uploadImgContent">
+        <!-- 主區域 END -->
+
+
+
+
+
+
+
+
+
+
+        <!-- 擴展欄 START -->
+        <div class="w-ext" >
+
+
+            <!-- BANNER圖 -->
+            <div class="fn-clear m-banner" id="js_uploadImgContent">
                 {{if banner_url=='' || banner_url == undefined}}
                     <img src="img/article_banner_default.gif" alt="默认缩略图" width="300" id="js_bannerImgShow" bannerId="{{banner_id}}">
                 {{else}}
@@ -52,6 +72,8 @@
                          <input type="text" class="input-text" name="banner_wmp" id="js_banner_wmp" help-tips="选填项，参照小键盘方向输入，0为按后台设定的数值处理，-1为不加水印。" value="{{banner_wmp}}" />
                     </span>
                 </div>
+
+                <!-- 彈出窗口，默認隱藏 -->
                 <div class="g-modal" style="" id="js_subject-thumb-upload-list">
                     <div class="g-modal-dialog">
                         <a href="javascript:void(0)" class="close" id="js_uploadImgListClose"><i class="fa fa-times"></i></a>
@@ -61,13 +83,13 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
-            <!-- 缩略图 END -->
 
-            <div class="widget widget-level">
+
+            <!-- 挂件 - 評級 -->
+            <div class="fn-clear m-widget m-widget-level">
                 <h4>评级</h4>
-                <div class="layout-block">
+                <div class="m-box">
                     <strong>{{views}}</strong> 浏览 / <strong>{{comments}}</strong> 评论
                     <span class="date" id="js_postDate"></span>
                     <strong class="level">中</strong>
@@ -75,10 +97,10 @@
             </div>
 
 
-
-            <div class="widget widget-app" >
+            <!-- 挂件 - 關聯應用 -->
+            <div class="fn-clear m-widget m-widget-app" >
                 <h4>关联应用</h4>
-                <div class="layout-block" id="js_applicationListContent">
+                <div class="fn-clear m-box" id="js_applicationListContent">
                     {{each apps as app index}}
                         <a href="javascript:void(0)" class="btn-app" applicationid="js_{{app.id}}">
                             {{if app.icon=='' || app.icon==null}}
@@ -91,9 +113,7 @@
                     <a href="javascript:void(0)" class="btn-app add-app" id="js_addApplicationBtn"><i class="fa fa-plus"></i></a>
                 </div>
 
-
-
-
+                <!-- 彈出窗口，默認隱藏 -->
                 <div class="g-modal select-app" style="" id="js_widgetApplicationList">
                     <div class="g-modal-dialog">
                         <a href="javascript:void(0)" class="close" id="js_widgetApplicationListClose"><i class="fa fa-times"></i></a>
@@ -110,45 +130,43 @@
                 </div>
             </div>
 
-            <div class="widget widget-cat-timer">
-                <h4>文章基本信息</h4>
-                <div class="layout-block">
-                    <div class="category">
-                        <div class="w-add-category">
-                            <a href="javascript:void(0)" class="g-btn g-btn-mini add-category" id="js_categoryBtn">分类</a> :
-                        </div>
 
-                        <ul class="list-category" id="js_categoryListContent">
-                            {{each categories as categorie index}}
-                                <li><a href="javascript:void(0)" value="{{categorie.id}}">{{categorie.name}}</a></li>
-                            {{/each}}
-                        </ul>
-                        <div class="g-modal" style="" id="js_categoryListSelect">
-                            <div class="g-modal-dialog">
-                                <a href="javascript:void(0)" class="close" id="js_categoryListClose"><i class="fa fa-times"></i></a>
-                                <h1>文章分类</h1>
-                                <select name="" id="js_categoryListSelectContent" multiple="multiple" style="width:560px;height: 200px">
-                                </select>
-                                <div class="modal-footer">
-                                    <button type="button" class="g-btn g-btn-primary" id="js_categorySubmit">确定</button>
-                                </div>
+            <!-- 挂件 - 文章基本信息 -->
+            <div class="fn-clear m-widget m-widget-category">
+                <h4>分类</h4>
+                <div class="m-box">
+                    <ul class="fn-clear list-category" id="js_categoryListContent">
+                        {{each categories as categorie index}}
+                            <li><a href="javascript:void(0)" value="{{categorie.id}}">{{categorie.name}}</a></li>
+                        {{/each}}
+                    </ul>
+                    <a href="javascript:void(0)" class="g-btn add-category" id="js_categoryBtn">添加</a>
+
+                    <!-- 彈出窗口，默認隱藏 -->
+                    <div class="g-modal" style="" id="js_categoryListSelect">
+                        <div class="g-modal-dialog">
+                            <a href="javascript:void(0)" class="close" id="js_categoryListClose"><i class="fa fa-times"></i></a>
+                            <h1>文章分类</h1>
+                            <select name="" id="js_categoryListSelectContent" multiple="multiple" style="width:560px;height: 200px">
+                            </select>
+                            <div class="modal-footer">
+                                <button type="button" class="g-btn g-btn-primary" id="js_categorySubmit">确定</button>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- 设置定时器 -->
-                    <div class="timer">
-                        <input type="datetime-local" class="input-text" disabled id="js_postTime">
-                        <input type="checkbox" class="input-checkbox" id="js_setPostTime">定时
                     </div>
                 </div>
             </div>
 
-            <!-- 文章标签 -->
-            <div class="widget widget-tags">
+
+
+
+
+
+            <!-- 挂件 - 文章標籤 -->
+            <div class="fn-clear m-widget m-widget-tags">
                 <h4>文章标签</h4>
-                <div class="layout-block">
-                    <ul class="list-tags" id="js_tagsListContent">
+                <div class="m-box">
+                    <ul class="fn-clear list-tags" id="js_tagsListContent">
                         {{each tags as tag index}}
                             <li><a href="javascript:void(0)">{{tag.name}}</a></li>
                         {{/each}}
@@ -160,27 +178,60 @@
                 </div>
             </div>
 
-            <!-- more START -->
-            <div class="more">
-                <div class="w-more-btn">
-                    <a href="javascript:void(0)" class="g-btn" id="js_moreContentBtn">高级选项<span class="arrow-open"  ></span></a>
+
+
+
+
+            <!-- 挂件 - 设置定时器 -->
+            <div class="fn-clear m-widget m-widget-timer">
+                <h4>定时器</h4>
+                <div class="m-box">
+                    <input type="datetime-local" class="input-text" disabled id="js_postTime">
+                    <input type="checkbox" class="input-checkbox" id="js_setPostTime">定时
                 </div>
-                <!-- 高级选项 START -->
-                <div class="widget widget-article-info" id="js_moreContent"  style="display:none" >
-                    <div class="layout-block">
+            </div>
+
+
+
+
+
+            <!-- 挂件 - 高級選項 -->
+            <div class="fn-clear m-widget m-widget-advanced">
+                <div class="exp-btn">
+                    <a href="javascript:void(0)" class="g-btn" id="js_moreContentBtn">
+                        高级选项 <span class="arrow-open"></span>
+                    </a>
+                </div>
+
+                <div class="m-box" id="js_moreContent"  style="display:none" >
                         <div class="section info-src">
-                            <input type="text" class="input-text" placeholder="来源作者" value="{{author}}" id="js_author">
-                            <input type="text" class="input-text" placeholder="来源站点" value="{{source_name}}" id="js_source_name">
-                            <input type="text" class="input-text" placeholder="来源链接" value="{{source_url}}" id="js_source_url">
+                            <div class="field">
+                                <label for="">来源作者</label>
+                                <input type="text" class="input-text" placeholder="来源作者" value="{{author}}" id="js_author">
+                            </div>
+
+                            <div class="field">
+                                <label for="">来源站点</label>
+                                <input type="text" class="input-text" placeholder="来源站点" value="{{source_name}}" id="js_source_name">
+                            </div>
+
+                            <div class="field">
+                                <label for="">来源链接</label>
+                                <input type="text" class="input-text" placeholder="来源链接" value="{{source_url}}" id="js_source_url">
+                            </div>
                         </div>
 
                         <div class="section article-setting">
                             <div class="field">
-                                <label >自定义URL：</label><input type="text" class="input-text" id="js_slug" value='{{slug}}' >
+                                <label >自定URL</label>
+                                <input type="text" class="input-text" id="js_slug" placeholder="自定URL" value='{{slug}}' >
                             </div>
+
                             <div class="field">
-                                <label >跳转URL：</label><input type="text" class="input-text" id="js_goto_link" value='{{goto_link}}'>
+                                <label >跳转URL</label>
+                                <input type="text" class="input-text" id="js_goto_link" placeholder="跳转URL"  value='{{goto_link}}'>
                             </div>
+
                             <div class="field">
                                 <label>文章模板</label>
                                 <select name="" id="js_templateContent" class="g-select">
@@ -188,25 +239,26 @@
                                 </select>
                             </div>
                         </div>
-                        <ul class="more-opt">
-                            <li><input type="checkbox" class="input-checkbox" id="js_disable_comment">禁止评论</li>
-                            <li><input type="checkbox" class="input-checkbox" id="js_ontop">置顶</li>
-                            <li><input type="checkbox" class="input-checkbox" id="js_url_filter">过滤外站连接</li>
-                            <li><input type="checkbox" class="input-checkbox" id="js_page">页面</li>
-                        </ul>
-                    </div>
+
+                        <div class="section more-opt">
+                            <ul class="g-list-ul">
+                                <li><input type="checkbox" class="input-checkbox" id="js_disable_comment">禁止评论</li>
+                                <li><input type="checkbox" class="input-checkbox" id="js_ontop">置顶</li>
+                                <li><input type="checkbox" class="input-checkbox" id="js_url_filter">过滤外站连接</li>
+                                <li><input type="checkbox" class="input-checkbox" id="js_page">页面</li>
+                            </ul>
+                        </div>
                 </div>
-                <!-- 高级选项 END -->
             </div>
-            <!-- more END -->
+
         </div>
-        <!-- 右侧栏结束 -->
-
-
+        <!-- 擴展欄 END -->
 </form>
-<!-- 中栏或(中栏+右侧栏) 结束-->
 
-<!-- 分类列表 g-show 这个class代表开启-->
+
+
+
+<!-- 分類列表彈窗 -->
 <div class="g-modal" style="" id="js_categoryListSelect">
     <div class="g-modal-dialog">
         <a href="javascript:void(0)" class="close" id="js_categoryListClose"><i class="fa fa-times"></i></a>
@@ -219,7 +271,7 @@
     </div>
 </div>
 
-<!-- 上传图片列表的模板 开始 -->
+<!-- 上傳圖片彈窗 -->
 <script id="js_uploadImgTpl" type="text/html">
     <div class="g-modal" style="" id="js_subject-thumb-upload-list">
         <div class="g-modal-dialog">
@@ -242,4 +294,3 @@
         </div>
     </div>
 </script>
-<!-- 上传图片列表的模板 结束-->

@@ -25,7 +25,6 @@ function($, template, Backbone, tpl,model){
             "click span[operate=delete]" : 'delete',
         },
         render: function() {
-            $('body').removeClass().addClass('m-list-plugin');
             var html = template.compile(this.template)({data:this.model.attributes});
             Saturn.renderToDom(html,'#js_mainContent');
         }

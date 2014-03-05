@@ -4,7 +4,7 @@ define([
     'backbone',
     'text!../../../template/application/edit.html',
     '../../model/application/edit',
-    'swfupload',
+    'swfuploadQueue',
     '../../model/common/attachment',
     '../../model/set/system',
     ],
@@ -45,7 +45,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
                         object:this.attachment,
                         method:'get',
                         params:{
-                            type : 'application/',
+                            type : 'application',
                             id : obj.id,
                             relation : 'screenshot'
                         }
@@ -68,7 +68,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
         },
         events:{
             'click #js_addTag':'addTag',
-            'click #js_tagsListContent': 'deleteTag',
+            'click #js_tagsListContent li': 'deleteTag',
             'click #js_publicBtn': 'submit',
 
             // categorylist
@@ -89,7 +89,6 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
         render: function(data) {
             this.model.set('screenshots',data[1].data);
             this.model.set('downloads',data[2].get('data'));
-            $('body').removeClass().addClass('m-application-panel-edit');
             var html = template.compile(this.template)(this.model.attributes);
             Saturn.renderToDom(html,'#js_mainContent');
 
@@ -112,13 +111,9 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
                 }
             };
         },
-        deleteTag:function(){
-            var target = event.target || window.event.srcElement;
-            if (target.nodeName != 'SPAN') {
-                return false;
-            };
-            $(target).remove();
-            var tags = [];
+        deleteTag:function(e){
+            debugger;
+            $(e.target).remove();
         },
 
         submit:function(){
@@ -233,7 +228,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
         },
         screenShotLoadInit:function(){
             var settings = {
-                flash_url : Saturn.cmsPath+'manageV2/js/lib/swfupload/swfupload.swf',
+                flash_url : Saturn.cmsPath+'manageV3/js/lib/swfupload/swfupload.swf',
                 upload_url: Saturn.cmsPath + "ipa/attachment",
                 file_post_name : "file",
                 post_params: {
@@ -249,7 +244,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
                 },
                 debug: false,
                 // Button settings
-                button_image_url: Saturn.cmsPath+'manageV2/js/lib/swfupload/upload-pic-btn.png',
+                button_image_url: Saturn.cmsPath+'manageV3/js/lib/swfupload/upload-pic-btn.png',
                 button_width: "90",
                 button_height: "22",
                 button_placeholder_id: 'js_uploadImgBtn',
@@ -261,6 +256,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
                 },
                 upload_success_handler : function(file,attachment) {
                     var attachment = JSON.parse(attachment);
+                    debugger;
                     var html = [
                                 '<li screeenshotId="'+attachment.id+'" class="active">',
                                 '<img src="'+attachment.url+'" alt="">',
@@ -294,7 +290,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
         },
         iconImgLoadInit:function(){
             var settings = {
-                flash_url : Saturn.cmsPath+'manageV2/js/lib/swfupload/swfupload.swf',
+                flash_url : Saturn.cmsPath+'manageV3/js/lib/swfupload/swfupload.swf',
                 upload_url: Saturn.cmsPath + "ipa/attachment",
                 file_post_name : "file",
                 post_params: {
@@ -310,16 +306,16 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
                 },
                 debug: false,
                 // Button settings
-                button_image_url: Saturn.cmsPath+'manageV2/js/lib/swfupload/upload-pic-btn.png',
+                button_image_url: Saturn.cmsPath+'manageV3/js/lib/swfupload/upload-pic-btn.png',
                 button_width: "90",
                 button_height: "22",
                 button_placeholder_id: 'js_iconUploadBtn',
                 file_dialog_complete_handler : function(){
                     this.startUpload();
                 },
-                upload_start_handler : function(file){
-                    Saturn.beginLoading("上传中...");
-                },
+                // upload_start_handler : function(file){
+                //     Saturn.beginLoading("上传中...");
+                // },
                 upload_success_handler : function(file,attachment) {
                     var attachment = JSON.parse(attachment);
                     $('#js_icon_id').attr('src',attachment.url);

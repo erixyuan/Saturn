@@ -13,41 +13,53 @@ function($, template, Backbone, tpl,modelData){
         model: modelData,
         template:tpl,
         initialize: function(obj){
-            var that = this;
-
-
-            this.model = new this.model();
-            this.render();
+            if(obj){
+                this.model = new this.model(obj.status,obj.page);
+            }else{
+                this.model = new this.model();
+            }
+            this.model.fetch({
+                success:function(){
+                    this.render();
+                }.bind(this)
+            })
         },
         events:{
-            'click span[operate=delete]' : 'deleteComment',
-            'click span[operate=refuse]' : 'refuseComment',
-            'click span[operate=pass]' : 'passComment',
+            'click span[operate=delete],span[operate=refuse],span[operate=pass],#js_batchOperate' : 'operate',
+            'click ': 'operateCheckBox'
         },
         render: function() {
-            var that = this;
-            this.model.fetch({
-                success:function(model,response){
-                    var html = template.compile(that.template)(that.model.attributes);
-                    Saturn.renderToDom(html,this.el);
+            _.each(this.model.get('data'),function(value,key,list){
+                if (value.created) {
+                    value.formatCreated = Saturn.formatTimeToDate(value.created);
                 }
-            });
-
+            })
+            var html = template.compile(this.template)(this.model.attributes);
+            Saturn.renderToDom(html,this.el);
         },
-        refuseComment: function(){
-            var target = event.target || window.event.srcElement;
-            this.model.refuse($(target).attr('operateid'));
-            this.render();
+        operateCheckBox:function(e){
+            var bool = $(e.target).prop('checked');
+            $(e.target).parents('table').find('input[type=checkbox]').prop('checked',bool);
         },
-        deleteComment:function(){
-            var target = event.target || window.event.srcElement;
-            this.model.delete($(target).attr('operateid'));
-            this.render();
-        },
-        passComment:function(){
-            var target = event.target || window.event.srcElement;
-            this.model.pass($(target).attr('operateid'));
-            this.render();
+        operate:function(e){
+            var type;
+            if($(e.target).attr('operate')){
+                var id = $(e.target).attr('operateid')
+                type = $(e.target).attr('operate');
+                this.model.operate(type,id,function(){
+                    window.location.reload();
+                })
+            }else{
+                type = $('#js_batchOperateSelect').val();
+                var ids = [];
+                if(!type) return false;
+                $('#js_commentListContent input[type=checkbox][operateId]:checked').each(function(){
+                    ids.push($(this).attr('operateId'));
+                })
+                this.model.operate(type,ids,function(data){
+                    window.location.reload();
+                })
+            }
         }
     });
 }

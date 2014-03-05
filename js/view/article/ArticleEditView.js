@@ -40,7 +40,8 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
             'click #js_publicBtn,#js_draftBtn,#js_pendingBtn,#js_previewBtn': 'submit',
             // tag
             'click #js_addTag':'addTag',
-            'click #js_tagsListContent': 'deleteTag',
+            'click #js_tagsListContent li': 'deleteTag',
+            'keypress #js_newTag': 'keypressAddTag',
             // applist
             'click #js_addApplicationBtn': 'addApplicationBtn',
             'click #js_widgetApplicationListClose,#js_widgetApplicationListSubmit': 'closeAppWidget',
@@ -50,7 +51,7 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
             'click #js_categoryBtn': 'showCategory',
             'click #js_categoryListClose': 'categoryListClose',
             'click #js_categorySubmit': 'categorySubmit',
-            'click #js_categoryListContent': 'categoryDelete',
+            'click #js_categoryListContent li': 'categoryDelete',
 
             // 显示更多选项
             'click #js_moreContentBtn': 'showMoreContent',
@@ -66,7 +67,6 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
             'blur #js_title' : 'updateInput',
         },
         render: function(context) {
-            $('body').removeClass().addClass('m-article-create');
             var html = template.compile(this.template)(this.model.attributes);
             Saturn.renderToDom(html,'#js_mainContent')
 
@@ -111,9 +111,8 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
             };
             $('#js_categoryListSelect').removeClass('show');
         },
-        categoryDelete:function(){
-            var target = event.target || window.event.srcElement;
-            $(target).remove();
+        categoryDelete:function(e){
+            $(e.target).remove();
         },
         closeAppWidget:function(){
             $('#js_widgetApplicationList').css('display',"none");
@@ -155,7 +154,7 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
          ******************************************************************************************************/
         imgLoadInit:function(){
             var settings = {
-                flash_url : Saturn.cmsPath+'manageV2/js/lib/swfupload/swfupload.swf',
+                flash_url : Saturn.cmsPath+'manageV3/js/lib/swfupload/swfupload.swf',
                 upload_url: Saturn.cmsPath + "ipa/attachment",
                 file_post_name : "file",
                 post_params: {
@@ -172,7 +171,7 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
                 debug: false,
 
                 // Button settings
-                button_image_url: Saturn.cmsPath+'manageV2/js/lib/swfupload/upload-pic-btn.png',
+                button_image_url: Saturn.cmsPath+'manageV3/js/lib/swfupload/upload-pic-btn.png',
                 button_width: "90",
                 button_height: "22",
                 button_placeholder_id: 'js_subject-thumb-upload-button',
@@ -225,12 +224,14 @@ function($, template, _, Backbone, editTpl,EditModel,ace,KindEditor,lang,swfuplo
         /*****************************************************************************************************
          * 标签
          ******************************************************************************************************/
-        deleteTag:function(){
-            var target = event.target || window.event.srcElement;
-            $(target).parent().remove();
-            var tags = [];
+        deleteTag:function(e){
+            $(e.target).remove();
         },
-
+        keypressAddTag:function(e){
+            if(e.keyCode == 13){
+                this.addTag();
+            }
+        },
         addTag:function(){
             var newTag = $('#js_newTag').val();
             if (newTag !='') {

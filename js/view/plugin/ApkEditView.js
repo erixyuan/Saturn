@@ -15,7 +15,7 @@ function($, template, Backbone, tpl,model){
         status:'',
         initialize: function(obj){
             if (obj.id) {
-                this.model = new model(id);
+                this.model = new model(obj.id);
                 this.model.fetch({
                     success:function(){
                         this.render();
@@ -30,7 +30,6 @@ function($, template, Backbone, tpl,model){
             "click #js_update":'update'
         },
         render: function() {
-            $('body').removeClass().addClass('m-appkey-edit');
             var html = template.compile(this.template)(this.model.attributes);
             Saturn.renderToDom(html,'#js_mainContent');
         },

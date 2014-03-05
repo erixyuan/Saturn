@@ -37,6 +37,10 @@ Saturn.formatTime = function(time){
       return new Date(time*1000).toISOString().substr(0,16)
 }
 
+Saturn.formatTimeToDate = function(time){
+      return new Date(time*1000).toISOString().substr(0,10)
+}
+
 Saturn.defer = function(list,callback){
     var remain = list.length;
     var allData = [];

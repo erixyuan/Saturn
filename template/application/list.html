@@ -1,94 +1,96 @@
-<!-- 中栏或(中栏+右侧栏) 开始-->
-<div class="wrap">
-    <!-- 主要内容开始 -->
-    <div class="w-main" >
-        <div class="m-toolbar">
-            <div class="g-btn-group fn-left" id="js_secondNav">
-                <a href="#application/list/all/page=1" class="g-btn" status="all">全部()</a>
-                <a href="#application/list/publish/1" class="g-btn" status="publish">已发布()</a>
-                <a href="#application/list/pending/1" class="g-btn" status="pending">未审核()</a>
-                <a href="#application/list/draft/1" class="g-btn" status='draft'>草稿()</a>
-                <a href="#application/list/refuse/1" class="g-btn" status="refuse">拒绝()</a>
-            </div>
-            <div class="fn-right">
-                <input type="text" class="input-text">
-                <button href="#" class="g-btn">搜索</button>
-                <a href="#" class="g-btn g-btn-primary">添加</a>
-            </div>
+<div class="wrap g-moudel-list m-application m-application-list">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left g-btn-group" id="js_secondNav">
+            <a href="#application/list/all{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="all">全部({{count.all}})</a>
+            <a href="#application/list/publish{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="publish">已发布({{count.publish}})</a>
+            <a href="#application/list/pending{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="pending">未审核({{count.draft}})</a>
+            <a href="#application/list/draft{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status='draft'>草稿({{count.pending}})</a>
+            <a href="#application/list/refuse{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="refuse">拒绝({{count.refuse}})</a>
+            <a href="#application/list/recycle{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="recycle">回收站({{count.recycle}})</a>
         </div>
-
-         <table class="g-table">
-                <thead>
-                    <tr>
-                        <th class="col-checkbox"><input type="checkbox" class="input-checkbox" id="js_operateCheckBox"></th>
-                        <th class="col-title mobile-hide">ID</th>
-                        <th class="col-name">名称</th>
-                        <th class="col-category mobile-hide">分类</th>
-                        <th class="col-added mobile-hide">添加者</th>
-                        <th class="col-status">状态</th>
-                        <th class="col-package mobile-hide">包名</th>
-                        <th class="col-platform mobile-hide">平台</th>
-                        <th class="col-download mobile-hide">下载</th>
-                        <th class="col-creat-at mobile-hide">添加时间</th>
-                        <th class="col-order mobile-hide">排序</th>
-                        <th class="col-actions">操作</th>
-                    </tr>
-                </thead>
-                <tbody id="js_applicationListContent">
-                    <!-- 模板 START -->
-                        {{each data as app index}}
-                            <tr>
-                                <th class="col-checkbox"><input type="checkbox" class="input-checkbox"></th>
-                                <td class="col-title mobile-hide">{{app.id}}</td>
-                                <td class="col-name">
-                                    <a href="#application/edit/{{app.id}}">{{app.name}}</a>
-                                </td>
-                                <td class="col-category mobile-hide">
-                                    {{each app.categories as categorie index}}
-                                        <a href="#">{{categorie.name}}</a>
-                                    {{/each}}
-                                </td>
-                                <td class="col-added mobile-hide">{{app.username}}</td>
-                                <td class="col-status" id="js_status">{{app.status}}</td>
-                                <td class="col-package mobile-hide">{{app.name_package}}</td>
-                                <td class="col-platform mobile-hide">
-                                    {{each app.downloads as download index}}
-                                        <a href="#">{{download.platform}}</a>
-                                    {{/each}}
-                                </td>
-                                <td class="col-download mobile-hide">1024</td>
-                                <td class="col-creat-at mobile-hide">{{app.formatCreated}}</td>
-                                <td class="col-order mobile-hide">{{app.order}}</td>
-                                <td class="col-actions">
-                                    <a href="#application/edit/{{app.id}}" class="g-btn g-btn-mini">编</a>
-                                    <span class="g-btn g-btn-mini g-btn-delete" operate="delete" operateid="js_{{app.id}}">删</span>
-                                </td>
-                            </tr>
-                        {{/each}}
-                    <!-- 模板 END -->
-                </tbody>
-            </table>
-
-        <div class="w-page-footer" >
-                <div class="m-function">
-                    <select name="" id="js_" class="g-select">
-                        <option value="">请选择操作</option>
-                        <option value="">批量移动</option>
-                        <option value="">通过</option>
-                        <option value="">拒绝</option>
-                        <option value="">待审核</option>
-                        <option value="">删除</option>
-                        <option value="">导出</option>
-                    </select>
-                    <a href="#" class="g-btn g-btn-primary">提交</a>
-                </div>
-                <!-- 分页器 START-->
-                <div class="g-pagination" id="js_pagination">
-                </div>
-                <!-- 分页器 end-->
-            </div>
+        <div class="fn-right">
+            <input type="text" class="input-text" id="searchKeyWord">
+            <span class="g-btn" id="searchBtn">搜索</span>
+            <a href="#application/create" class="g-btn g-btn-primary">添加</a>
         </div>
     </div>
-    <!-- 主要内容结束 -->
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox">
+                    <input type="checkbox" class="input-checkbox" id="js_operateCheckBox">
+                </th>
+                <th class="col-title mobile-hide">ID</th>
+                <th class="col-name">名称</th>
+                <th class="col-category mobile-hide">分类</th>
+                <th class="col-added mobile-hide">添加者</th>
+                <th class="col-status">状态</th>
+                <th class="col-package mobile-hide">包名</th>
+                <th class="col-platform mobile-hide">平台</th>
+                <th class="col-download mobile-hide">下载</th>
+                <th class="col-creat-at mobile-hide">添加时间</th>
+                <th class="col-order mobile-hide">排序</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+
+        <tbody id="js_applicationListContent">
+            {{each data as app index}}
+                <tr>
+                    <th class="col-checkbox">
+                        <input type="checkbox" class="input-checkbox" operateId="{{app.id}}">
+                    </th>
+                    <td class="col-title mobile-hide">{{app.id}}</td>
+                    <td class="col-name">
+                        <a href="#application/edit/{{app.id}}">{{app.name}}</a>
+                    </td>
+                    <td class="col-category mobile-hide">
+                        {{each app.categories as categorie index}}
+                            <a href="#">{{categorie.name}}</a>
+                        {{/each}}
+                    </td>
+                    <td class="col-added mobile-hide">{{app.username}}</td>
+                    <td class="col-status" id="js_status">{{app.status}}</td>
+                    <td class="col-package mobile-hide">{{app.name_package}}</td>
+                    <td class="col-platform mobile-hide">
+                        {{each app.downloads as download index}}
+                            <a href="#">{{download.platform}}</a>
+                        {{/each}}
+                    </td>
+                    <td class="col-download mobile-hide">1024</td>
+                    <td class="col-creat-at mobile-hide">{{app.formatCreated}}</td>
+                    <td class="col-order mobile-hide">{{app.order}}</td>
+                    <td class="col-actions">
+                        <a href="#application/edit/{{app.id}}" class="g-btn g-btn-mini">编</a>
+                        <span class="g-btn g-btn-mini g-btn-delete" operate="delete" operateid="{{app.id}}">删</span>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer" >
+        <div class="fn-left m-function">
+            <select name="" id="js_batchOperateSelect" class="g-select">
+                <option value="">请选择操作</option>
+                <option value="publish">通过</option>
+                <option value="refuse">拒绝</option>
+                <option value="pending">待审核</option>
+                <option value="delete">删除</option>
+                <option value="">导出</option>
+            </select>
+            <span class="g-btn g-btn-primary" id="js_batchOperate">提交</span>
+        </div>
+
+        <!-- 翻頁 START -->
+        <div class="fn-right g-pagination" id="js_pagination"></div>
+        <!-- 翻頁 END -->
+    </div>
+
 </div>
 

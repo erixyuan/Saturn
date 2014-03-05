@@ -13,6 +13,7 @@ function($, template, Backbone, tpl,model){
         model: model,
         template:tpl,
         initialize: function(obj){
+            /*
             var that = this;
             this.model = new this.model();  // 3.初始化模型
             this.model.fetch({
@@ -20,6 +21,8 @@ function($, template, Backbone, tpl,model){
                     that.render()
                 }
             });
+            */
+            this.render();
 
 
         },
@@ -28,7 +31,6 @@ function($, template, Backbone, tpl,model){
         },
         render: function() {
 
-            $('body').removeClass().addClass('m-article-create');
             var data = [];
             for(var i in this.model.attributes){
                 var temp = this.model.attributes[i];

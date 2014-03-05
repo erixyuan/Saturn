@@ -1,7 +1,5 @@
-<script type="text/html" id="js_roleEditTpl">
-
     <!-- 左侧导航栏结束 -->
-    <div class="wrap">
+    <div class="wrap m-role m-role-roleEdit">
         <!-- 主要内容开始 -->
         <div class="w-main m-block">
             <div class="m-toolsbar">
@@ -16,83 +14,30 @@
                 </div>
                 <div class="field">
                     <label>组名称</label>
-                    <input class="input-text" placeholder="请输入组名称..." type="text" name="name" value="{{remark}}" id="js_remark">
+                    <input class="input-text" placeholder="请输入组名称..." type="text" name="name" value="{{display_name}}" id="js_display_name">
                 </div>
 
                 <div class="field">
                     <label>英文标识</label>
-                    <input type="text" name="role" placeholder="请英文标识..." class="input-text" value="{{role}}" id="js_role">
+                    <input type="text" name="role" placeholder="请英文标识..." class="input-text" value="{{name}}" id="js_name">
                     <em>如 admin 或 member 或 guanliyuan 或 DLY 等。</em>
                 </div>
             </div>
             <div class="section" id="js_auth">
                 <h2>角色授权</h2>
 
-                <div class="field" id="js_subject">
-                    <label>文章</label>
-                    <input  type="checkbox"  class="input-checkbox"value="1" name="subject[publish]">发布文章
-                    <input  type="checkbox"  class="input-checkbox"value="2" name="subject[delete]">删除文章
-                    <input  type="checkbox"  class="input-checkbox"value="4" name="subject[submit]">提交文章
-                    <input  type="checkbox"  class="input-checkbox"value="8" name="subject[edit_others]">操作其他人的文章
-                </div>
-
-                <div class="field" id="js_application">
-                    <label>应用</label>
-                    <input  type="checkbox"  class="input-checkbox"value="1" name="application[publish]">发布应用
-                    <input  type="checkbox"  class="input-checkbox"value="2" name="application[delete]">删除应用
-                    <input  type="checkbox"  class="input-checkbox"value="4" name="application[submit]">提交应用
-                    <input  type="checkbox"  class="input-checkbox"value="8" name="application[edit_others]">编辑其他人的应用
-                </div>
-
-                <div class="field" id="js_phone">
-                    <label>手机</label>
-                    <input type="checkbox"  class="input-checkbox"value="1" name="phone[publish]">发布手机
-                    <input type="checkbox"  class="input-checkbox"value="2" name="phone[delete]">删除手机
-                    <input type="checkbox"  class="input-checkbox"value="4" name="phone[submit]">提交手机
-                    <input type="checkbox"  class="input-checkbox"value="8" name="phone[edit_others]">操作其他人的手机
-                </div>
-
-                <div class="field" id="js_category">
-                    <label>分类</label>
-                    <input  type="checkbox"  class="input-checkbox"value="1" name="category[create]">创建分类
-                    <input  type="checkbox"  class="input-checkbox"value="2" name="category[delete]">删除分类
-                    <input  type="checkbox"  class="input-checkbox"value="4" name="category[edit]">编辑分类
-                </div>
-
-                <div class="field" id="js_model">
-                        <label>模型</label>
-                        <input type="checkbox"  class="input-checkbox"value="1" name="model[create]">创建模型
-                        <input type="checkbox"  class="input-checkbox"value="2" name="model[delete]">删除模型
-                        <input type="checkbox"  class="input-checkbox"value="4" name="model[edit]">编辑模型
-                </div>
-
-                <div class="field" id="js_user">
-                        <label>用户/组</label>
-                        <input  type="checkbox"  class="input-checkbox"value="1" name="user[create]">用户/组管理
-                </div>
-
-                <div class="field" id="js_system">
-                        <label>系统</label>
-                        <input  type="checkbox"  class="input-checkbox"value="1" name="system[setting]">系统设置
-                </div>
-
-                <div class="field" id="js_attachment">
-                        <label>附件</label>
-                        <input  type="checkbox"  class="input-checkbox"value="1" name="attachment[upload]">上传附件
-                </div>
-
-
-                <div class="field" id="js_attachment_extends">
-                        <label>允许的扩展名</label>
-                        <input type="text" class="input-text" name="attachment_extends_remark" value="">
-                </div>
-
-                <div class="field" id="js_attachment_max_size">
-                        <label>上传最大大小</label>
-                        <input type="text" class="input-text" name="attachment_max_size_remark" value="">
-                </div>
+                {{each permission as value index}}
+                    <div class="field" >
+                        <input type="checkbox" class="input-checkbox" {{if value.allow == true}}checked{{/if}} name="{{value.name}}">
+                        <label>{{value.display_name}}</label>
+                        {{each value.childs as child index}}
+                            <input child-checkbox type="checkbox"  class="input-checkbox" {{if child.allow == true}}checked{{/if}} name="{{child.name}}">
+                            {{child.display_name}}
+                        {{/each}}
+                    </div>
+                {{/each}}
             </div>
-            <div class="w-page-footer" >
+            <div class="w-page-footer fn-clear" >
                 <span class="g-btn g-btn-primary" id="js_submit">提交</span>
             </div>
         </div>
@@ -101,4 +46,3 @@
 
     <!-- 中栏或(中栏+右侧栏) 结束-->
 
-</script>

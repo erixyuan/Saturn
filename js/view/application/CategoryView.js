@@ -37,7 +37,6 @@ function($, template, Backbone, tpl,model){
                 };
             };
 
-            $('body').removeClass().addClass('m-application-panel-edit');
             var html = template.compile(this.template)(categoriesArr);
             Saturn.renderToDom(html,'#js_mainContent');
         },

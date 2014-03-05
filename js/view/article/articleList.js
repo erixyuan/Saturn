@@ -4,12 +4,11 @@ define([
     'backbone',
     'underscore',
     'text!../../../template/article/list.html',
-    'text!../../../template/article/sidebar.html',
     '../PaginationView',
     '../../model/article/list'
     ],
 
-function($, template, Backbone,_, listTpl,sidebarTpl,PaginationView,ListModel){
+function($, template, Backbone,_, listTpl,PaginationView,ListModel){
 
 
     return Backbone.View.extend({
@@ -17,19 +16,19 @@ function($, template, Backbone,_, listTpl,sidebarTpl,PaginationView,ListModel){
         model: ListModel,
         template:listTpl,
         initialize: function(obj){
-            if($('#js_articleList').length == 0){
-                $('body').append(this.template);   //1. 如果模板不存在,把模板丢入body的底部
-            }
-            //2.判断obj是否给出了状态和页
+            // 判断obj是否给出了状态和页
+
             if (obj == undefined) {
                 var status = 'all';
                 var page = '1';
+                var keyword;
             }else{
-                var status = obj.status == undefined ? 'all' : obj.status;
+                console.log(obj)
+                var status = this.status = obj.status == undefined ? 'all' : obj.status;
                 var page = obj.page == undefined ? '1' : obj.page;
+                var keyword = obj.keyword;
             }
-            this.status = status;
-            Saturn.articleList = this.model = new this.model(status,page);  // 3.初始化模型
+            Saturn.articleList = this.model = new this.model(status,page,keyword);  // 3.初始化模型
             this.model.bind('change',this.render,this);              // 4.绑定
             this.model.fetch({
                 success:function(){
@@ -39,68 +38,68 @@ function($, template, Backbone,_, listTpl,sidebarTpl,PaginationView,ListModel){
         },
         events:{
             'click span[operate=delete]' : 'deleteList',
-            'click #js_operateCheckBox': 'operateCheckBox'
+            'click #js_operateCheckBox': 'operateCheckBox',
+            'click #js_batchOperate': 'batchOperate',
+            'click #searchBtn' : 'search',
+            'keypress #searchKeyWord' : 'keypressSearch',
         },
         render: function() {
 
-            $('body').removeClass().addClass('m-atricle-list');
             _.each(this.model.get('data'),function(value,key,list){
                 if (value.published) {
-                    value.formatPublished = Saturn.formatTime(value.published);
+                    value.formatPublished = Saturn.formatTimeToDate(value.published);
                 }else{
                     value.formatPublished = '未发布'
                 }
             })
-            var html = template.render('js_articleList', this.model.attributes);
-            //加载模板到对应的el属性中
+            var html = template.compile(this.template)(this.model.attributes)
             Saturn.renderToDom(html,this.el);
+
             $('#js_secondNav a').removeClass('active');
             $('#js_secondNav a[status='+this.status+']').addClass('active');
+
+            // 创建分页对象
+            //判断有关键字的时候，特殊处理
             var pagination = new PaginationView({
-                                    url:'#article/list/',
-                                    data:this.model.attributes
-                                });     // 创建分页对象
+                                    url : this.model.get('keyword') ?
+                                               '#article/list/'+this.status+'/'+this.model.get('keyword') :
+                                               '#article/list/'+this.status,
+                                    data : this.model.attributes
+                                });
         },
-        operateCheckBox:function(){
-            var target = event.target || window.event.srcElement;
-            var bool = $(target).prop('checked');
-            $(target).parents('table').find('input[type=checkbox]').prop('checked',bool);
-
-        },
-        deleteList:function(){
-            var target = event.target || window.event.srcElement;
-            if (confirm("确定删除？")){
-            var id = $(target).attr('operateId');    //获取删除的id
-            if (id == undefined ) return false;
-            $.ajax({
-                url:Saturn.cmsPath+'ipa/article/'+id,
-                type:"DELETE",
-                //data:{ids:[id]},
-                contentType : 'application/json',
-                dataType: 'json',
-                beforeSend:function(){
-                    Saturn.beginLoading("删除中...");
-                },
-                success:function(data){
-                    //删除成功，如果是all子模块，就改变状态为-99，如果已经是-99，清除dom
-                    if(data.errCode == 0){
-                        if (this.status == 'all') {
-                            if ($(target).parents('tr').find('#js_status').text() == "-99") {
-                                $(target).parents('tr').remove();
-                            }else{
-                                $(target).parents('tr').find('#js_status').html('-99');
-                            }
-                        }else{
-                            $(target).parents('tr').remove();
-                        }
-                    }else{
-                        alert(data.msg)
-                    }
-                    Saturn.afterLoading();
-                }.bind(this)
+        batchOperate:function(e){
+            var type = $('#js_batchOperateSelect').val();
+            var ids = [];
+            if(!type) return false;
+            $('#js_articleListContent input[type=checkbox][operateId]:checked').each(function(){
+                ids.push($(this).attr('operateId'));
             })
-        }
-
+            this.model.batchOperate(type,ids,function(data){
+                window.location.reload();
+            })
+        },
+        operateCheckBox:function(e){
+            var bool = $(e.target).prop('checked');
+            $(e.target).parents('table').find('input[type=checkbox]').prop('checked',bool);
+        },
+        deleteList:function(e){
+            var id = $(e.target).attr('operateid');
+            this.model.delete(id,function(data){
+                window.location.reload();
+            })
+        },
+        search:function(){
+            var keyword = $('#searchKeyWord').val();
+            if(!keyword){
+                return false;
+            }
+            // 组装hash请求
+            window.location.hash = '#article/list/'+this.status+'/'+keyword+"/1";
+        },
+        keypressSearch:function(e){
+            if(e.keyCode == 13){
+                this.search();
+            }
         }
     });
 }

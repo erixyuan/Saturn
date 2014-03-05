@@ -41,7 +41,6 @@ function($, template, Backbone, tpl,model){
 
             })
             console.log(data);
-            $('body').removeClass().addClass('m-list-plugin');
             var html = template.compile(this.template)(data);
             Saturn.renderToDom(html,'#js_mainContent');
         },

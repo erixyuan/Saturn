@@ -28,7 +28,6 @@ function($, template, Backbone,_, listTpl,PaginationView,ListModel){
         },
         render: function() {
 
-            $('body').removeClass().addClass('m-atricle-list');
             var html = template.compile(this.template)(this.model.get('data'));
 
             var pagination = new PaginationView({

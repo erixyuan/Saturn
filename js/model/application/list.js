@@ -14,8 +14,21 @@ function(_, Backbone){
         defaults: {
             //name: "Harry Potter"
         },
-        validate:function(attributes){
-
+        batchOperate:function(type,data,callback){
+            $.ajax({
+                url:Saturn.cmsPath+'ipa/application/'+type,
+                data:JSON.stringify({ids:data}),
+                type:"put",
+                contentType : 'application/json',
+                dataType: 'json',
+                beforeSend:function(){
+                    Saturn.beginLoading('处理中...');
+                },
+                success:function(data){
+                    callback && callback(data);
+                    Saturn.afterLoading();
+                }
+            })
         },
         delete:function(id,status){
             if (confirm("确定删除？")){
@@ -26,17 +39,8 @@ function(_, Backbone){
                         Saturn.beginLoading('删除中...');
                     },
                     success:function(data){
-                        var target = $('span[operateId='+id+']').parents('tr')
                         if(data.errCode == 0){
-                            if (status == 'all') {
-                                if (target.find('#js_status').text() == "-99") {
-                                    target.remove();
-                                }else{
-                                    target.find('#js_status').html('-99');
-                                }
-                            }else{
-                                target.remove();
-                            }
+                            callback && callback(data);
                         }else{
                             alert(data.msg)
                         }

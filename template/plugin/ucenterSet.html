@@ -1,63 +1,56 @@
+<div class="wrap g-moudel-page m-plugin m-plugin-ucenterset">
+    <div class="w-main">
 
-    <!-- 中栏或(中栏+右侧栏) 开始-->
-    <div class="wrap m-plugin m-plugin-ucenterSet">
-        <!-- 主要内容开始 -->
-        <div class="w-main m-block">
-
-            <div class="section">
-                <h2>UCenter 设置</h2>
-
-                <div class="field">
-                    <label>UC 通信密钥</label>
-                    <input type="text" value="{{uc_key}}" name="uc_key" size="60" placeholder="请输入..." class="input-text" keyev="true">
-                </div>
-
-                <div class="field">
-                    <label>UC URL地址</label>
-                    <input type="text" value="{{uc_api}}" name="uc_api" size="60" placeholder="请输入..." class="input-text">
-                </div>
-
-                <div class="field">
-                    <label>UC 字符集</label>
-                    <input type="text" value="{{uc_charset}}" name="uc_charset" placeholder="请输入..." class="input-text">
-                </div>
-
-                <div class="field">
-                    <label>当前应用的 ID</label>
-                    <input type="text" value="{{uc_appid}}" name="uc_appid" placeholder="请输入..." class="input-text">
-                </div>
-
-                <div class="field">
-                    <label>统一登录地址</label>
-                    <input type="text" value="" name="login_page" size="60" placeholder="请输入..." class="input-text">
-                </div>
-
-                <div class="field">
-                    <label>统一注册地址</label>
-                     <input type="text" value="" name="login_page" size="60" placeholder="请输入..." class="input-text">
-                </div>
-
-                <div class="field">
-                    <label>模式</label>
-                        <input type="radio" name="settings[mode]" value="master" title="将以UCenter的数据为准。">
-                        主数据模式
-
-                        <input type="radio" name="settings[mode]" value="extend" title="自动创建用户，类似微博登录，可以绑定用户、新注册用户，自动创建用户。" checked="checked">
-                        第三方登录模式
-                    <!--
-                    <label help-tips="类似微博登录，可以绑定用户、新注册用户，需要用户填写资料（用户名，密码等）。">
-                        <input type="radio" name="settings[mode]" value="register"  />
-                        第三方登录模式(需要填写用户资料)
-                    </label>
-                    -->
-                </div>
+        <div class="section">
+            <div class="field">
+                <label>UC 通信密钥</label>
+                <input type="text" value="{{uc_key}}" name="uc_key" size="60" placeholder="请输入..." class="input-text" keyev="true">
             </div>
 
-            <div class="w-page-footer fn-clear">
-                <a href="" class="g-btn g-btn-primary">保存</a>
+            <div class="field">
+                <label>UC URL地址</label>
+                <input type="text" value="{{uc_api}}" name="uc_api" size="60" placeholder="请输入..." class="input-text">
             </div>
 
+            <div class="field">
+                <label>UC 字符集</label>
+                <input type="text" value="{{uc_charset}}" name="uc_charset" placeholder="请输入..." class="input-text">
+            </div>
+
+            <div class="field">
+                <label>当前应用的 ID</label>
+                <input type="text" value="{{uc_appid}}" name="uc_appid" placeholder="请输入..." class="input-text">
+            </div>
+
+            <div class="field">
+                <label>统一登录地址</label>
+                <input type="text" value="" name="login_page" size="60" placeholder="请输入..." class="input-text">
+            </div>
+
+            <div class="field">
+                <label>统一注册地址</label>
+                 <input type="text" value="" name="login_page" size="60" placeholder="请输入..." class="input-text">
+            </div>
+
+            <div class="field">
+                <label>模式</label>
+                    <input type="radio" name="settings[mode]" value="master" title="将以UCenter的数据为准。">
+                    主数据模式
+
+                    <input type="radio" name="settings[mode]" value="extend" title="自动创建用户，类似微博登录，可以绑定用户、新注册用户，自动创建用户。" checked="checked">
+                    第三方登录模式
+                <!--
+                <label help-tips="类似微博登录，可以绑定用户、新注册用户，需要用户填写资料（用户名，密码等）。">
+                    <input type="radio" name="settings[mode]" value="register"  />
+                    第三方登录模式(需要填写用户资料)
+                </label>
+                -->
+            </div>
         </div>
-        <!-- 主要内容结束 -->
+
+        <div class="fn-clear">
+            <a href="" class="g-btn g-btn-primary">保存</a>
+        </div>
+
     </div>
-    <!-- 中栏或(中栏+右侧栏) 结束-->
+</div>

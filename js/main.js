@@ -106,7 +106,7 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 "article/comment":                  "article_comment",
                 "article/comment/:status/:page":    "article_comment",
                 "article/articleSyn":               "article_articleSyn",
-                "article/articleSyn/:page":         "article_articleSyn",
+                "article/articleSyn/:status/:page": "article_articleSyn",
                 // ************文章 end*********************
 
                 // ************应用 start*********************
@@ -146,9 +146,9 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 "plugin" : "plugin_list",
                 "plugin/pluginList" : "plugin_list",
 
-                'plugin/apkList' : "apkList",
-                'plugin/apkEdit/:id' : "apkEdit",
-                'plugin/apkCreate' : "apkEdit",
+                'plugin/appkeyList' : "appkeyList",
+                'plugin/appkeyEdit/:id' : "appkeyEdit",
+                'plugin/appkeyCreate' : "appkeyEdit",
                 'plugin/adList' : "adList",
                 'plugin/adEdit/:id' : "adEdit",
                 'plugin/adCreate' : "adEdit",
@@ -240,10 +240,10 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 })
                 Saturn.navModel.set({currentModule:'article',secondModule:'comment'});
             },
-            article_articleSyn:function(page){
+            article_articleSyn:function(status,page){
                 loadView(function(){
                     require(['view/article/ArticleSynView'],function(ArticleSynView){
-                        Saturn.currentView = new ArticleSynView({page:page});
+                        Saturn.currentView = new ArticleSynView({status:status,page:page});
                     });
                 });
                 Saturn.navModel.set({currentModule:'article',secondModule:'articleSyn'});
@@ -401,21 +401,21 @@ require(['jquery','backbone','model/checkLogin','ace'], function($,Backbone, isL
                 });
                 Saturn.navModel.set({currentModule:'plugin',secondModule:'pluginList'});
             },
-            apkList:function(){
+            appkeyList:function(){
                 loadView(function(){
-                    require(['view/plugin/ApkListView'],function(ApkListView){
-                        Saturn.currentView = new ApkListView();
+                    require(['view/plugin/appkeyListView'],function(appkeyListView){
+                        Saturn.currentView = new appkeyListView();
                     });
                 });
-                Saturn.navModel.set({currentModule:'plugin',secondModule:'apkList'});
+                Saturn.navModel.set({currentModule:'plugin',secondModule:'appkeyList'});
             },
-            apkEdit:function(id){
+            appkeyEdit:function(id){
                 loadView(function(){
-                    require(['view/plugin/ApkEditView'],function(ApkListView){
-                        Saturn.currentView = new ApkListView({id:id});
+                    require(['view/plugin/appkeyEditView'],function(appkeyListView){
+                        Saturn.currentView = new appkeyListView({id:id});
                     });
                 });
-                Saturn.navModel.set({currentModule:'plugin',secondModule:'apkList'});
+                Saturn.navModel.set({currentModule:'plugin',secondModule:'appkeyList'});
             },
             adList:function(){
                 loadView(function(){

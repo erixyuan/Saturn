@@ -3,24 +3,33 @@ define([
     'template',
     'backbone',
     'text!../../../template/set/setSynchronous.html',
-    //'../../model/article/syncList',
+     '../../model/set/sync',
     ],
 
 function($, template, Backbone, tpl,model){
 
     return Backbone.View.extend({
         el:"#js_mainContent",
-        //model: model,
+        model: model,
         template:tpl,
         status:'',
         initialize: function(obj){
-            this.render();
+            this.model = new model();
+            this.model.fetch({
+                success:function(model,data){
+                    this.render(data)
+                }.bind(this)
+            })
         },
         events:{
+            "click #js_update" : "update",
         },
-        render: function() {
-            var html = template.compile(this.template)({});
+        render: function(data) {
+            var html = template.compile(this.template)({data:data});
             Saturn.renderToDom(html,'#js_mainContent');
+        },
+        update:function(){
+            this.model.update($('#js_syncContent').val());
         }
     });
 }

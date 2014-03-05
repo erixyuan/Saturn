@@ -1,36 +1,27 @@
-    <!-- 中栏或(中栏+右侧栏) 开始-->
-    <div class="wrap m-set m-set-setSynchronous">
-        <!-- 主要内容开始 -->
-        <div class="w-main m-block">
-            <div class="section">
-                <h2>
-                    <div class="fn-right">
-                        <a href="?f=Plugin_CMSSync_Panel_Appsync.php" class="g-btn">
-                            APP同步
-                        </a>
-                        <a href="?f=Plugin_CMSSync_Panel_Postsync.php" class="g-btn">
-                            文章同步
-                        </a>
-                    </div>
-                    站点设置
-                </h2>
-                <div class="field">
-                     <label>站点名称=&gt;域名</label>
-                    <textarea name="domains" id="js_" cols="60" rows="3">少数派=&gt;http://sspai.com</textarea>
-                    <em>
-                        一行一条记录<br>
-                        eg: <strong>少数派=&gt;http://sspai.com</strong>
-                    </em>
-                </div>
-            </div>
+<div class="wrap g-moudel-page g-moudel-list m-set m-set-settingSystem">
 
-            <div class="w-page-footer fn-clear" style="">
-                <a href="#" class="g-btn g-btn-primary">保存</a>
-            </div>
+    <div class="w-main">
 
-
-
+        <div class="fn-clear section">
+            <h2>同步设置</h2>
         </div>
-        <!-- 主要内容结束 -->
+
+
+
+        <div class="section">
+            <div class="field">
+                 <label>站点名称=&gt;域名</label>
+                <textarea name="cmssync" id="js_syncContent" cols="60" rows="3" placeholder="一行一条记录，如：少数派=&gt;http://sspai.com">{{each data as value}}{{value.name}}=>{{value.url}}
+{{/each}}</textarea>
+            </div>
+        </div>
+
+
+        <div class="fn-clear g-moudel-list-footer">
+            <span class="g-btn g-btn-primary" id="js_update">保存</span>
+        </div>
+
+
     </div>
-    <!-- 中栏或(中栏+右侧栏) 结束-->
+
+</div>

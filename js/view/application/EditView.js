@@ -36,7 +36,8 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
         initialize: function(obj){
             this.model = Saturn.appModel = new this.model(obj.id);
             this.platformModel = new this.platformModel('application__platform')
-            Saturn.defer([
+            Saturn.defer(
+                [
                     {
                         object: this.model,
                         method:'fetch',
@@ -56,7 +57,8 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
                     }
                 ],function(data){
                     this.render(data);
-                }.bind(this))
+                }.bind(this)
+            )
             //=================
         },
         defer:function(i,data){
@@ -82,6 +84,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
             'click #js_showIconBtn': 'showIconBtn',
             'click #js_iconListClose': 'iconListClose',
 
+            'click #js_catch-app-info': 'updateApk',
 
             'click #js_publishBtn,#js_draftBtn': 'submit',
 
@@ -150,6 +153,7 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
             submitObject.order = $('#js_order').val();
             submitObject.name_cn = $('#js_name_cn').val();
             submitObject.name_en = $('#js_name_en').val();
+            submitObject.name_package = $('#js_name_package').val();
             submitObject.version = $('#js_version').val();
             submitObject.size = $('#js_size').val();
             submitObject.language = $('#js_language').val();
@@ -327,6 +331,19 @@ function($, template, Backbone, tpl,model,swfupload,attachment,platformModel){
             };
             this.iconImgSwf = new SWFUpload(settings);
         },
+        updateApk:function(){
+            // 实现跨域的回调函数
+            window.callback = function(data){
+                var data = data.data;
+                $('#js_icon_id').attr('src',data.icon_url);
+                $('#js_icon_id').attr('iconId',data.icon_id);
+                $('#js_name_package').val(data.packageName[0]);
+                $('#js_size').val(data.filesize);
+                $('#js_version').val(data.versionName);
+            }
+            $('#apkForm').attr('action',Saturn.cmsPath+'ipa/unpack  ')
+            $('#apkForm').submit();
+        }
     });
 }
 

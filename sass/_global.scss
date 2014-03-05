@@ -1,17 +1,583 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///  定義swf上傳的控件樣式
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.swfupload {
-    height: 21px;
-    background: #eee;
-    vertical-align: top !important;
+///////////////////////////////////////////////////////////////////
+//  BUTTON 按鈕
+///////////////////////////////////////////////////////////////////
+
+// 通过色相（hue）、饱和度(saturation)和亮度（lightness）的值创建一个颜色；
+// hsl($hue,$saturation,$lightness)
+//
+// // 通过色相（hue）、饱和度(saturation)、亮度（lightness）和透明（alpha）的值创建一个颜色；
+// hsla($hue,$saturation,$lightness,$alpha)
+//
+// // 从一个颜色中获取色相（hue）值；
+// hue($color)
+//
+// // 从一个颜色中获取饱和度（saturation）值；
+// saturation($color)
+//
+// // 从一个颜色中获取亮度（lightness）值；
+// lightness($color)
+//
+// // 通过改变一个颜色的色相值，创建一个新的颜色；
+// adjust-hue($color,$degrees)
+//
+// // 通过改变颜色的亮度值，让颜色变亮，创建一个新的颜色；
+// lighten($color,$amount)
+//
+// // 通过改变颜色的亮度值，让颜色变暗，创建一个新的颜色；
+// darken($color,$amount)
+//
+// // 通过改变颜色的饱和度值，让颜色更饱和，从而创建一个新的颜色
+// saturate($color,$amount)
+//
+// // 通过改变颜色的饱和度值，让颜色更少的饱和，从而创建出一个新的颜色；
+// desaturate($color,$amount)
+//
+// // 将一个颜色变成灰色，相当于desaturate($color,100%);
+// grayscale($color)
+//
+// // 返回一个补充色，相当于adjust-hue($color,180deg);
+// complement($color)
+//
+// // 反回一个反相色，红、绿、蓝色值倒过来，而透明度不变。
+// invert($color)
+
+$g-btn-background-color: #f9f9f9;
+$g-btn-primary-background-color: #00ae56;
+$g-btn-delete-background-color: #e30045;
+
+.g-btn {
+    background: $g-btn-background-color;
+    color: #fff;
+    border: 1px solid darken($g-btn-background-color, 20%);
+    border-radius: $g-btn-border-radius;
+    padding: 7px 12px;
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    // 去除虚框
+    outline: none;
+    cursor:pointer;
+
+    &:hover {
+        text-decoration: none;
+        background-color: lighten($g-btn-background-color, 5%);
+        border-color: darken($g-btn-background-color, 30%);
+        box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    &:active {
+        background: darken($g-btn-primary-background-color, 2%);
+        @include gBoxShadowInset;
+        color: #fff;
+    }
+
+    &.active {
+        background-color: darken($g-btn-primary-background-color, 5%);
+        color: #fff;
+    }
 }
 
-.g-modal {
+.g-btn-primary {
+    background: $g-btn-primary-background-color;
+    border: 1px solid darken($g-btn-primary-background-color, 5%);
+    color: #fff;
+
+    &:hover {
+        background-color: lighten($g-btn-primary-background-color, 5%);
+        border-color: darken($g-btn-primary-background-color, 8%);
+    }
+}
+
+.g-btn-delete {
+    background: $g-btn-delete-background-color;
+    border: 1px solid darken($g-btn-delete-background-color, 5%);
+    color: #fff;
+
+    &:hover {
+        background-color: lighten($g-btn-delete-background-color, 5%);
+        border-color: darken($g-btn-delete-background-color, 8%);
+    }
+}
+
+.g-btn-mini {
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.g-btn-large {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.g-btn-block {
+    display: block;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.g-btn-group {
+    display: inline-block;
+    display: inline-flex;
+    border-radius: $g-border-radius;
+    border: 1px solid #999;
+    border-top: 0;
+    border-bottom: 0;
+
+    .g-btn {
+        float: left;
+        border: 1px solid #999;
+        border-right: 0;
+        border-radius: 0;
+
+        &:first-child {
+            border-left: 0 none;
+        }
+    }
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  TABLE 表格
+///////////////////////////////////////////////////////////////////
+table.g-table {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-collapse: separate;
+    border-radius: $g-border-radius;
+    background: #fff;
+    width: 100%;
+
+    a {
+        color: #000;
+    }
+
+    td, th {
+        border-top: 1px solid #c7ced3;
+        border-left: none;
+        border-right: none;
+        padding: 10px 10px;
+        text-align: left;
+    }
+
+    thead {
+        border-radius: $g-border-radius;
+        background-image: -moz-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+
+        tr {
+            th {
+                border-top: none;
+            }
+        }
+    }
+
+    tbody {
+        background: #fff;
+        tr {
+            &:nth-child(even) {
+                background-color: #fafafa;
+            }
+
+            &:hover {
+                background-color: #eee;
+            }
+        }
+
+        td {
+            img {
+                max-width: 120px;
+                max-height: 100px;
+            }
+        }
+    }
+
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  SELECT 下拉選項
+///////////////////////////////////////////////////////////////////
+.g-select {
+    padding: 6px 5px;
+    font-size: 14px;
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  LIST 列表
+///////////////////////////////////////////////////////////////////
+ul.g-list, ul.g-list-ul, ul.g-list-ol {
+    margin: 0;
+    padding: 0;
+
+    li {
+        line-height: 1.8;
+        margin-right: 5px;
+    }
+}
+
+ul.g-list-ul {
+    li {
+        list-style: inside disc;
+    }
+}
+
+ul.g-list-ol {
+    li {
+        list-style: inside decimal;
+    }
+}
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  INPUT 輸入框
+///////////////////////////////////////////////////////////////////
+input[type="checkbox"], input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+input[disabled] {
+    border-color: #d5dbdb;
+    color: #d5dbdb;
+    background-color: #f4f6f6;
+}
+
+input[type="file"] {
+    background: #ccc;
+    border-radius: $g-border-radius;
+}
+
+input[type="text"], .input-text, textarea {
+    padding: 7px 5px;
+    color: #34495e;
+    font-size: 14px;
+    font-family: $font-base;
+    border: 1px solid #ccc;
+    border-radius: $g-btn-border-radius;
+    outline: 0;
+    @include gBoxShadowInset;
+    @include gBoxShadowInset;
+
+    &:focus {
+        box-shadow: 0 0 5px rgba(140, 247, 149, 0.4);
+        border: 1px solid #99D197;
+    }
+}
+
+.input-text-mini {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  ALERT 警告
+///////////////////////////////////////////////////////////////////
+.g-alert {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    padding: 10px 30px 10px 10px;
+    background-color: #0f6cd3;
+    text-align: center;
+    color: #fff;
+    border-bottom: 3px solid #aab1b9;
+    @include gBoxShadow;
+
+    //显示
+    &.show {
+        display: block;
+    }
+
+    //关闭按钮
+    .close {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10001;
+        color: #fff;
+    }
 }
 
 
+
+// 信息 - 警告窗口
+.g-alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-bottom-color: #3ec6e2;
+    .close {
+        color: #31708f;
+    }
+}
+
+// 成功 - 警告窗口
+.g-alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-bottom-color: #6ad80e;
+    .close {
+        color: #3c763d;
+    }
+}
+
+// 警告 - 警告窗口
+.g-alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-bottom-color: #ffac00;
+    .close {
+        color: #8a6d3b;
+    }
+}
+
+//   严重错误 - 警告
+.g-alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-bottom-color: #fa3454;
+    .close {
+        color: #a94442;
+    }
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// 载入 提示 添加 use-progress 这个class的话表明要显示载入进度,
+/// 给里面的use-progress元素设置宽度百分比代表当前的进度
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.g-loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    padding: 3px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 3px solid $g-link-color;
+    @include gBoxShadow;
+
+    .img-loading {
+        display: inline-block;
+        *display:inline;
+        *zoom: 1;
+        width: 25px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: .5em;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    &.show {
+        display: block;
+    }
+
+    // 使用百分比进度条
+    &.use-progress {
+        border-bottom: 0;
+
+        .progress-bar {
+            position: absolute;
+            left: 0;
+            bottom:0;
+            height: 3px;
+            background-color: #3283eb;
+        }
+    }
+}
+
+
+
+///////////////////////////////////////////////////////////////////
+//  filter 過濾器
+///////////////////////////////////////////////////////////////////
+// .g-filter-toolbar {
+//     display: none;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     padding: 10px 30px 10px 10px;
+//     background: #fff;
+//     z-index: 8000;
+//     text-align: center;
+//     @include gBoxShadow;
+//     border-bottom: 3px solid #e5650f;
+//     overflow: hidden;
+//     &.show {
+//         display: block;
+//     }
+//     .close {
+//         position: absolute;
+//         top: 10;
+//         right: 10px;
+//         color: #333;
+//         z-index: 8001;
+//         text-decoration: none;
+//     }
+//     .input-text {
+//         margin: 0;
+//     }
+//     .field {
+//         border-bottom: 0;
+//         display: inline-block;
+//         margin-right: 1em;
+//         label {
+//             display: inline-block;
+//             margin-right: .5em;
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MOUDEL LIST 模塊統一列表
+///////////////////////////////////////////////////////////////////
+.g-moudel-list {
+
+    // 列表頭部
+    .g-moudel-list-header {
+        margin-bottom: 20px;
+
+    }
+
+    // 列表內容
+    .g-moudel-list-container {
+        margin-bottom: 20px;
+
+    }
+
+    // 列表底部
+    .g-moudel-list-footer {
+
+    }
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MOUDEL POST 包住主要文章模塊，如文章、應用專用
+///////////////////////////////////////////////////////////////////
+.g-moudel-post {
+
+    // 主要
+    .w-main {
+        width: auto;
+        margin-right: 320px;
+    }
+
+
+
+    // 邊欄
+    .w-ext {
+        position: absolute;
+        right: 20px;
+        top: 0;
+        width: 300px;
+        overflow: hidden;
+    }
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MOUDEL PAGE 包住次要模塊，如插件，通用性較好
+///////////////////////////////////////////////////////////////////
+.g-moudel-page {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  SECTION 片段，一遍用h2做標題，下面接表單field
+///////////////////////////////////////////////////////////////////
 .section {
     margin-bottom: 40px;
 
@@ -57,386 +623,9 @@
 
 
 
-
-
-// 表格
-table.g-table {
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-collapse: separate;
-    border-radius: $g-border-radius;
-    background: #fff;
-    width: 100%;
-
-    a {
-        color: #000;
-    }
-
-
-    thead {
-        border-radius: $g-border-radius;
-        background-image: -moz-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
-        background-image: -webkit-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
-        background-image: -ms-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
-
-        tr {
-            th {
-                border-top: none;
-            }
-        }
-    }
-
-    tbody {
-        background: #fff;
-        tr {
-            &:nth-child(even) {
-                background-color: #fafafa;
-            }
-
-            &:hover {
-                background-color: #eee;
-            }
-        }
-    }
-
-    td, th {
-        border-top: 1px solid #c7ced3;
-        border-left: none;
-        border-right: none;
-        padding: 10px 10px;
-        text-align: left;
-    }
-
-}
-
-
-
-
-// 按鈕
-
-// 通过色相（hue）、饱和度(saturation)和亮度（lightness）的值创建一个颜色；
-// hsl($hue,$saturation,$lightness)
-//
-//
-// 通过色相（hue）、饱和度(saturation)、亮度（lightness）和透明（alpha）的值创建一个颜色；
-// hsla($hue,$saturation,$lightness,$alpha)
-//
-//
-// 从一个颜色中获取色相（hue）值；
-// hue($color)
-//
-//
-// 从一个颜色中获取饱和度（saturation）值；
-// saturation($color)
-//
-//
-// 从一个颜色中获取亮度（lightness）值；
-// lightness($color)
-//
-//
-// 通过改变一个颜色的色相值，创建一个新的颜色；
-// adjust-hue($color,$degrees)
-//
-//
-// 通过改变颜色的亮度值，让颜色变亮，创建一个新的颜色；
-// lighten($color,$amount)
-//
-//
-// 通过改变颜色的亮度值，让颜色变暗，创建一个新的颜色；
-// darken($color,$amount)
-//
-//
-// 通过改变颜色的饱和度值，让颜色更饱和，从而创建一个新的颜色
-// saturate($color,$amount)
-//
-//
-// 通过改变颜色的饱和度值，让颜色更少的饱和，从而创建出一个新的颜色；
-// desaturate($color,$amount)
-//
-//
-// 将一个颜色变成灰色，相当于desaturate($color,100%);
-// grayscale($color)
-//
-//
-// 返回一个补充色，相当于adjust-hue($color,180deg);
-// complement($color)
-//
-//
-// 反回一个反相色，红、绿、蓝色值倒过来，而透明度不变。
-// invert($color)
-
-
-$g-btn-background-color: #f9f9f9;
-$g-btn-primary-background-color: #00ae56;
-$g-btn-delete-background-color: #e30045;
-
-.g-btn {
-    background: $g-btn-background-color;
-    color: #fff;
-    border: 1px solid darken($g-btn-background-color, 20%);
-    border-radius: $g-btn-border-radius;
-    padding: 7px 12px;
-    color: #000;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-
-    // 去除虚框
-    outline: none;
-    cursor:pointer;
-
-    &:hover {
-        text-decoration: none;
-        background-color: lighten($g-btn-background-color, 5%);
-        border-color: darken($g-btn-background-color, 30%);
-        box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.05);
-    }
-
-    &:active {
-        background: darken($g-btn-primary-background-color, 2%);
-        @include gBoxShadowInset;
-        color: #fff;
-    }
-
-    &.active {
-        background-color: darken($g-btn-primary-background-color, 5%);
-        color: #fff;
-    }
-
-}
-
-
-.g-btn-primary {
-    background: $g-btn-primary-background-color;
-    border: 1px solid darken($g-btn-primary-background-color, 5%);
-    color: #fff;
-
-    &:hover {
-        background-color: lighten($g-btn-primary-background-color, 5%);
-        border-color: darken($g-btn-primary-background-color, 8%);
-    }
-
-}
-
-
-.g-btn-delete {
-    background: $g-btn-delete-background-color;
-    border: 1px solid darken($g-btn-delete-background-color, 5%);
-    color: #fff;
-
-    &:hover {
-        background-color: lighten($g-btn-delete-background-color, 5%);
-        border-color: darken($g-btn-delete-background-color, 8%);
-    }
-
-}
-
-
-
-
-
-.g-btn-mini {
-    padding: 2px 5px;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.g-btn-large {
-    padding: 10px 15px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-
-.g-btn-block {
-    display: block;
-    text-align: center;
-    margin: 5px 0;
-}
-
-
-
-.g-btn-group {
-    display: inline-block;
-    display: inline-flex;
-    border-radius: $g-border-radius;
-    border: 1px solid #999;
-    border-top: 0;
-    border-bottom: 0;
-
-    .g-btn {
-        float: left;
-        border: 1px solid #999;
-        border-right: 0;
-        border-radius: 0;
-
-        &:first-child {
-            border-left: 0 none;
-        }
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 下拉選項
-.g-select {
-    padding: 6px 5px;
-    font-size: 14px;
-}
-
-
-
-
-
-
-ul.g-list, ul.g-list-ul, ul.g-list-ol {
-    margin: 0;
-    padding: 0;
-    display: table;
-
-    li {
-        line-height: 1.8;
-        margin-right: 5px;
-    }
-}
-
-ul.g-list-ul {
-    li {
-        list-style: inside disc;
-    }
-}
-
-ul.g-list-ol {
-    li {
-        list-style: inside decimal;
-    }
-}
-
-
-
-
-
-
-// 輸入框
-input[type="checkbox"], input[type="radio"] {
-    vertical-align: middle;
-    margin-right: 3px;
-}
-
-input[disabled] {
-    border-color: #d5dbdb;
-    color: #d5dbdb;
-    background-color: #f4f6f6;
-}
-
-input[type="file"] {
-    background: #ccc;
-    border-radius: $g-border-radius;
-}
-
-input[type="text"], .input-text, textarea {
-    padding: 7px 5px;
-    color: #34495e;
-    font-size: 14px;
-    font-family: $font-base;
-    border: 1px solid #ccc;
-    border-radius: $g-btn-border-radius;
-    outline: 0;
-    @include gBoxShadowInset;
-    @include gBoxShadowInset;
-
-    &:focus {
-        box-shadow: 0 0 5px rgba(140, 247, 149, 0.4);
-        border: 1px solid #99D197;
-    }
-}
-
-.input-text-mini {
-    padding: 5px 5px !important;
-    font-size: 12px !important;
-
-}
-
-
-
-
-
-
-ul.attachment-list {
-    @extend ul.g-list;
-    width: 100%;
-    margin-top: 10px;
-
-    li {
-        @include gBoxShadow;
-        position: relative;
-        list-style: inside none;
-        width: 19%;
-        height: 150px;
-        margin-right: 1%;
-        float: left;
-        margin-bottom: 15px;
-        border-radius: $g-btn-border-radius;
-
-        img {
-            width: 100%;
-            max-height: 150px;
-        }
-
-        .bottom {
-            width: 100%;
-            line-height: 1.2;
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 4px;
-            text-align: center;
-            background: #aaa;
-            opacity: .8;
-
-
-            .filename {
-                @include oneLineText;
-                font-family: $font-mingliu;
-                font-size: 11px;
-                width: 100%;
-            }
-
-            .actions {
-                a {
-                    @extend .g-btn, .g-btn-mini;
-                    font-family: $font-mingliu;
-                    font-size: 11px;
-                    padding: 1px 5px;
-                }
-            }
-        }
-    }
-}
-
-
-
-
-
-
-
-// 翻頁
+///////////////////////////////////////////////////////////////////
+//  PAGER 翻頁
+///////////////////////////////////////////////////////////////////
 .g-pagination {
 
     .goto {
@@ -516,11 +705,84 @@ ul.attachment-list {
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Modal 弹框
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+//  flash上傳控件 與 上傳選擇
+///////////////////////////////////////////////////////////////////
+.swfupload {
+    height: 21px;
+    background: #eee;
+    vertical-align: top !important;
+}
+
+
+ul.attachment-list {
+    @extend ul.g-list;
+    width: 100%;
+    margin-top: 10px;
+
+    li {
+        @include gBoxShadow;
+        background-color: #FCFCFC;
+        border: 1px solid #ECECEC;
+        position: relative;
+        list-style: inside none;
+        width: 19%;
+        height: 150px;
+        margin-right: 1%;
+        float: left;
+        margin-bottom: 15px;
+        border-radius: $g-border-radius;
+
+        img {
+            width: 100%;
+            max-height: 105px;
+            background-color: #fcc;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            line-height: 1.2;
+            text-align: center;
+            opacity: .8;
+
+
+            .filename {
+                @include oneLineText;
+                font-family: $font-mingliu;
+                font-size: 11px;
+                width: 100%;
+            }
+
+            .actions {
+                display: block;
+
+                a {
+                    @extend .g-btn, .g-btn-mini;
+                    font-family: $font-mingliu;
+                    font-size: 11px;
+                    padding: 1px 5px;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MODAL 彈窗
+///////////////////////////////////////////////////////////////////
 .g-modal {
-    // 隐藏
+
+    // 全屏背景部分
     display: none;
     position: fixed;
     top: 0;
@@ -539,8 +801,9 @@ ul.attachment-list {
         opacity: 1;
     }
 
-    // Modal 主体
+    // Modal 主彈窗
     .g-modal-dialog {
+        @include gBoxShadowInset;
         position: relative;
         top: 20%;
         left: 50%;
@@ -549,7 +812,6 @@ ul.attachment-list {
         margin-left: -300px;
         background: #fff;
         border-radius: 4px;
-        @include gBoxShadowInset;
         margin-top: 3em;
 
 
@@ -575,9 +837,12 @@ ul.attachment-list {
         //标题
         &>h1 {
             margin: 0 0 20px 0;
+            padding: 0 0 10px 0;
             font-weight: 400;
-            font-size: 26px;
-            border-bottom: 1px solid #ccc;
+            font-size: 20px;
+            font-family: $font-mingliu;
+            font-weight: bold;
+            border-bottom: 1px solid #aaa;
         }
 
         // 内容
@@ -596,178 +861,8 @@ ul.attachment-list {
             }
         }
     }
-}
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//      样式化警告窗口
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.g-alert {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10000;
-    padding: 10px 30px 10px 10px;
-    background-color: #0f6cd3;
-    text-align: center;
-    color: #fff;
-    border-bottom: 3px solid #aab1b9;
-    @include gBoxShadow;
-
-
-    //显示
-    &.show {
-        display: block;
+    .g-pagination {
+        margin-top: 20px;
     }
-
-    //关闭按钮
-    .close {
-        display: block;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 10001;
-        color: #fff;
-    }
-}
-
-// 信息 - 警告窗口
-.g-alert-info {
-    color: #31708f;
-    background-color: #d9edf7;
-    border-bottom-color: #3ec6e2;
-    .close {
-        color: #31708f;
-    }
-}
-
-// 成功 - 警告窗口
-.g-alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-bottom-color: #6ad80e;
-    .close {
-        color: #3c763d;
-    }
-}
-
-// 警告 - 警告窗口
-.g-alert-warning {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-bottom-color: #ffac00;
-    .close {
-        color: #8a6d3b;
-    }
-}
-
-//   严重错误 - 警告
-.g-alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-bottom-color: #fa3454;
-    .close {
-        color: #a94442;
-    }
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// 载入 提示
-/// 添加 use-progress 这个class的话表明要显示载入进度,
-/// 给里面的use-progress元素设置宽度百分比代表当前的进度
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.g-loading {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9000;
-    padding: 3px;
-    background-color: #fff;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    border-bottom: 3px solid $g-link-color;
-    @include gBoxShadow;
-
-    .img-loading {
-        display: inline-block;
-        *display:inline;
-        *zoom: 1;
-        width: 25px;
-        height: 20px;
-        vertical-align: middle;
-        margin-right: .5em;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    &.show {
-        display: block;
-    }
-
-    // 使用百分比进度条
-    &.use-progress {
-        border-bottom: 0;
-
-        .progress-bar {
-            position: absolute;
-            left: 0;
-            bottom:0;
-            height: 3px;
-            background-color: #3283eb;
-        }
-    }
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///  悬浮在顶部的 过滤工具条
-.g-filter-toolbar {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 30px 10px 10px;
-    background: #fff;
-    z-index: 8000;
-    text-align: center;
-    @include gBoxShadow;
-    border-bottom: 3px solid #e5650f;
-    overflow: hidden;
-
-    &.show {
-        display: block;
-    }
-
-    .close {
-        position: absolute;
-        top: 10;
-        right: 10px;
-        color: #333;
-        z-index: 8001;
-        text-decoration: none;
-    }
-
-    .input-text {
-        margin: 0;
-    }
-
-    .field {
-        border-bottom: 0;
-        display: inline-block;
-        margin-right: 1em;
-
-        label {
-            display: inline-block;
-            margin-right: .5em;
-        }
-    }
-
 }

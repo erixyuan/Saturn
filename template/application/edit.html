@@ -1,4 +1,4 @@
-<div class="wrap g-moudel-edit m-application m-application-edit">
+<div class="wrap g-moudel-post m-application m-application-edit">
     <!-- 主區域 START -->
     <div class="w-main">
 
@@ -66,8 +66,13 @@
             <div class="section m-auto-attr">
                 <h2>自动填写APK包信息</h2>
                 <div class="field">
-                    <strong>1.上传解压</strong> <input type="file" class="ke-upload-file" name="apk" tabindex="-1">
-                    <em><input type="checkbox" val="1" name="downloadapk">将APK保存到服务器</em>
+                    <iframe style="height: 0" frameborder="0" id="js_formTarget"></iframe>
+                    <form action="" method ="post" target="js_formTarget" id="apkForm" enctype="multipart/form-data">
+                        <strong>1.上传解压</strong>
+                        <input type="file" class="ke-upload-file" name="apk" tabindex="-1">
+                        <input type="hidden" name="appid" value="{{id}}">
+                        <em><input type="checkbox" val="1" name="downloadappkey">将APK保存到服务器</em>
+                    </form>
                 </div>
                 <br>
                 <div class="field">
@@ -75,7 +80,7 @@
                     <em>(目前支持 酷安和应用汇)</em>
                 </div>
                 <br>
-                <a href="###" class="g-btn" id="js_catch-app-info">获取应用信息</a>
+                <span class="g-btn" id="js_catch-app-info">获取应用信息</span>
             </div>
 
 

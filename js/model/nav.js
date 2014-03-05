@@ -127,7 +127,7 @@ function(_, Backbone){
                         {
                             parent:'plugin',
                             name:'Appkey设置',
-                            module:'apkList'
+                            module:'appkeyList'
                         },
                         {
                             parent:'plugin',

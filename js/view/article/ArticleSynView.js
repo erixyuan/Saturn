@@ -5,36 +5,53 @@ define([
     'underscore',
     'text!../../../template/article/synLlist.html',
     '../PaginationView',
-    '../../model/article/synList'
+    '../../model/article/synList',
+    '../../model/set/sync',
     ],
 
-function($, template, Backbone,_, listTpl,PaginationView,ListModel){
+function($, template, Backbone,_, listTpl,PaginationView,ListModel,syncModel){
 
 
     return Backbone.View.extend({
         el:"#js_mainContent",
         model: ListModel,
+        syncModel:syncModel,
         template:listTpl,
         initialize: function(obj){
-            Saturn.articleList = this.model = new this.model();
-            this.model.fetch({
-                success:function(){
-                    this.render();
+            var status = this.status = obj.status == undefined ? 1 : obj.status;
+            var page =  obj.page == undefined ? 1 : obj.page;
+            this.model = new this.model(status,page);
+            this.syncModel = new this.syncModel();
+            Saturn.defer(
+                [
+                    {
+                        object: this.model,
+                        method:'fetch',
+                    },
+                    {
+                        object:this.syncModel,
+                        method:'fetch',
+                    }
+                ],function(data){
+                    this.render(data);
                 }.bind(this)
-            });
+            )
         },
         events:{
             'click span[operate=sync]' : 'update',
         },
-        render: function() {
+        render: function(data) {
+            this.model.set('sites',data[1].attributes);
+            var html = template.compile(this.template)(this.model.attributes);
 
-            var html = template.compile(this.template)(this.model.get('data'));
-
-            var pagination = new PaginationView({
-                                    url:'#article/articleSyn/',
-                                    data:this.model.attributes
-                                });
             Saturn.renderToDom(html,this.el);
+            // 必须在渲染全局页面之后，才能渲染分页器
+            var pagination = new PaginationView({
+                                    url : '#article/articleSyn/'+this.status,
+                                    data : this.model.attributes.data
+                                });
+            $('#js_secondNav').find('a').removeClass('active')
+            $('#js_secondNav').find('a').eq(this.status).addClass('active');
         },
         operateCheckBox:function(){
             var target = event.target || window.event.srcElement;

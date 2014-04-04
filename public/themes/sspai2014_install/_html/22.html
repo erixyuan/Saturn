@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="zh"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>少數派2014純DOM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+//的工具类 Fn
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+            .x1 {
+                /*width: 800px;*/
+                height: 300px;
+                background: #eee;
+            }
+
+            .x2-left, .x2-right {
+                width: 30px;
+                height: 30px;
+                background: blue;
+            }
+
+            .x2-left {
+                position: absolute;
+                top: 0;
+                left: -10px;
+            }
+
+            .x2-right {
+                position: absolute;
+                top: 0;
+                right: -10px;
+            }
+
+            ul.x2 {
+                position: relative;
+                /*position: relative;*/
+                /*top: 0;*/
+                /*left: 50%;*/
+                background: #c01;
+                /*height: 30px;*/
+                display: table;
+                min-width: 80%;
+                /*width: 50%;*/
+                margin: 0 auto;
+                text-align: center;
+                padding: 0;
+
+            }
+
+            ul.x2 li {
+                /*float: left;*/
+                display: inline-block;
+                /*text-align: center;*/
+                /*width: 20%;*/
+                background: #fc0;
+                /*display: block;*/
+                display: table-cell;
+
+            }
+
+            ul.x2 li a {
+
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <div class="x1">
+            <ul class="x2 fn-clear">
+                <div class="x2-left"></div>
+                <div class="x2-right"></div>
+                <li><a href="">HELLO~~~</a></li>
+                <li><a href="">HELLO~~~</a></li>
+                <li><a href="">HELLO~~~</a></li>
+                <li><a href="">HELLO~~~</a></li>
+                <li><a href="">HELLO~~~</a></li>
+            </ul>
+        </div>
+    </body>
+</html>

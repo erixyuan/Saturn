@@ -1,0 +1,1358 @@
+@import "variable";
+
+// ####################################################################
+// # 全局 Sprite
+// ####################################################################
+@mixin mainSprite {
+    background-repeat: no-repeat;
+    background-image: url(../img/sp_main.png);
+    background-image: -webkit-image-set(url(../img/sp_main.png) 1x, url(../img/sp_main@2x.png) 2x);
+   @media (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3 / 2),(min-device-pixel-ratio:1.5) {
+            background-image: url(../img/sp_main@2x.png);
+            background-size: 900px auto;
+    }
+}
+
+@mixin textSprite {
+    background-repeat: no-repeat;
+    background-image: url(../img/sp_text.png);
+    background-image: -webkit-image-set(url(../img/sp_text.png) 1x, url(../img/sp_text@2x.png) 2x);
+   @media (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3 / 2),(min-device-pixel-ratio:1.5) {
+            background-image: url(../img/sp_text@2x.png);
+            background-size: 900px auto;
+    }
+}
+
+
+
+// ####################################################################
+// # 全局功能
+// ####################################################################
+
+// 不当前文本或元素被选中。
+// 如果有必要多浏览器兼容，可以在IE6-9中执行这段JS。
+// document.body.onselectstart = document.body.ondrag = function(){
+//     return false;
+// }
+@mixin disableSelect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+
+// 用于锁住文本宽度，多出的用...代替，使用时，记得加个width。
+@mixin hiddenText {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+
+// ####################################################################
+// # 全局设置
+// ####################################################################
+html,body {
+    font-family: $baseFont;
+    font-size: $baseFontSize;
+    line-height: $baseLineHeight;
+    // background: #ededef url(../img/body_bg.png) repeat;
+    // 試試純色，可以微調。
+    background: #f5f5f5;
+    min-width: 320px;
+}
+
+
+
+
+
+// ####################################################################
+// # 辅助class
+// ####################################################################
+.fn-left, .fn-right {
+    display:inline;
+}
+
+.fn-left {
+    float: left;
+}
+
+.fn-right {
+    float: right;
+}
+
+/* 单行文字溢出时出现省略号，需设定宽度 */
+.fn-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* 清理浮动 */
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+
+/* 隐藏, 通常用来与 JS 配合 */
+*.fn-hide {
+    display:none!important;
+}
+
+*.fn-hide-mobile {
+    display: none;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        display: block;
+    }
+}
+
+.fn-hide-desktop {
+     @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        display: none!important;
+        _display: none;
+     }
+}
+
+%hide-text {
+    overflow: hidden;
+    text-indent: -9999em;
+    *text-indent: 0;
+    *font-size: 0;
+}
+
+@mixin hide-text {
+    overflow: hidden;
+    text-indent: -9999em;
+    *text-indent: 0;
+    *font-size: 0;
+    color: transparent;
+}
+
+%inline-block {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+@mixin inline-block {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+
+
+// ####################################################################
+// # 输入框
+// ####################################################################
+.input-text {
+    font-size: 14px;
+    padding: 7px;
+    line-height: 20px;
+    border: 1px solid #d4d4d4;
+    border-radius: 1px;
+    box-shadow: inset 0px 1px 3px rgba(244,244,244,1);
+    outline: none;
+    box-sizing: content-box;
+}
+
+
+
+// ####################################################################
+// # 文本区域
+// ####################################################################
+textarea {
+    box-shadow: inset 0px 1px 3px rgba(244,244,244,1);
+    border: 1px solid #d4d4d4;
+    border-radius: 1px;
+    outline: none;
+    padding: 9px 8px;
+    box-sizing: content-box;
+}
+
+// ####################################################################
+// # 组合框
+// ####################################################################
+.g-input-combo {
+    @extend %inline-block;
+    .input-text, .g-btn {
+        float: left;
+    }
+
+}
+
+
+// ####################################################################
+// # 按钮
+// ####################################################################
+
+@mixin btnGradien($colorA,$colorB,$colorC,$colorD,$colorE) {
+    background: $colorB;
+    background: -moz-linear-gradient(top, $colorA 0%, $colorB 61%, $colorC 98%, $colorD 99.5%, $colorE 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $colorA), color-stop(61%, $colorB), color-stop(29%, $colorC), color-stop(99.5%, $colorD), color-stop(100%, $colorE)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, $colorA 0%, $colorB 61%, $colorC 98%, $colorD 99.5%, $colorE 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, $colorA 0%, $colorB 61%, $colorC 98%, $colorD 99.5%, $colorE 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, $colorA 0%, $colorB 61%, $colorC 98%, $colorD 99.5%, $colorE 100%); /* IE10+ */
+    background: linear-gradient(to bottom, $colorA 0%, $colorB 61%,$colorC 98%, $colorD 99.5%, $colorE 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$colorA', endColorstr='$colorE',GradientType=0 ); /* IE6-9 */
+}
+
+
+// 正常 状态下的按钮的渐变
+@mixin btnGradienNormal ($color,$bottomStopColor){
+    $colorLight: lightness($color);
+    $colorLightDiffPercentB: 8; //第2个悬停点与主颜色的差别百分比
+    $colorLightDiffPercentC: 13; //第3个悬停点与主颜色的差别百分比
+
+    $colorLightBottom: lightness ($bottomStopColor);
+    $colorLightBottomDiffPercentB: 22; //最后的底部悬停点与底部颜色的差别百分比
+
+    // 计算各个悬停点颜色
+    $colorB: darken($color,$colorLightDiffPercentB);
+    $colorC: darken($color,$colorLightDiffPercentC);
+
+
+    $bottomStopColorB: lighten($color,$colorLightBottomDiffPercentB);
+
+    //输出的各个浏览器渐变的CSS
+    @include btnGradien($color,$colorB,$colorC,$bottomStopColor,$bottomStopColorB);
+}
+
+// 鼠标悬停在按钮上的渐变
+@mixin btnGradienHover($color,$bottomStopColor){
+    $colorLight: lightness($color);
+    $colorLightDiffPercentB: 13; //第2个悬停点与主颜色的差别百分比
+    $colorLightDiffPercentC: 13; //第3个悬停点与主颜色的差别百分比
+
+    $colorLightBottom: lightness ($bottomStopColor);
+    $colorLightBottomDiffPercentB: 10; //最后的底部悬停点与底部颜色的差别百分比
+
+    // 计算各个悬停点颜色
+    $colorB: darken($color,$colorLightDiffPercentB);
+    $colorC: darken($color,$colorLightDiffPercentC);
+
+
+    $bottomStopColorB: lighten($color,$colorLightBottomDiffPercentB);
+
+    //输出的各个浏览器渐变的CSS
+    @include btnGradien($color,$colorB,$colorC,$bottomStopColor,$bottomStopColorB);
+}
+
+
+//点击按钮的时候的渐变
+@mixin btnGradienActive($color) {
+    $colorLight: lightness($color);
+    $colorLightDiffPercentB: 11; //第2个悬停点与主颜色的差别百分比
+    // 计算各个悬停点颜色
+    $colorB: darken($color,$colorLightDiffPercentB);
+
+    background: mix($color,$colorB, .6);
+    background: -moz-linear-gradient(top, $color 0%, $colorB 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color), color-stop(100%,$colorB)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, $color 0%,$colorB 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, $color 0%,$colorB 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, $color 0%,$colorB 100%); /* IE10+ */
+    background: linear-gradient(to bottom, $color 0%,$colorB 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color', endColorstr='$colorB',GradientType=0 ); /* IE6-9 */
+}
+
+.g-btn {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    font-weight: bold;
+    font-size: 14px;
+    color: #292929;
+    line-height: 1em;
+    text-decoration: none;
+
+    padding: 10px 35px;
+    border: 1px solid #c2c2c2;
+    border-radius: $btnRadius;
+
+    background-color: #fafafa;
+
+    @include btnGradienNormal(#fefefe,#ffffff);
+    text-shadow:1px 1px 0px #fff;
+
+    &:hover {
+        @include btnGradienHover(#f5f5f5,#f7f7f7);
+    }
+
+    &:active, &.active {
+        @include btnGradienActive(#fcfcfc);
+        box-shadow:inset 0 0px 5px rgba(88,88,88,0.53);
+    }
+
+
+    // 最小尺寸按钮
+    &.g-btn-mini {
+        -webkit-text-size-adjust: none;
+        font-size: 11px;
+        font-family: $mingliu;
+        padding: 7px 23px;
+    }
+
+    // 最大尺寸按钮
+    &.g-btn-large {
+        padding: 13px 60px;
+        font-size: 22px;
+        font-family: $yahei;
+
+        &:active {
+             box-shadow: inset 0 0px 10px rgba(88, 88, 88, 0.65);
+        }
+
+    }
+
+    &.g-btn-block {
+        display: block;
+        text-align: center;
+        margin-bottom: .5em;
+    }
+
+}
+
+
+// 严重 按钮
+.g-btn-danger {
+    color: #fff;
+    border-color: #cd040b;
+    background-color: #ff797d;
+    // background:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff5a5f), to(#ff9fa2), color-stop(.95,#fc1b22));
+    // background: -moz-linear-gradient(100% 100% 90deg,#ff5a5f, #ff5a5f, #fc1b22 6%);
+    @include btnGradienNormal(#ff5a5f,#ff8589);
+    text-shadow:1px 1px 0px #d61e24;
+
+    &:hover {
+        @include btnGradienHover(#ff5a5f,#ff8589);
+        // background:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7565b), to(#ff9fa2), color-stop(.95,#f41a21));
+        // background: -moz-linear-gradient(100% 100% 90deg,#f7565b, #ff9fa2, #f41a21 6%);
+    }
+
+    &:active, &.active {
+        color: #fff;
+        @include btnGradienActive(#ff5a5f);
+        // background-color: #f41a21;
+        // background: -webkit-gradient(linear, 0 0, 0 99%, from(#f7565b), to(#f41a21));
+        // background: -moz-linear-gradient(top,#f7565b,#f41a21 99%);
+    }
+}
+
+
+
+// 重要按钮
+.g-btn-primary {
+    color: #fff;
+    text-shadow:1px 1px 0px #141c2a;
+    @include btnGradienNormal(#585e6a,#959ba7);
+    // background-image:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#434a56), to(#6a717d), color-stop(.95,#4d535f));
+    // background-image: -moz-linear-gradient(100% 100% 90deg,#585e6a, #6a717d, #4d535f 6%);
+
+    &:hover {
+        // background-color: #4f5662;
+        // background-image:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#434a56), to(#6a717d), color-stop(.95,#3c4350));
+        // background-image: -moz-linear-gradient(100% 100% 90deg,#434a56, #6a717d, #3c4350 6%);
+        @include btnGradienHover(#585e6a,#959ba7);
+    }
+
+    &:active, &.active {
+        // background-color: #4f5662;
+        // background: -webkit-gradient(linear, 0 0, 0 100%, from(#585e6a), to(#4d535f));
+        // background: -moz-linear-gradient(top,#585e6a,#4d535f 100%);
+        @include btnGradienActive(#585e6a);
+
+    }
+}
+
+
+
+// ####################################################################
+// # 按钮组
+// ####################################################################
+.g-btn-group {
+    overflow: hidden;
+    *zoom: 1;
+
+    .g-btn {
+        float: left;
+        border-right-width: 0;
+        vertical-align: top;
+        &:last-child {
+            border-right-width: 1px;
+        }
+    }
+}
+
+
+// ####################################################################
+// # 平台按钮
+// ####################################################################
+.g-sys-btn {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 44px;
+    height: 18px;
+    overflow: hidden;
+    text-indent: -99999px;
+    *text-indent: 0px;
+    *line-height: 200em;
+    @include mainSprite;
+
+    &.g-sys-ios {
+        background-position: -400px -100px;
+    }
+
+    &.g-sys-android {
+        background-position: -400px -130px;
+    }
+
+    &.g-sys-windows-phone {
+        background-position: -400px -160px;
+    }
+
+    &.g-sys-app {
+        background-position: -400px -190px;
+    }
+}
+
+// ####################################################################
+// # 只有图标的平台按钮
+// ####################################################################
+.g-sys-btn-notext {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 49px;
+    height: 23px;
+    overflow: hidden;
+    text-indent: -99999px;
+    *text-indent: 0px;
+    *line-height: 200em;
+
+    &.g-sys-ios {
+        background-image: url(../img/btn_img_sys_ios.png);
+    }
+
+    &.g-sys-android {
+        background-image: url(../img/btn_img_sys_android.png);
+    }
+}
+
+
+
+
+// ####################################################################
+// # 只有图标的平台按钮
+// ####################################################################
+.g-title-btn, .g-title-btn-silver {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 54px;
+    height: 26px;
+    overflow: hidden;
+    text-indent: -99999px;
+    *text-indent: 0px;
+    *line-height: 200em;
+    @include mainSprite;
+}
+
+
+.g-title-btn {
+    background-position: -623px -200px;
+}
+
+.g-title-btn-silver {
+    background-position: -680px -200px;
+}
+
+
+
+
+
+// ####################################################################
+// # 分类bannar
+// ####################################################################
+.catecolor {
+    display: none;
+    position: absolute;
+    top: 7px;
+    left: 17px;
+    z-index: 11;
+    height: 24px;
+    line-height: 27px;
+    font-size: 12px;
+    font-family: $mingliu;
+    color: #fff;
+    text-decoration: none;
+    padding-left: 8px;
+    background-color: #ed2000;
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        display: block;
+    }
+
+    .after {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -19px;
+        width: 19px;
+        height: 24px;
+        z-index: 0;
+        @include mainSprite;
+        background-position: -500px -50px;
+    }
+
+    .before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0px;
+        width: 37px;
+        height: 27px;
+        z-index: 0;
+        @include mainSprite;
+        background-position: -500px 0;
+    }
+
+    .text {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+
+
+// ####################################################################
+// # 分类bannar 巨大
+// ####################################################################
+.catecolor-large {
+    display: block;
+    position: absolute;
+    top: 22px;
+    left: 0;
+    font-family: $yahei;
+    font-size: 16px;
+    height: 31px;
+    color: #fff;
+    line-height: 31px;
+    // -webkit-text-stroke: 1px #df1e00;
+    border: 1px solid #d61e02;
+    border-left-width: 0;
+    border-right-width: 0;
+    background-color: #ed2000;
+    text-decoration: none;
+    padding-right: 10px;
+    border: 1px solid #d61e02;
+    border-left-width: 0;
+    border-right-width: 0;
+
+    .before, .after {
+        @include mainSprite;
+    }
+
+    .before {
+        position: absolute;
+        display: block;
+        top: -1px;
+        left: -15px;
+        z-index: 0;
+        width: 36px;
+        height: 36px;
+        background-position: -400px 0;
+        background-repeat: no-repeat;
+    }
+
+    .text {
+        position: relative;
+        z-index: 1;
+    }
+    .after {
+        position: absolute;
+        display: block;
+        top: -1px;
+        right: -29px;
+        width: 29px;
+        height: 33px;
+        z-index: 0;
+        background-position: -400px -50px;
+        background-repeat: no-repeat;
+    }
+}
+
+
+// ####################################################################
+// # 通用的title icon
+// ####################################################################
+.title-icon {
+    @extend %inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 18px;
+    _font-size: 0;
+    line-height: 0;
+    @include mainSprite;
+    background-repeat: no-repeat;
+}
+
+
+
+
+.title-icon-arrow {
+    @extend .title-icon;
+    background-position: -500px -100px;
+}
+
+.title-icon-book {
+    @extend .title-icon;
+    background-position: -500px -130px;
+}
+
+.title-icon-bookmark {
+    @extend .title-icon;
+    background-position: -500px -160px;
+}
+
+.title-icon-file {
+    @extend .title-icon;
+    background-position: -500px -220px;
+}
+
+.title-icon-exchange {
+    @extend .title-icon;
+    background-position: -500px -190px;
+}
+
+.title-icon-clock {
+    @extend .title-icon;
+    background-position: -500px -250px;
+}
+
+.title-icon-bullhorn {
+    @extend .title-icon;
+    background-position: -500px -280px;
+}
+
+.title-icon-labs {
+    @extend .title-icon;
+    background-position: -500px -311px;
+}
+
+.title-icon-user {
+    @extend .title-icon;
+    background-position: -500px -340px;
+}
+
+.title-icon-info {
+    @extend .title-icon;
+    background-position: -500px -370px;
+}
+
+.title-icon-rocket {
+    @extend .title-icon;
+    background-position: -500px -400px;
+}
+
+.title-icon-star {
+    @extend .title-icon;
+    background-position: -500px -430px;
+}
+
+.title-icon-comments {
+    @extend .title-icon;
+    background-position: -500px -460px;
+    height: 21px;
+}
+
+.title-icon-setting {
+    @extend .title-icon;
+    background-position: -500px -490px;
+}
+
+.title-icon-tasks {
+    @extend .title-icon;
+    background-position: -500px -520px;
+}
+
+.title-icon-asterisk {
+    @extend .title-icon;
+    background-position: -500px -550px;
+}
+
+.title-icon-rss {
+    @extend .title-icon;
+    background-position: -500px -580px;
+}
+
+.title-icon-briefcase {
+    @extend .title-icon;
+    background-position: -500px -610px;
+}
+
+.title-icon-heart {
+    @extend .title-icon;
+    background-position: -500px -640px;
+}
+
+
+
+
+
+
+.title-icon-photo {
+    @extend .title-icon;
+    background-position: -550px -100px;
+}
+
+.title-icon-weibo {
+    @extend .title-icon;
+    background-position: -550px -130px;
+}
+
+
+
+
+
+// ####################################################################
+// # 评论数泡泡
+// # $type 泡泡类型[square,small]
+// # $color 泡泡颜色[red,gray,blue]
+// ####################################################################
+@mixin comment-count-bubble($type,$color) {
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    font-family: Tahoma;
+    font-size: 11px;
+    font-style: normal;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    @include mainSprite;
+
+    @if $type == 'square' {
+        width: 36px;
+        height: 26px;
+        line-height: 19px;
+
+        //背景图片
+
+        @if $color == 'red' {
+            background-position: -300px 0;
+        }
+    }
+
+    // 小的泡泡 去掉
+    // @if $type == 'small' {
+    //     width: 38px;
+    //     height: 22px;
+    //     line-height: 19px;
+    //     font-weight: bold;
+
+    //     @if $color == 'red' {
+    //          background-position: -572px -172px;
+    //     }
+
+    //     @if $color == 'gray' {
+    //         background-position: -650px -172px;
+    //     }
+
+    //     @if $color == 'blue' {
+    //         background-position: -610px -172px;
+    //     }
+
+    //     @if $color == 'white' {
+    //         color: #202020;
+    //         background-position: -692px -172px;
+    //     }
+    // }
+
+}
+
+
+
+// ####################################################################
+// # 下载 平台图标列表
+// ####################################################################
+@mixin listDowload {
+     a,span {
+        @extend %inline-block;
+        @extend %hide-text;
+        @include mainSprite;
+        width: 16px;
+        height: 16px;
+        margin-top: 4px;
+        margin-right: 4px;
+        background-repeat: no-repeat;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-right: 0;
+        }
+
+        &:last-child, &.last {
+            margin-right: 0;
+        }
+
+        $icons:
+            ios -300px -300px,
+            android -300px -330px,
+            windows-phone -300px -357px
+        ;
+
+        @each $icon in $icons {
+                &.#{nth($icon, 1)} {
+                background-position: nth($icon, 2) nth($icon, 3);
+            }
+        }// @end each
+     }
+}
+
+
+// ####################################################################
+// # 社交网络图标 (小)
+// ####################################################################
+@mixin socialIconSmall {
+    // 设置图标
+    $icons:
+        tencent-weibo -250px -252px,
+        sina-weibo -250px -300px
+    ;
+
+    @each $icon in $icons {
+        .icon-#{nth($icon, 1)} {
+            background-position: nth($icon, 2) nth($icon, 3);
+        }
+    }
+}
+
+// ####################################################################
+// # 社交网络图标 (大)
+// ####################################################################
+@mixin socialIconBig {
+    // 设置图标
+    $icons:
+        tencent-weibo -200px -252px,
+        sina-weibo -200px -300px,
+        qrcode -200px -350px,
+        tianyi -200px -400px
+    ;
+
+    @each $icon in $icons {
+        .icon-#{nth($icon, 1)} {
+            background-position: nth($icon, 2) nth($icon, 3);
+        }
+    }
+}
+
+
+// ####################################################################
+// #  分栏图标
+// ####################################################################
+.icon-book, .icon-store {
+    @extend %inline-block;
+    @extend %hide-text;
+    @include mainSprite;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.icon-book {
+    background-position: -800px -190px;
+}
+
+.icon-store {
+    background-position: -800px -160px;
+}
+
+
+// ####################################################################
+// #  提示框
+// ####################################################################
+.sn-alert{
+    display: none;
+    background: #ffc;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    top: 51px;
+    left: 0;
+    right:0;
+    font-size: 12px;
+    border-bottom: 1px solid #fc5;
+    color: #000;
+    z-index: 10000;
+
+
+    @media screen and (min-width: $desktopWidth) and (orientation:landscape){
+        top: 0;
+    }
+}
+
+
+
+// ####################################################################
+// # 弹框Modal
+// ####################################################################
+
+// 底部的黑色层
+.overlay {
+    display: none;
+    position: fixed;
+    _position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 9999;
+}
+
+.g-modal {
+    display: none;
+    position: fixed;
+    _position: absolute;
+    top: 2em;
+    left: 1em;
+    right: 1em;
+    background: #fff;
+    border: 3px solid rgba(204,204,204,0.3);
+    *border: 1px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    z-index: 10000;
+    border-radius: 3px;
+
+    @media screen and (min-width: $desktopWidth) and (orientation:landscape){
+        width: 700px;
+        margin-left: -350px;
+        top: 30%;
+        left: 50%;
+        right: 0;
+    }
+
+    .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 15px;
+        color: #000000;
+        text-shadow: 0 1px 0 #ffffff;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        opacity: 0.2;
+        filter: alpha(opacity=20);
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        -webkit-appearance: none;
+        text-decoration: none;
+    }
+
+    .modal-inner {
+        padding: 15px;
+
+        h1 {
+            font-family: $yahei;
+            font-weight: normal;
+            font-size: 1.3em;
+            clear: both;
+            margin-top: 0;
+        }
+
+        .field {
+            position: relative;
+            margin-bottom: 1em;
+            overflow: hidden;
+
+            label {
+                @include inline-block;
+                width: 4em;
+                text-align: right;
+                vertical-align: middle;
+            }
+        }
+        .model-footer {
+            margin-top: 1em;
+            clear: both;
+            overflow: hidden;
+            text-align: right;
+        }
+    }
+}
+
+
+// ####################################################################
+// #  QR弹框
+// ####################################################################
+
+.qrcode-view {
+    width: 300px;
+    height: 300px;
+
+    @media screen and (min-width: 1024px) and (orientation: landscape) {
+        margin-left: -200px;
+    }
+
+    .modal-inner {
+        //标题
+        h1 {
+            text-align:center;
+        }
+
+        //二维码
+        .w-qrcode {
+            text-align: center;
+            img {
+                max-width: 220px;
+            }
+        }
+
+        // 底部说明的文字
+        .model-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px;
+            text-align: left;
+            font-size: 12px;
+            border-top: 1px solid #ddd;
+        }
+    }
+}
+
+// ####################################################################
+// #  顶栏的二维码
+// ####################################################################
+.header-qrcode-view {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    overflow: hidden;
+    padding: 1em;
+    border: 3px solid rgba(204,204,204,0.3);
+    *border: 1px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    background-color: #fff;
+    z-index: 10000;
+    border-radius: 3px;
+    text-align: center;
+
+    p {
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+
+    }
+}
+
+// ####################################################################
+// #  fancybox 图片预览弹窗
+// ####################################################################
+.fancybox-wrap, .fancybox-skin, .fancybox-outer, .fancybox-inner, .fancybox-image {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    vertical-align: top;
+}
+
+.fancybox-wrap {
+    iframe, object {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        outline: none;
+        vertical-align: top;
+    }
+}
+
+.fancybox-nav {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    vertical-align: top;
+    span {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        outline: none;
+        vertical-align: top;
+    }
+}
+
+.fancybox-tmp {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    vertical-align: top;
+}
+
+.fancybox-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10010;
+}
+
+.fancybox-skin {
+    position: relative;
+    background: #f9f9f9;
+    color: #444;
+    text-shadow: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.fancybox-opened {
+    z-index: 10020;
+    .fancybox-skin {
+        -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.fancybox-outer {
+    position: relative;
+}
+
+.fancybox-inner {
+    position: relative;
+    overflow: hidden;
+}
+
+.fancybox-type-iframe .fancybox-inner {
+    -webkit-overflow-scrolling: touch;
+}
+
+.fancybox-error {
+    color: #444;
+    font: 14px / 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.fancybox-image, .fancybox-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.fancybox-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+    background-image: url('../img/fancybox_sprite.png');
+}
+
+#fancybox-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -22px;
+    margin-left: -22px;
+    background-position: 0 -108px;
+    opacity: 0.8;
+    cursor: pointer;
+    z-index: 8060;
+    div {
+        width: 44px;
+        height: 44px;
+        background: url('fancybox_loading.gif') center center no-repeat;
+    }
+}
+
+.fancybox-close {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 8040;
+}
+
+.fancybox-nav {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent url('../img/blank.gif');
+    /* helps IE */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    z-index: 8040;
+}
+
+.fancybox-prev {
+    left: 0;
+}
+
+.fancybox-next {
+    right: 0;
+}
+
+.fancybox-nav span {
+    position: absolute;
+    top: 50%;
+    width: 36px;
+    height: 34px;
+    margin-top: -18px;
+    cursor: pointer;
+    z-index: 8040;
+    visibility: hidden;
+}
+
+.fancybox-prev span {
+    left: 10px;
+    background-position: 0 -36px;
+}
+
+.fancybox-next span {
+    right: 10px;
+    background-position: 0 -72px;
+}
+
+.fancybox-nav:hover span {
+    visibility: visible;
+}
+
+.fancybox-tmp {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    visibility: hidden;
+    max-width: 99999px;
+    max-height: 99999px;
+    overflow: visible !important;
+}
+
+/* Overlay helper */
+
+.fancybox-lock {
+    overflow: hidden !important;
+    width: auto;
+    body {
+        overflow: hidden !important;
+    }
+}
+
+.fancybox-lock-test {
+    overflow-y: hidden !important;
+}
+
+.fancybox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: none;
+    z-index: 8010;
+    background: url('../img/fancybox_overlay.png');
+}
+
+.fancybox-overlay-fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.fancybox-lock .fancybox-overlay {
+    overflow: auto;
+    overflow-y: scroll;
+}
+
+/* Title helper */
+
+.fancybox-title {
+    visibility: hidden;
+    font: normal 13px / 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+    text-shadow: none;
+    z-index: 8050;
+}
+
+.fancybox-opened .fancybox-title {
+    visibility: visible;
+}
+
+.fancybox-title-float-wrap {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    margin-bottom: -35px;
+    z-index: 8050;
+    text-align: center;
+    .child {
+        display: inline-block;
+        margin-right: -100%;
+        padding: 2px 20px;
+        background: transparent;
+        /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(0, 0, 0, 0.8);
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        text-shadow: 0 1px 2px #222;
+        color: #FFF;
+        font-weight: bold;
+        line-height: 24px;
+        white-space: nowrap;
+    }
+}
+
+.fancybox-title-outside-wrap {
+    position: relative;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.fancybox-title-inside-wrap {
+    padding-top: 10px;
+}
+
+.fancybox-title-over-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 10px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/*Retina graphics!*/
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+    #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+        background-image: url('../img/fancybox_sprite@2x.png');
+        background-size: 44px 152px;
+        /*The size of the normal image, half the size of the hi-res image*/
+    }
+    #fancybox-loading div {
+        background-image: url('../img/fancybox_loading@2x.gif');
+        background-size: 24px 24px;
+        /*The size of the normal image, half the size of the hi-res image*/
+    }
+}

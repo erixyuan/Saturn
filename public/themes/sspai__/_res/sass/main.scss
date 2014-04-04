@@ -1,0 +1,4120 @@
+// 在 @media screen and (min-width: $desktopWidth) and (orientation: landscape) 裏面的代碼，都是給手機版準備的。
+// 意爲「窗口寬度 < 800px， 且手機至於橫屏下」，則調用。
+
+@import "global";
+@import "appinfo";
+
+// ####################################################################
+// ####################################################################
+// # FW 框架
+// ####################################################################
+body {
+    // margin-top: 105px + 22px;
+    // banner上下不要間距了，改成現在這個
+    // margin-top: 80px + 22px;
+    // 這是讓banner有間距
+    margin-top: 80px + 20px + 11px;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        margin-top: 0;
+    }
+}
+
+//菜单罩层
+#js-mask {
+    display:  none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: rgba(0,0,0,0.3);
+
+    &.active {
+        display: block;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            display: none;
+        }
+    }
+}
+
+// 内容宽度
+.wrap {
+    position: relative;
+
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        width: $pageWidth;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+}
+
+// ####################################################################
+// # HEADER 页头 START
+.r-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #202835 url(../img/bg_header_mobile.png) repeat-x;
+
+    // MENU菜单滚动的时候渐变
+    // -moz-transition: 0.15s ease-in;
+    // -webkit-transition: 0.15s ease-in;
+    // -o-transition: 0.15s ease-in;
+    //  transition: 0.15s ease-in;
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        position: relative;
+        height: 150px;
+        background: #fff;
+        border-bottom: 1px solid #ccc;
+
+        // MENU菜单滚动的时候渐变
+        -moz-transition: none;
+        -webkit-transition: none;
+        -o-transition: none;
+         transition: none;
+    }
+
+
+    // 顶栏的上半部分，主要電腦版。在手機版上，一開始顯示，但是滑動後，就隱藏起來。 START
+    .top {
+        position: relative;
+        padding-top: 15px;
+        margin-bottom: 10px;
+        text-align: center;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            height: 105px;
+            padding-top: 0;
+            margin-bottom: 0;
+            text-align: left;
+            background: #232323;
+        }
+
+        .m-logo {
+            @extend %inline-block;
+            @extend %hide-text;
+            text-decoration: none;
+            width: 143px;
+            height: 34px;
+
+            @include mainSprite;
+            background-position: 0 -100px;
+
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                margin-top: 15px;
+                background-position: 0 10px;
+                width: 193px;
+                height: 77px;
+            }
+        }
+    }
+    // 顶栏的上半部分，主要電腦版。在手機版上，一開始顯示，但是滑動後，就隱藏起來。 START
+
+
+
+    // 顶部状态栏下半部分，主要是MENU，菜單。 START
+    .bottom {
+        position: relative;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            position: relative;
+            width: 1000px;
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        // Logo 只在电脑版置顶模式的时候才显示 内容为手机版的Logo的图形部分
+        .m-logo {
+            @extend %hide-text;
+            @include mainSprite;
+            display: block;
+            opacity: 0;
+            position: absolute;
+            left: -46px;
+            margin-top: 6px;
+            width: 35px;
+            height: 35px;
+            background-position: -3px -100px;
+
+            -moz-transition: opacity 0.1s linear;
+            -webkit-transition: opacity 0.1s linear;
+            -o-transition: opacity 0.1s linear;
+             transition: opacity 0.1s linear;
+        }
+
+
+        // 菜單（BIG MODEL） START
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            overflow: hidden;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                height: 46px;
+            }
+            &, & a {
+                color: #fff;
+                text-decoration: none;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    color: #000;
+                }
+            }
+
+            li {
+                &:hover, &.active {
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                            border-bottom: 5px solid #f43d43;
+                    }
+                }
+            }
+        }
+
+
+        // 在手機版上默認顯示的菜单项 START
+        .imp {
+            position: relative;
+            overflow: hidden;
+            float: left;
+            margin-left: 15px;
+            line-height: 1.0;
+
+            li {
+                float: left;
+                margin-right: 1.2em;
+                font-size: 16px;
+                height: 43px;
+                line-height: 46px;
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    margin-right: 2em;
+                }
+            }
+        }
+        // 在手機版上默認顯示的菜单项 END
+
+
+
+
+        // 手机版更多按钮
+        .more {
+            position: absolute;
+            top: 0px;
+            right: 0;
+            display: block;
+            @extend %hide-text;
+            @include mainSprite;
+            width: 50px;
+            height: 42px;
+            background-position: -588px -141px;
+
+            &:hover, &.active {
+                background-position: -588px -81px;
+                background-color: rgba(255,255,255,0.1);
+            }
+
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                display: none;
+            }
+        }
+
+        // 手機版的菜單 START
+        .mobile-ext-menu {
+            position: fixed;
+            top: 102px;
+            left: 0;
+            width: 100%;
+
+
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                position: static;
+                width: auto;
+                float: left;
+            }
+
+            .menu-content {
+                display: none;
+                border-bottom: 1px solid #282828;
+                &.open {
+                    display: block;
+                }
+                 @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    display: block;
+                    border-bottom:0;
+                 }
+            }
+
+
+            // 下拉菜单
+            .ext {
+                li {
+                    height: 42px;
+                    // background: url(../img/header_nav_ext_mobile.png);
+                    padding-left: 1.2em;
+                    line-height: 42px;
+                    background: #454d5c;
+                    border-bottom: 1px solid #5b6372;
+                    border-top: 1px solid #282828;
+
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        background: none;
+                        float: left;
+                        height: 43px;
+                        line-height: 45px;
+                        overflow: hidden;
+                        padding-left: 0;
+                        margin-right: 2em;
+                        border-top: 0;
+                        border-bottom: 0;
+                        background: none;
+                        &:first-child, .first {
+                            padding-left: 0;
+                        }
+                        &:hover, &.active {
+                            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                                    border-bottom: 5px solid #f43d43;
+                            }
+                        }
+                    }
+                }
+            }
+            // .ext END
+
+
+
+            // .func START
+            .func {
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    position: absolute;
+                    right: 0;
+                    top: -63px;
+                    width: 280px;
+                }
+                // 搜索框
+                .search-box {
+                    height: 50px;
+                    padding-top: 12px;
+                    padding-left: 24px;
+                    line-height: 42px;
+                    border-top: 1px solid #282828;
+                    border-bottom: 1px solid #5b6372;
+                    background: #454d5c;
+
+                    .g-input-combo {
+                        position: relative;
+                        padding-top: 6px;
+                    }
+
+
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        background: none;
+                        border-top: 0;
+                        border-bottom: 0;
+                        height: auto;
+                        padding: 0;
+
+                        .g-input-combo {
+                            float: right;
+                        }
+                        // 隐藏按钮
+                        .g-btn {
+                            display: block;
+                            position: absolute;
+                            right: 10px;
+                            top: 10px;
+                            @include mainSprite;
+                            @include hide-text;
+                            background-position: -141px -500px;
+                            width: 20px;
+                            height: 20px;
+                            border: 0;
+                            padding: 0;
+                            box-shadow: none;
+                        }
+
+                        // 样式化输入框 圆角
+                        .input-text {
+                            width: 100px;
+                            background-color: rgba(255,255,255, 0.3);
+                            *background-color: #595959;
+                            color: #fff;
+                            border: 0;
+                            box-shadow: none;
+                            padding: 5px;
+                            font-size: 12px;
+                            padding-left: 10px;
+                            padding-right: 30px;
+                            border-radius: 30px;
+                            line-height: 17px;
+                        }
+
+                    }
+
+                }
+
+                // 社交网络链接
+                .social-links {
+                    display: none;
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 9px 0 0 0;
+                    overflow: hidden;
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        display: block;
+                        float: left;
+                    }
+
+                    li {
+                        float: left;
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 20px;
+                        a {
+                            @include inline-block;
+                            @include hide-text;
+                            @include mainSprite;
+                            width: 26px;
+                            height: 25px;
+                            vertical-align: top;
+                            border: 0;
+                            text-decoration: none;
+                            background-repeat: no-repeat;
+
+                            &.sina {
+                                background-position: -141px -352px;
+                            }
+
+                            &.rss {
+                                background-position: -138px -301px;
+                            }
+
+                            &.globe {
+                                background-position: -140px -254px;
+                            }
+
+                            &.weixin {
+                                background-position: -140px -450px;
+                            }
+                        }
+                    }
+                }
+            }
+            // .func END
+        }
+        // 手機版的菜單 END
+    }
+    // 顶部状态栏下半部分，主要是MENU，菜單。 END
+
+
+
+
+    // 固定位置的菜單欄（浮在屏幕頂部）START
+    &.fixed-top {
+        top: -60px;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            position: fixed;
+            top: 0;
+            height: 45px;
+            z-index: 9999;
+        }
+
+
+        .top {
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                display: none;
+            }
+        }
+
+        .bottom {
+            .m-logo {
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    display: block;
+                    visibility: visible;
+                    opacity: 1;
+                    -webkit-transition-delay: 0.2s;
+                    -o-transition-delay: 0.2s;
+                    transition-delay: 0.2s;
+
+
+                }
+            }
+            .mobile-ext-menu {
+                top: 42px;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    top: 0;
+                }
+
+                .func {
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        top: 2px;
+                        .social-links {
+                            display: none;
+                        }
+                        .search-box {
+                            .input-text {
+                                background-color: #f3f3f3;
+                                border: 1px solid #e2e2e2;
+                                color: #222;
+                            }
+                            .g-btn {
+                                background-position: -141px -525px;
+                            }
+                        }
+                    }
+                }//@end .func
+            }
+        }
+    }
+    // 固定位置的菜單欄（浮在屏幕頂部）END
+
+
+
+
+    // 图片字体
+    .header-text {
+        @extend %inline-block;
+        @extend %hide-text;
+        @include textSprite;
+        width: 47px;
+        height: 46px;
+
+        //电脑版的X，电脑版的Y
+        $texts:
+            cat-home 0 0,
+            cat-apps 0 -50px,
+            cat-games 0 -100px,
+            cat-device 0 -150px,
+            cat-skills 0 -200px,
+            cat-news 0 -250px,
+            cat-review 0 -300px,
+            cat-depth 0 -350px,
+            cat-topic 0 -400px,
+            cat-activity 0 -450px;
+
+            @each $text in $texts {
+                &.#{nth($text, 1)}  {
+                    background-position: -130px nth($text, 3);
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        background-position: nth($text, 2) nth($text, 3);
+                    }
+                }
+            }
+    }
+}
+// 页头 END
+
+
+
+
+
+
+
+// ####################################################################
+// # FOOTER 页脚
+// ####################################################################
+.r-footer {
+    position: relative;
+    overflow: hidden;
+    clear: both;
+    background-color: #252525;
+    z-index: 10;
+    *zoom: 1;
+    &, a {
+        color: #a5a5a5;
+    }
+
+    // 导航列表
+    .m-nav-lists {
+        overflow: hidden;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding: 0 ($widgetPaddingLeftRight /2);
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-top: 1.5em;
+            margin-bottom: 1em;
+            padding: 0 $widgetPaddingLeftRight ;
+        }
+
+        .m-nav-col, .m-nav-col2 {
+            padding: 0;
+            margin: 0;
+            clear: both;
+            overflow: hidden;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                float: left;
+                clear: none;
+                // margin-right: 85px;
+                margin-right: 50px;
+                margin-left: 0;
+            }
+
+            h4 {
+                color: #fff;
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+                font-size: 12px;
+                li {
+                    float: left;
+                    margin-left: 1em;
+                     @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        float: none;
+                        margin-bottom: 1em;
+                        margin-left: 0;
+                     }
+
+                    a {
+                        text-decoration: none;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 双栏
+        .m-nav-col2 {
+            width: 100%;
+            overflow: hidden;
+
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                width: 27%;
+                margin-right: 3%;
+            }
+
+            ul {
+                overflow: hidden;
+                margin-bottom: .5em;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    float: left;
+                    width: 100%;
+                    margin-bottom: 0;
+                    *width: 49.5%;
+                    _width: 100px;
+                    _margin-right: 10px;
+                    overflow: hidden;
+                }
+
+                li {
+                    float: left;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin-right: 1em;
+                    margin-left: 0;
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        margin-right: 0;
+                        width: 50%;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        .sspai-footer-hottopic {
+            width: 43%;
+            margin-right: 1%;
+
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                ul {
+                    li {
+                        width: 30%;
+
+                    }
+                }
+
+            }
+        }
+
+        // 这样写是因为，友情链接和关于我们要局右
+        .sspai-friends-link, .sspai-footer-mobile {
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                float: right;
+                width: 20%;
+                margin-left: 5%;
+            }
+        }
+
+
+
+
+        // 手机版上的关于
+        .sspai-footer-mobile {
+            ul {
+                text-align: center;
+                margin: 0 auto;
+                display: table;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    display: block;
+                    text-align: left;
+                }
+
+                li {
+
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    }
+                }
+            }
+        }
+
+
+        // 手机版上的关于
+        .sspai-friends-link {
+            ul {
+                li {
+
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    }
+                }
+            }
+        }
+    }
+
+
+    // 版权 和站点资料
+    .site-info {
+        color: #777;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        font-size: 12px;
+        font-family: Tahoma;
+        text-align: center;
+        background: url(../img/bg-footer.png) repeat-x;
+
+        a {
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+
+        p {
+            margin: 0 0 2px 0;
+            a {
+                color: #777;
+            }
+        }
+        .copyright {
+            font-weight: normal;
+        }
+
+        .miitbian {
+            display: none;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                display: block;
+            }
+        }
+
+    }
+}
+// 页脚 END
+
+
+
+// ####################################################################
+// # CONTAINER 中间布局部分 START
+// ####################################################################
+div.r-container {
+    // IE7以下 hack 解决 r-container 的属性覆盖不了 warp的属性
+    margin-top: 0px;
+    margin-bottom: 40px;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        margin-top: 27px;
+    }
+}
+
+.r-container {
+    position: relative;
+    overflow: visible;
+    // margin-top: 27px;
+    margin-top: 0px;
+    margin-bottom: 82px;
+    *zoom: 1;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        margin-top: 27px;
+    }
+
+
+    @extend .fn-clear;
+    //内容部分
+    .w-main {
+        position: relative;
+        overflow: visible;
+        width: 100%;
+        margin-bottom: 1.5em;
+        @extend .fn-clear;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            float: left;
+            width: 682px;
+        }
+
+        .m-block {
+            margin-bottom: 20px;
+        }
+    }
+
+    // 侧栏部分
+    .m-sidebar {
+        position: relative;
+        // overflow: hidden;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            float: right;
+            margin-left: 26px;
+            width: 292px;
+            _margin-left: 0px;
+        }
+
+    }
+
+    // 全宽 套层
+    .w-full-width {
+        position: relative;
+        overflow: hidden;
+        clear: both;
+        .m-block {
+            margin-bottom: 40px;
+        }
+    }
+
+}
+// 中间布局部分END
+
+
+
+// ####################################################################
+// # PUBLIC 内容部分的 模块(公用) w-main>.m-block 或者在 .w-full-width(全宽套层) >.m-block START
+// ####################################################################
+.m-block {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #ddd;
+
+    h2 {
+        position: relative;
+        font-size: 14px;
+        height: 40px;
+        line-height: 43px;
+        padding: 0 20px;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        background-color: #fdfdfd;
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#fbfbfb));
+        background-image: -moz-linear-gradient(100% 100% 90deg, white, #fbfbfb);
+        font-family: $yahei;
+        // @extend %hide-text;
+
+
+        .func {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            height: 100%;
+            line-height: 43px;
+            text-indent: initial;
+            font-weight: normal;
+
+            .more {
+                // float: right;
+                font-size: 12px;
+                font-weight: normal;
+                text-decoration: none;
+                margin-right: 10px;
+                color: #777;
+            }
+        }
+    }
+
+    .block-content {
+        position: relative;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 0 ($pagePaddingLeftRight/2);
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            padding: 0 $pagePaddingLeftRight;
+        }
+    }
+}
+// 内容部分的 模块(公用) w-main>.m-block 或者在 .w-full-width(全宽套层) >.m-block END
+
+
+
+// ####################################################################
+// # SIDEBAR 侧栏部分的 挂件模块(公用) .m-sidabar>.m-widget START
+// ####################################################################
+.m-widget {
+    overflow: hidden;
+    *zoom: 1;
+    background: #fff;
+    border: 1px solid #dddde1;
+    margin-bottom: 28px;
+
+    // 标题 的文字会被隐藏 现实使用会使用图片代替
+    h4 {
+        font-family: $yahei;
+        font-size: 14px;
+        height: 40px;
+        line-height: 43px;
+        padding: 0 10px 0 20px;
+        margin: 0 0;
+        border-bottom: 1px solid #ddd;
+        background-color: #fdfdfd;
+        background-image:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#fbfbfb));
+        background-image: -moz-linear-gradient(100% 100% 90deg,#fff, #fbfbfb);
+        vertical-align: middle;
+        overflow: hidden;
+        clear: both;
+        *zoom: 1;
+
+
+
+        .more {
+            float: right;
+            font-size: 12px;
+            font-weight: normal;
+            text-decoration: none;
+            margin-right: 10px;
+            color: #777;
+
+            // float: right;
+            // margin-top: 11px;
+            // font-weight: normal;
+            // font-size: 12px;
+            // vertical-align: middle;
+            // padding: 3px 7px;
+            // *margin-top: 0;
+            // _margin-top: 8px;
+        }
+    }
+
+    ul {
+        overflow: hidden;
+        *zoom: 1;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: #0d0d0d;
+    }
+}
+// 侧栏部分的 挂件模块(公用) .m-sidabar>.m-widget END
+
+
+
+
+// ####################################################################
+// # SIDEBAR 自定義廣告
+// ####################################################################
+.sidebar-color {
+
+    img {
+        width: 96%;
+        padding: 0 2%;
+
+    }
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        img {
+            width: 100%;
+            padding: 0;
+        }
+    }
+}
+
+// ####################################################################
+// # BANNER 顶部滚动横幅 START
+// ####################################################################
+.m-banner {
+    // display: none;
+    // banner大横幅颜色
+    background: #e1e1e1;
+    overflow: hidden;
+    padding: 20px 0 20px 0;
+    margin: 10px 0;
+    *zoom: 1;
+
+    // 只負責顯示背景高寬
+    width: 100%;
+    height: auto;
+
+    //改变背景颜色的动画
+    -moz-transition: background 0.3s ease 0.1s;
+    -webkit-transition: background 0.3s ease 0.1s;
+    -o-transition: background 0.3s ease 0.1s;
+     transition: background 0.3s ease 0.1s;
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        margin: 0;
+        padding: 30px 0;
+        display: block;
+        min-height: auto;
+    }
+
+
+    // 包住 上下页箭头的位置，手機版不顯示
+    .banner_nav {
+        display: none;
+        width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 999999999;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            display: block;
+        }
+    }
+
+    // 上一張，下一張，切換banner圖滾動
+    .prev, .next {
+        opacity: .3;
+        position: absolute;
+        top: 125px;
+        color: #fff;
+        width: 40px;
+        height: 55px;
+        @include mainSprite;
+        text-indent: -99999em;
+        @include disableSelect;
+
+        &:hover {
+            opacity: 1;
+
+        }
+    }
+
+    .prev {
+        background-position: 0px -350px;
+        left: -55px;
+
+        &:active {
+            left: -57px;
+        }
+    }
+
+    .next {
+        background-position: 0px -450px;
+        right: -55px;
+
+        &:active {
+            right: -57px;
+        }
+    }
+
+
+
+    // 以下樣式配合 jquery.iosslider
+    .fluidHeight {
+        height: 0;
+        padding: 0 0 48.8% 0;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            height: 313px;
+            padding: 0;
+        }
+
+        .sliderContainer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            .iosSlider {
+                width: 100%;
+                height: 100%;
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    width: 1000px;
+                }
+
+                ul.slider {
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                    margin: 0;
+                    display: table;
+
+
+                    // 普通的banner圖
+                    li.item {
+                        position: relative;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0.25;
+                        margin: 0;
+                        padding: 0;
+                        border-radius: 2px;
+
+                        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                            padding-left: 360px;
+                            width: 640px;
+                        }
+
+
+                        img {
+                            position: relative;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+
+                            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                                width: 640px;
+                            }
+                        }
+
+
+                        // banner圖片的標題和文字介紹 START
+                        .text1, .text2 {
+                            position: absolute;
+                            opacity: 0;
+                           // text-shadow: 1px 1px 2px rgba(87, 87, 87, 0.34);;
+
+                            span {
+                                opacity: .8;
+                                display: block;
+                                border-radius: 3px;
+                                line-height: 1.6;
+                            }
+
+                            a {
+                                text-decoration: none;
+                            }
+                        }
+
+
+
+                        .text1 {
+                            display: none;
+                            bottom: 10px;
+                            text-align: center;
+
+                            span {
+                                opacity: .8;
+                                box-shadow: 1px 1px 3px #333;
+                                background: #111;
+                                color: #fff;
+                                font-size: 0.9em;
+                            }
+
+                            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                                display: block;
+                                width: 340px;
+                                text-align: left;
+                                top: 0px;
+                                left: 30px;
+
+                                span {
+                                    box-shadow: none;
+                                    font-family: $yahei;
+                                    font-size: 22px;
+                                    font-weight: bold;
+                                    background: none;
+                                }
+                            }
+                        }
+
+                        .text2 {
+                            display: none;
+                            top: 90px;
+                            left: 0px;
+
+                            span {
+                                font-size: 14px;
+                            }
+
+                            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                                display: block;
+                                width: 340px;
+                            }
+                        }
+                        // banner圖片的標題和文字介紹 END
+
+                    }
+
+
+                    // 被選中的banner圖
+                    li.current {
+                        opacity: 1;
+                        width: 100%;
+                        height: auto;
+
+                        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                            width: 640px;
+                        }
+
+                        img {
+                            width: 100%;
+                            height: auto;
+
+                            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                                width: 640px;
+                            }
+                        }
+                    }
+                }
+
+
+
+
+
+            }
+        }
+    }
+    // 結束jquery.iosslider
+
+
+
+
+
+
+
+
+
+    // 下面是用jquery.roundabout.2.4.2時候的樣式，現在暫時不用。
+    // .ul {
+    //     margin: 0 auto;
+    //     list-style: none;
+    //     padding: 0;
+
+    //     li {
+    //         overflow: hidden;
+    //         // border: 1px solid #0076a3;
+    //         border-radius: 3px;
+    //         a{
+    //             border: 0;
+    //             text-decoration: none;
+    //             img {
+    //                 width: 100%;
+    //                 height: 100%;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // // 控制整个外套大小
+    // .roundabout-holder {
+    //     list-style: none;
+    //     padding: 0;
+    //     margin: 0;
+    //     width: 450px;
+    //     height: 310px;
+    //     margin: 0 auto;
+    // }
+
+    // // 控制最大那张图片大小
+    // .roundabout-moveable-item {
+    //     width: 900px;
+    //     height: 310px;
+    //     cursor: pointer;
+    //     background-color: #ccc;
+    //     // border: 1px solid #999;
+    //     a {
+    //         display: block;
+    //         border: 0;
+    //         width: 100%;
+    //         height: 100%;
+    //         img {
+    //             width: 100%;
+    //             height: 100%;
+    //         }
+    //     }
+
+    // }
+    // .roundabout-in-focus {
+    //     cursor: auto;
+    // }
+}
+// 顶部滚动横幅 END
+
+
+
+// ####################################################################
+// # LIST 文章列表 START
+// ####################################################################
+.m-post-list {
+    //列表部分
+    .block-content {
+        _margin: 0;
+         padding-left: 0;
+        padding-right: 0;
+    }
+
+    .get-more-post {
+        display: none;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            display: block;
+            text-align: center;
+            margin: 30px 0;
+
+            .g-btn-block {
+                margin: 0 20px;
+                padding: 13px 30px !important;
+            }
+        }
+
+
+    }
+
+    ul {
+        position: relative;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+
+        li.post-item {
+            $paddingLeftRight: 20px;
+            $paddingBottom: 20px;
+            position: relative;
+            clear: both;
+            min-height: 160px;
+            *height: 160px;
+            border-bottom: 1px solid #f2f2f4;
+            margin-top: 19px;
+            padding: 0 10px $paddingBottom 10px;
+            *zoom: 1;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                padding-left: $paddingLeftRight;
+                padding-right: $paddingBottom;
+            }
+
+            &:first-child, &.first{
+                margin-top: 0;
+            }
+
+            &:last-child, &.last{
+                border-bottom: 0;
+            }
+
+            // 文章标题
+            .title {
+                position: relative;
+                color: #292929;
+                overflow: hidden;
+                // 应为去掉评论数在标题右边显示，这里先注释掉。
+                // padding-right: 37px;
+                min-height: 26px;
+                *height: 26px;
+                font-family: $yahei;
+                font-weight: bold;
+                font-size: 1.4em;
+                line-height: 1.3;
+                margin: 0;
+                margin-bottom: 0.4em;
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    font-size: 1.3em;
+                }
+
+
+                a {
+                    text-decoration: none;
+                    color: #292929;
+                    &:hover {
+                        // text-decoration: underline;
+                        color: #dc3920;
+                    }
+                }
+
+                // 评论数
+                .comment-count {
+                    position: absolute;
+                    z-index: 11;
+                    right: 0;
+                    top: 0px;
+                    @include comment-count-bubble('square','red');
+
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        @include comment-count-bubble('square','red');
+                    }
+                }
+            }
+
+            // 缩略图
+            .thumb {
+                margin:14px 0;
+                width: 100%;
+                img {
+                    width: 100%;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    border: 0;
+                }
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    position: absolute;
+                    top: 0;
+                    left: 20px;
+                    width: 330px;
+                    margin: 0;
+                    img {
+                        max-height: 161px;
+                    }
+                }
+            }
+
+            // 预留缩略图的位置
+            .title, p, .meta {
+                 @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    margin-left: 345px;
+                 }
+            }
+
+            // 文章简介
+            p {
+                color: #292929;
+                margin-bottom: 14px;
+                margin-top: 0;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    overflow: hidden;
+                    height: 65px;
+                }
+            }
+
+            // 其他文章信息
+            .meta {
+                font-weight: normal;
+                font-size: 12px;
+                _width: 298px;
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    position: absolute;
+                    left: 20px;
+                    right: $paddingLeftRight;
+                    top: $paddingBottom + 118px;
+                }
+
+                &, a {
+                    color: #ccc;
+
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        color: #d5d5d5;
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .author, .date, .comments, .views {
+                    // @extend %inline-block;
+                    @include mainSprite;
+                    background-repeat: no-repeat;
+                    height: 14px;
+                    line-height: 14px;
+                    padding-left: 22px;
+                }
+                // 作者
+                .author {
+                    @extend .fn-text-overflow;
+                    // max-width: 30px;
+                    margin-right: 1em;
+                    background-position: -800px -100px;
+                }
+
+                //日期
+                .date {
+                    margin-right: 1em;
+                    background-position: -800px -130px;
+                }
+
+                //熱度
+                .views {
+                    @extend .fn-text-overflow;
+                    margin-right: 1em;
+                    padding-left: 25px;
+                    background-position: -800px -251px;
+                }
+
+                //評論數
+                .comments {
+                    @extend .fn-text-overflow;
+                    // width: 4em;
+                    margin-right: 1em;
+                    background-position: -800px -220px;
+                }
+
+                .list-dowload {
+                    @include listDowload;
+                }
+            }//@end meta
+
+        }// @end post-item
+
+        .first {
+            //专为IE6这个东西写的hack
+            margin-top: 0;
+        }
+
+        .last {
+            //专为IE6这个东西写的hack
+            border-bottom: 0;
+        }
+
+    }
+}
+// 文章列表 END
+
+
+
+// ####################################################################
+// # COL3 3栏缩略图 START
+// ####################################################################
+.m-list-thumblink-col3 {
+    overflow: hidden;
+    h4 {
+        margin-bottom: 0;
+    }
+
+
+    ul.block-content {
+        position: relative;
+        list-style-type: none;
+        padding: 25px 20px 0 20px;
+        _padding-bottom: 20px;
+        margin: 0;
+        overflow: hidden;
+        background-image: url(../img/bg_gray.png);
+        *zoom: 1;
+
+
+        li {
+            position: relative;
+            float: left;
+            width: 300px;
+            height: 180px;
+            margin-right: 25px;
+            margin-bottom: 30px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 1px 4px 3px rgba(0,0,0,0.2);
+            *zoom: 1;
+
+
+            &:hover {
+                box-shadow: 1px 4px 3px rgba(0,0,0,0.6);
+            }
+
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+
+            a {
+                display: block;
+                border: 0;
+                text-decoration: none;
+                img {
+                    width: 100%;
+                }
+                //图片标题
+                strong {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background-color: #333;
+                    color: #fff;
+                    font-family: $yahei;
+                    padding: 6px;
+                    _width: 100%;
+                    @extend .fn-text-overflow;
+                }
+            }
+
+        }
+
+
+        .n3 {
+            // 专门为IE6 不支持选 ele.class放在这里的
+            margin-right: 0;
+        }
+    }
+}
+// 3栏缩略图 END
+
+
+
+
+
+// ####################################################################
+// # SYSTEM 前置系统图标的链接列表 START
+// ####################################################################
+.m-list-system-post {
+    background-color: #fffef4;
+    overflow: hidden;
+    *zoom: 1;
+    .block-content {
+        background-image: url(../img/bg-list-system-post.png);
+        background-position: 0px 15px;
+        margin-bottom: 20px;
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            float: left;
+            width: 47.5%;
+            *zoom: 1;
+
+            &:first-child {
+                margin-right: 43px;
+                border-right: 1px solid #eeede2;
+            }
+
+            li {
+                height: 20px;
+                line-height: 20px;
+                margin-bottom: 21px;
+                @extend .fn-text-overflow;
+
+                &:last-child, &.last {
+                    margin-bottom: 8px;
+                }
+
+                &, & a {
+                    color: #0d0d0d;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    // text-decoration: underline;
+                    color: #dc3920;
+                }
+
+                .g-sys-btn {
+                    text-decoration: underline;
+                    margin-right: 10px;
+                    vertical-align: bottom;
+                }
+
+            }
+        }
+    }
+}
+// 前置系统图标的链接列表 END
+
+
+
+
+// ####################################################################
+// # GRID 文章格子列表 START
+// ####################################################################
+.m-grid-posts {
+    overflow: hidden;
+    *zoom: 1;
+    .catecolor {
+        display: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        *zoom: 1;
+
+        .n3 {
+            margin-right: 0;
+        }
+
+        li {
+            position: relative;
+            width: 297px;
+            height: 210px;
+            float: left;
+            margin-right: 26px;
+            margin-bottom: 29px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+
+            overflow: hidden;
+            *zoom: 1;
+
+            &:hover {
+                box-shadow: 1px 0px 5px rgba(55, 55, 55, 0.5);
+
+            }
+
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+
+            .thumb {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    // height: 100%;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                }
+            }
+
+            // // 文章的总链接
+            // .post-link {
+            //     display: block;
+            //     border: 0;
+            //     text-decoration: none;
+            // }
+
+            // 分类
+            .catecolor {
+                left: -3px;
+            }
+
+            // 评论数
+            .comment-count {
+                position: absolute;
+                display: block;
+                right: 6px;
+                top: 6px;
+                z-index: 100;
+                @include comment-count-bubble("square","red");
+            }
+
+            // 标题
+            h1 {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                padding: 10px 15px 35px 10px;
+                margin-bottom: 0;
+                background-color: #fff;
+                @include hiddenText;
+                width: 272px;
+                font-size: 14px;
+                // font-weight: normal;
+                _width: 100%;
+                _bottom: -1px;
+
+                &, & a {
+                    color: #202020;
+                }
+
+                a {
+                    text-decoration: none;
+                    &:hover {
+                        color: #dc3920;
+                    }
+                }
+            }
+
+            // 文章扩展信息
+            .meta {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 2;
+                padding: 0 10px 10px 10px;
+                font-family: sans-serif;
+                font-size: 12px;
+                height: 20px;
+                &, & a {
+                    color: #c6c6c6;
+                }
+
+                a {
+                    text-decoration: none;
+                    margin-right: 5px;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+
+
+                //日期
+                .date {
+                    @include mainSprite;
+                    @include inline-block;
+                    margin-right: 1em;
+                    padding-left: 20px;
+                    background-position: -800px -127px;
+                }
+
+                //評論數
+                .comments {
+                    @include mainSprite;
+                    @include inline-block;
+                    padding-left: 20px;
+                    margin-right: 1em;
+                    background-position: -800px -217px;
+                }
+
+
+
+
+                .list-dowload {
+                    @include listDowload;
+                } //@end .list-dowload
+            } // @end .meta
+        } // @end li
+    }// @end ul
+
+    //底部的巨大下一页按钮
+    .btn-next-page {
+        display: block;
+        border: 0;
+        width: 549px;
+        height: 72px;
+        margin: 0 auto 50px auto;
+        text-decoration: none;
+        @extend %hide-text;
+        @include mainSprite;
+        background-position: 0 -700px;
+    }
+}
+// 文章格子列表 END
+
+
+
+// ####################################################################
+// # ROLLBACK 滚回顶部 START
+// ####################################################################
+.m-rollback {
+    display: none;
+    position: fixed;
+    bottom: 3%;
+    right: 0.5%;
+    z-index: 1000;
+    border: 0;
+    // margin-left: 530px;
+    text-decoration: none;
+    width: 74px;
+    height: 48px;
+    @include mainSprite;
+    background-position: 0 -252px;
+    opacity: 0.7;
+    *filter: alpha(opacity=70);
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        display: block;
+        _display: none;
+    }
+
+    &:hover{
+        opacity: 1;
+        *filter: alpha(opacity=100);
+    }
+}
+// 滚回顶部 END
+
+
+
+
+// ####################################################################
+// # POST 文章 START
+// ####################################################################
+.m-post {
+    position: relative;
+    background-color: #fff;
+    padding: $pagePaddingLeftRight ($pagePaddingLeftRight/2);
+    border: 1px solid #dddde1;
+    margin-bottom: 28px;
+    _zoom: 1;
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        padding: $pagePaddingLeftRight;
+    }
+
+
+    // 文章内的应用信息栏
+    @include app_info_style;
+
+    // 分类标签去掉，放到meta里 TODO
+    // @include app_info_style;
+    // //分类
+    // .catecolor-large {
+    //     padding-left: 5px;
+    //     padding-right: 5px;
+    //     border-left-width: 1px;
+    //     border-right-width: 1px;
+    //     top: $pagePaddingLeftRight;
+    //     left: ($pagePaddingLeftRight/2);
+    //     font-size: 12px;
+    //     height: 26px;
+    //     line-height: 26px;
+    //     background-image: url(../img/bannar_b.png);
+
+    //     span.after, span.before {
+    //         display: none;
+    //     }
+
+    //     @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+    //         span.after,span.before {
+    //             display: block;
+    //         }
+    //         top: 22px;
+    //         left: 10px;
+    //         font-size: 16px;
+    //         height: 31px;
+    //         line-height: 31px;
+    //         padding-left: 10px;
+    //         padding-right: 10px;
+    //         background-image: none;
+    //     }
+
+    // }
+
+    //评论数;
+    .comment-count {
+        display: block;
+        position: absolute;
+        top: $pagePaddingLeftRight;
+        right: ($pagePaddingLeftRight/2);
+        @include comment-count-bubble('square','red');
+         @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            right: $pagePaddingLeftRight;
+         }
+
+    }
+
+    //文章标题
+    h1.post-title {
+        margin: 0 40px 12px 0px;
+        font-family: $yahei;
+        line-height: 1.1;
+        font-size: 1.8em;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        }
+    }
+
+
+    // 文章信息
+    .meta {
+        margin-bottom: 12px;
+        font-size: 12px;
+
+        a {
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .author {
+            color: #333;
+            margin-right: 8px;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                display: none;
+            }
+        }
+
+        .date {
+            color: #aaa;
+            // margin-right: 8px;
+        }
+
+        .category {
+            color: #aaa;
+            margin-right: 8px;
+        }
+
+        .views {
+            color: #aaa;
+            margin-right: 8px;
+        }
+
+        .edit {
+            color: #000;
+            text-decoration: underline;
+        }
+    }
+
+    // 横幅
+    .banner {
+        $bannerMarginBottom: 24px;
+        overflow: hidden;
+        margin-bottom: ($bannerMarginBottom/2);
+        margin-left: -($pagePaddingLeftRight/2);
+        margin-right: -($pagePaddingLeftRight/2);
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-bottom: $bannerMarginBottom;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+
+    //文章内容结束线
+    .end-content-line {
+            display: block;
+            margin-left: -($pagePaddingLeftRight/2);
+            margin-right: -($pagePaddingLeftRight/2);
+            border-bottom: 1px solid #f2f2f4;
+            margin-top: .7em;
+            margin-bottom: .7em;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                margin-left: -$pagePaddingLeftRight;
+                margin-right: -$pagePaddingLeftRight;
+            }
+    }
+
+
+    // 上面导航就不显示箭头了
+    .post-inner-nav-top {
+        .pager {
+            display: none;
+        }
+    }
+
+    // 文章分页导航
+    .post-inner-nav {
+        position: relative;
+        overflow: hidden;
+        background: #F8F8F8;
+        padding: 10px;
+        border: 1px solid #E2E2E2;
+        border-radius: 3px;
+
+
+        // 上一页 下一页
+        .pager {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            margin: 2em 0;
+
+            .g-btn {
+                vertical-align: middle;
+                font-size: 12px;
+                font-family: Tahoma;
+            }
+        }
+
+        .pageer-num {
+            font-weight: bold;
+            position: absolute;
+            left: 46%;
+            top: 3px;
+            font-size: 12px;
+        }
+
+        // 本文导航
+        h3 {
+            color: #555;
+            margin: 0;
+            margin-top: 0.3em;
+            margin-bottom: 0.8em;
+            font-size: 1.1em;
+            font-family: $yahei;
+        }
+
+        // 标题列表
+        .list-title {
+            position: relative;
+            overflow: hidden;
+            padding-left: 0;
+            padding: 0;
+            margin: 0;
+            *zoom: 1;
+            &, a {
+                color: #004ac6;
+            }
+
+            .current{
+                a{
+                    color: #db0000;
+                    text-decoration: underline;
+                    font-weight: normal;
+
+                }
+
+                span {
+                    color: #000;
+                }
+            }
+
+
+            a {
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            li {
+                font-size: 12px;
+                float: none;
+                width: 99%;
+                margin-right: 1%;
+                margin-bottom: .5em;
+                @extend .fn-text-overflow;
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    float: left;
+                    width: 49%;
+                }
+                span {
+                    color: #777;
+                    font-weight: normal;
+                    margin-right: 3px;
+                }
+
+            }
+        }
+    }
+
+
+    //版权
+    .copyright {
+        $marginTop: 50px;
+        $marginBottom:80px;
+        margin: ($marginTop/2) 0 ($marginBottom/2) 0;
+        color: #b9b9b9;
+        font-size: 13px;
+        line-height: 18px;
+        clear: both;
+        *zoom: 1;
+
+        .icon-copyright {
+            @extend %inline-block;
+            @include mainSprite;
+            vertical-align: top;
+            width: 17px;
+            height: 17px;
+            background-position: -800px -50px;
+            _margin-right: 5px;
+        }
+
+        a {
+            font-weight: bold;
+            color: #cbcbcb;
+            text-decoration: none;
+            &:hover {
+                color: #f0f0f0;
+                text-decoration: underline;
+            }
+        }
+    }
+
+
+    //分享功能
+    .func-share {
+        position: relative;
+        overflow: hidden;
+        *zoom: 1;
+        font-size: 12px;
+        color: #686868;
+        margin-bottom: 30px;
+        height: 26px;
+        line-height: 24px;
+        &, & a {
+            color: #686868;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        label {
+            vertical-align: middle;
+        }
+
+        .icon-tencent-weibo, .icon-sina-weibo, .icon-qrcode, .icon-tianyi {
+            position: relative;
+            @extend %inline-block;
+            @extend %hide-text;
+            @include mainSprite;
+            width: 24px;
+            height: 24px;
+            margin: 2px;
+            vertical-align: middle;
+
+
+            &:hover {
+                *filter:alpha(opacity=70);
+                opacity: 0.7;
+            }
+        }
+
+        // 设置图标的背景
+        @include socialIconBig();
+    } //@end 图标
+
+    // 长微博
+    .btn-long-weibo {
+        @extend %inline-block;
+        @extend %hide-text;
+        @include mainSprite;
+        position: relative;
+        width: 162px;
+        height: 26px;
+        line-height: 26px;
+        background-position: -600px 0;
+
+        &:hover {
+            *filter: alpha(opacity=70);
+            opacity: 0.7;
+        }
+    }//@end .fun-share
+
+
+
+
+    // 隐藏短信分享的表单
+    .send-sns-share {
+        display: none;
+    }
+
+
+    // 标签
+    .tags {
+        $marginBottom: 25px;
+        margin-bottom: ($marginBottom/2);
+        line-height: 35px;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-bottom: $marginBottom;
+        }
+
+        label {
+            color: #686868;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        a {
+            @extend %inline-block;
+            vertical-align: middle;
+            padding: 5px 10px;
+            margin: 0 2px;
+            border: 1px solid #e6e6e6;
+            border-radius: 2px;
+            font-size: 12px;
+            line-height: 1em;
+            color: #666;
+            text-decoration: none;
+            &:hover {
+                background-color: #eee;
+            }
+        }
+    } //@end .tags
+
+
+
+    // 截图
+    .screenshots {
+        margin: 50px 0;
+
+        ul{
+            overflow:  hidden;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            white-space: nowrap;
+            overflow-x: auto;
+
+            li {
+                @include inline-block;
+                height: 110px;
+                margin-right: 10px;
+                text-align: center;
+                overflow: hidden;
+                img {
+                    height: 100%;
+                }
+            }
+        }
+
+    }
+
+
+
+    // 无觅
+    .wumi {
+        $paddingTopBottom: 20px;
+        $margin-bottom: 20px;
+        $margin-top: 20px;
+        padding: ($paddingTopBottom / 2) ($pagePaddingLeftRight/2);
+
+        overflow: hidden;
+        border: 1px solid #f2f2f4;
+        border-left-width: 0;
+        border-right-width: 0;
+        margin-bottom: ($margin-bottom/2);
+        margin-left: (-$pagePaddingLeftRight/2);
+        margin-right: (-$pagePaddingLeftRight/2);
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            padding: $paddingTopBottom $pagePaddingLeftRight;
+            margin-left: (-$pagePaddingLeftRight);
+            margin-right: (-$pagePaddingLeftRight);
+            // margin-bottom: 14px;
+            margin-top: $margin-top;
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+
+        //隐藏不需要的部分
+        .wumii-widget-title, .wumii-footer, #wumiiBtnDiv {
+            display: none;
+        }
+    }//@end wumi
+
+
+
+
+
+    // 上一篇文章和下一篇文章
+    .post-nav {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 14px;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-bottom: 0;
+            // display: none;
+        }
+
+
+        &, a {
+            color: #686868;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        a {
+            display: block;
+            width: 50%;
+            padding: 20px 0;
+            &:hover {
+                background-color: #f2f2f2;
+            }
+        }
+
+
+        // 里面的内容
+        .prev .inner, .next .inner {
+            height: 25px;
+            @extend .fn-text-overflow;
+            @include mainSprite;
+
+            // 缩略图
+            .thumb {
+                display: none;
+            }
+
+            // 时间
+            .date {
+                display: none;
+            }
+
+            h4 {
+                font-size: 14px;
+                font-weight: normal;
+                margin: 0;
+                margin-top: 2px;
+                @extend .fn-text-overflow;
+            }
+        }
+
+
+
+        // 上一篇
+        .prev {
+            float: left;
+
+            .inner {
+                padding-left: 28px;
+                margin-left: 5px;
+                background-repeat: no-repeat;
+                background-image: url(../img/sp_main.png);
+                background-position: left bottom;
+                border-right: 1px solid #ccc;
+
+            }
+        }
+
+        // 下一篇
+        .next {
+            float: right;
+            text-align: right;
+
+
+
+            .inner {
+                padding-right: 28px;
+                padding-left: 5px;
+                margin-right: 5px;
+                background-repeat: no-repeat;
+                background-position: right bottom;
+                background-image: url(../img/sp_main.png);
+
+            }//@end .inner
+        }
+
+
+    }
+}
+// 文章 END
+
+
+// 电脑板的 上一页和下一页 START
+.disktop-post-nav{
+    display: none;
+    position: relative;
+    z-index: 5;
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        display: block;
+    }
+    // 上一页 和 下一页的公共样式
+    .prev, .next {
+        display: block;
+        height: 114px;
+        border: 0;
+        opacity: .4;
+
+        .inner {
+            opacity: 0;
+            -webkit-transition: opacity 0.3s linear;
+            -moz-transition: opacity 0.3s linear;
+            -ms-transition: opacity 0.3s linear;
+            -o-transition: opacity 0.3s linear;
+            transition: opacity 0.3s linear;
+        }
+
+        &.hover {
+            opacity: 1;
+            -webkit-animation-delay: 1s;
+            -moz-animation-delay: 1s;
+            -o-animation-delay: 1s;
+            animation-delay: 1s;
+            border-radius: 3px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px #777;
+            width: 310px;
+
+            .inner {
+                // display: block;
+                opacity: 1;
+                padding: 12px 12px 12px 0;
+                overflow: hidden;
+                background: #fff;
+            }
+        }
+
+        &:active {
+            @include disableSelect;
+        }
+
+        .thumb {
+            display: block;
+            width: 184px;
+            height: 90px;
+            overflow: hidden;
+        }
+
+        .info {
+            width: 100px;
+            overflow: hidden;
+
+            .date {
+                display: none;
+                padding: 3px;
+                margin-bottom: .5em;
+                border-radius: 2px;
+                color: #fff;
+                background-color: #969597;
+                line-height: 1em;
+            }
+
+            h4 {
+                white-space: normal;
+                font-size: 14px;
+                color: #333;
+                font-weight: bold;
+                line-height: 1.3em;
+                height: 4em;
+                overflow: hidden;
+                margin: 0;
+            }
+        }
+    }
+
+
+
+
+    // 这里由js控制延迟0.2秒，由js控制时，下面的hover要由:hover 改成 .hover。
+    // 上一页
+    .prev {
+        position: fixed;
+        top: 35%;
+        left: 50%;
+        margin-left: -600px;
+        padding-left: 50px;
+        width: 0;
+        overflow: hidden;
+        @include mainSprite;
+        background-position: 7px -320px;
+
+        &.hover {
+            margin-left: -600px;
+        }
+
+        &:active {
+            margin-left: -601px;
+        }
+
+        .thumb {
+            float: left;
+        }
+
+        .info {
+            float: left;
+            margin-left: 10px;
+        }
+    }
+
+
+    // 下一页
+    .next {
+        position: fixed;
+        top: 35%;
+        right: 50%;
+        margin-right: -600px;
+        padding-right: 50px;
+        @include mainSprite;
+        background-position: 5px -420px;
+        width: 0;
+        overflow: hidden;
+
+        &.hover {
+            background-position: 315px -420px;
+
+            .inner {
+                padding-left: 12px;
+                padding-right: 0;
+            }
+        }
+
+        &:active {
+            margin-right: -601px;
+        }
+
+        .thumb {
+            float: right;
+        }
+
+        .info {
+            float: right;
+            margin-right: 10px;
+        }
+    }
+}
+// 电脑板的 上一页和下一页 END
+
+
+// ####################################################################
+// # 手机用的悬浮跳转到APP栏位置用的图标
+// ####################################################################
+.m-mobile-fixed-app-icon {
+    position: fixed;
+    display: block;
+    right: 6%;
+    bottom: 10%;
+    opacity: 0.3;
+    overflow: hidden;
+    z-index: 500;
+
+    img {
+        background: #ccc;
+        border-radius: 300px;
+        border: 1px solid #999;
+        height: 30px;
+        width: 30px;
+
+    }
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        display: none;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+
+}
+
+
+
+
+
+// ####################################################################
+// # COMMENTS 评论列表
+// ####################################################################
+.m-comments {
+    position: relative;
+    overflow: hidden;
+    *zoom: 1;
+    background: #fff;
+    border: 1px solid #dddde1;
+
+    // 标题 的文字会被隐藏 现实使用会使用图片代替
+    h2 {
+        font-size: 14px;
+        height: 40px;
+        line-height: 43px;
+        margin: 0;
+        padding-left: 14px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #dddde1;
+        background-color: #fdfdfd;
+        background-image:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#fbfbfb));
+        background-image: -moz-linear-gradient(100% 100% 90deg,#fff, #fbfbfb);
+        overflow: hidden;
+        clear: both;
+        *zoom: 1;
+
+        .title-icon-arrow {
+            @extend .title-icon;
+            background-position: -500px -100px;
+        }
+
+
+        // 现在有多少条评论
+        .count-comments {
+            float: right;
+            font-weight: normal;
+            font-size: 12px;
+            margin-right: 22px;
+
+            strong {
+                font-size: 16px;
+                font-family: Tahoma;
+                font-weight: bold;
+            }
+        }
+    }
+
+    // 创建 新评论
+    .create-comment {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+        padding: 0 21px;
+        clear: both;
+        *zoom: 1;
+
+        .field {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            color: #505050;
+            font-size: 14px;
+            clear: both;
+
+            a {
+                color: #505050;
+                text-decoration: none;
+                font-weight: bold;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            label, .input-text {
+                display: block;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    @include inline-block;
+                    vertical-align: middle;
+                }
+            }
+
+            label {
+                margin-bottom: .3em;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    margin-bottom: 0;
+                }
+
+                .required {
+                    color: #f70606;
+                }
+            }
+
+            .input-text {
+                width: 50%;
+                margin-right: 35px;
+                margin-bottom: .5em;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    width: 111px;
+                    margin-bottom: 0;
+                }
+            }
+
+            textarea {
+                display: block;
+                box-sizing: border-box;
+                width:100%;
+                *width:638px;
+                _width:618px;
+                 min-height: 110px;
+                *height: 110px;
+            }
+
+            .captcha {
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    @include inline-block;
+                    vertical-align: middle;
+                }
+
+                label {
+                    display: block;
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        display:  none;
+                    }
+                }
+
+                .input-captcha {
+                    margin-right: 0;
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        width: 1em;
+                        float: left;
+                    }
+                }
+
+                .img-captcha {
+                    @extend %inline-block;
+                    vertical-align: middle;
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        float: left;
+                        height: 32px;
+                    }
+
+                    img {
+                        height: 100%;
+                    }
+                }
+            }
+
+        }
+
+
+        // 已有账号
+        a.btn-login {
+            position: relative;
+            @include inline-block;
+            @include mainSprite;
+            overflow: hidden;
+            vertical-align: middle;
+            background-position: -642px -252px;
+            height: 18px;
+            font-size: 12px;
+            line-height: 18px;
+            color: #505050;
+            text-decoration: none;
+            padding: 5px;
+            border: 1px solid #e5e5e5;
+            border-radius: 2px;
+            background-color: #f6f6f6;
+            .icon-que {
+                @include inline-block;
+                @include mainSprite;
+                vertical-align: middle;
+                width: 18px;
+                height: 18px;
+                background-position: -800px -1px;
+                margin-right: 5px;
+            }
+
+            &:hover {
+                background-color: #ffdede;
+                border: 1px solid #f4b3b3;
+                text-decoration: none;
+            }
+
+        }
+
+        .create-comment-footer {
+            font-size: 12px;
+            color: #999;
+
+            .btn-cancel-reply {
+                margin-left: 5px;
+                display: none;
+            }
+
+            .input-checkbox {
+                // 让它与文字对齐
+                vertical-align: middle;
+            }
+        }
+    }
+
+
+    // 根评论列表与子评论列表的公共样式
+    .root-commits-thread, .sub-comment-thread {
+        position: relative;
+        overflow: hidden;
+        list-style-type: none;
+        padding: 0;
+        clear: both;
+        *zoom: 1;
+
+        // 评论样式
+        .comment {
+            position: relative;
+            overflow: visible;
+            *zoom: 1;
+            min-height: 55px;
+            border-bottom: 1px solid #f2f2f4;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            margin-bottom: 32px;
+            // 头像
+            .avater {
+                position: absolute;
+                top: 0;
+                left:0;
+                overflow: hidden;
+                width: 50px;
+                height: 50px;
+                border-radius: 2px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            // 评论的主体
+            .w-comment {
+                margin-left: 65px;
+
+                // 评论者的名字
+                h5 {
+                    margin-top: 0;
+                    padding-top: 0px;
+                    margin-bottom: 13px;
+                    &, & a {
+                        color: #4c4c4c;
+                        text-decoration: none;
+                        font-size: 14px;
+                    }
+
+                    //日期
+                    .date {
+                        font-size: 11px;
+                        font-family: Tahoma;
+                        font-weight: normal;
+                        color: #ddd;
+                        margin-left: 5px;
+                    }
+
+                    // 回复按钮
+                    .reply {
+                        @extend %inline-block;
+                        @include mainSprite;
+                        height: 13px;
+                        padding-left: 20px;
+                        color: #bcbcbc;
+                        font-size: 12px;
+                        font-weight: normal;
+                        line-height: 13px;
+                        background-repeat: no-repeat;
+                        background-position: -800px -299px;
+                    }
+                }
+
+
+                //评论的内容
+                .message {
+                    font-size: 14px;
+                    color: #000;
+                    margin-top: 0;
+                }
+            }
+
+        }
+    }
+
+
+
+    // 跟评论样式
+     .root-commits-thread {
+        margin: 0 20px;
+     }
+
+
+    // 子评论列表的样式
+    .sub-comment-thread {
+        //padding-left: $subCommentIndent;
+        margin-left: (($subCommentIndent / 3) - 10px);
+        border-left: 1px solid #f2f2f4;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-left: ($subCommentIndent - 10px);
+        }
+
+        // 子评论 的间隔和主评论很多
+        .comment {
+            padding-left: 9px;
+            .avater {
+                left: 9px;
+            }
+        }
+
+        // 第一个评论 要预留
+        &>.comment:first-child {
+            border-top: 1px solid #f2f2f4;
+            padding-top: 23px;
+            .avater {
+                position: absolute;
+                top: 23px;
+            }
+        }
+    }
+}
+
+
+
+// ####################################################################
+// # COMMENTS-WEIBO 微博评论列表
+// ####################################################################
+.m-comments-weibo {
+    position: relative;
+
+    h2 {
+        margin-bottom: -1px;
+    }
+
+    margin: 20px 0;
+    background: #fff;
+    // padding: 20px;
+
+    .root-commits-thread {
+        background: #030;
+    }
+
+    .kill-weibo-tips {
+        width: 100px;
+        height: 35px;
+        position: absolute;
+        background: #fff;
+        right: 0px;
+        bottom: 0px;
+    }
+
+
+}
+
+
+
+// ####################################################################
+// # PAGER 分页器
+// ####################################################################
+.m-pager {
+    position: relative;
+    text-align: left;
+    font-size: 16px;
+    line-height: 36px;
+    height: 36px;
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+    *zoom: 1;
+    @extend .fn-clear;
+
+   -moz-user-select: none; /*火狐*/
+   -webkit-user-select: none;  /*webkit浏览器*/
+   -ms-user-select: none;   /*IE10*/
+   -khtml-user-select: none; /*早期浏览器*/
+   user-select: none;
+
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+         width: 370px;
+    }
+
+    .g-btn {
+        vertical-align: middle;
+    }
+
+    //当前多少页
+    .current {
+        display: none;
+        cursor: pointer;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            display: block;
+        }
+        .num {
+            color: #e70000;
+            font-family: Tahoma;
+            margin: 0 .5em;
+        }
+
+        &:hover, &.open {
+            // hover上的时候 反转箭头
+            i {
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                transform: rotate(180deg);
+                -ms-transform: rotate(0);
+            }
+        }
+
+        i {
+            @include inline-block;
+            position: relative;
+            margin: 0 0 0 5px;
+            width: 6px;
+            height: 6px;
+            -webkit-transition: .3s ease-in;
+            -moz-transition: .3s ease-in;
+            -o-transition: .3s ease-in;
+            transition: .3s ease-in;
+
+            em {
+                position: absolute;
+                top: 1px;
+                left: 0;
+                width: 0;
+                height: 0;
+                border-color: rgba(255,255,255,0);
+                border-color: transparent\0;
+                _border-color: tomato;
+                _filter: chroma(color=tomato);
+                border-style: solid;
+                overflow: hidden;
+                border-width: 3px 3px 0;
+                border-top-color: #6c6c6c;
+            }
+
+            span {
+                position: absolute;
+                top: 0px;
+                left: 0;
+                width: 0;
+                height: 0;
+                border-color: rgba(255,255,255,0);
+                border-color: transparent\0;
+                _border-color: tomato;
+                _filter: chroma(color=tomato);
+                border-style: solid;
+                overflow: hidden;
+                border-width: 3px 3px 0;
+
+                border-top-color: #f5f5f5;
+            }
+        }
+
+        // 箭头
+        .title-icon-arrow {
+            @extend %inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            width: 0px;
+            height: 0px;
+            after {
+                content: "<";
+            }
+            border-style: solid;
+            border-width: 5px 4px 0 4px;
+            border-color: #000000 transparent transparent transparent;
+            line-height: 0px;
+            _border-color: #000000 #ffffff #ffffff #ffffff;
+            _filter: progid:DXImageTransform.Microsoft.Chroma(color='#ffffff');
+        }
+    }
+
+
+    //上一页和下一页
+    .prev,.next {
+        float: none;
+    }
+
+    .prev {
+        position: relative;
+        @extend %hide-text;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        margin-right: 10px;
+         @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            padding: 10px 35px;
+            height: auto;
+            width: auto;
+            text-indent: 0;
+            line-height: 1em;
+            float: left;
+            font-size: 14px;
+            color: #292929;
+            margin-right: 0;
+         }
+
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "<";
+            padding: 10px;
+            font-size: 16px;
+            color: #292929;
+            text-indent: initial;
+            // line-height: 35px;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                display: none;
+            }
+        }
+    }
+
+    .next {
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            float: right;
+        }
+    }
+
+    //其他页的导航
+    .nav {
+        display: none;
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        margin-left: -68px;
+        width: 115px;
+        list-style-type: none;
+        padding: 20px 10px;
+        border: 1px solid #c7c7c7;
+        background-color: #fff;
+        text-align: center;
+
+        &.open {
+            display: block;
+        }
+
+        &, a {
+            color: #595959;
+            text-decoration: none;
+        }
+
+        .current {
+            &, a {
+                color: #c1c0c0;
+            }
+        }
+
+        li {
+            margin-bottom:  14px;
+            _height: 36px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            a {
+                display: block;
+                &:hover {
+                    background-color: #eee;
+                }
+            }
+        }
+    }
+}
+
+
+
+// ####################################################################
+// # AUTHOR 作者信息
+// ####################################################################
+.m-author {
+    .block-content{
+        $avatarWidth: 96px;
+        $avaterLeftOffset: 40px;
+        position: relative;
+        overflow: visible;
+        margin-bottom: 10px;
+        .avatar {
+            position: absolute;
+            top: 0;
+            left: $avaterLeftOffset;
+            _left: -(40px + 96px);
+            width: $avatarWidth;
+            height: $avatarWidth;
+            overflow: hidden;
+            border-radius: $avatarWidth / 2;
+        }
+
+        // 作者信息
+        .info {
+            margin-left: $avatarWidth + $avaterLeftOffset + 22px;
+            margin-bottom: 35px;
+            min-height: $avatarWidth;
+            *height: $avatarWidth ;
+
+
+            h5 {
+                font-size: 16px;
+                font-family: Tahoma;
+                font-weight: normal;
+                margin-bottom: 13px;
+                color: #0c0c0c;
+            }
+
+            //介绍
+            i {
+                display: block;
+                font-size: 12px;
+                font-style: normal;
+                color: 999;
+                line-height: 16px;
+                margin-bottom: 14px;
+                color: #999;
+            }
+
+            // 自我简介
+            .bio {
+                color: #2d2c2c;
+                font-size: 12px;
+                margin: 0;
+            }
+
+            // 社交网络的链接
+            .social-link {
+                display: inline-block;
+                *display: inline;
+                *zoom: 1;
+                vertical-align: top;
+
+                a {
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    *overflow: hidden;
+                    width: 16px;
+                    height: 16px;
+
+                    @include hide-text;
+                    @include mainSprite;
+                }
+
+                @include socialIconSmall;
+            }
+        }
+
+        // 文章数
+        .post-count {
+            color: #444;
+            line-height: 18px;
+            height: 18px;
+            .icon-book {
+                vertical-align: top;
+                _margin-right: 5px;
+            }
+
+            .num {
+                color: #ec141c;
+                font-size: 17px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
+
+// ####################################################################
+// # FILTER 类型过滤器 (文章类型过滤器)
+// ####################################################################
+.m-filter {
+    padding: 17px ($pagePaddingLeftRight/2);
+    font-size: 12px;
+    color: #0d0d0d;
+    line-height: 32px;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        padding: 17px $pagePaddingLeftRight;
+    }
+
+    // 过滤选项
+
+    a {
+        @extend %inline-block;
+        padding: 5px;
+        color: #292929;
+        border: 1px solid #c2c2c2;
+        border-radius: 3px;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        line-height: 1em;
+        font-size: 11px;
+        font-family: $mingliu;
+
+
+        &:hover, &.active {
+            color: #fff;
+            background-color: #4d535f;
+            background:  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#302e2e), to(#6d7380), color-stop(.95,#4d535f));
+            background: -moz-linear-gradient(100% 100% 90deg,#302e2e, #6d7380, #4d535f 6%);
+            box-shadow:inset 0 0px 5px rgba(88,88,88,0.53);
+        }
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+// ####################################################################
+// # SEARCH 搜索
+// ####################################################################
+.m-search {
+    position: relative;
+    overflow: hidden;
+    form {
+        border: 1px solid #d3d3d3;
+        border-top-width: 0;
+        margin-bottom: 25px;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            width: 486px;
+            margin: 0 auto 30px auto;
+        }
+        .keyword-input {
+            position: relative;
+            margin-right: 102px;
+            margin-left: -1px;
+            margin-bottom: 20px;
+            .input-text {
+                width: 100%;
+                font-size: 16px;
+                padding: 6px;
+                padding-bottom: 7px;
+            }
+
+            .g-btn {
+                position: absolute;
+                top: 0;
+                right: -102px;
+                _right: 0;
+
+                *padding: 8px 15px;
+                _padding: 8px 20px;
+            }
+        }
+
+        .search-options {
+            text-align: left;
+            color: #444;
+            line-height:  24px;
+            margin-bottom: 24px;
+            font-size: 12px;
+            padding: 0 ($pagePaddingLeftRight / 2);
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                font-size: 14px;
+                text-align: center;
+            }
+
+            .search-option {
+                display: block;
+                margin-bottom: .5em;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    margin-bottom: 0;
+                }
+
+                input, select {
+                    vertical-align: middle;
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        vertical-align: baseline;
+                    }
+                }
+
+                input {
+                    margin-right: 3px;
+                }
+
+                .checkbox {
+                    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                        margin-right: 35px;
+                    }
+                }//@end .checkbox
+            }//@end .search-option
+        }//@end .search-options
+    } //@end form
+
+    .count-app-result, .count-post-result {
+        position: relative;
+        height: 18px;
+        background-repeat: no-repeat;
+        color: #444;
+        border-bottom: 1px solid #dddde1;
+        height: 18px;
+        line-height: 18px;
+        padding-bottom: 5px;
+        margin-bottom: 30px;
+
+        .icon-book, .icon-store {
+            vertical-align: top;
+        }
+        .num {
+            font-family: Tahoma;
+            font-size: 16px;
+            color: #ec141c;
+        }
+    }
+
+    // 找不到任何搜索结果
+    .not-found {
+        .message {
+            text-align: center;
+            font-family: $yahei;
+            font-size: 1.2em;
+        }
+    }
+
+}
+
+
+
+// ####################################################################
+// # APPLIST APP列表
+// ####################################################################
+.m-app-list {
+    position: relative;
+    overflow: hidden;
+    .list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        .item-app {
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #dddde1;
+            margin-bottom: 35px;
+            $appIconWidth: 97px;
+
+            &:last-child, .last {
+                margin-bottom: 0;
+                border-bottom: 0;
+            }
+
+            //图标
+            .app-icon {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: $appIconWidth/2;
+                height: $appIconWidth/2;
+                overflow: hidden;
+
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    width: $appIconWidth;
+                    height: $appIconWidth;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    border: 0;
+                }
+            }
+
+            // APP资料
+            .app-info {
+                position: relative;
+                margin-left: $appIconWidth/2 + 15px;
+                min-height: $appIconWidth/2 + 10px;
+                *height: $appIconWidth/2 + 10px;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    margin-left: $appIconWidth + 27px;
+                    min-height: $appIconWidth + 10px;
+                    *height: $appIconWidth + 10px;
+                }
+
+
+                //链接
+                a {
+                    color: #444;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                // APP名字
+                h1{
+                    font-size: 16px;
+                    font-family: Tahoma;
+                    &, a {
+                        color: #0d0d0d;
+                    }
+                }
+
+
+                // APP 相关的文章
+                .post-list {
+                    list-style-image: url(../img/list_style_image.png);
+                    padding-left: 14px;
+                    li {
+                        margin-bottom: 15px;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
+
+
+
+// ####################################################################
+// # 只有空白項目侧栏 挂件
+// ####################################################################
+.m-null-box {
+
+
+}
+
+
+
+
+
+
+
+// ####################################################################
+// # 只有链接的侧栏 挂件
+// ####################################################################
+.list-textlink {
+    // 链接列表
+    ul {
+        // list-style-image: url("../img/list_style_image.png");
+        // list-style-position: inside;
+
+        li {
+            background: url("../img/list_style_image.png") no-repeat 15px 25px;
+            padding: 15px $widgetPaddingLeftRight 15px $widgetPaddingLeftRight;
+            border-bottom: 1px solid #f5f5f6;
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            a {
+                @include hiddenText;
+                width: 240px;
+                display: block;
+                font-size: 14px;
+                padding-left: 8px;
+                text-decoration: none;
+                &:hover {
+                    //text-decoration: underline;
+                    color: #dc3920;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+// ####################################################################
+// # 图片链接的侧栏 挂件
+// ####################################################################
+.list-thumblink {
+    ul {
+        padding-top: 23px;
+        padding-bottom: 14px;
+        li {
+            position: relative;
+            box-sizing: content-box;
+            overflow: hidden;
+            // height: 121px;
+            margin: 0 $widgetPaddingLeftRight 13px $widgetPaddingLeftRight;
+            a {
+                display: block;
+                text-decoration: none;
+                &:hover {
+                    //动画效果显示 图片简介
+                    strong {
+                        display: block;
+                        bottom: 0;
+                        background-color: rgba(0,0,0,1);
+                        -moz-transition: 0.3s ease-in;
+                        -webkit-transition: 0.3s ease-in;
+                        -o-transition: 0.3s ease-in;
+                         transition: 0.3s ease-in;
+                    }
+                }
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                // max-height: 315px;
+            }
+
+            //底下的 应用名称
+            strong {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                padding: 6px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+                font-family: $yahei;
+                text-align: left;
+                background-color: rgba(0,0,0,0.25);
+                *zoom: 1;
+                _width: 100%;
+            }
+        }
+    }
+}
+
+
+// ####################################################################
+// # APP 推荐 挂件
+// ####################################################################
+.list-applink {
+    ul {
+        // padding-top: 16px;
+        li {
+            position: relative;
+            overflow: hidden;
+            *zoom: 1;
+            padding: 15px $widgetPaddingLeftRight;
+            margin-bottom: 13px;
+            border-bottom: 1px solid #f7f7f7;
+            font-size: 14px;
+            height: 55px;
+            box-sizing: content-box;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+            a {
+                display: block;
+                text-decoration: none;
+
+                &:hover {
+                    h5 {
+                        color: #dc3920;
+                    }
+                }
+            }
+
+            $iconWidth: 55px;
+            .app-icon {
+                position: absolute;
+                top: 15px;
+                left: $widgetPaddingLeftRight;
+                width: $iconWidth;
+                height: 55px;
+            }
+
+            // 其他元素与 图标并排 需要的左外边距
+            h5, .meta {
+                margin-left:  $iconWidth + 20px;
+            }
+
+            // 软件名称
+            h5 {
+                color: #0d0d0d;
+                font-size: 14px;
+                font-family: Tahoma;
+                font-weight: normal;
+                padding-top: 5px;
+                margin-bottom:5px;
+                margin-top: 0;
+                // 防止因为软件的名字太长导致换行
+                @extend .fn-text-overflow;
+            }
+
+            //软件评级或者其他信息
+            .meta {
+                overflow: hidden;
+                *zoom: 1;
+            }
+
+            // 软件评级
+            .rating {
+                position: relative;
+                float: left;
+                width: 75px;
+                height: 15px;
+                margin-top: 3px;
+                @include mainSprite;
+                background-position: -200px -190px;
+
+                //亮起的星星
+                .count {
+                    @include mainSprite;
+                    height: 100%;
+                    background-position: -200px -160px;
+                }
+
+                $halfStarWidth: 7.5px;
+                $totalStar: 5;
+                @for $i from 0  to $totalStar * 2 + 1 {
+                    .c-#{$i} {
+                        width: $halfStarWidth * $i;
+                    }
+                } //@end for
+            }
+
+            // 平台链接
+            .list-dowload {
+                float: right;
+                @include listDowload;
+            }
+
+        }
+    }
+}
+
+
+
+// ####################################################################
+// # APP信息 挂件
+// ####################################################################
+.siderbar-appinfo {
+    text-align: center;
+
+    h4 {
+        text-align: left;
+        margin-top: 0;
+    }
+
+    .app-icon {
+        width: 96px;
+        height: 96px;
+        margin: 25px auto 14px auto;
+    }
+
+    h5 {
+        font-family: Tahoma;
+        font-size: 16px;
+        font-weight: normal;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    //标签
+    .cats {
+        margin-bottom: 13px;
+        a {
+            font-size: 12px;
+            color: #a2a2a2;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &:after {
+                content: "，";
+                font-size: 12px;
+                color: #a2a2a2;
+            }
+
+            &:last-child:after {
+                content: "";
+            }
+        }
+    }
+
+    //价格
+    .list-dowload {
+        list-style: none;
+        padding: 0;
+        font-size: 13px;
+        text-align: left;
+
+        li {
+            width: 200px;
+            margin:0 auto 16px auto;
+
+            a {
+                @extend .g-btn;
+                @extend .g-btn-block;
+                padding-left: 20px;
+                padding-right: 20px;
+                line-height: 20px;
+                overflow: hidden;
+                *zoom: 1;
+            }
+
+            .os {
+                @extend %inline-block;
+                vertical-align: middle;
+                width: 100px;
+                height: 20px;
+                background-repeat: no-repeat;
+                float: left;
+                @include mainSprite;
+            }
+
+            $osTitles:
+                iphone -300px -100px,
+                ipad  -300px -190px,
+                android -300px -130px,
+                google-play -300px -220px,
+                windows -300px -160px
+            ;
+
+            @each $osTitle in $osTitles {
+                &.#{nth($osTitle, 1)}  .os{
+                    background-position: nth($osTitle, 2) nth($osTitle, 3);
+                }
+            }
+        }
+    }
+
+
+    // QR 二维码
+    .qrcode {
+        display: none;
+        padding-bottom: 25px;
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            display: block;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto 10px auto;
+            max-width: 120px;
+            max-height: 120px;
+            padding: 9px;
+            box-sizing: content-box;
+            border: 1px solid #b7b7b7;
+        }
+
+        p {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+}
+
+
+// ####################################################################
+// # 作者信息 挂件
+// ####################################################################
+.author-info {
+    position: relative;
+    overflow: hidden;
+
+    .w-author {
+        position: relative;
+        overflow: visible;
+        margin-top: 24px;
+        margin-right: $widgetPaddingLeftRight / 2;
+
+        padding-bottom: 27px;
+        min-height: 94px;
+        *height: 94px;
+         @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-right: $widgetPaddingLeftRight;
+         }
+
+        $avatarWidth: 68px;
+
+        .avatar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: $widgetPaddingLeftRight;
+            width: $avatarWidth;
+            height: 68px;
+            overflow: hidden;
+            border-radius: 34px;
+
+            img {
+                width: 68px;
+                height: 68px;
+            }
+        }
+
+        // 作者信息
+        .info {
+            margin-left: $avatarWidth + $widgetPaddingLeftRight + 13px;
+            h5 {
+                font-size: 16px;
+                font-family: Tahoma;
+                font-weight: bold;
+                margin-bottom: 13px;
+                a {
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            //介绍
+            i {
+                display: block;
+                font-size: 12px;
+                font-style: normal;
+                color: 999;
+                line-height: 16px;
+                margin-bottom: 14px;
+            }
+
+            .job {
+                margin-right: 5px;
+            }
+
+
+            // 社交网络的链接
+            .social-link {
+                display: inline-block;
+                *display: inline;
+                *zoom: 1;
+                vertical-align: top;
+
+                a {
+                    display: inline-block;
+                    *display: inline;
+                    *zoom: 1;
+                    *overflow: hidden;
+                    width: 16px;
+                    height: 16px;
+
+                    @include hide-text;
+                    @include mainSprite;
+                }
+
+                @include socialIconSmall;
+            }
+        }
+
+        // 自我简介
+        .bio {
+            color: #777;
+            font-size: 12px;
+            padding-top: 10px;
+            margin: 0 0 0 14px;
+        }
+
+
+
+
+
+    }
+}
+
+
+
+
+// ####################################################################
+// # LOGIN 用户登录框
+// ####################################################################
+.user-login-modal {
+    @media screen and (min-width: $desktopWidth) and (orientation:landscape){
+        width: 268px;
+        margin-left: -134px;
+        .modal-inner {
+            .model-footer {
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+
+
+
+// ####################################################################
+// # 跳转页面
+// ####################################################################
+
+.m-message{
+    background: #fff;
+    margin-top: $widgetPaddingLeftRight /2 ;
+    padding: $widgetPaddingLeftRight /2 ;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+        padding: $widgetPaddingLeftRight ;
+        margin-top: $widgetPaddingLeftRight ;
+    }
+}
+
+
+// ####################################################################
+// # 跳转页面 (特殊设置)
+// # 目的是让底栏贴主屏幕底部
+// ####################################################################
+.m-page-message {
+    .r-footer.bottom {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+    }
+}
+
+
+
+// ####################################################################
+// # 页面-作者页 (特殊设置)
+// ####################################################################
+.m-page-author .r-container .w-main {
+    //去除作者模块与文章列表模块中间的空格
+    .m-author {
+        margin-bottom: 0;
+        border-bottom: 0;
+        overflow: hidden;
+        *zoom: 1;
+    }
+
+}
+
+
+// ####################################################################
+// # 页面-列表页 (特殊设置)
+// # 特别设置 分页其与文章列表之间的样式
+// ####################################################################
+.m-page-category {
+    .m-post-list {
+        .m-filter {
+            padding-bottom: 0;
+        }
+
+        ul.block-content{
+            border-bottom: 1px solid #ddd;
+        }
+    }
+
+    .m-pager {
+        margin-bottom: 35px;
+        margin-top: 27px;
+        _margin-bottom: 0;
+        _padding-bottom: 35px;
+        _padding-top: 35px;
+    }
+}
+
+
+// ####################################################################
+// # 页面-作者页 (特殊设置)
+// # 特别设置 分页其与文章列表之间的样式
+// ####################################################################
+.m-page-author {
+    @extend .m-page-category;
+}
+
+// ####################################################################
+// # 页面-搜索页 (特殊设置)
+// # 目的是把 文章列表和APP列表模块的分隔线延伸到最外面
+// # 特别设置 分页其与文章列表之间的样式
+// ####################################################################
+.m-page-search {
+
+    .m-app-list {
+        margin-left: (-$pagePaddingLeftRight/2);
+        margin-right: (-$pagePaddingLeftRight/2);
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-left: (-$pagePaddingLeftRight);
+            margin-right: (-$pagePaddingLeftRight);
+        }
+        .item-app {
+            padding-left: $pagePaddingLeftRight/2;
+            padding-right: $pagePaddingLeftRight/2;
+            @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                padding-left: $pagePaddingLeftRight;
+                padding-right: $pagePaddingLeftRight;
+            }
+            .app-icon {
+                left: $pagePaddingLeftRight/2;
+                @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+                    left: $pagePaddingLeftRight;
+                    _left: -(97px + $pagePaddingLeftRight);
+                }
+            }
+        }
+    }
+
+    .m-post-list {
+        border-bottom: 1px solid #ddd;
+        margin-left: (-$pagePaddingLeftRight/2);
+        margin-right: (-$pagePaddingLeftRight/2);
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            margin-left: (-$pagePaddingLeftRight);
+            margin-right: (-$pagePaddingLeftRight);
+        }
+    }
+
+    .m-pager {
+        margin-bottom: 35px;
+        _margin-bottom: 0;
+        _padding-bottom: 35px;
+    }
+}
+
+
+// ####################################################################
+// # 页面-首页 (特殊设置)
+// # 特别设置 分页其与文章列表之间的样式
+// ####################################################################
+.m-page-index {
+    .m-post-list {
+        .block-content {
+            //margin-bottom: 35px;
+            margin-bottom: 0;
+        }
+    }
+
+    .w-pager {
+        border-top: 1px solid #ddd;
+        .m-pager {
+            padding-top: 35px;
+            margin-bottom: 35px;
+            _margin-bottom: 0;
+            _padding-bottom: 35px;
+        }
+
+    }
+}

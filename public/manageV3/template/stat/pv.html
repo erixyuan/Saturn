@@ -1,0 +1,40 @@
+<div class="wrap g-moudel-list m-stat m-stat-pv">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left">
+            <strong>条件</strong>
+            起始日期:
+            <input type="date" class="input-text" id="js_from">
+            结束日期:
+            <input type="date" class="input-text" id="js_to">
+            分组:
+            <select name="" class="g-select" id="js_group_by">
+                <option value="day">天</option>
+                <option value="weekly">周</option>
+                <option value="month">月</option>
+            </select>
+             <button class="g-btn g-btn-primary" id="js_update">确定</button>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th>日期</th>
+                <th>IP/PV</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each}}
+                <tr>
+
+                    <td>{{$value.begin}}</td>
+                    <td class="{{if $value.ip == 0 && $value.pv == 0}} warning {{/if}}">{{$value.ip}}/{{$value.pv}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>

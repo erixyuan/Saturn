@@ -1,0 +1,50 @@
+<div class="wrap g-moudel-list m-stat m-stat-list">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left">
+            <strong>条件</strong>
+            起始日期:
+            <input type="date" class="input-text">
+            结束日期:
+            <input type="date" class="input-text">
+            分组:
+            <select name="" id="js_" class="g-select">
+                <option value="">天</option>
+                <option value="">周</option>
+                <option value="">月</option>
+            </select>
+             <button class="g-btn g-btn-primary">确定</button>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th>分类ID</th>
+                <th>分类</th>
+                {{each dates as date index}}
+                <th>
+                    {{date.begin}}
+                    <div>~</div>
+                    {{date.begin}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{each data as dt index}}
+            <tr>
+                <td>{{dt.id}}</td>
+                <td>{{dt.name}}</td>
+                {{each dt.data}}
+                    <td class="{{if $value == 0}}warning{{/if}}">{{$value}}</td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>
+

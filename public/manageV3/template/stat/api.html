@@ -1,0 +1,49 @@
+<div class="wrap g-moudel-list m-stat m-stat-api">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left">
+            <strong>条件</strong>
+            起始日期:
+            <input type="date" class="input-text">
+            结束日期:
+            <input type="date" class="input-text">
+            分组:
+            <select name="" id="js_" class="g-select">
+                <option value="">天</option>
+                <option value="">周</option>
+                <option value="">月</option>
+            </select>
+             <button class="g-btn g-btn-primary">确定</button>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th>API ID</th>
+                <th>API Name</th>
+                {{each dates as date index}}
+                    <th>
+                        <span  title="API请求次数 / 下载次数" title="API请求次数 / 下载次数">{{date.dateFrom}}<div>~</div>{{date.dateTo}}</span>
+                    </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{each data as dt index}}
+                <tr>
+                    <td>{{dt.apiId}}</td>
+                    <td>{{dt.apiName}}</td>
+                    {{each dt.hits}}
+                        <td>{{$value}}</td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>
+
+

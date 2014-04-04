@@ -1,0 +1,28 @@
+<!-- 分页器模板 START-->
+<script id="js_pagePluginTpl" type="text/html">
+    {{if numberBoxs!=undefined && numberBoxs.length>0}}
+        <div class="goto">
+            <input type="text" class="g-input" js_jumpPageValue/>页
+            <a class="g-btn" js_jumpPageBtn >跳转</a>
+        </div>
+        {{if prev !== ''}}
+            <div class="prev">
+                <a page="{{prev.page}}" prev>上一页</a>
+            </div>
+        {{/if}}
+        <ul class="numbers" js_numbers>
+            {{each numberBoxs as value index}}
+            <li class="{{value.type}} {{if value.current == true}}current{{/if}}">
+                <a page={{value.num}}>{{value.num}}</a>
+            </li>
+            {{/each}}
+        </ul>
+        {{if next !== ''}}
+            <div class="next">
+                <a page="{{next.page}}" next>下一页</a>
+            </div>
+        {{/if}}
+
+    {{/if}}
+</script>
+<!-- 分页器模板 END-->

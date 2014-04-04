@@ -1,0 +1,21 @@
+{
+    "name": "chekun/oauth2",
+    "description": "Oauth2 Client For PHP",
+    "authors": [
+        {
+            "name": "chekun",
+            "email": "234267695@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.x",
+        "kriswallsmith/buzz": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Chekun\\Oauth2": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

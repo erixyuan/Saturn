@@ -1,0 +1,282 @@
+@charset "UTF-8";
+@mixin app_info_style(){
+    // APP信息
+    .m-appinfo {
+        position: relative;
+        width: auto;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #bbb;
+        border-radius: 3px;
+        overflow: hidden;
+        *zoom: 1;
+        clear: both;
+        font-size: 12px;
+        color: #000;
+
+        @media screen and (min-width: 1024px) and (orientation: landscape) {
+             background: white url(../img/ccc.jpg) 530px 0 repeat-y;
+        }
+
+        ul {
+            clear: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            border: 0;
+        }
+        // 内容部分（图片 下载 分类）
+        .w-app-inner {
+            position: relative;
+            overflow: hidden;
+            *zoom: 1;
+            margin: 0 5px 0 0;
+
+            // APP 图标
+            .icon {
+                display: none;
+                float: left;
+                width: 90px;
+                height: 90px;
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    display: block;
+                }
+
+                &.downloads-total-2, &.downloads-total-1,&.downloads-total-3{
+                    height: 100px;
+                }
+
+                &.downloads-total-4{
+                    height: 125px;
+                }
+                &.downloads-total-5{
+                    height: 155px;
+                }
+                img {
+                    width: 90px;
+                    height: auto;
+                }
+            }
+
+            // 软件名和分类信息 与 Icon图标的边距
+            h5,.info-dowloads {
+                margin-left: 0;
+                margin-right: 0;
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    margin: 0 105px;
+                }
+                clear: none;
+            }
+
+            // APP的名字
+            h5 {
+                font-size: 24px;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0;
+                line-height: 100%;
+                color: #0033b3;
+                font-family: 'Microsoft YaHei';
+            }
+
+            // 下载地址 与 分类
+            .info-dowloads {
+                position: relative;
+                overflow: hidden;
+                *zoom: 1;
+                //下载地址与 分类的宽度设定,取消里面的ul的样式
+                .info, .downloads {
+                    overflow: hidden;
+                    *zoom: 1;
+                     ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style-type: none;
+                     }
+                }
+
+                // app 信息
+                .info {
+                    width: 40%;
+                    position: relative;
+                    float: left;
+                    overflow: hidden;
+                    clear: none;
+                    *zoom: 1;
+                    margin: 0;
+
+                    li {
+                        line-height: 1.8em;
+                    }
+
+                    a {
+                        margin-right: .5em;
+                    }
+                }
+
+                // app 地址
+                .downloads {
+                    width: 59.5%;
+                    position: relative;
+                    margin: 0;
+                    float: right;
+                    clear: none;
+                    overflow: hidden;
+                    *zoom: 1;
+
+                    li {
+                        overflow: hidden;
+                        *zoom: 1;
+                        margin-bottom: 6px;
+                        line-height: 26px;
+                        text-align: right;
+
+                        .platform-name {
+                            max-width: 49px;
+                            overflow: hidden;
+                            display: inline-block;
+                            height: 2em;
+                            vertical-align: middle;
+                            padding-right: 0.5em;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        // QRCode 部分
+        .w-qrcode {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 0;
+            width: 105px;
+            text-align: center;
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: block;
+            }
+            //取消 图片下面的留白
+            .img-qrcode {
+                line-height: 0;
+            }
+
+            a {
+                color: #999;
+                display: block;
+            }
+
+            img {
+                display: block;
+                margin: 0 auto;
+                width: 86px;
+                height: 86px;
+            }
+        }
+
+
+        //分享 按钮区域
+        .w-share {
+            position: relative;
+            overflow: hidden;
+            *zoom: 1;
+
+            //短信的提交表单
+            .sharePlatformForm {
+                float: left;
+                vertical-align: top;
+            }
+
+            //天翼短信分享按钮
+            .share-ty {
+                display: inline-block;
+                *display: inline;
+                *zoom: 1;
+                vertical-align: top;
+                padding-left: 20px;
+                height: 16px;
+                line-height: 16px;
+                color: #333;
+                margin-right: 5px;
+                border: none;
+                background: url(../img/icon_yfx.gif) no-repeat;
+                cursor: pointer;
+                vertical-align: top;
+            }
+
+            // 隐藏 +this 的文字 只保留图标
+            #ckepop a span.jtico{
+                width: 0;
+                margin-right: 0;
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+
+
+        // 下载平台的按钮
+        .btn-download {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            width: 80px;
+            padding-left: 10px;
+            height: 26px;
+            text-align: center;
+            color: #222;
+            opacity: 0.9;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: none;
+                opacity: 1;
+            }
+
+            &.iphone, &.ipad, &.windows-phone, &.android {
+                width: 80px;
+                padding-left: 10px;
+                height: 26px;
+                background: url(../img/sp_download_platform.png?v=1) no-repeat;
+                color: #fff;
+                text-shadow: 1px 1px 1px #333;
+            }
+
+            &.iphone {
+                background-position: 0 -30px;
+            }
+            &.ipad {
+                background-position: 0 -60px;
+            }
+            &.windows-phone {
+                background-position: 0 -90px;
+            }
+        }
+
+
+        //#### 关闭相应的功能 ####
+        // 不含APP信息
+        &.not-appinfo {
+            background-image: none;
+            line-height: 1em;
+            border: none;
+            background: none;
+            padding-left: 0;
+            padding-right: 0;
+            //隐藏QRCODE 和app信息
+            .w-app-inner, .w-qrcode {
+                display: none;
+            }
+        }
+
+        // 不含分享信息
+        &.not-share {
+            .w-share {
+                display: none;
+            }
+        }
+    }
+}
+
+

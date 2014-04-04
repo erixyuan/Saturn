@@ -1,0 +1,59 @@
+<div class="wrap g-moudel-list m-stat m-stat-awhall">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left">
+            <strong>条件</strong>
+            起始日期:
+            <input type="date" class="input-text">
+            结束日期:
+            <input type="date" class="input-text">
+            分组:
+            <select name="" id="js_" class="g-select">
+                <option value="">天</option>
+                <option value="">周</option>
+                <option value="">月</option>
+            </select>
+             <button class="g-btn g-btn-primary">确定</button>
+
+             <button class="g-btn">下载Excel</button>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th>城市</th>
+                <th>县</th>
+                <th>级别</th>
+                <th>营业厅</th>
+                <th>总计</th>
+                {{each dates as date index}}
+                <th>
+                    <div style= title="PV / 应用详情(点击) / 短信分享(点击) / (二维码扫描)下载">{{date.dateFrom}}<div>~</div>{{date.dateTo}}</div>
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{each data as dt index}}
+            <tr>
+                <td>{{dt.city}}</td>
+                <td>{{dt.county}}</td>
+                <td>{{dt.level}}</td>
+                <td>{{dt.office}}</td>
+                <td style="max-width: 5em">{{dt.sum}}</td>
+                {{each dt.mainData as md index}}
+                <td class="{{if md.ip == 0 && md.applicationHits && md.messageShareHist && md.dimensionalCodeDownload  == 0}} warning {{/if}}" style="text-align: left;">
+                        <div style="display: inline;float: left;margin-left:10px;width:72px; text-align:center;" >{{md.ip}} / {{md.applicationHits}} / {{md.messageShareHist}} / {{md.dimensionalCodeDownload}}</div>
+                </td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>
+
+

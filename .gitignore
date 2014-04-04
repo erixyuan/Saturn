@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+/app/config/database.php
+attachment
+/public/database

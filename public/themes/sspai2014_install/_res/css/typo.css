@@ -1,0 +1,229 @@
+@charset "UTF-8";
+/* line 121, sass/_value.scss */
+.fn-clear:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+/* line 130, sass/_value.scss */
+.fn-clear {
+  zoom: 1;
+  /* for IE6 IE7 */
+}
+
+/* line 134, sass/_value.scss */
+.fn-hide {
+  display: none;
+}
+
+/* line 138, sass/_value.scss */
+.fn-left, .fn-right {
+  display: inline;
+}
+
+/* line 142, sass/_value.scss */
+.fn-left {
+  float: left;
+}
+
+/* line 146, sass/_value.scss */
+.fn-right {
+  float: right;
+}
+
+/* line 150, sass/_value.scss */
+.fn-text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 7, sass/typo.scss */
+.typo {
+  overflow: hidden;
+  margin-bottom: 2em;
+  font-size: 14px;
+  line-height: 2.0;
+}
+@media screen and (min-width: 1024px) and (orientation: landscape) {
+  /* line 21, sass/typo.scss */
+  .typo h1, .typo h2, .typo h3, .typo h4 {
+    font-family: "Microsoft YaHei", "微软雅黑", "\5FAE\8F6F\96C5\9ED1", "Microsoft JhengHei", STHeiti;
+  }
+}
+/* line 28, sass/typo.scss */
+.typo h1 {
+  margin: 15px 0 5px 0;
+}
+/* line 33, sass/typo.scss */
+.typo h2 {
+  font-size: 1.6em;
+  margin: 15px 0 10px 0;
+  padding-top: 15px;
+  border-bottom: 1px solid #D3D3D3;
+  padding-bottom: 9px;
+}
+/* line 41, sass/typo.scss */
+.typo h3 {
+  font-size: 1.2em;
+  margin: 10px 0 5px 0;
+  color: #000000;
+  padding-top: 10px;
+}
+/* line 54, sass/typo.scss */
+.typo blockquote {
+  background-color: #F7F7F7;
+  padding: 18px;
+  padding-left: 50px;
+  margin: 0 0px 15px 0px;
+  position: relative;
+  line-height: 1.8;
+  text-indent: 0px;
+  border-left: 4px solid #ccc;
+}
+/* line 64, sass/typo.scss */
+.typo blockquote:before, .typo blockquote:after {
+  font-family: Arial,serif;
+  font-size: 5em;
+  line-height: 1em;
+  font-weight: bold;
+  color: #ddd;
+  position: absolute;
+}
+/* line 73, sass/typo.scss */
+.typo blockquote:before {
+  content: "“";
+  left: 12px;
+  top: 0;
+}
+/* line 79, sass/typo.scss */
+.typo blockquote:after {
+  content: "”";
+  right: 12px;
+  bottom: -31px;
+}
+/* line 88, sass/typo.scss */
+.typo table {
+  margin: 1em 0;
+  background-color: #f9f9f9;
+  border: 1px #aaa solid;
+  border-collapse: collapse;
+  color: black;
+}
+/* line 95, sass/typo.scss */
+.typo table th, .typo table tr, .typo table td {
+  padding: 0.3em;
+}
+/* line 100, sass/typo.scss */
+.typo table th {
+  background-color: #f2f2f2;
+  text-align: center;
+  border: 1px #aaa solid;
+}
+/* line 106, sass/typo.scss */
+.typo table tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+/* line 112, sass/typo.scss */
+.typo table td {
+  border: 1px #aaa solid;
+}
+/* line 117, sass/typo.scss */
+.typo a {
+  background: transparent;
+  color: #1525db;
+  text-decoration: none;
+  border-bottom: 1px dotted #030CE9;
+  margin: 0 3px;
+}
+/* line 124, sass/typo.scss */
+.typo a img {
+  display: block;
+}
+/* line 129, sass/typo.scss */
+.typo p {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  line-height: 2.2;
+}
+@media screen and (min-width: 1024px) and (orientation: landscape) {
+  /* line 129, sass/typo.scss */
+  .typo p {
+    font-size: 14px;
+  }
+}
+/* line 140, sass/typo.scss */
+.typo img {
+  max-width: 100%;
+  margin-bottom: 15px;
+}
+@media screen and (min-width: 1024px) and (orientation: landscape) {
+  /* line 140, sass/typo.scss */
+  .typo img {
+    max-width: 640px;
+  }
+}
+/* line 159, sass/typo.scss */
+.typo .row {
+  position: relative;
+  width: 97.7%;
+  padding: 1%;
+  *zoom: 1;
+  clear: both;
+  display: table;
+  margin-bottom: 0.5em;
+  background: #F8F8F8;
+  border: solid 1px #DDDDDD;
+  border-radius: 2px;
+}
+/* line 172, sass/typo.scss */
+.typo .row .grid3, .typo .row .grid4, .typo .row .grid6 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.5em;
+  float: left;
+  margin: 1%;
+}
+/* line 179, sass/typo.scss */
+.typo .row .grid3 img, .typo .row .grid4 img, .typo .row .grid6 img {
+  max-width: 100%;
+  box-shadow: 1px 1px 1px rgba(88, 88, 88, 0.43);
+  margin: 0;
+}
+/* line 189, sass/typo.scss */
+.typo .row .grid6 {
+  width: 48%;
+}
+/* line 192, sass/typo.scss */
+.typo .row .grid6 img {
+  *width: 48%;
+}
+/* line 198, sass/typo.scss */
+.typo .row .grid4 {
+  width: 31.3%;
+}
+/* line 201, sass/typo.scss */
+.typo .row .grid4 img {
+  *width: 31.3%;
+}
+/* line 207, sass/typo.scss */
+.typo .row .grid3 {
+  width: 23%;
+}
+/* line 210, sass/typo.scss */
+.typo .row .grid3 img {
+  *width: 31.3%;
+}
+/* line 218, sass/typo.scss */
+.typo .grid2 {
+  list-style-type: none;
+  overflow: hidden;
+  clear: both;
+}

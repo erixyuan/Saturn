@@ -1,0 +1,238 @@
+=====================================================================================================
+
+前端逻辑：
+
+用文章编辑来说明：
+
+当执行http://127.0.0.1/saturn_laravel_4_1/public/m/#article/edit/24861的时候
+
+就会走index.html页面，然后加载requirejs，requirejs去加载main.js
+
+main.js就去配置好库的路径，然后加载
+require(['jquery','backbone','model/checkLogin','enquire'], function($,Backbone, isLogin){
+    加载完之后
+    1.判断是否已经登录，如果没有登陆就跳转到登陆页面，如果登陆就往下执行
+    2.创建路由表
+    3.根据url的#article/edit/24861去匹配路由表，这里找到 "article/edit/:id" : "article_edit", 然后去执行article_edit的方法
+    4.loadView的方法主要是在切换视图之前，把直接绑定的视图，事件全部注销掉，避免冲突
+      然后加载对应的视图，然后设置当前的模块，这个是用于导航的切换
+        article_edit: function(id) {
+            loadView(function(){
+                require(['view/article/ArticleEditView'],function(ArticleEditView){
+                    //传入对象，id(Key):id(Value)
+                    Saturn.currentView = new ArticleEditView({id:id});
+                    Saturn.navModel.set({currentModule:'article',secondModule:'create'});
+                });
+            })
+
+        }
+    5.加载完视图，就会实例化视图。实例化视图的过程中，它会再去加载html模板，和model数据，等到模板和数据之后，进行渲染显示
+}
+
+逻辑结束；
+=====================================================================================================
+
+
+
+
+
+
+|   README
+|
++---css
+|   |   build.bat
+|   |   config.rb
+|   |   style.css
+|   |
+|   \---sass
+|           style.scss
+|           _font-awesome.scss
+|           _global.scss
+|           _normalize.scss
+|           _value.scss
+|
++---img
+|       application_banner_default.gif
+|       article_banner_default.gif
+|       bg_login.jpg
+|       DefaultApplicationIcon.png
+|       pic_i.jpg
+|       sp_main.png
+|       sp_main.psd
+|       sp_main@2x.png
+|
++---js
+|   |   login.js    // 登陆页面的逻辑，主要是走登陆接口
+|   |   main.js     // 这是一个核心文件，requirejs引入的第一个文件，里面的内容包括3块。1：配置库的路径，2：设置路由，3：入口的简单逻辑（例如走登陆接口，判断是否登陆，没登陆跳转到登陆页面）
+|   |   Saturn.js   // 这是一个全局对象Saturn，绑定着一些全局、公用的方法和属性，后面如果增加公用方法可以直接在这个文件中添加
+|   |
+|   +---collections     // 这个目录没有用到，因为没有业务逻辑需要用到集合
+|   |
+|   +---model               // 所有的数据模型的放在这里
+|   |   |   checkLogin.js   // 判断登陆
+|   |   |   logout.js       // 登出
+|   |   |   nav.js          // 导航还是子导航
+|   |   |
+|   |   +---application     // 所有应用模块的数据实体
+|   |   |       edit.js     // 编辑 和 创建应用
+|   |   |       list.js     // 应用列表的
+|   |   |
+|   |   +---article         // 所有文章模块的数据实体
+|   |   |       articleEdit_plugin_applicationList.js    // 文章的应用挂件
+|   |   |       articleEdit_plugin_category.js           // 文章的分类挂件
+|   |   |       comment.js
+|   |   |       edit.js
+|   |   |       list.js
+|   |   |       synList.js
+|   |   |
+|   |   +---common                  // 公共模块的数据实体
+|   |   |       attachment.js       // 附件
+|   |   |       category.js         // 分类
+|   |   |       templateModel.js    // 模板
+|   |   |
+|   |   +---plugin                  // 插件模块的数据实体
+|   |   |       adEdit.js           // 广告编辑和创建
+|   |   |       adList.js           // 广告列表
+|   |   |       appkeyEdit.js       // appkey编辑和创建
+|   |   |       appkeyList.js       // appkey列表
+|   |   |       pluginList.js       // 插件列表
+|   |   |       ucenter.js          // ucenter（还没有用到）
+|   |   |
+|   |   +---product                 // 产品模块的数据实体
+|   |   |       edit.js             // 产品编辑和创建
+|   |   |       list.js             // 产品列表
+|   |   |
+|   |   +---role
+|   |   |       roleEdit.js         // 角色编辑和创建
+|   |   |       roleList.js         // 角色列表
+|   |   |       userEdit.js         // 用户编辑和创建
+|   |   |       userList.js         // 用户列表
+|   |   |
+|   |   +---setting                 // 设置模块的数据实体
+|   |   |       cache.js            // 清除缓存
+|   |   |       sync.js             // 同步设置
+|   |   |       system.js           // 系统
+|   |   |       theme.js            // 主题
+|   |   |
+|   |   \---stat                    // 统计模块的数据实体
+|   |           appdown.js          // 分类统计
+|   |           halls.js            // 营业厅统计
+|   |           platform.js         // 平台统计
+|   |           pv.js               // 访问量
+|   |
+|   \---view                            // 所有的视图（其实也是控制器），1.引入模板和model，渲染页面，2.做事件绑定
+|       |   HomeView.js                 // 主页
+|       |   navView.js                  // 导航
+|       |   PaginationPluginView.js     // 挂件所用的分页（例如文章编辑的应用列表，图片列表）
+|       |   PaginationView.js           // 基本分页，例如文章列表的分页
+|       |
+|       +---application                                     // 应用模块的视图
+|       |       ApplicationEdit_plugin_categoryListView.js  // 应用编辑中的分类列表
+|       |       CategoryView.js                             // 应用分类
+|       |       EditView.js                                 // 应用编辑
+|       |       ListView.js                                 // 应用列表
+|       |
+|       +---article                                         // 文章模块的视图
+|       |       ArticleCategoryView.js                      // 文章分类列表
+|       |       ArticleCommentView.js                       // 文章评论列表
+|       |       ArticleEditView.js                          // 文章编辑和创建
+|       |       ArticleEdit_plugin_applicationListView.js   // 文章编辑的应用列表挂件
+|       |       ArticleEdit_plugin_categoryListView.js      // 文章编辑的分类列表挂件
+|       |       ArticleEdit_plugin_productListView.js       // 文章编辑的应用列表挂件
+|       |       ArticleList.js                              // 文章列表
+|       |       ArticleSynView.js                           // 文章同步
+|       |
+|       +---common                                          // 公共模块的视图
+|       |       CategoryPluginListView.js                   // 分类挂件列表
+|       |       EditCategoryView.js                         // 编辑分类
+|       |
+|       +---plugin                                          // 插件模块的视图
+|       |       AdEditView.js                               // 广告编辑和创建
+|       |       AdListView.js                               // 广告列表
+|       |       AppkeyEditView.js                           // appkey编辑和创建
+|       |       AppkeyListView.js                           // appkey列表
+|       |       DuoshuoSetView.js                           // 多说设置
+|       |       PluginListView.js                           // 插件列表
+|       |       SqlisteOutputView.js                        // sq列表
+|       |       UcenterSetView.js                           // ucenter设置
+|       |
+|       +---product                                         // 产品模块的视图
+|       |       CategoryView.js                             // 产品分类
+|       |       EditView.js                                 // 产品编辑和创建
+|       |       ListView.js                                 // 产品列表
+|       |
+|       +---role                                            // 角色模块的视图
+|       |       RoleEditView.js                             // 角色编辑和创建
+|       |       RoleListView.js                             // 角色列表
+|       |       UserEditView.js                             // 用户编辑和创建
+|       |       UserListView.js                             // 用户列表
+|       |
+|       +---setting                                         // 设置模块的视图
+|       |       ClearCacheView.js                           // 清除缓存
+|       |       SetSynchronousView.js                       // 同步设置
+|       |       SetSystemView.js                            // 系统设置
+|       |       ThemesListView.js                           // 主题列表
+|       |
+|       \---stat                                            // 统计模块的视图
+|               StatApiView.js                              // api
+|               StatAppdownView.js                          // 分类下载
+|               StatHallsView.js                            // 营业厅统计
+|               StatPlatformView.js                         // 平台统计
+|               StatPvView.js                               // 访问量
+|               StatQualityView.js                          // 文章绩效
+|
+\---template                        // 所有的模板放在这里，模板就是html代码
+    |   footer.html                 // 底部
+    |   home.html                   // 首页
+    |   pagination.html             // 基础分页
+    |   paginationPlugin.html       // 挂件所用的分页
+    |
+    +---application                 // 应用模块的模板
+    |       category.html           // 应用分类
+    |       edit.html               // 应用创建和编辑
+    |       list.html               // 应用列表
+    |
+    +---article                     // 文章模块的模板
+    |       categoryList.html       // 文章分类列表
+    |       comment.html            // 文章评论列表
+    |       edit.html               // 文章编辑和创建
+    |       list.html               // 文章列表
+    |       synLlist.html           // 文章同步
+    |
+    +---common                      // 公共模块的模板
+    |       editCategory.html       // 分类编辑和创建
+    |
+    +---plugin                      // 插件模块的模板
+    |       adCreate.html           // 广告创建和编辑
+    |       adList.html             // 广告列表
+    |       appkeyCreate.html       // appkey创建和编辑
+    |       appkeyList.html         // appkey列表
+    |       duoshuoSet.html         // 多说设置
+    |       pluginList.html         // 插件列表
+    |       ucenterSet.html         // ucenter设置
+    |
+    +---product                     // 产品模块的模板
+    |       category.html           // 产品分类
+    |       edit.html               // 产品编辑和创建
+    |       list.html               // 产品列表
+    |
+    +---role                        // 用户模块的模板
+    |       roleedit.html           // 角色创建和编辑
+    |       roleList.html           // 角色列表
+    |       useredit.html           // 用户编辑和创建
+    |       userlist.html           // 用户列表
+    |
+    +---setting                     // 设置模块的模板
+    |       clearCache.html         // 清除缓存
+    |       setSynchronous.html     // 设置同步
+    |       settingSystem.html      // 系统设置
+    |       themesEdit.html         // 主题编辑
+    |       themesList.html         // 主题列表
+    |
+    \---stat                        // 统计模块的模板
+            api.html                // api
+            appdown.html            // 分类平台
+            awhall.html             // 营业厅统计
+            platform.html           // 平台统计
+            pv.html                 // 访问量统计
+            quality.html            // 文章绩效统计

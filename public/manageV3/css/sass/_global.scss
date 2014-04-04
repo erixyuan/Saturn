@@ -1,0 +1,924 @@
+///////////////////////////////////////////////////////////////////
+//  BUTTON 按鈕
+///////////////////////////////////////////////////////////////////
+
+// 通过色相（hue）、饱和度(saturation)和亮度（lightness）的值创建一个颜色；
+// hsl($hue,$saturation,$lightness)
+//
+// // 通过色相（hue）、饱和度(saturation)、亮度（lightness）和透明（alpha）的值创建一个颜色；
+// hsla($hue,$saturation,$lightness,$alpha)
+//
+// // 从一个颜色中获取色相（hue）值；
+// hue($color)
+//
+// // 从一个颜色中获取饱和度（saturation）值；
+// saturation($color)
+//
+// // 从一个颜色中获取亮度（lightness）值；
+// lightness($color)
+//
+// // 通过改变一个颜色的色相值，创建一个新的颜色；
+// adjust-hue($color,$degrees)
+//
+// // 通过改变颜色的亮度值，让颜色变亮，创建一个新的颜色；
+// lighten($color,$amount)
+//
+// // 通过改变颜色的亮度值，让颜色变暗，创建一个新的颜色；
+// darken($color,$amount)
+//
+// // 通过改变颜色的饱和度值，让颜色更饱和，从而创建一个新的颜色
+// saturate($color,$amount)
+//
+// // 通过改变颜色的饱和度值，让颜色更少的饱和，从而创建出一个新的颜色；
+// desaturate($color,$amount)
+//
+// // 将一个颜色变成灰色，相当于desaturate($color,100%);
+// grayscale($color)
+//
+// // 返回一个补充色，相当于adjust-hue($color,180deg);
+// complement($color)
+//
+// // 反回一个反相色，红、绿、蓝色值倒过来，而透明度不变。
+// invert($color)
+
+$g-btn-background-color: #fefefe;
+$g-btn-primary-background-color: #00ae56;
+$g-btn-delete-background-color: #e30045;
+
+.g-btn {
+    background: $g-btn-background-color;
+    border: 1px solid darken($g-btn-background-color, 20%);
+    border-radius: $g-border-radius;
+    padding: 8px 12px;
+    color: #111;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    // 去除虚框
+    outline: none;
+    cursor:pointer;
+
+    &:hover {
+        text-decoration: none;
+        background-color: lighten($g-btn-background-color, 5%);
+        border-color: darken($g-btn-background-color, 30%);
+        box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    &:active {
+        background: darken($g-btn-primary-background-color, 2%);
+        box-shadow: inset 0 0px 4px rgba(13, 188, 103, 0.7);
+        background: #F7FFF9;
+
+
+    }
+
+    &.active {
+        color: #fff;
+        background-color: darken($g-btn-primary-background-color, 5%);
+        background: darken($g-link-color, 5%);
+        box-shadow: inset 0px 0px 8px rgba(9, 134, 74, 0.5);
+    }
+}
+
+.g-btn-primary {
+    background: $g-btn-primary-background-color;
+    border: 1px solid darken($g-btn-primary-background-color, 5%);
+    color: #fff;
+
+    &:hover {
+        background-color: lighten($g-btn-primary-background-color, 5%);
+        border-color: darken($g-btn-primary-background-color, 8%);
+    }
+}
+
+.g-btn-delete {
+    background: $g-btn-delete-background-color;
+    border: 1px solid darken($g-btn-delete-background-color, 10%);
+    color: #fff !important;
+
+    &:hover {
+        background-color: lighten($g-btn-delete-background-color, 5%);
+        border-color: darken($g-btn-delete-background-color, 8%);
+    }
+}
+
+.g-btn-mini {
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.g-btn-large {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.g-btn-block {
+    display: block;
+    text-align: center;
+    margin: 5px 0;
+}
+
+
+
+
+
+// BUTTON GROUP 按纽分组/////////////////////////////////////////////////////////////////
+.g-btn-group {
+    display: inline-block;
+    display: inline-flex;
+    border-radius: $g-border-radius;
+    border: 1px solid #0dbc67;
+    border-top: 0;
+    border-bottom: 0;
+
+    .g-btn {
+        float: left;
+        border: 1px solid #0dbc67;
+        padding: 7px 6px;
+        border-right: 0;
+        border-radius: 0;
+
+        &:first-child {
+            border-left: 0 none;
+        }
+
+        span {
+            font-weight: normal;
+            font-family: $font-code;
+            font-size: 9px;
+            margin-left: 1px;
+            line-height: 1;
+            vertical-align: middle;
+            color: #777;
+        }
+
+        &.active {
+            span {
+                color: #fff;
+            }
+        }
+    }
+
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  TABLE 表格
+///////////////////////////////////////////////////////////////////
+table.g-table {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-collapse: separate;
+    border-radius: $g-border-radius;
+    background: #fff;
+    width: 100%;
+
+
+    td, th {
+        border-top: 1px solid #c7ced3;
+        border-left: none;
+        border-right: none;
+        text-align: left;
+    }
+
+    thead {
+        border-radius: $g-border-radius;
+        background-image: -moz-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+
+        tr {
+            th {
+                padding: 9px;
+                border-top: none;
+            }
+        }
+    }
+
+    tbody {
+        background: #fff;
+        tr {
+
+            &:nth-child(even) {
+                background-color: #fafafa;
+            }
+
+            &:hover {
+                background-color: #eee;
+            }
+        }
+
+        td {
+            padding: 9px;
+
+            a {
+                color: #000;
+            }
+
+
+            img {
+                max-width: 120px;
+                max-height: 100px;
+            }
+        }
+    }
+
+
+    // 第一排，文章分类组
+    // 第二排，应用分类组
+    .col-checkbox {
+        width: 1%;
+    }
+
+    .col-category, .col-author, .col-status, .col-view, .col-comment,
+    .col-package, .col-platform {
+        width: 7%;
+    }
+
+    .col-order,
+    .col-added {
+        width: 11%;
+    }
+
+
+    .col-creat-at, .col-actions {
+        width: 13%;
+    }
+
+    .col-actions {
+        text-align: right;
+    }
+
+
+
+
+
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  SELECT 下拉選項
+///////////////////////////////////////////////////////////////////
+.g-select {
+    padding: 7px 5px;
+    font-size: 14px;
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  LIST 列表
+///////////////////////////////////////////////////////////////////
+.g-list, .g-list-ul, .g-list-ol {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+
+    li {
+        list-style-position: inside;
+        line-height: 1.8;
+        margin-right: 5px;
+    }
+}
+
+.g-list-ul {
+    li {
+        list-style: inside disc;
+    }
+}
+
+.g-list-ol {
+    li {
+        list-style: inside decimal;
+    }
+}
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  INPUT 輸入框
+///////////////////////////////////////////////////////////////////
+input[type="text"], .input-text, textarea {
+    padding: 8px 5px;
+    color: #34495e;
+    font-size: 14px;
+    font-family: $font-base;
+    border: 1px solid #ccc;
+    border-radius: $g-border-radius;
+    outline: 0;
+    @include gBoxShadowInset;
+    @include gBoxShadowInset;
+
+    &:focus {
+        box-shadow: 0 0 5px rgba(140, 247, 149, 0.4);
+        border: 1px solid #99D197;
+    }
+}
+
+input[disabled] {
+    border-color: #d5dbdb;
+    color: #d5dbdb;
+    background-color: #f4f6f6;
+}
+
+
+.input-text-mini {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+
+
+input[type="date"] {
+    width: 140px;
+}
+
+input[type="file"] {
+    background: #ccc;
+    border-radius: $g-border-radius;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  ALERT 警告
+///////////////////////////////////////////////////////////////////
+.g-alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    padding: 10px 30px 10px 10px;
+    background-color: #0f6cd3;
+    text-align: center;
+    color: #fff;
+    border-bottom: 3px solid #aab1b9;
+    @include gBoxShadow;
+
+    //显示
+    &.show {
+        display: block;
+    }
+
+    //关闭按钮
+    .close {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10001;
+        color: #fff;
+    }
+}
+
+
+
+// 信息 - 警告窗口
+.g-alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-bottom-color: #3ec6e2;
+    .close {
+        color: #31708f;
+    }
+}
+
+// 成功 - 警告窗口
+.g-alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-bottom-color: #6ad80e;
+    .close {
+        color: #3c763d;
+    }
+}
+
+// 警告 - 警告窗口
+.g-alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-bottom-color: #ffac00;
+    .close {
+        color: #8a6d3b;
+    }
+}
+
+//   严重错误 - 警告
+.g-alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-bottom-color: #fa3454;
+    .close {
+        color: #a94442;
+    }
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// 载入 提示 添加 use-progress 这个class的话表明要显示载入进度,
+/// 给里面的use-progress元素设置宽度百分比代表当前的进度
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.g-loading {
+    display: none;
+    position: fixed;
+    top: -4px;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 3px solid $g-link-color;
+
+
+    &.show {
+        display: block;
+    }
+
+    // 使用百分比进度条
+    &.use-progress {
+        border-bottom: 0;
+
+        .progress-bar {
+            position: absolute;
+            left: 0;
+            bottom:0;
+            height: 2px;
+            background-color: lighten($g-link-color, 2%);
+        }
+    }
+}
+
+
+
+///////////////////////////////////////////////////////////////////
+//  filter 過濾器
+///////////////////////////////////////////////////////////////////
+// .g-filter-toolbar {
+//     display: none;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     padding: 10px 30px 10px 10px;
+//     background: #fff;
+//     z-index: 8000;
+//     text-align: center;
+//     @include gBoxShadow;
+//     border-bottom: 3px solid #e5650f;
+//     overflow: hidden;
+//     &.show {
+//         display: block;
+//     }
+//     .close {
+//         position: absolute;
+//         top: 10;
+//         right: 10px;
+//         color: #333;
+//         z-index: 8001;
+//         text-decoration: none;
+//     }
+//     .input-text {
+//         margin: 0;
+//     }
+//     .field {
+//         border-bottom: 0;
+//         display: inline-block;
+//         margin-right: 1em;
+//         label {
+//             display: inline-block;
+//             margin-right: .5em;
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MOUDEL LIST 模塊統一列表
+///////////////////////////////////////////////////////////////////
+.g-moudel-list {
+
+    // 列表頭部
+    .g-moudel-list-header {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    // 列表內容
+    .g-moudel-list-container {
+        margin-bottom: 20px;
+
+    }
+
+    // 列表底部
+    .g-moudel-list-footer {
+
+    }
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MOUDEL POST 包住主要文章模塊，如文章、應用專用
+///////////////////////////////////////////////////////////////////
+.g-moudel-post {
+
+    // 主要
+    .w-main {
+        width: auto;
+        margin-right: 320px;
+    }
+
+
+
+    // 邊欄
+    .w-ext {
+        position: absolute;
+        right: 20px;
+        top: 0;
+        width: 300px;
+        overflow: hidden;
+    }
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MOUDEL PAGE 包住次要模塊，如插件，通用性較好
+///////////////////////////////////////////////////////////////////
+.g-moudel-page {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  SECTION 片段，一遍用h2做標題，下面接表單field
+///////////////////////////////////////////////////////////////////
+.section {
+    margin-bottom: 40px;
+
+    h2 {
+        @include gTextShadowWhite;
+        font-size: 18px;
+        font-family: $font-yahei;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+
+    .field {
+        margin-bottom: 10px;
+        font-size: 14px;
+
+
+        label {
+            text-align: right;
+            width: 100px;
+            margin-right: 5px;
+            display: inline-block;
+
+        }
+
+        input {
+            margin-right: 10px;
+        }
+
+        em {
+            font-style: normal;
+            font-family: $font-code-mingliu;
+            font-size: 11px;
+            color: #aaa;
+
+
+        }
+    }
+
+
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  PAGER 翻頁
+///////////////////////////////////////////////////////////////////
+.g-pagination {
+
+    .goto {
+        float: left;
+        margin-right: 5px;
+        font-size: 14px;
+
+        .g-input {
+            @extend .input-text;
+            width: 20px;
+            margin: 0 2px;
+            text-align: center;
+        }
+
+        .g-btn {
+            @extend .g-btn;
+            font-weight: normal;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+    }
+
+    .prev, .next, ul.numbers li {
+        margin: 0 3px;
+
+        a {
+            @extend .g-btn;
+        }
+
+    }
+
+
+    .prev {
+        float: left;
+
+        a {
+            @extend .g-btn-primary;
+        }
+
+    }
+
+    .next {
+        float: left;
+
+        a {
+            @extend .g-btn-primary;
+        }
+    }
+
+    ul.numbers {
+        margin: 0;
+        padding: 0;
+        float: left;
+
+        li {
+            list-style: inside none;
+            float: left;
+
+            a {
+                font-weight: normal;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            &.current {
+                a {
+                    @extend .g-btn-primary;
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  flash上傳控件 與 上傳選擇
+///////////////////////////////////////////////////////////////////
+.swfupload {
+    height: 21px;
+    background: #eee;
+    vertical-align: top !important;
+}
+
+
+ul.attachment-list {
+    @extend .g-list;
+    width: 100%;
+    margin-top: 10px;
+
+    li {
+        @include gBoxShadow;
+        background-color: #FCFCFC;
+        border: 1px solid #ECECEC;
+        position: relative;
+        list-style: inside none;
+        width: 18%;
+        height: 150px;
+        margin-right: 1%;
+        float: left;
+        margin-bottom: 15px;
+        border-radius: $g-border-radius;
+
+        img {
+            width: 100%;
+            max-height: 105px;
+            background-color: #fcc;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            line-height: 1.2;
+            text-align: center;
+            opacity: .8;
+
+
+            .filename {
+                @include oneLineText;
+                font-family: $font-mingliu;
+                font-size: 11px;
+                width: 100%;
+            }
+
+            .actions {
+                display: block;
+
+                a {
+                    @extend .g-btn, .g-btn-mini;
+                    font-family: $font-mingliu;
+                    font-size: 11px;
+                    padding: 1px 5px;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  MODAL 彈窗
+///////////////////////////////////////////////////////////////////
+.g-modal {
+
+    // 全屏背景部分
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1024;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    background: rgba( 0, 0, 0, .6);
+
+
+    //隐藏
+    &.show {
+        display: block;
+        opacity: 1;
+    }
+
+    // Modal 主彈窗
+    .g-modal-dialog {
+        @include gBoxShadowInset;
+        position: relative;
+        top: 20%;
+        left: 50%;
+        padding: 20px;
+        width: 600px;
+        margin-left: -300px;
+        background: #fff;
+        border-radius: 4px;
+        margin-top: 3em;
+
+
+
+        //关闭 按钮
+        .close {
+            margin: -10px -10px 0 0;
+            float: right;
+            font-size: 12px;
+            color: #666;
+            border: 0;
+            text-decoration: none;
+
+            i {
+                font-size: 30px;
+            }
+
+            &:hover {
+                color: #999;
+            }
+        }
+
+
+
+        .g-modal-dialog-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #aaa;
+
+            //标题
+            h5 {
+                margin: 0;
+                padding: 0 0 15px 0;
+                font-weight: bold;
+                font-size: 20px;
+                font-family: $font-mingliu;
+            }
+        }
+
+
+
+        .g-modal-dialog-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+
+        }
+
+        .g-modal-dialog-footer {
+            margin-bottom: 20px;
+        }
+
+    }
+
+}

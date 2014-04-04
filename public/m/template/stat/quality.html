@@ -1,0 +1,51 @@
+<div class="wrap g-moudel-list m-stat m-stat-list">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left">
+            <strong>条件</strong>
+            起始日期:
+            <input type="date" class="input-text">
+            结束日期:
+            <input type="date" class="input-text">
+            分组:
+             <button class="g-btn g-btn-primary">确定</button>
+
+             <button class="g-btn">Excel 下载</button>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>标题</th>
+                <th>发布日期</th>
+                <th>分类</th>
+                <th>作者</th>
+                <th>{{days}}天阅读数</th>
+                <th>{{days}}天评论数</th>
+                <th>评分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each data as dt index}}
+                <tr>
+                    <td>{{dt.id}}</td>
+                    <td>{{dt.title}}</td>
+                    <td>{{dt.published}}</td>
+                    <td>{{dt.category}}</td>
+                    <td>{{dt.author}}</td>
+                    <td>{{dt.reads}}</td>
+                    <td>{{dt.comment}}</td>
+                    <td>{{dt.score}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>
+
+
+

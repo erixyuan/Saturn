@@ -1,0 +1,475 @@
+///////////////////////////////////////////////////////////////////
+//  BUTTON 按鈕
+///////////////////////////////////////////////////////////////////
+
+// 通过色相（hue）、饱和度(saturation)和亮度（lightness）的值创建一个颜色；
+// hsl($hue,$saturation,$lightness)
+//
+// // 通过色相（hue）、饱和度(saturation)、亮度（lightness）和透明（alpha）的值创建一个颜色；
+// hsla($hue,$saturation,$lightness,$alpha)
+//
+// // 从一个颜色中获取色相（hue）值；
+// hue($color)
+//
+// // 从一个颜色中获取饱和度（saturation）值；
+// saturation($color)
+//
+// // 从一个颜色中获取亮度（lightness）值；
+// lightness($color)
+//
+// // 通过改变一个颜色的色相值，创建一个新的颜色；
+// adjust-hue($color,$degrees)
+//
+// // 通过改变颜色的亮度值，让颜色变亮，创建一个新的颜色；
+// lighten($color,$amount)
+//
+// // 通过改变颜色的亮度值，让颜色变暗，创建一个新的颜色；
+// darken($color,$amount)
+//
+// // 通过改变颜色的饱和度值，让颜色更饱和，从而创建一个新的颜色
+// saturate($color,$amount)
+//
+// // 通过改变颜色的饱和度值，让颜色更少的饱和，从而创建出一个新的颜色；
+// desaturate($color,$amount)
+//
+// // 将一个颜色变成灰色，相当于desaturate($color,100%);
+// grayscale($color)
+//
+// // 返回一个补充色，相当于adjust-hue($color,180deg);
+// complement($color)
+//
+// // 反回一个反相色，红、绿、蓝色值倒过来，而透明度不变。
+// invert($color)
+
+$g-btn-background-color: #fefefe;
+$g-btn-primary-background-color: #e91b12;
+$g-btn-delete-background-color: #e30045;
+
+.g-btn {
+    background: $g-btn-background-color;
+    border: 1px solid darken($g-btn-background-color, 20%);
+    border-radius: $g-border-radius;
+    padding: 8px 12px;
+    color: #111;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    // 去除虚框
+    outline: none;
+    cursor:pointer;
+
+    &:hover {
+        text-decoration: none;
+        background-color: lighten($g-btn-background-color, 5%);
+        border-color: darken($g-btn-background-color, 30%);
+        box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    &:active {
+        background: darken($g-btn-primary-background-color, 2%);
+        box-shadow: inset 0 0px 4px rgba(lighten($g-btn-primary-background-color, 20%), 0.5);
+        background: lighten($g-btn-background-color, 50%);
+    }
+
+    &.active {
+        color: #fff;
+        background-color: darken($g-btn-primary-background-color, 5%);
+        background: darken($g-link-color, 5%);
+        box-shadow: inset 0px 0px 8px rgba(9, 134, 74, 0.5);
+    }
+}
+
+.g-btn-primary {
+    background: $g-btn-primary-background-color;
+    border: 1px solid darken($g-btn-primary-background-color, 5%);
+    color: #fff;
+
+    &:hover {
+        background-color: lighten($g-btn-primary-background-color, 5%);
+        border-color: darken($g-btn-primary-background-color, 8%);
+    }
+}
+
+
+.g-btn-disabled {
+    background: darken($g-btn-background-color, 5%);
+    border: 1px solid darken($g-btn-background-color, 10%);
+    color: darken($g-btn-background-color, 40%);
+    cursor: default;
+}
+
+.g-btn-delete {
+    background: $g-btn-delete-background-color;
+    border: 1px solid darken($g-btn-delete-background-color, 10%);
+    color: #fff !important;
+
+    &:hover {
+        background-color: lighten($g-btn-delete-background-color, 5%);
+        border-color: darken($g-btn-delete-background-color, 8%);
+    }
+}
+
+.g-btn-mini {
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.g-btn-large {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.g-btn-block {
+    display: block;
+    text-align: center;
+    margin: 5px 0;
+}
+
+
+
+
+
+// BUTTON GROUP 按纽分组/////////////////////////////////////////////////////////////////
+.g-btn-group {
+    display: inline-block;
+    display: inline-flex;
+    border-radius: $g-border-radius;
+    border: 1px solid #0dbc67;
+    border-top: 0;
+    border-bottom: 0;
+
+    .g-btn {
+        float: left;
+        border: 1px solid #0dbc67;
+        padding: 7px 6px;
+        border-right: 0;
+        border-radius: 0;
+
+        &:first-child {
+            border-left: 0 none;
+        }
+
+        span {
+            font-weight: normal;
+            font-family: $font-code;
+            font-size: 9px;
+            margin-left: 1px;
+            line-height: 1;
+            vertical-align: middle;
+            color: #777;
+        }
+
+        &.active {
+            span {
+                color: #fff;
+            }
+        }
+    }
+
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  TABLE 表格
+///////////////////////////////////////////////////////////////////
+table.g-table {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-collapse: separate;
+    border-radius: $g-border-radius;
+    background: #fff;
+    width: 100%;
+
+
+    td, th {
+        border-top: 1px solid #c7ced3;
+        border-left: none;
+        border-right: none;
+        text-align: left;
+    }
+
+    thead {
+        border-radius: $g-border-radius;
+        background-image: -moz-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(240,242,245) 0%, rgb(245,246,247) 45%, rgb(250,250,250) 100%);
+
+        tr {
+            th {
+                padding: 9px;
+                border-top: none;
+            }
+        }
+    }
+
+    tbody {
+        background: #fff;
+        tr {
+
+            &:nth-child(even) {
+                background-color: #fafafa;
+            }
+
+            &:hover {
+                background-color: #eee;
+            }
+        }
+
+        td {
+            padding: 9px;
+
+            a {
+                color: #000;
+            }
+
+
+            img {
+                max-width: 120px;
+                max-height: 100px;
+            }
+        }
+    }
+
+
+    // 第一排，文章分类组
+    // 第二排，应用分类组
+    // .col-checkbox {
+    //     width: 1%;
+    // }
+
+    // .col-category, .col-author, .col-status, .col-view, .col-comment,
+    // .col-package, .col-platform {
+    //     width: 7%;
+    // }
+
+    // .col-order,
+    // .col-added {
+    //     width: 11%;
+    // }
+
+
+    // .col-creat-at, .col-actions {
+    //     width: 13%;
+    // }
+
+    // .col-actions {
+    //     text-align: right;
+    // }
+
+
+
+
+
+}
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  INPUT 輸入框
+///////////////////////////////////////////////////////////////////
+input[type="text"], .input-text, textarea {
+    padding: 8px 5px;
+    color: #34495e;
+    font-size: 14px;
+    font-family: $font-base;
+    border: 1px solid #ccc;
+    border-radius: $g-border-radius;
+    outline: 0;
+    @include gBoxShadowInset;
+    @include gBoxShadowInset;
+
+    &:focus {
+        box-shadow: 0 0 5px rgba(140, 247, 149, 0.4);
+        border: 1px solid #99D197;
+    }
+}
+
+input[disabled] {
+    border-color: #d5dbdb;
+    color: #d5dbdb;
+    background-color: #f4f6f6;
+}
+
+
+.input-text-mini {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+
+
+input[type="date"] {
+    width: 140px;
+}
+
+input[type="file"] {
+    background: #ccc;
+    border-radius: $g-border-radius;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  LIST 列表
+///////////////////////////////////////////////////////////////////
+.g-list, .g-list-ul, .g-list-ol {
+    margin: 0;
+    padding: 0;
+
+    li {
+        list-style: inside none;
+        line-height: 1.8;
+    }
+}
+
+.g-list-ul {
+    li {
+        list-style: inside disc;
+    }
+}
+
+.g-list-ol {
+    li {
+        list-style: inside decimal;
+    }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  G-BOX全局盒子
+///////////////////////////////////////////////////////////////////
+.g-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 3px rgba(55, 55, 55, 0.1);
+
+    .g-box-header {
+        padding: 10px 20px;
+        background-image: -moz-linear-gradient( 90deg, rgb(249,249,249) 0%, rgb(255,255,255) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(249,249,249) 0%, rgb(255,255,255) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(249,249,249) 0%, rgb(255,255,255) 100%);
+        border-bottom: 1px solid #ddd;
+    }
+
+    .g-box-container {
+
+    }
+
+    .g-box-footer {
+
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////
+//  PAGER 翻頁
+///////////////////////////////////////////////////////////////////
+.g-pagination {
+
+    ul{
+        margin: 0;
+        padding: 0;
+        display: table;
+        margin: 0 auto;
+
+        li {
+            list-style: inside none;
+            float: left;
+
+            a, span {
+                @extend .g-btn;
+                font-size: 14px;
+                font-weight: normal;
+                min-width: 12px;
+                text-align: center;
+                padding: 8px 20px;
+                margin: 0 10px;
+                color: #111;
+                display: block;
+
+                .fa {
+                    color: #000;
+                    margin: 0 5px;
+                }
+
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    padding: 8px 10px;
+                    margin: 0 4px;
+                }
+            }
+        }
+
+
+
+        li.disabled {
+            span {
+                @extend .g-btn-disabled;
+            }
+        }
+
+        li.active {
+            span {
+                font-weight: bold;
+                cursor: default;
+            }
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                @extend .g-btn-primary;
+            }
+        }
+
+
+        li.num {
+            display: none;
+
+            &:last-child, &:first-child{
+                display: block;
+            }
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: block;
+            }
+        }
+
+
+    }
+
+
+}
+
+.g-pagination-simple {
+    ul {
+        margin: none;
+        margin-right: 10px;
+        float: right;
+        li {
+            a,span {
+                padding: 10px 20px;
+                margin: 0 10px;
+            }
+        }
+    }
+}
+
+

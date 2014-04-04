@@ -1,0 +1,199 @@
+<div class="wrap g-moudel-page m-set m-set-settingSystem">
+
+    <div class="w-main">
+
+        <div class="section">
+            <h2>站点相关设置</h2>
+            <div class="field">
+                <label>站点名称</label>
+                <input type="text" class="input-text" size="30" name="sitename" value="{{sitename}}" placeholder="请输入站点名称..." />
+                <em>&lt;?php echo Option::get('sitename');?&gt;</em>
+            </div>
+
+            <div class="field">
+                <label>站点域名</label>
+                <input type="text" class="input-text" size="30" name="domain" value="{{domain}}" placeholder="请输入站点域名..." />
+                <em>&lt;?php echo Option::get('domain');?&gt;</em>
+            </div>
+
+            <div class="field">
+                <label>站点描述</label>
+                <input type="text" class="input-text" size="30" name="site__description" value="{{site__description}}" placeholder="请输入站点描述..." />
+                <em>&lt;?php echo Option::get('site::description');?&gt;</em>
+            </div>
+
+            <div class="field">
+                <label>站点关键字</label>
+                <input type="text" class="input-text" size="30" name="site__keywords" value="{{site__keywords}}" placeholder="请输入站点关键字..." />
+                <em>&lt;?php echo Option::get('site::keywords');?&gt;</em>
+            </div>
+
+            <div class="field">
+                <label>前台模板</label>
+                <select name="theme" class="g-select" id="js_theme">
+                    <option value="">选择模板</option>
+                    {{each themeList}}
+                        <option value="{{$value}}">
+                    {{$value}}
+                    </option>
+                    {{/each}}
+                </select>
+                <em>&lt;?php echo Option::get('theme');?&gt;</em>
+            </div>
+
+            <div class="field">
+                <label>文章固定连接</label>
+                <input type="radio" name="subject_default_slug" value="0"  /> 无(使用ID)
+                <input type="radio" name="subject_default_slug" value="1"  /> 拼音
+                <input type="radio" name="subject_default_slug" value="2"  /> 中文
+                <em>&lt;?php echo Option::get('domain');?&gt;</em>
+            </div>
+
+        </div>
+
+
+        <div class="section">
+            <h2>评论相关</h2>
+            <div class="field">
+                <label>默认通过</label>
+                <input type="radio" name="comment_default__enable" value="0"  />否
+                <input type="radio" name="comment_default__enable" value="1"  />是
+                <em>带有网址的评论除外</em>
+            </div>
+            <div class="field">
+
+                <label>开启验证码</label>
+                <input type="radio" name="comment_default__captcha" value="0"  />否
+                <input type="radio" name="comment_default__captcha" value="1"  />是
+                <em>&lt;?php echo Option::get('comment_default::captcha');?&gt;</em>
+            </div>
+            <div class="field">
+
+                <label>开启用户名</label>
+                <input type="radio" name="comment_default__username" value="0"  />否
+                <input type="radio" name="comment_default__username" value="1"  />是
+                <em>&lt;?php echo Option::get('comment_default::username');?&gt;</em>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2>文章同步</h2>
+
+            <div class="field">
+                <label>采集图片</label>
+                <input type="radio" name="Postsync__thumb_enable" value="0"  />原图
+                <input type="radio" name="Postsync__thumb_enable" value="1"  />缩略图
+                <em>若选择缩略图则采集到的图片可能有水印</em>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h2>附件相关</h2>
+            <div class="field">
+                <label>附件路径规则</label>
+                <input type="radio" name="attachment__path_rule" value="0"  />按id生成
+                <input type="radio" name="attachment__path_rule" value="1"  />按时间生成
+            </div>
+
+            <div class="field">
+
+                <label>文章Banner</label>
+                <input type="text" name="Subject__thumb_empty_url" class="input-text" value="{{Subject__thumb_empty_url}}" />
+                <em>相对目录(网站根目录开始)最开头不带/</em>
+            </div>
+
+            <div class="field">
+                <label>附件最大大小</label>
+                <input   placeholder="请输入附件最大大小..." type="text" name="attachment__max_size" class="input-text" value="{{attachment__max_size}}" />
+                <em>eg:500K,10M,1G</em>
+            </div>
+
+            <div class="field">
+                <label>允许的扩展名</label>
+                <input placeholder="请输入水印地址..." type="text" name="attachment__allow_extensions" class="input-text" value="{{attachment__allow_extensions}}" />
+                <em>多个用英文逗号隔开,且没有空格.</em>
+            </div>
+
+            <div class="field">
+                <label>水印地址</label>
+                <input placeholder="请输入水印地址..." type="text" name="attachment__watermarks" class="input-text" value="{{attachment__watermarks}}" />
+                <em>相对目录(网站根目录开始)最开头不带/,绝对目录带/; 多个用逗号隔开.</em>
+            </div>
+
+            <div class="field">
+                <label>图片加水印条件</label>
+                宽：
+                <input size="15" placeholder="请输入宽(PX)..." type="text" name="attachment__watermark_min_width" class="input-text" value="{{attachment__watermark_min_width}}" />
+                高：
+                <input size="15" placeholder="请输入高(PX)..." type="text" name="attachment__watermark_min_height" class="input-text" value="{{attachment__watermark_min_height}}" />
+                <em>相对目录(网站根目录开始)最开头不带/,绝对目录带/; 多个用逗号隔开.</em>
+            </div>
+
+            <!--
+            <div class="field">
+                <label>水印默认位置</label>
+               <input placeholder="请输入水印默认位置..." type="text" name="" value="" />
+                <em>请看小键盘,0 为随机</em>
+            </div>
+            -->
+        </div>
+
+
+        <div class="section">
+            <h2>文章绩效相关</h2>
+
+            <div class="field">
+                <label>中等评价阅读数</label>
+                <input class="input-text" size="20" placeholder="" type="text" name="subject_quality__lv1_views" value="{{subject_quality__lv1_views}}" />
+                <em>评价中等条件1，大于该阅读数；小于该数值显示差</em>
+            </div>
+            <div class="field">
+                <label>优秀评价阅读数</label>
+                <input class="input-text" size="20" placeholder="" type="text" name="subject_quality__lv2_views" value="{{subject_quality__lv2_views}}" />
+                <em> 评价优秀条件1，大于该阅读数</em>
+            </div>
+            <div class="field">
+                <label>中等优秀评论数</label>
+                <input class="input-text" size="20" placeholder="" type="text" name="subject_quality__lv1_comments" value="{{subject_quality__lv1_comments}}" />
+                <em>评价中等\优秀条件2，大于该评论数</em>
+            </div>
+
+        </div>
+
+
+        <div class="section">
+            <h2>应用相关</h2>
+
+            <div class="field">
+                <label>平台</label>
+                <input class="input-text" size="50" placeholder="" type="text" name="application__platform" class="input-text" value="{{application__platform}}" />
+                <em>多个用 | 隔开</em>
+            </div>
+
+        </div>
+
+
+        <div class="section">
+            <h2>其他</h2>
+            <div class="field">
+                <label>后台公告</label>
+                <textarea name="manage__notice" id="js_"  cols="90" rows="2">{{manage__notice}}</textarea>
+            </div>
+
+            <div class="field">
+                <label>提示设置头像</label>
+                <input type="radio" name="manage__warn_avatar" value="0"  />否
+                <input type="radio" name="manage__warn_avatar" value="1"  />是
+            </div>
+        </div>
+
+
+        <div class="fn-clear" >
+            <span class="g-btn g-btn-primary" id="js_update">保存</span>
+        </div>
+
+    </div>
+
+</div>

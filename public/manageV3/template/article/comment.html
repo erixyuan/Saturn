@@ -1,0 +1,76 @@
+<div class="wrap g-moudel-list m-article m-article-comment">
+
+
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left g-btn-group" id="js_secondNav">
+            <a href="#article/comment/all/1" class="g-btn" status="all">全部({{count.all}})</a>
+            <a href="#article/comment/publish/1" class="g-btn" status="publish">已通过({{count.publish}})</a>
+            <a href="#article/comment/pending/1" class="g-btn" status="pending">待审核({{count.pending}})</a>
+            <a href="#article/comment/refuse/1" class="g-btn" status="refuse">拒绝({{count.refuse}})</a>
+            <a href="#article/comment/recycle/1" class="g-btn" status="recycle">回收站({{count.recycle}})</a>
+        </div>
+
+        <div class="fn-right">
+        </div>
+    </div>
+
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox">
+                    <input type="checkbox" class="input-checkbox" id="js_operateCheckBox">
+                </th>
+                <th class="col-title mobile-hide">文章标题</th>
+                <th class="col-username mobile-hide">评论用户</th>
+                <th class="col-content">评论内容</th>
+                <th class="col-status">状态</th>
+                <th class="col-create-at mobile-hide">发表时间</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+        <tbody id="js_commentListContent">
+            {{each data as comment index}}
+            <tr>
+                <td class="col-checkbox">
+                    <input type="checkbox" class="input-checkbox" operateId="{{comment.id}}">
+                </td>
+                <th class="col-title mobile-hide">
+                    <a href="#comment?id={{comment.id}}">{{comment.post_title}}</a>
+                </td>
+                <td class="col-username mobile-hide">{{comment.author}}</td>
+                <td class="col-content">{{comment.content}}</td>
+                <td class="col-status">{{comment.status}}</td>
+                <td class="col-create-at mobile-hide">{{comment.created}}</td>
+                <td class="col-actions">
+                    <span class="g-btn g-btn-mini" operateid="{{comment.id}}" operate="publish">通</span>
+                    <span class="g-btn g-btn-mini" operateid="{{comment.id}}" operate="refuse">拒</span>
+                    <span class="g-btn g-btn-mini g-btn-delete" operateid="{{comment.id}}" operate="delete">删</span>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer">
+        <div class="fn-left m-function">
+            <select name="" id="js_batchOperateSelect" class="g-select">
+                <option value="">请选择操作</option>
+                <option value="publish">通过</option>
+                <option value="refuse">拒绝</option>
+                <option value="delete">删除</option>
+            </select>
+            <span class="g-btn g-btn-primary" id="js_batchOperate">提交</span>
+        </div>
+        <!-- 分页器 START-->
+        <div class="fn-right g-pagination" id="js_page"></div>
+        <!-- 分页器 end-->
+    </div>
+
+
+
+</div>

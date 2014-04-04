@@ -1,0 +1,148 @@
+// 雅黑字體
+$font-yahei: "Microsoft YaHei", "微软雅黑", "\5FAE\8F6F\96C5\9ED1", "Microsoft JhengHei", STHeiti;
+$font-mingliu: Arial, Mingliu, sans-serif;
+$font-simsun: Arial, Simsun, sans-serif;
+$font-base: Arial, Tahoma, sans-serif;
+$font-code: Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-code-mingliu: Menlo, Monaco, Consolas, Mingliu;
+
+
+$g-border-radius: 3px;
+
+$g-link-color: #05da73;
+$w-sidebar-width: 180px;
+
+
+$m-top-tabs-li-a-width: 60px;
+
+
+
+@mixin spMain {
+    background-repeat: no-repeat;
+    background-image: url(../img/sp_main.png);
+    background-image: -webkit-image-set(url(../img/sp_main.png) 1x, url(../img/sp_main@2x.png) 2x);
+
+    @media (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:3 / 2),(min-device-pixel-ratio:1.5) {
+        background-image: url(../img/sp_main@2x.png);
+        background-size: 900px auto;
+    }
+}
+
+
+
+// 文字陰影，黑
+@mixin gTextShadow {
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .9);
+}
+
+// 文字陰影，白
+@mixin gTextShadowWhite {
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, .99);
+}
+
+// box內陰影
+@mixin gBoxShadowInset {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+// box外陰影
+@mixin gBoxShadow {
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.075);
+}
+
+
+
+// btn內陰影（按下）
+@mixin gBtnShadowInset {
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+}
+
+
+// 劃過動畫
+@mixin gTransitionBackground {
+    -webkit-transition-property: background;
+    -moz-transition-property: background;
+    -o-transition-property: background;
+    transition-property: background;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+
+
+// 不当前文本或元素被选中。
+// 如果有必要多浏览器兼容，可以在IE6-9中执行这段JS。
+// document.body.onselectstart = document.body.ondrag = function(){
+//     return false;
+// }
+@mixin disableSelect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+
+// 用于锁住文本宽度，多出的用...代替，使用时，记得加个width。
+@mixin hiddenText {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+
+
+// 鎖住一行文本，多餘的用...顯示。
+@mixin oneLineText {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+}
+
+
+//的工具类 Fn
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+
+.fn-hide {
+    display: none;
+}
+
+.fn-left,.fn-right {
+    display:inline;
+}
+
+.fn-left {
+    float: left;
+}
+
+.fn-right {
+    float: right;
+}
+
+.fn-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+

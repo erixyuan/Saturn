@@ -1,0 +1,22 @@
+//  瀑布流页面的样式
+.waterfall {
+    background: none;
+    border: 0;
+    .waterfall_nav,.clearfix {
+        overflow: hidden;
+        *zoom: 1;
+    }
+    .waterfall_nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .waterfall_nav ul li {
+        list-style-type: none;
+        a {
+            text-decoration: none;
+        }
+    }
+
+}

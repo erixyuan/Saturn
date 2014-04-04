@@ -1,0 +1,84 @@
+<div class="wrap g-moudel-list m-role m-role-userList">
+     <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-right">
+
+        </div>
+    </div>
+
+
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left">
+            <span class="g-btn g-btn-primary">添加用户</span>
+        </div>
+
+        <div class="fn-right">
+            <input type="text" class="input-text" id="searchKeyWord">
+            <span class="g-btn" id="searchBtn">搜索</span>
+        </div>
+    </div>
+
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox"><input type="checkbox" class="input-checkbox"></th>
+                <th class="col-id mobile-hide">ID</th>
+                <th class="col-name mobile-hide">用户名</th>
+                <th class="col-email mobile-hide">邮箱</th>
+                <th class="col-role">角色</th>
+                <!-- <th class="col-post-count mobile-hide">文章数</th> -->
+                <th class="col-enable">可用</th>
+                <th class="col-create-conut mobile-hide">注册时间</th>
+                <th class="col-last-login mobile-hide">最后登录</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+        <tbody id="js_userListContent">
+                {{each data as user index}}
+                    <tr>
+                        <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                        <td class="col-id mobile-hide">{{user.id}}</td>
+                        <td class="col-name mobile-hide">
+                            <a href="#userManage/user/edit/{{user.id}}">
+                            {{user.username}}
+                            </a>
+                            </td>
+                        <td class="col-email mobile-hide">{{user.email}}</td>
+                        <td class="col-role">
+                            {{each user.roles as role index}}
+                                {{role.display_name}}&nbsp;&nbsp;
+                            {{/each}}
+                        </td>
+                        <!-- <td class="col-post-count mobile-hide">{{}}</td> -->
+                        <td class="col-enable">{{user.enabled}}</td>
+                        <td class="col-create-conut mobile-hide">{{user.formatRegistered}}</td>
+                        <td class="col-last-login mobile-hide">{{user.formatLogined}}</td>
+                        <td class="col-actions">
+                            <a href="#userManage/user/edit/{{user.id}}" class="g-btn g-btn-mini">编</a>
+                            <a href="#" class="g-btn g-btn-mini g-btn-delete">删</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </script>
+
+        </tbody>
+    </table>
+
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer" >
+        <div class="fn-left m-function">
+            <select name="" id="js_" class="g-select">
+                <option value="">请选择操作</option>
+                <option value="">删除</option>
+            </select>
+            <a href="#" class="g-btn g-btn-primary">提交</a>
+        </div>
+        <!-- 分页器 START-->
+        <div class="fn-right g-pagination" id="js_pagination">
+        </div>
+        <!-- 分页器 end-->
+    </div>
+</div>

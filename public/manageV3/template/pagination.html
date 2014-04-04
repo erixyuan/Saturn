@@ -1,0 +1,53 @@
+<!-- 分页器模板 START-->
+<script id="js_pageTpl" type="text/html">
+    {{if numberBoxs!=undefined && numberBoxs.length>0 && url}}
+
+        <div class="goto">
+            <input type="text" class="g-input" id="js_jumpPageValue"/>页
+            <button class="g-btn" id="js_jumpPageBtn" attr="{{url}}/" params="{{params}}">跳转</button>
+        </div>
+        {{if prev !== ''}}
+            <div class="prev">
+                <a href="{{url}}/{{prev.page}}{{params}}" >上一页</a>
+            </div>
+        {{/if}}
+        <ul class="numbers" id="js_numbers">
+            {{each numberBoxs as value index}}
+            <li class="{{value.type}} {{if value.current == true}}current{{/if}}">
+                <a href="{{url}}/{{value.num}}{{params}}">{{value.num}}</a>
+            </li>
+            {{/each}}
+        </ul>
+        {{if next !== ''}}
+            <div class="next">
+                <a href="{{url}}/{{next.page}}{{params}}" >下一页</a>
+            </div>
+        {{/if}}
+
+    {{else if numberBoxs!=undefined && numberBoxs.length>0}}
+
+        <div class="goto">
+            <input type="text" class="g-input" id="js_jumpPageValue"/>页
+            <button class="g-btn" id="js_jumpPageBtn" >跳转</button>
+        </div>
+        {{if prev !== ''}}
+            <div class="prev">
+                <a page="{{prev.page}}">上一页</a>
+            </div>
+        {{/if}}
+        <ul class="numbers" id="js_numbers">
+            {{each numberBoxs as value index}}
+            <li class="{{value.type}} {{if value.current == true}}current{{/if}}">
+                <a page={{value.num}}>{{value.num}}</a>
+            </li>
+            {{/each}}
+        </ul>
+        {{if next !== ''}}
+            <div class="next">
+                <a page="{{next.page}}" >下一页</a>
+            </div>
+        {{/if}}
+
+    {{/if}}
+</script>
+<!-- 分页器模板 END-->

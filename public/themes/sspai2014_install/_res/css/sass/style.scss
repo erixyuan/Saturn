@@ -1,0 +1,1256 @@
+@charset "UTF-8";
+
+//载入全局设置 和 组件样式
+@import "normalize";
+@import "value";
+@import "global";
+// 引用全局字体路径 ../../../../resource/font
+@import "font-awesome";
+
+.wrap {
+
+    @media screen and (min-width: 1024px) and (orientation: landscape) {
+        width: 1000px;
+        padding: 0;
+        margin: 0 auto;
+    }
+}
+
+
+body {
+    font-family: $font-base;
+    background: #f9f9f9;
+}
+
+a {
+    text-decoration: none;
+    color: $g-link-color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+
+// 一些共用組件
+.post-status {
+    margin: 15px 0 5px 0;
+
+    @media screen and (min-width: 1024px) and (orientation: landscape) {
+        margin: 15px 0 20px 0;
+    }
+
+    .author, .date, .view, .comment, .category, .edit {
+        float: left;
+        margin-right: 15px;
+        font-size: 12px;
+        font-family: $font-code;
+        line-height: 1.5;
+        color: #bbb;
+
+        a {
+            color: #bbb;
+        }
+    }
+
+    .author {
+        @include spMain;
+        padding-left: 20px;
+        background-position: -800px -100px;
+
+    }
+
+    .date {
+        @include spMain;
+        padding-left: 20px;
+        background-position: -800px -130px;
+    }
+
+    .view {
+        @include spMain;
+        padding-left: 22px;
+        background-position: -800px -251px;
+    }
+
+    .comment {
+        @include spMain;
+        padding-left: 20px;
+        background-position: -800px -220px;
+    }
+
+    .edit {
+        float: right;
+        margin-right: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+// ______        _______ _______ _______ _____  _______ ______
+// |   __ \______|   |   |    ___|   _   |     \|    ___|   __ \
+// |      <______|       |    ___|       |  --  |    ___|      <
+// |___|__|      |___|___|_______|___|___|_____/|_______|___|__|
+.r-header {
+
+    .m-nav-top {
+        background: #000;
+        padding: 15px 0;
+
+
+        .m-logo {
+            float: none;
+            margin: 0 auto;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                float: left;
+                margin: auto;
+            }
+
+            a {
+                @include spMain;
+                background-position: -0px -100px;
+                width: 145px;
+                height: 35px;
+                text-indent: -9999em;
+            }
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                a {
+                    background-position: -0px -0px;
+                    width: 200px;
+                    height: 60px;
+                }
+            }
+
+        }
+
+        .m-function {
+            display: none;
+            position: relative;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: block;
+                margin-top: 13px;
+                float: right;
+                width: 380px;
+            }
+
+            // 分享站點在手機版上不顯示
+            ul.m-fllow-our {
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    float: left;
+                    margin-top: 4px;
+                    margin-right: 10px;
+
+                    li {
+                        float: left;
+                        margin-right: 10px;
+
+                        a {
+                            @include spMain;
+                            text-indent: -9999em;
+                            width: 26px;
+                            height: 26px;
+                        }
+                    }
+
+                    .rss {
+                        background-position: -140px -300px;
+                    }
+
+                    .sina {
+                        background-position: -140px -350px;
+                    }
+
+                    .weixin {
+                        background-position: -140px -450px;
+                    }
+                }
+            }
+
+            .m-search {
+                float: right;
+            }
+            .m-search-fixed {
+                position: fixed;
+                top: 6px;
+                z-index: 100;
+                margin-left: 157px;
+            }
+        }
+
+    }
+
+
+    .m-nav-bottom {
+        background: #fff;
+        border-bottom: 1px solid #ccc;
+
+        ul.m-nav, ul.m-nav-ext {
+            li {
+                float: left;
+                line-height: 1.0;
+
+                a {
+                    display: block;
+                    color: #000;
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-family: $font-yahei;
+                    padding: 12px;
+                    margin-right: 10px;
+                    margin-top: 3px;
+                    border-bottom: 3px solid #fff;
+
+                    &:hover {
+                        border-bottom: 3px solid red;
+
+                    }
+                }
+
+                &.active a {
+                    border-bottom: 3px solid red;
+                }
+            }
+
+        }
+
+
+
+        ul.m-nav {
+
+        }
+
+        // 在手機版上不顯示，變成一個更多按鈕
+        ul.m-nav-ext {
+            display: none;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: block;
+            }
+
+        }
+    }
+
+    .m-nav-bottom-fixed {
+        position: fixed;
+        width: 100%;
+        top: 0px;
+        z-index: 99;
+        opacity: 0.9;
+        @media screen and (min-width: 1024px) and (orientation: landscape) {
+            opacity: 0.98;
+        }
+    }
+
+}
+// .r-header END
+
+
+
+
+
+
+
+
+
+
+
+
+//  ______        _______ _______ _______ _______ _______ ______
+// |   __ \______|    ___|       |       |_     _|    ___|   __ \
+// |      <______|    ___|   -   |   -   | |   | |    ___|      <
+// |___|__|      |___|   |_______|_______| |___| |_______|___|__|
+.r-footer {
+    background: #111;
+
+    .links {
+        border-bottom: 1px solid #222;
+        padding: 20px 0;
+
+        .m-section  {
+            .m-section-header {
+                h5 {
+                    color: #fff;
+                    font-size: 14px;
+                    padding: 0;
+                    margin:0;
+                    margin-bottom: 15px;
+                }
+            }
+
+            .m-section-container {
+                 a {
+                    color: #ccc;
+                }
+            }
+        }
+
+
+
+
+        .m-section-hottopic, .m-section-friends, .m-section-about {
+            ul {
+                li {
+                    float: left;
+                    width: 48%;
+                    list-style: inside none;
+                    a {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+
+
+
+        .m-section-hottopic {
+            display: none;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: block;
+                float: left;
+                width: 280px;
+                margin-right: 100px;
+            }
+        }
+
+
+        .m-section-friends {
+            display: none;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: block;
+                float: left;
+                width: 300px;
+            }
+
+        }
+
+        .m-section-about {
+            display: block;
+            float: none;
+            width: 90%;
+            margin: 0 auto;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                float: right;
+                margin: auto;
+                width: 250px;
+            }
+
+            .m-section-header {
+                display: none;
+
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    display: block;
+                }
+
+            }
+
+            ul {
+                li {
+                    width: auto;
+                    margin-right: 20px;
+                    a {
+                        text-align: center;
+                    }
+                }
+            }
+
+            // 關於這行，不需要折行 on PC版上。
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                ul {
+                    li {
+                        margin-right: 0px;
+                        width: 48%;
+                        a {
+
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    .copyright {
+        padding: 30px 0;
+        font-size: 12px;
+        font-family: $font-code;
+        border-top: 1px solid #000;
+
+        .site-info {
+            text-align: center;
+            color: #999;
+            margin-bottom: 5px;
+
+            .ver {
+                display: none;
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    display: inline-block;
+                }
+            }
+        }
+        .gov-info {
+            text-align: center;
+            color: #999;
+            a {
+                color: darken($g-link-color, 10%);
+            }
+
+            .ipc {
+                display: none;
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+// .r-footer END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ______        ______ _______ _______ _______ _______ _______ _______ _______ ______
+// |   __ \______|      |       |    |  |_     _|   _   |_     _|    |  |    ___|   __ \
+// |      <______|   ---|   -   |       | |   | |       |_|   |_|       |    ___|      <
+// |___|__|      |______|_______|__|____| |___| |___|___|_______|__|____|_______|___|__|
+.r-container {
+
+    margin-top: 20px;
+
+
+    // .m-main START
+    .m-main {
+
+        @media screen and (min-width: 1024px) and (orientation: landscape) {
+            float: left;
+            width: 682px;
+        }
+
+
+
+        .m-pager {
+            margin-bottom: 30px;
+        }
+    }
+    // .m-main END
+
+
+
+
+
+    // .m-sidebar START
+    .m-sidebar {
+
+        @media screen and (min-width: 1024px) and (orientation: landscape) {
+            float: right;
+            width: 300px;
+        }
+
+    }
+    // .m-sidebar END
+}
+// .r-container END
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  ______        _______ _______ _____
+// |   __ \______|   |   |       |     \
+// |      <______|       |   -   |  --  |
+// |___|__|      |__|_|__|_______|_____/
+
+
+
+// 邊欄小掛件
+.m-widget {
+    margin-bottom: 20px;
+
+    .g-box-header {
+
+        .fa {
+            margin-right: 3px;
+        }
+
+        h5 {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Tahoma;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+}
+
+
+// 新聞掛件
+.m-widget-news {
+    .g-box-container {
+
+        ul {
+            li {
+                padding: 8px 20px;
+                position: relative;
+                font-size: 14px;
+                line-height: 2.4;
+                border-bottom: 1px solid #eee;
+
+                a {
+                    @include oneLineText;
+                    padding-right: 35px;
+                    color: #000;
+                }
+
+                span {
+                    position: absolute;
+                    top: 12px;
+                    right: 18px;
+                    color: #ccc;
+                    font-family: $font-mingliu;
+                    font-size: 11px;
+                }
+            }
+            li:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
+
+
+// 作者掛件
+.m-widget-author {
+    .g-box-container {
+        padding: 20px;
+
+        .author-info {
+            .avatar {
+                float: left;
+                margin-right: 15px;
+                width: 68px;
+                height: 68px;
+
+                img {
+                    background: #90a;
+                    width: 68px;
+                    height: 68px;
+                    border-radius: 300px;
+                }
+            }
+
+            .info {
+                float: left;
+                width: 175px;
+
+                .name {
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #000;
+                }
+
+                .weibo {
+                    margin-top: 10px;
+
+                    a {
+                        @include spMain;
+                        width: 16px;
+                        height: 16px;
+                        text-indent: -9999em;
+                        background-position: -250px -300px;
+                    }
+                }
+            }
+
+        }
+
+        .author-bio {
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #999;
+
+        }
+    }
+}
+
+
+
+// APP掛件
+.m-widget-app {
+    .g-box-container {
+
+        .app-icon, .app-name, .app-category, .app-qr, .app-qr-tips {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .app-icon {
+        }
+
+
+        .app-name {
+            margin-top: 20px;
+            strong {
+                font-size: 16px;
+            }
+        }
+
+        .app-category {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+
+        // .app-links START
+        .app-download {
+            margin-top: 15px;
+
+            .app-links {
+                margin: 10px 0;
+
+                a {
+                    display: block;
+                    width: 54%;
+                    display: block;
+                    padding: 4% 10%;
+                    height: 20px;
+                    border: 1px solid #ccc;
+                    border-radius: $g-border-radius - 1;
+                    text-align: center;
+                    margin: 0 auto;
+
+                    background: #eaeaea;
+                    background: -moz-linear-gradient(top, #fefefe 0%, #eaeaea 61%, #dddddd 98%, white 99.8%, white 100%);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fefefe), color-stop(61%, #eaeaea), color-stop(29%, #dddddd), color-stop(99.8%, white), color-stop(100%, white));
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top, #fefefe 0%, #eaeaea 61%, #dddddd 98%, white 99.8%, white 100%);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top, #fefefe 0%, #eaeaea 61%, #dddddd 98%, white 99.8%, white 100%);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top, #fefefe 0%, #eaeaea 61%, #dddddd 98%, white 99.8%, white 100%);
+                    /* IE10+ */
+                    background: linear-gradient(to bottom, #fefefe 0%, #eaeaea 61%, #dddddd 98%, #ffffff 99.8%, #ffffff 100%);
+                    /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$colorA', endColorstr='$colorE',GradientType=0 );
+                    /* IE6-9 */
+
+                    strong {
+                        @include spMain;
+                        display: block;
+                        text-indent: -9999em;
+                        float: left;
+                        width: 95px;
+                        height: 20px;
+                        margin-right: 5%;
+                    }
+
+                    span {
+                        float: right;
+                        display: block;
+                        width: 20%;
+                        font-size: 14px;
+                        font-weight: bold;
+                        font-family: $font-code;
+                        color: #000;
+                        @include gTextShadowWhite;
+
+                    }
+
+                    &:hover {
+                        background: #d4d4d4;
+                        background: -moz-linear-gradient(top, whitesmoke 0%, #d4d4d4 61%, #d4d4d4 98%, #f7f7f7 99.8%, white 100%);
+                        /* FF3.6+ */
+                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, whitesmoke), color-stop(61%, #d4d4d4), color-stop(29%, #d4d4d4), color-stop(99.8%, #f7f7f7), color-stop(100%, white));
+                        /* Chrome,Safari4+ */
+                        background: -webkit-linear-gradient(top, whitesmoke 0%, #d4d4d4 61%, #d4d4d4 98%, #f7f7f7 99.8%, white 100%);
+                        /* Chrome10+,Safari5.1+ */
+                        background: -o-linear-gradient(top, whitesmoke 0%, #d4d4d4 61%, #d4d4d4 98%, #f7f7f7 99.8%, white 100%);
+                        /* Opera 11.10+ */
+                        background: -ms-linear-gradient(top, whitesmoke 0%, #d4d4d4 61%, #d4d4d4 98%, #f7f7f7 99.8%, white 100%);
+                        /* IE10+ */
+                        background: linear-gradient(to bottom, #f5f5f5 0%, #d4d4d4 61%, #d4d4d4 98%, #f7f7f7 99.8%, #ffffff 100%);
+                        /* W3C */
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$colorA', endColorstr='$colorE',GradientType=0 );
+                        /* IE6-9 */
+                    }
+
+                    &.Android strong {
+                        background-position: -300px -130px;
+                    }
+
+                    &.iPhone strong {
+                        background-position: -300px -100px;
+                    }
+
+                    &.iPad strong {
+                        background-position: -300px -190px;
+                    }
+
+                    &.Windows strong {
+                        background-position: -300px -160px;
+                    }
+                }
+            }
+        }
+        // .app-links END
+
+
+        .app-qr {
+            margin-top: 20px;
+        }
+
+        .app-qr-tips {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+            padding-bottom: 20px;
+        }
+
+
+
+
+    }
+}
+// m-widget-app 的 JS EF
+.m-widget-app-fixed {
+
+    @media screen and (min-width: 1024px) and (orientation: landscape) {
+        position: fixed;
+        width: 300px;
+        z-index: 3;
+    }
+}
+
+
+
+
+
+// 文章列表模塊 START
+.m-post-list {
+    margin-bottom: 20px;
+
+    // 頭部
+    .g-box-header {
+        h5 {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Tahoma;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    // 內容
+    .g-box-container {
+
+        ul {
+
+            // 列表單篇 START
+            li {
+
+                position: relative;
+                padding: 15px 3%;
+                // 定義列表padding-left與圖片的寬度一致
+                $m-post-list-container-padding-left-width: 320px;
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 20px;
+
+                @media screen and (min-width: 1024px) and (orientation: landscape) {
+                    padding: 15px 20px;
+                    height: 180px;
+                    padding-left: $m-post-list-container-padding-left-width + 30;
+                }
+
+                // 文章標題
+                h2.title {
+                    line-height: 1;
+                    padding: 0;
+                    margin: 0;
+                    margin-bottom: 10px;
+
+                    a {
+                        font-family: $font-yahei;
+                        font-size: 18px;
+                        color: #000;
+
+                        @media screen and (min-width: 1024px) and (orientation: landscape) {
+                            font-size: 20px;
+                        }
+                    }
+                }
+
+                // 縮略圖
+                .thumb {
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        position: absolute;
+                        top: 15px;
+                        left: 20px;
+                        width: $m-post-list-container-padding-left-width;
+                    }
+
+                    img {
+                        width: 100%;
+                        max-height: auto;
+
+                        @media screen and (min-width: 1024px) and (orientation: landscape) {
+                            max-height: 163px;
+                        }
+                    }
+
+
+                }
+
+                // 分類
+                .category {
+                    display: none;
+
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        display: block;
+                        position: absolute;
+                        top: 15px;
+                        left: 20px;
+                        line-height: 1.4;
+                        background-color: rgba($g-link-color, 0.6);
+                        padding: 2px 12px;
+                        border-bottom-right-radius: $g-border-radius;
+
+                        a {
+                            color: #fff;
+                            font-size: 14px;
+                            font-family: $font-code;
+                        }
+                    }
+                }
+
+                .intor {
+                    font-size: 14px;
+                    display: block;
+                    height: atuo;
+                    line-height: 1.8;
+                    overflow: hidden;
+                    margin-bottom: 5px;
+
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        height: 85px;
+                        line-height: 1.5;
+                    }
+                }
+
+
+
+            }
+            // 列表單篇 END
+
+        }
+
+    }
+
+}
+// 文章列表模塊 END
+
+
+
+
+
+
+
+
+
+
+
+
+// 文章內頁模塊 START
+.m-post-view {
+    padding: 18px 20px;
+    margin-bottom: 30px;
+    position: relative;
+
+
+    h1.title {
+        padding: 0;
+        margin: 0;
+        // 給旁邊的.comment-flag留位置
+        margin-right: 30px;
+
+        line-height: 1;
+        a {
+            font-size: 24px;
+            font-family: $font-yahei;
+            color: #000;
+        }
+    }
+
+    .comment-flag {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+
+        a {
+            background: $g-link-color;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+
+
+    .banner, .typo {
+
+        img {
+            width: 100%;
+
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                width: auto;
+                max-width: 640px;
+            }
+        }
+    }
+
+
+    .post-status {
+
+        .comment {
+            @media screen and (min-width: 1024px) and (orientation: landscape) {
+                display: none;
+            }
+        }
+    }
+
+    .typo {
+        margin-top: 20px;
+    }
+
+
+    .copyright {
+        @include spMain;
+        padding-left: 23px;
+        background-position: -800px -51px;
+        font-size: 12px;
+        color: #999;
+        margin-bottom: 40px;
+        height: 18px;
+    }
+
+
+    .share, .category, .tag {
+        margin-bottom: 20px;
+
+        label {
+            // float: left;
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 12px;
+            color: #999;
+            padding-top: 2px;
+
+        }
+
+    }
+
+    .category, .tag {
+        a {
+            @extend .g-btn, .g-btn-mini;
+        }
+    }
+
+
+    .share {
+
+        label {
+            padding-top: 5px;
+
+        }
+
+        a {
+            @include spMain;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            // float: left;
+            margin-right: 5px;
+            text-indent: -9999em;
+
+            &.sina-weibo {
+                background-position: -200px -300px;
+            }
+
+            &.tencent-weibo {
+                background-position: -200px -250px;
+            }
+
+            &.weixin {
+                background-position: -200px -350px;
+            }
+
+            &.yfx-sms {
+                background-position: -200px -400px;
+            }
+
+            &:hover {
+                *filter: alpha(opacity=70);
+                opacity: 0.7;
+            }
+        }
+
+
+    }
+
+    .tag {
+        margin-bottom: 40px;
+    }
+
+
+
+    .prev-next-post {
+        margin: 20px 0;
+
+        .prev, .next {
+            @include spMain;
+            height: 26px;
+            font-size: 14px;
+            line-height: 1.8;
+            width: 43.9%;
+            padding: 12px 0;
+            @include hiddenText;
+
+
+            &:hover {
+                background-color: #eee;
+            }
+        }
+
+        .prev {
+            float: left;
+            text-align: left;
+            background-position: left -1064px;
+            padding-left: 6%;
+            border-right: 1px solid #f5f5f5;
+
+        }
+
+        .next {
+            float: right;
+            text-align: right;
+            background-position: right -1064px;
+            padding-right: 6%;
+        }
+    }
+
+
+    .relation-post {
+        background: #105;
+
+    }
+
+}
+// 文章內頁模塊 END
+
+
+
+
+
+
+
+
+
+
+
+// ★★★ COMBO ONLY INDEX 滾動圖，帶背景顏色切換
+.r-combo {
+    padding: 0px 0 10px 0;
+    overflow: hidden;
+    transition-property: background-color;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+
+    @media screen and (min-width: 1024px) and (orientation: landscape) {
+        height: 313px;
+        padding: 30px 0;
+    }
+
+    .r-combo-container {
+        position: relative;
+        visibility: visible;
+
+        ul {
+            margin: 0;
+            padding: 0;
+
+            li {
+                float: left;
+                width: 100%;
+                display: inline-block;
+
+                img.image {
+                    position: relative;
+                    display: block;
+                    width: 100%;
+
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        float: right;
+                        max-width: 640px;
+                        max-height: 313px;
+
+
+                    }
+
+                }
+
+                a {
+
+                }
+
+                span.text1, span.text2 {
+
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        position: absolute;
+                        top: 0px;
+                    }
+
+                }
+
+                span.text1 {
+                    font-size: 16px;
+                    font-weight: bold;
+                    font-family: $font-yahei;
+                    width: 100%;
+                    text-align: center;
+                    display: block;
+                    padding-top: 10px;
+                    vertical-align: middle;
+
+
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        font-size: 24px;
+                        width: 350px;
+                        text-align: left;
+                        padding-top: 0;
+                        line-height: 1.4;
+                    }
+                }
+
+                span.text2 {
+                    display: none;
+
+                    @media screen and (min-width: 1024px) and (orientation: landscape) {
+                        display: block;
+                        width: 350px;
+                        top: 80px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        ol.flex-control-nav {
+            display: none;
+        }
+
+        ul.flex-direction-nav {
+
+            a.flex-prev, a.flex-next {
+                position: absolute;
+                top: 135px;
+                @include spMain;
+                width: 40px;
+                height: 55px;
+                text-indent: -9999em;
+                opacity: .5;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+
+            }
+
+            a.flex-prev {
+                left: -50px;
+                background-position: 0 -350px;
+
+                &:active {
+                    background-position: -2px -350px;
+                }
+            }
+            a.flex-next {
+                right: -50px;
+                background-position: 0 -450px;
+
+                &:active {
+                    background-position: 2px -450px;
+                }
+            }
+        }
+    }
+
+    .r-combo-container-hidden {
+        visibility: hidden;
+    }
+}
+
+
+
+
+
+.r-fullbox {
+    .r-fullbox-header {
+    }
+
+    .r-fullbox-container {
+    }
+}
+
+.r-fullbox-devices {
+    .wrap {
+        background: #9ff;
+    }
+}
+
+
+
+
+
+

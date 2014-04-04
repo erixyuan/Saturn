@@ -1,0 +1,127 @@
+
+    <!-- 中栏或(中栏+右侧栏) 开始-->
+    <div class="wrap m-role m-role-userEdit">
+        <!-- 主要内容开始 -->
+        <div class="w-main m-block" >
+            <form action="" id="js_userEditForm" enctype="multipart/form-data" method="POST">
+                <div class="section">
+                    <h2>用户基本信息</h2>
+                    <div class="field">
+                        <label>用户名</label>
+                        <input placeholder="请输入用户名..." class="input-text" type="text" text-rest="username" id="js_username" value="{{username}}" >
+                    </div>
+
+                    <div class="field" id="js_userRole">
+                        <label>角色</label>
+                        {{each allRole as role index}}
+                            <input type="checkbox" class="input-checkbox" value="{{role.id}}" >{{role.display_name}}
+                        {{/each}}
+                   </div>
+
+                    <div class="field">
+                        <label>密码</label>
+                        <input type="password" placeholder="请输入密码..." text-rest="password"  class="input-text" value="" id="js_password1">
+                        <em>不修改密码请留空，最少6位</em>
+                    </div>
+
+                    <div class="field">
+                        <label>重复密码</label>
+                        <input type="password" placeholder="请重复上面的密码..." text-rest="password2" text-rest class="input-text" value="" id="js_password2">
+                        <em>不修改密码请留空</em>
+                    </div>
+
+                    <div class="field">
+                        <label>邮箱</label>
+                        <input placeholder="请输入用户名..." type="email" text-rest="email" class="input-text" text-rest value="{{email}}" id="js_email">
+                    </div>
+
+                    <div class="field" id="js_enabled">
+                        <label>是否可用</label>
+                        <input type="radio" name="enabled" radio-rest="enabled" value="1">是
+                        <input type="radio" name="enabled" radio-rest="enabled" value="0">否
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>用户详细资料</h2>
+                    <div class="field">
+                        <label>昵称</label>
+                        <input type="text" id="js_nickname" text-rest="metas.nickname" class="input-text" value="{{metas.nickname}}">
+                    </div>
+
+                    <div class="field">
+                        <label>手机</label>
+                        <input type="text" id="js_telphone" text-rest="metas.telphone" class="input-text" value="{{metas.telphone}}">
+                    </div>
+
+                    <div class="field" id="js_sex">
+                        <label>性别</label>
+                        <input checked="checked" type="radio" id="js_unknownSex" name="sex" value="unknown">未知
+                        <input type="radio" id="js_male" radio-rest="sex" name="sex" value="male">男
+                        <input type="radio" id="js_female" radio-rest="sex" name="sex" value="female">女
+                    </div>
+
+                    <div class="field">
+                        <label>地址</label>
+                        <input id="js_address" class="input-text" text-rest="metas.address" value="{{metas.address}}">
+                    </div>
+
+                    <div class="field">
+                        <label>邮编</label>
+                        <input id="js_zipcode" class="input-text" text-rest="metas.zipcode" value="{{metas.zipcode}}">
+                    </div>
+
+                    <div class="field">
+                        <label>真实姓名</label>
+                        <input id="js_realname" class="input-text" text-rest="metas.realname" value="{{metas.realname}}">
+                    </div>
+
+                    <div class="field">
+                        <label>支付宝</label>
+                        <input id="js_alipay" class="input-text" text-rest="metas.alipay" value="{{metas.alipay}}">
+                    </div>
+
+                    <div class="field">
+                        <label>职业</label>
+                        <input class="input-text" name="job" id="js_job" text-rest="metas.job" value="{{metas.job}}">
+                    </div>
+
+                    <div class="field">
+                        <label>新浪微博</label>
+                        <input type="text" name="weibo" id="js_weibo" class="input-text" text-rest="metas.weibo" value="{{metas.weibo}}">
+                    </div>
+
+                    <div class="field">
+                        <label>QQ号码</label>
+                        <input type="text" class="input-text" name="qq" id="js_qq" text-rest="metas.qq" value="{{metas.qq}}">
+                    </div>
+
+                    <div class="field">
+                        <label>个人说明</label>
+                        <textarea name="bio" cols="80" class="input-text" rows="3" id="js_bio" text-rest="metas.bio">{{metas.bio}}</textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>头像</label>
+                        <input type="file" name="avatar" id="js_uploadAvatar">
+
+                        <div class="user-avatar" class="avatar">
+                            <span id="js_avatar">
+                                {{if avatar}}
+                                    <img src="{{avatar.thumb_url}}" alt="" avatarId="{{avatar_id}}" width="100px">
+                                {{else}}
+                                    <img src="img/article_banner_default.gif" alt="" width="100px">
+                                {{/if}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-page-footer fn-clear">
+                    <span class="g-btn g-btn-primary" id="js_submit">提交</span>
+                </div>
+            </form>
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+    <!-- 中栏或(中栏+右侧栏) 结束-->

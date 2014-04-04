@@ -1,0 +1,122 @@
+<div class="wrap g-moudel-list m-product m-product-list">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left g-btn-group" id="js_secondNav">
+            <a href="#product/list/all{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="all">全部<span>({{count.all}})</span></a>
+            <a href="#product/list/publish{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="publish">已发布<span>({{count.publish}})</span></a>
+            <a href="#product/list/pending{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="pending">未审核<span>({{count.draft}})</span></a>
+            <a href="#product/list/draft{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status='draft'>草稿<span>({{count.pending}})</span></a>
+            <a href="#product/list/refuse{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="refuse">拒绝<span>({{count.refuse}})</span></a>
+            <a href="#product/list/recycle{{if keyword}}/{{keyword}}{{/if}}/1" class="g-btn" status="recycle">回收站<span>({{count.recycle}})</span></a>
+        </div>
+        <div class="fn-right">
+            <div class="search-input">
+                <input type="text" class="input-text" id="searchKeyWord">
+                <a href="#product/list" class="g-btn g-btn-mini g-btn-delete search-clear" clearSearch style="display: none">清除</a>
+            </div>
+            <span class="g-btn" id="searchBtn">搜索</span>
+            <a href="#product/create" class="g-btn g-btn-primary">添加</a>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox">
+                    <input type="checkbox" class="input-checkbox" id="js_operateCheckBox">
+                </th>
+                <th class="col-title mobile-hide">ID</th>
+                <th class="col-name">名称</th>
+                <th class="col-category mobile-hide">分类</th>
+                <th class="col-added mobile-hide">添加者</th>
+                <th class="col-status">状态</th>
+                <th class="col-platform mobile-hide">价格</th>
+                <th class="col-platform mobile-hide">平台</th>
+                <th class="col-creat-at mobile-hide">评分</th>
+                <th class="col-creat-at mobile-hide">添加时间</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+
+        <tbody id="js_productListContent">
+            {{each data as product index}}
+                <tr>
+                    <td class="col-checkbox">
+                        <input type="checkbox" class="input-checkbox" operateId="{{product.id}}">
+                    </td>
+                    <!-- id -->
+                    <td class="col-title mobile-hide">{{product.id}}</td>
+                    <!-- 产品名称 -->
+                    <td class="col-name">
+                        <a href="#product/edit/{{product.id}}">{{product.name}}</a>
+                    </td>
+                    <!-- 分类 -->
+                    <td class="col-category mobile-hide">
+                        {{each product.categories as categorie index}}
+                            <a href="#product/list/all/1?category={{categorie.id}}">{{categorie.name}}</a>
+                        {{/each}}
+                    </td>
+                    <!-- 添加者 -->
+                    <td class="col-added mobile-hide">
+                        <a href="#product/list/all/1?author={{product.user.id}}">{{product.user.username}}</a>
+                    </td>
+                    <!-- 产品状态 -->
+                    <td class="col-status" id="js_status">
+                        {{if product.status == 1}}
+                            已发布
+                        {{else if product.status == 2}}
+                            页面
+                        {{else if product.status == -99}}
+                            已删除
+                        {{else if product.status == -2}}
+                            未审核
+                        {{else if product.status == -1}}
+                            草稿
+                        {{else if product.status == -11}}
+                            投稿
+                        {{else if product.status == -3}}
+                            拒绝
+                        {{/if}}
+                    </td>
+                    <!-- 参考价格 -->
+                    <td class="col-platform mobile-hide">{{product.price}}</td>
+                    <!-- 平台 -->
+                    <td class="col-platform mobile-hide">
+                        {{each product.product_links as link index}}
+                            {{link.platform}}
+                        {{/each}}
+                    </td>
+                    <td class="col-creat-at mobile-hide">{{product.rating}}</td>
+                    <td class="col-creat-at mobile-hide">{{product.formatCreated}}</td>
+                    <td class="col-actions">
+                        <a href="#product/edit/{{product.id}}" class="g-btn g-btn-mini">编</a>
+                        <span class="g-btn g-btn-mini g-btn-delete" operate="delete" operateid="{{product.id}}">删</span>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer" >
+        <div class="fn-left m-function">
+            <select name="" id="js_batchOperateSelect" class="g-select">
+                <option value="">请选择操作</option>
+                <option value="publish">通过</option>
+                <option value="refuse">拒绝</option>
+                <option value="pending">待审核</option>
+                <option value="delete">删除</option>
+                <option value="">导出</option>
+            </select>
+            <span class="g-btn g-btn-primary" id="js_batchOperate">提交</span>
+        </div>
+
+        <!-- 翻頁 START -->
+        <div class="fn-right g-pagination" id="js_pagination"></div>
+        <!-- 翻頁 END -->
+    </div>
+
+</div>
+

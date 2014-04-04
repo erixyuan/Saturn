@@ -1,0 +1,19 @@
+.waterfall {
+  background: none;
+  border: 0;
+}
+.waterfall .waterfall_nav, .waterfall .clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+.waterfall .waterfall_nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.waterfall .waterfall_nav ul li {
+  list-style-type: none;
+}
+.waterfall .waterfall_nav ul li a {
+  text-decoration: none;
+}

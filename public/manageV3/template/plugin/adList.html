@@ -1,0 +1,59 @@
+<div class="wrap g-moudel-list m-plugin m-plugin-adlist">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-clear m-toolbar">
+            <div class="fn-left">
+                <a href="#plugin/adCreate" class="g-btn g-btn-primary">添加</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox">
+                    <input type="checkbox" select-name="id[]" class="input-checkbox">
+                </th>
+                <th class="col-name">名称</th>
+                <th class="col-key mobile-hide">Key</th>
+                <th class="col-status">状态</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+        <tbody id="js_adListContent">
+                {{each data as ad index}}
+                    <tr>
+                        <td class="col-checkbox">
+                            <input type="checkbox" name="id[]" class="JS-select-all" value="1">
+                        </td>
+                        <td class="col-name">{{ad.name}}</td>
+                        <td class="col-key mobile-hide">{{ad.key}}</td>
+                        <td class="col-status">{{ad.states}}</td>
+                        <td class="col-actions">
+                            <a href="#plugin/adEdit/{{ad.id}}" class="g-btn g-btn-mini">编</a>
+                            <span class="g-btn g-btn-mini g-btn-delete">删</span>
+                        </td>
+                    </tr>
+                {{/each}}
+        </tbody>
+    </table>
+
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer" >
+        <div class="fn-left m-function">
+                <select name="" id="js_" class="g-select">
+                    <option value="">请选择操作</option>
+                    <option value="">删除</option>
+                </select>
+                <a href="#" class="g-btn  g-btn-primary">提交</a>
+        </div>
+        <!-- 分页器 START-->
+        <div class="fn-right g-pagination" id="js_page">
+        </div>
+        <!-- 分页器 end-->
+    </div>
+
+</div>

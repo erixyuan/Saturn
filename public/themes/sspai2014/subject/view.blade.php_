@@ -1,0 +1,166 @@
+@extends('sspai2014.layouts.default')
+
+@section('title')
+    @parent
+@stop
+
+@section('head')
+    @parent
+@stop
+
+@section('container')
+
+    <div class="fn-clear r-container">
+        <div class="wrap">
+            <!-- 主要部分 m-main START -->
+            <div class="m-main">
+
+                <!-- 文章內容 START -->
+                <div class="fn-clear m-post-view">
+
+                    <h1>
+                        <a href="{{$article->url()}}">{{$article->title}}</a>
+                    </h1>
+
+                    <!-- 文章狀態 -->
+                    <div class="fn-clear status">
+
+                        <div class="author">
+                            <a href='{{url("author/{$article->user_id}")}}' target="_blank" class="author">
+                                @if ($article->author)
+                                    {{$article->author}}
+                                @else
+                                    {{$article->user->username}}
+                                @endif
+                            </a>
+                        </div>
+
+                        <div class="date">
+                            {{date('Y-m-d,H:i',$article->published)}}
+                        </div>
+
+                        <div class="view">
+                            {{$article->views}}
+                        </div>
+
+                        <div class="comment">
+                            32
+                        </div>
+
+                        <div class="category">
+                            @if(!$article->categories->isEmpty())
+                                <a title="查看 {{$article->categories->first()->name}} 分类的所有文章" class="category {{$article->categories->first()->slug}}" href="{{--$article->categories->url()--}}">
+                                    发布于 {{$article->categories->first()->name}}
+                                </a>
+                            @endif
+                        </div>
+
+                        <div class="edit">
+                             @if(Auth::check())
+                                <!--有编辑他人权限-->
+                                <a href="{{url("edit/{$article->id}")}}">编辑此文</a>
+                             @endif
+                        </div>
+
+                    </div>
+
+                    <!-- 題圖 -->
+                    <div class="banner">
+                        @if($imgurl = $article->banner_url( array('mw' => 640, 'wm' => 1, 'wmp' => 3) ))
+                            <a href="" title="{{{$article->title}}}">
+                                <img src="{{$imgurl}}" alt="{{{$article->title}}}">
+                            </a>
+                        @endif
+                    </div>
+
+                    <!-- 正文 -->
+                    <div class="typo">
+                        {{$article->getContent(array('img_args' => array('mw' => 640, 'wm' => 0)))}}
+                    </div>
+
+
+                    <!-- 版權 -->
+                    <div class="copyright">
+                         @if($article->source_name)
+
+                            @if($article->source_name || $article->source_url())
+                                <a href="{{$article->source_url()}}" title="{{$article->source_name}}" target="_blank">
+                                    {{$article->source_name}}
+                                </a>
+                            @else
+                                少数派
+                            @endif
+
+                            @if($article->author)
+                                ，原作者 {{$article->author}}
+                            @endif
+
+                        @else
+                            除非特别声明，文章均为 少数派 原创报道，
+                        @endif
+                        转载请注明原文链接。
+                    </div>
+
+
+                    <!-- 文章分享 -->
+                    <div class="share">
+                        <label>分享:</label>
+                        <a href="http://service.weibo.com/share/share.php?searchPic=true&amp;style=number&amp;url=http%3A%2F%2Fsspai.com%2F24870&amp;title=+%E3%80%90%E5%B8%A6%E6%84%9F%E7%9A%84%E6%96%B9%E5%9D%97%E4%BA%BA%E6%88%98%E4%BA%89%EF%BC%9A%E6%B2%99%E7%9B%92%E5%A0%A1%E5%9E%92+Block+Fortress%3A+War%E3%80%91%E6%9B%BE%E5%87%BA%E5%93%81%E8%BF%87%E7%BB%8F%E5%85%B8%E6%B2%99%E7%9B%92%E6%B8%B8%E6%88%8F%E3%80%8A%E6%B2%99%E7%9B%92%E5%A0%A1%E5%9E%92%E3%80%8B%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%95%86+Foursaken%EF%BC%8C%E8%BF%91%E6%97%A5%E6%AD%A3%E5%BC%8F%E6%8E%A8%E5%87%BA%E4%BA%86%E6%9C%80%E6%96%B0%E7%BB%AD%E4%BD%9C%E3%80%8ABlock+Fortress%3A+War%E3%80%8B%E3%80%82%E4%BB%8A%E5%A4%A9%E5%B0%8F%E4%BB%99%E5%B0%B1%E5%B8%A6%E5%A4%A7%E5%AE%B6%E4%B8%80%E8%B5%B7%E5%8E%BB%E7%9C%8B%E7%9C%8B%E7%BB%AD%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BA%AE%E7%82%B9%EF%BC%8C%E6%98%AF%E5%90%A6%E8%83%BD%E5%BB%B6%E7%BB%AD%E5%89%8D%E4%BD%9C%E7%9A%84%E9%AD%85%E5%8A%9B%EF%BC%9F&amp;pic=http%3A%2F%2Fsspai.com%2Fthumbs%2F2014%2F03%2F12%2F7a26a774c78f60cd70d650bfb05b39aa_w_640_wmp_3.jpg&amp;language=zh_cn&amp;app_src=1227760842&amp;button=pubilish&amp;appkey=1227760842" target="_bank" class="icon-sina-weibo" title="分享到新浪微博">新浪微博</a>
+                        <a href="####" class="icon-qrcode js-show-qrcode" data-url="http://sspai.com/24870" title="扫描二维码分享到微信">微信二维码</a>
+                        <a href="http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;url=http%3A%2F%2Fsspai.com%2F24870&amp;appkey=1227760842&amp;title=+%E3%80%90%E5%B8%A6%E6%84%9F%E7%9A%84%E6%96%B9%E5%9D%97%E4%BA%BA%E6%88%98%E4%BA%89%EF%BC%9A%E6%B2%99%E7%9B%92%E5%A0%A1%E5%9E%92+Block+Fortress%3A+War%E3%80%91%E6%9B%BE%E5%87%BA%E5%93%81%E8%BF%87%E7%BB%8F%E5%85%B8%E6%B2%99%E7%9B%92%E6%B8%B8%E6%88%8F%E3%80%8A%E6%B2%99%E7%9B%92%E5%A0%A1%E5%9E%92%E3%80%8B%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E5%95%86+Foursaken%EF%BC%8C%E8%BF%91%E6%97%A5%E6%AD%A3%E5%BC%8F%E6%8E%A8%E5%87%BA%E4%BA%86%E6%9C%80%E6%96%B0%E7%BB%AD%E4%BD%9C%E3%80%8ABlock+Fortress%3A+War%E3%80%8B%E3%80%82%E4%BB%8A%E5%A4%A9%E5%B0%8F%E4%BB%99%E5%B0%B1%E5%B8%A6%E5%A4%A7%E5%AE%B6%E4%B8%80%E8%B5%B7%E5%8E%BB%E7%9C%8B%E7%9C%8B%E7%BB%AD%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BA%AE%E7%82%B9%EF%BC%8C%E6%98%AF%E5%90%A6%E8%83%BD%E5%BB%B6%E7%BB%AD%E5%89%8D%E4%BD%9C%E7%9A%84%E9%AD%85%E5%8A%9B%EF%BC%9F&amp;pic=http%3A%2F%2Fsspai.com%2Fthumbs%2F2014%2F03%2F12%2F7a26a774c78f60cd70d650bfb05b39aa_w_640_wmp_3.jpg&amp;line1=" target="_bank" class="icon-tencent-weibo" title="分享到腾讯微博">腾讯微博</a>
+                        <a href="####" class="icon-tianyi" id="js-send-sns" data-url="http://sspai.com/24870" title="通过免费短信分享">短信分享</a>
+                    </div>
+
+
+                    <!-- 文章標籤 -->
+                    <div class="tag">
+                        @foreach ($article->tags as $tag)
+                            <a rel="tag" href="{{$tag->url()}}" title="查看所有关于 {{$tag->name}} 的文章">
+                                {{$tag->name}}
+                            </a>
+                        @endforeach
+                    </div>
+
+
+                    <!-- 上一篇，下一篇 -->
+                    <div class="prev-next-post">
+                        @if($next_post = $article->next())
+                            <a rel="next" class="prev" href="{{$next_post->url()}}">{{$next_post->title}}</a>
+                            <div class="inner">
+                                <img src="{{$next_post->banner_url( array('w' => 184, 'h' => 90) )}}" alt="{{$next_post->title}}" class="thumb">
+                                <div class="info">
+                                    <div class="date">{{date('Y-m-d,H:i',$next_post->published)}}</div>
+                                    <h4>{{$next_post->title}}</h4>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($previous_post = $article->previous())
+                            <a rel="previous" class="next" href="{{$previous_post->url()}}">{{$previous_post->title}}</a>
+                            <div class="inner">
+                                <img src="{{$previous_post->banner_url( array('w' => 184, 'h' => 90) )}}" alt="{{$previous_post->title}}" class="thumb">
+                                <div class="info">
+                                    <div class="date">{{date('Y-m-d,H:i',$previous_post->published)}}</div>
+                                    <h4>{{$previous_post->title}}</h4>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
+
+                    <!-- 相關文章 -->
+                    <div class="relation-post">
+
+                    </div>
+
+                </div>
+                <!-- 文章內容 END -->
+
+            </div>
+            <!-- 主要部分 m-main END -->
+
+            @include('sspai2014.include.sidebar')
+
+        </div>
+    </div>
+@stop

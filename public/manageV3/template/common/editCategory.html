@@ -1,0 +1,77 @@
+
+    <!-- 中栏或(中栏+右侧栏) 开始-->
+    <div class="wrap m-common m-common-category">
+        <!-- 主要内容开始 -->
+        <div class="w-main m-block">
+
+            <div class="section">
+                <h2>设置分类</h2>
+
+                <div class="field">
+                    <label>类型</label>
+                    <select name="type" id="js_type">
+                        <option value="" >选择分类</option>
+                        <option value="subject" >文章分类</option>
+                        <option value="application" >应用分类</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>上级</label>
+                    <select name="parent_id" id="js_parent_id">
+                        <option value="0" >顶级</option>
+                        {{each cateList as value index}}
+                            <option value="{{value.id}}" >{{value.otherName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>名称</label>
+                    <input type="text" value="{{name}}" id="js_name" placeholder="请输入..." class="input-text">
+                </div>
+
+                <div class="field">
+                    <label>别名</label>
+                    <input type="text" value="{{slug}}" id="js_slug" placeholder="请输入..." class="input-text">
+                </div>
+
+                <div class="field">
+                    <label>描述</label>
+                    <input type="text" value="{{description}}" id="js_description" placeholder="请输入..." class="input-text">
+                </div>
+                <div class="field">
+                    <label>关键字</label>
+                    <input type="text" value="{{keywords}}" id="js_keywords" placeholder="请输入..." class="input-text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;多个关键字，用空格隔开，不能为空
+                </div>
+                <div class="field">
+                    <label>排序</label>
+                    <input type="text" onkeyup="value=value.replace(/[^\    d]/g,'')"  value="{{if keywords}}{{keywords}}{{else}}0{{/if}}" id="js_order" placeholder="请输入..." class="input-text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;用于排序，数字，不能为空
+                </div>
+                <div class="field">
+                    <label>是否显示</label>
+                    <input type="checkbox" id="js_status">
+                    &nbsp;&nbsp;&nbsp;&nbsp;该分类的文章是否显示在首页文章流中
+                </div>
+                <div class="field">
+                    <label>图标</label>
+                    <input type="file" value="utf-8" name="file" placeholder="请输入..." class="input-text">
+                </div>
+                <div class="field">
+                    <label>自定义模板</label>
+                    <select name="skin" class="sel-skin" id="js_skin">
+                        <option value="">不使用自定义模板</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="w-page-footer fn-clear">
+                <span class="g-btn g-btn-primary" id="js_updateBtn">保存</span>
+            </div>
+
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+    <!-- 中栏或(中栏+右侧栏) 结束-->

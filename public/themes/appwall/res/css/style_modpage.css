@@ -1,0 +1,20 @@
+.modpage {background: #0094A4 url(images/background1.png) repeat;}
+.modpage .box { width: 1150px; margin-right: 8px; }
+.modpage .box .app { float: left; width:250px; margin: 0 0 10px 20px;}
+.modpage .main{width:auto;}
+.modpage div.rock{ padding-left: 50px;}
+
+
+
+html { background: url(images/bg-blue-strip.png); }
+html#home { background: url(images/bg-blue-strip.png); }
+html#bor3 { background: #3cc; }
+
+html#sport .header .top_h#top1_h a { background-position: -80px -0; }
+html#business .header  .top_h#top2_h a { background-position: -80px -29px; }
+html#student .header  .top_h#top3_h a { background-position: -80px -58px; }
+html#lady .header  .top_h#top4_h a { background-position: -80px -87px; }
+html#normal .header  .top_h#top5_h a { background-position: -280px -0; }
+html#art .header  .top_h#top6_h a { background-position: -280px -29px; }
+html#geek .header  .top_h#top7_h a { background-position: -280px -58px; }
+html#youwei .header  .top_h#top8_h a { background-position: -280px -87px; }

@@ -1,0 +1,54 @@
+<div class="wrap g-moudel-list m-article m-article-synList">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-left g-btn-group" id="js_secondNav">
+            {{each sites as site index}}
+            <a href="#article/articleSyn/{{index}}/1" class="g-btn">
+                {{site.name}}
+            </a>
+            {{/each}}
+        </div>
+    </div>
+
+
+
+
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-checkbox"><input type="checkbox" class="input-checkbox" id="js_operateCheckBox"></th>
+                <th  class="col-title">标题</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+        <tbody id="js_syncListContent">
+            <!-- 模板 START -->
+            {{each data.data as item index}}
+                <tr>
+                    <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                    <td class="col-title"><a href="{{item.url}}">{{item.title}}</a></td>
+                    <td class="col-actions">
+                        <span class="g-btn g-btn-mini" operate="sync" operateId="{{item.id}}">同步到本地</span>
+
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+
+    <!-- ■ 底部 - FOOTER //////////////////// -->
+    <div class="fn-clear g-moudel-list-footer" >
+        <div class="fn-left m-function">
+            <span class="g-btn g-btn-primary" id="js_batchOperate">提交</a>
+        </div>
+        <!-- 分页器 START-->
+        <div class="fn-right g-pagination" id="js_pagination"></div>
+        <!-- 分页器 end-->
+    </div>
+
+</div>
+

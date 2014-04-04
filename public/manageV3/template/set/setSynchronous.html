@@ -1,0 +1,27 @@
+<div class="wrap g-moudel-page g-moudel-list m-set m-set-settingSystem">
+
+    <div class="w-main">
+
+        <div class="fn-clear section">
+            <h2>同步设置</h2>
+        </div>
+
+
+
+        <div class="section">
+            <div class="field">
+                 <label>站点名称=&gt;域名</label>
+                <textarea name="cmssync" id="js_syncContent" cols="60" rows="3" placeholder="一行一条记录，如：少数派=&gt;http://sspai.com">{{each data as value}}{{value.name}}=>{{value.url}}
+{{/each}}</textarea>
+            </div>
+        </div>
+
+
+        <div class="fn-clear g-moudel-list-footer">
+            <span class="g-btn g-btn-primary" id="js_update">保存</span>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,14 @@
+.single-page .clearfix {
+  clear: both;
+}
+
+.m-comments {
+  color: #000;
+  font-size: 14px;
+}
+
+.m-sina-comment-box {
+  max-width: 1000px;
+  width: 100%;
+  *width: 1000px;
+}

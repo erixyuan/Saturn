@@ -1,0 +1,37 @@
+<div class="wrap g-moudel-list m-plugin m-plugin-adlist">
+
+    <!-- ■ 頭部 - TOOBAR //////////////////// -->
+    <div class="fn-clear g-moudel-list-header">
+        <div class="fn-clear m-toolbar">
+            <div class="fn-left">
+                <a href="#plugin/adCreate" class="g-btn g-btn-primary">添加</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ■■■ 中部 - TABLE //////////////////// -->
+    <table class="fn-clear g-moudel-list-container g-table">
+        <thead>
+            <tr>
+                <th class="col-name">名称</th>
+                <th class="col-key mobile-hide">Key</th>
+                <th class="col-status">状态</th>
+                <th class="col-actions">操作</th>
+            </tr>
+        </thead>
+        <tbody id="js_adListContent">
+                {{each data as ad index}}
+                    <tr>
+                        <td class="col-name">{{ad.name}}</td>
+                        <td class="col-key mobile-hide">{{ad.key}}</td>
+                        <td class="col-status">{{ad.states}}</td>
+                        <td class="col-actions">
+                            <a href="#plugin/adEdit/{{ad.id}}" class="g-btn g-btn-mini">编</a>
+                            <span operateid="{{ad.id}}" operate="delete" class="g-btn g-btn-mini g-btn-delete">删</span>
+                        </td>
+                    </tr>
+                {{/each}}
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,223 @@
+<div class="wrap g-moudel-post m-product m-product-edit">
+    <!-- 主區域 START -->
+    <div class="w-main">
+
+
+            <!-- 標題 -->
+            <div class="fn-clear m-title">
+                <input type="text" class="input-text input-text-app-name" value="{{name}}" id="js_title">
+            </div>
+
+            <!-- 引言 -->
+            <div class="fn-clear m-description">
+                <label>商品简介<em>(微博分享，<font>还可以输入<strong id="js_residue-counter">90</strong>字</font><font style="display: none;color:red">已超出<strong id="exceed-counter">90</strong>字</font> )</em></label>
+                <textarea name="" id="js_description">{{description}}</textarea>
+            </div>
+
+
+            <!-- app属性 -->
+            <div class="section m-app-attr">
+                <h2>商品属性</h2>
+
+                <div class="field">
+                    <label>价格</label>
+                    <input class="input-text" placeholder="请输入商品中文名..." type="text" value="{{price}}" id="js_price">
+                </div>
+
+            </div>
+
+            <!-- app截图 -->
+            <div class="section m-app-screenshot">
+                <h2>商品截图 （截图顺序会按文件名从小至大顺序排列）</h2>
+                <div class="w-upload">
+                    <span class="g-btn" id="js_uploadProductImgBtn">上传图片</span>
+                    <input type="file" name="file" id="js_ProductImg" multiple="" hidden="">
+                </div>
+                <!-- 这里的东西也是由上传控件生成的 -->
+                <ul id="js_applicationScreenshotList" class="fn-clear attachment-list">
+                    {{each screenshots as screenshot index}}
+                    <li screeenshotid="{{screenshot.id}}" class="active">
+                        <img src="{{screenshot.thumb_url}}" alt="">
+                        <span class="bottom">
+                            <span class="filename">{{screenshot.filename}}</span>
+                            <span class="actions">
+                                <a class="delete" href="javascript:void(0);" operate="deleteSreenShot" operateid="{{screenshot.id}}">删除</a>
+                            </span>
+                        </span>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+
+            <!-- app下载地址 -->
+            <div class="section m-app-dowload-box">
+                <h2 class="fn-clear">
+                    <div class="fn-left">商品Links</div>
+                    <div class="fn-right g-btn g-btn-primary" id="js_addAppdown">添加</div>
+                </h2>
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th class="col-platform">平台</th>
+                            <th class="col-url">地址</th>
+                            <th class="col-price">售价</th>
+                            <th class="col-depict">描述</th>
+                            <th class="col-redirection">跳转</th>
+                            <th class="col-actions">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="js_appinfos">
+                        {{each product_links as app index}}
+                        <tr appinfoId={{app.id}}>
+                            <td>
+                                <select name="" appinfoAttr="js_platform" class="g-select">
+                                    {{each downloads}}
+                                        <option value="{{$value}}">{{$value}}</option>
+                                    {{/each}}
+                                </select>
+                            </td>
+                            <td><input type="text" class="input-text col-url" appinfoAttr="js_url" value="{{app.url}}"></td>
+                            <td><input type="text" class="input-text col-price" appinfoAttr="js_price" value="{{app.price}}"></td>
+                            <td><input type="text" name="" class="col-depict" appinfoAttr="js_desc" value="{{app.desc}}"></td>
+                            <td><input type="text" name="" class="col-redirection" value="mk/p{{app.id}}" disabled></td>
+                            <td class="col-actions"><span operate="deleteApp" class="g-btn  g-btn-delete">删</span></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 各種功能按鈕 -->
+            <div class="fn-clear m-func" id="js_submit">
+                <span class="g-btn g-btn-primary" id="js_publishBtn" type="publish">发布</span>
+                <span class="g-btn" type="publish" skip="true">发布并撰写文章</span>
+                <span class="g-btn" id="js_draftBtn" type="draft">草稿</span>
+            </div>
+    </div>
+    <!-- 主區域 END -->
+
+
+
+    <!-- 擴展欄 START -->
+    <div class="w-ext" >
+
+        <!-- cover圖 -->
+        <div class="fn-clear m-banner">
+            {{if cover == null}}
+                <img src="img/article_banner_default.gif" alt="默认缩略图" width="300" id="js_cover_id" iconId="{{cover_id}}">
+            {{else}}
+                <img src="{{cover.thumb_url}}" alt="默认缩略图" width="300" id="js_cover_id" iconId="{{cover_id}}">
+            {{/if}}
+            <div class="action">
+                <span class="g-btn g-btn-mini" id="js_iconUploadBtn" >上传banner图</span>
+                <input type="file" name="file" id="iconImg" hidden>
+                <span class="g-btn g-btn-mini" id="js_showIconBtn">选择</span>
+                <span class="lable-input">
+                    水印
+                     <input type="text" class="input-text" name="banner_wmp" id="js_cover_wmp" help-tips="选填项，参照小键盘方向输入，0为按后台设定的数值处理，-1为不加水印。" value="{{cover_wmp}}" />
+                </span>
+            </div>
+
+            <!-- 彈出窗口，默認隱藏 -->
+            <div class="g-modal" style="" id="js_iconListContent">
+
+                <div class="g-modal-dialog">
+                    <a href="javascript:void(0)" class="close" id="js_iconListClose">
+                        <i class="fa fa-times"></i>
+                    </a>
+
+                    <div class="fn-clear g-modal-dialog-header">
+                        <h5 class="fn-left">请选择封面</h5>
+                    </div>
+
+                    <div class="fn-clear g-modal-dialog-container">
+                        <ul class="attachment-list" id="js_iconList" style="overflow-y: auto;max-height: 400px;"></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- 挂件 - 文章基本信息 -->
+        <div class="fn-clear m-widget m-widget-category">
+            <h4>商品分类</h4>
+            <div class="m-box">
+                <ul class="fn-clear list-category" id="js_categoryListContent">
+
+                    {{each categories as categorie index}}
+                        <li>
+                            <a href="javascript:void(0)" value="{{categorie.name}}">{{categorie.name}}</a>
+                        </li>
+                    {{/each}}
+
+                </ul>
+                <a href="javascript:void(0)" class="g-btn g-btn-mini g-btn-primary" id="js_categoryBtn">选择</a>
+
+
+
+                <!-- 彈出窗口，默認隱藏 -->
+                <div class="g-modal" style="" id="js_categoryListSelect">
+
+                    <div class="g-modal-dialog">
+                        <a href="javascript:void(0)" class="close" id="js_categoryListClose">
+                            <i class="fa fa-times"></i>
+                        </a>
+
+                        <div class="fn-clear g-modal-dialog-header">
+                            <h5 class="fn-left">商品分类</h5>
+                        </div>
+
+                        <div class="fn-clear g-modal-dialog-container">
+                            <select name="" id="js_categoryListSelectContent" multiple="multiple" style="width:100%; height: 200px"></select>
+                        </div>
+
+                        <div class="fn-clear g-modal-dialog-footer">
+                            <button type="button" class="g-btn g-btn-primary" id="js_categorySubmit">确定</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- 挂件 - 文章標籤 -->
+        <div class="fn-clear m-widget m-widget-tags">
+            <h4>商品标签</h4>
+            <div class="m-box">
+                <ul class="fn-clear list-tags" id="js_tagsListContent">
+                    {{each tags as tag index}}
+                        <li><a href="javascript:void(0)">{{tag.name}}</a></li>
+                    {{/each}}
+                </ul>
+
+                <div class="w-add-tage">
+                    <input type="text" class="input-text" id="js_newTag">
+                    <span  class="g-btn g-btn-mini g-btn-primary" id="js_addTag">添加</span>
+                </div>
+
+                <!-- 推荐的标签 -->
+                <div class="recb-tags" id="js_commonTags">
+                    <span class="tag">配件</span>
+                    <span class="tag">白色家电</span>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    <!-- 擴展欄 END -->
+</div>
+
+

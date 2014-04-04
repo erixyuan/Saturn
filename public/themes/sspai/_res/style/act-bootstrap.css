@@ -1,0 +1,132 @@
+.r-header *, .r-header *:after, .r-header *:before {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.r-header .nav > li > a {
+  padding: 0;
+}
+.r-header .nav > li > a:hover {
+  background-color: transparent;
+}
+
+.act-page {
+  padding: 2em 0;
+}
+@media screen and (max-width: 799px) {
+  .act-page {
+    margin-top: 105px;
+  }
+}
+.act-page ul {
+  margin-bottom: 0;
+}
+.act-page .dropdown-menu {
+  list-style-type: none;
+  padding-left: 0;
+}
+.act-page img {
+  max-width: 100%;
+}
+
+.header {
+  overflow: hidden;
+}
+.header .pull-right {
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.bs-sidebar.affix {
+  position: static;
+}
+
+/* First level of nav */
+.bs-sidenav {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+/* All levels of nav */
+.bs-sidebar .nav > li > a {
+  display: block;
+  color: #716b7a;
+  padding: 5px 20px;
+}
+.bs-sidebar .nav > li > a:hover, .bs-sidebar .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #e5e3e9;
+  border-right: 1px solid #dbd8e0;
+}
+.bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
+  font-weight: bold;
+  color: #563d7c;
+  background-color: transparent;
+  border-right: 1px solid #563d7c;
+}
+.bs-sidebar .nav .nav {
+  display: none;
+  /* Hide by default, but at >768px, show it */
+  margin-bottom: 8px;
+}
+.bs-sidebar .nav .nav > li > a {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+
+/* Nav: second level (shown on .active) */
+/* Show and affix the side nav when space allows it */
+@media screen and (min-width: 992px) {
+  .bs-sidebar .nav > .active > ul {
+    display: block;
+  }
+  .bs-sidebar.affix {
+    position: fixed;
+    /* Undo the static from mobile first approach */
+    top: 80px;
+  }
+  .bs-sidebar.affix-bottom {
+    position: absolute;
+    /* Undo the static from mobile first approach */
+  }
+  .bs-sidebar.affix-bottom .bs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .bs-sidebar.affix .bs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Widen the fixed sidebar */
+}
+@media screen and (min-width: 800px) {
+  /* Widen the fixed sidebar again */
+  .bs-sidenav.affix {
+    position: fixed;
+    top: 47px;
+  }
+  .bs-sidenav.affix-top {
+    position: static;
+  }
+  .bs-sidenav.affix-bottom {
+    position: absolute;
+    bottom: 0;
+  }
+}
+/*
+ * Docs sections
+ *
+ * Content blocks for each component or feature.
+ */
+/* Space things out */
+.bs-docs-section + .bs-docs-section {
+  padding-top: 40px;
+}

@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.helloword_test { font-size: 0; }
+$baseFont: Tahoma, sans-serif;
+$baseFontSize: 14px;
+$baseLineHeight: 1.6em;
+
+$mingliu: MingLiU,\7EC6\660E\4F53;
+$yahei: 'Microsoft YaHei UI','Microsoft YaHei',DengXian,'Segoe UI',"Lucida Grande",Helvetica;
+
+// 按钮的圆角大小
+$btnRadius: 1px;
+
+// 挂件的左右内边距
+$widgetPaddingLeftRight: 20px;
+
+// 子评论缩进
+$subCommentIndent: 70px;
+
+// 页面 左右边的内边距
+$pagePaddingLeftRight: 20px;
+
+// 页面宽度
+$pageWidth: 1000px;
+
+
+// ####################################################################
+// #    全局分辨分辨率
+// ####################################################################
+$mobilePhoneWidth: 800px;
+$tableWidth: 1023px;
+$desktopWidth: 1024px;

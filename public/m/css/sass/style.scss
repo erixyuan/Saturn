@@ -1,0 +1,970 @@
+@charset "UTF-8";
+
+// 自适应备注
+// for iPad 和 古老的12寸笔记本
+// @media screen and (max-width: 1024px) {}
+
+
+
+//载入全局设置 和   组件样式
+@import "normalize";
+@import "font-awesome";
+@import "value";
+@import "global";
+
+
+body {
+    background-color: #f5f5f5;
+    font-family: $font-base;
+    -webkit-text-size-adjust: none;
+}
+
+a {
+    text-decoration: none;
+    color: $g-link-color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  LOGIN 登录
+///////////////////////////////////////////////////////////////////
+.body-login {
+    background: url(../img/bg_login.jpg) #05040A;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+
+
+
+    .w-login {
+        position: relative;
+        margin: 0 auto;
+        margin-top: 100px;
+        width: 250px;
+        background-image: -moz-linear-gradient( 90deg, rgb(246,246,246) 0%, rgb(253,253,253) 100%);
+        background-image: -webkit-linear-gradient( 90deg, rgb(246,246,246) 0%, rgb(253,253,253) 100%);
+        background-image: -ms-linear-gradient( 90deg, rgb(246,246,246) 0%, rgb(253,253,253) 100%);
+        background-color: #fafafa;
+
+        padding: 20px 40px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(53, 53, 53, 1);
+
+        .r-login-header {
+            .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+                i {
+                    font-size: 24px;
+                    color: #eee;
+
+                    &:hover {
+                        color: #bbb;
+                    }
+                }
+            }
+
+        }
+
+        .r-login-container {
+
+            .logo {
+                display: block;
+                margin: 10% 0 20% 14%;
+                @include spMain;
+                background-position: -200px -0px;
+                width: 190px;
+                height: 40px;
+                text-indent: -9999em;
+            }
+
+            .section {
+                .field {
+                    margin: 20px 0;
+                }
+
+
+                .input-text {
+                    width: 75%;
+                    padding: 12px 20px;
+                    padding-left: 41px;
+                    @include spMain;
+                }
+
+
+                .username {
+                    .input-text {
+                        background-position: -695px -100px;
+                    }
+                }
+
+
+                .password {
+                    margin-bottom: 30px;
+                    .input-text{
+                        background-position: -695px -200px;
+                    }
+                }
+
+                .submit {
+
+                    .g-btn-primary{
+                        margin-top: 40px;
+                        width: 100%;
+                        margin: 0;
+                        padding: 15px;
+                        font-size: 16px;
+                        line-height: 1;
+                        text-shadow: 0 1px 1px rgba(22, 22, 22, 0.6);
+                    }
+                }
+
+
+                .help {
+                    text-align: center;
+                    margin-top: 30px;
+
+                    a {
+                        font-size: 14px;
+                        color: #ddd;
+                    }
+                }
+
+            }
+
+        }
+
+        .r-login-footer {
+
+        }
+
+
+    }
+
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  HEADER 頁頭
+///////////////////////////////////////////////////////////////////
+.r-header {
+    position: relative;
+    background: #14232c;
+    background-image: url();
+    border-bottom: #18212b;
+    box-shadow: 0 1px 1px rgba(0, 0 , 0, 0.4);
+    z-index: 2;
+    height: 60px;
+
+    .w-inner {
+        .w-logo {
+            position: relative;
+            float: left;
+            width: $w-sidebar-width + 1;
+            height: 60px;
+            @include spMain;
+            background-position: -619px -40px;
+
+            @media screen and (max-width: 1024px) {
+                width: $w-sidebar-width - 60 + 1;
+                background-position: -679px -40px;
+            }
+
+            a {
+                position: absolute;
+                top: 15px;
+                left: 31px;
+                width: 125px;
+                height: 30px;
+                display: block;
+                @include spMain;
+
+                @media screen and (max-width: 1024px) {
+                    top: 17px;
+                    left: 5px;
+                    width: 110px;
+                    height: 30px;
+                    background-size: 615%;
+
+                }
+            }
+
+        }
+
+        ul.m-top-tabs {
+            position: absolute;
+            top: 0;
+            left: $w-sidebar-width;
+            height: 60px;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            margin-left: 10px;
+            list-style: inside none;
+
+            @media screen and (max-width: 1024px) {
+                left: $w-sidebar-width - 60;
+
+            }
+
+            li {
+                float: left;
+                margin: 0 10px;
+
+                a {
+                    @include spMain;
+                    display: block;
+                    width: $m-top-tabs-li-a-width;
+                    height: 60px;
+                    text-indent: -9999em;
+                }
+
+                &.home a { background-position: 0 -100px; }
+                &.article a { background-position: $m-top-tabs-li-a-width * -1 -100px; }
+                &.application a { background-position: $m-top-tabs-li-a-width * -2 -100px; }
+                &.product a { background-position: $m-top-tabs-li-a-width * -7 -100px; }
+                &.userManage a { background-position: $m-top-tabs-li-a-width * -3 -100px; }
+                &.plugin a { background-position: $m-top-tabs-li-a-width * -4 -100px; }
+                &.stat a { background-position: $m-top-tabs-li-a-width * -5 -100px; }
+                &.set a { background-position: $m-top-tabs-li-a-width * -6 -100px; }
+
+                a {
+                   &.active, &:hover {
+                        color: $g-link-color;
+                        background-position-y: -200px;
+                    }
+                }
+
+            }
+
+        }
+
+        .w-func {
+            float: right;
+            margin-right: 20px;
+            width: 85px;
+
+            .exp-btn {
+                position: relative;
+                z-index: 0;
+                margin-top: 12px;
+
+                .avatar {
+                    a {
+                        display: block;
+                    }
+
+                    img {
+                        border-radius: $g-border-radius - 1;
+                        width: 36px;
+                        height: 36px;
+                    }
+                }
+
+                .exp-box {
+                    position: absolute;
+                    display: none;
+                    // display: block;
+                    padding: 15px;
+                    top: -7px;
+                    right: -7px;
+                    z-index: -1;
+                    background: #fff;
+                    border-radius: $g-border-radius;
+                    border: 1px solid #999;
+                    width: 140px;
+                    height: 60px;
+
+                    .name {
+                        position: absolute;
+                        top: 15px;
+                        left: 8px;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+
+                    .logout {
+                        position: absolute;
+                        bottom: 12px;
+                        right: 6px;
+                    }
+
+                    .edit {
+                        position: absolute;
+                        bottom: 14px;
+                        left: 10px;
+                        color: #ccc;
+                        font-size: 12px;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: #333;
+                        }
+                    }
+                }
+
+
+            }
+
+
+            .reviw-site {
+                margin-top: 18px;
+
+                a {
+                    @include spMain;
+                    display: block;
+                    width: 32px;
+                    height: 32px;
+                    text-indent: -9999em;
+                    background-position: -500px -0px;
+
+                    &:hover {
+                        background-position: -500px -50px;
+                    }
+                }
+            }
+
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  FOOTER 頁腳
+///////////////////////////////////////////////////////////////////
+.r-footer {
+    padding: 30px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 9;
+
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//  CONTAINER 中部
+///////////////////////////////////////////////////////////////////
+.r-container {
+    position: relative;
+
+
+    // 側邊欄 START
+    .w-sidebar {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        bottom: 0px;
+        // 左邊要放一條描邊
+        width: $w-sidebar-width - 1;
+        border-right: 1px solid #34414e;
+        background: #405365;
+
+        @media screen and (max-width: 1024px) {
+            width: $w-sidebar-width - 60 - 1;
+
+        }
+
+
+        ul.m-sidebar {
+            margin: 0;
+            padding: 0;
+            list-style: inside none;
+
+            li{
+                a {
+                    display: block;
+                    padding: 18px;
+                    padding-left: 32px;
+                    font-size: 14px;
+                    color: #fff;
+                    border-top: 1px solid #4F6375;
+                    border-bottom: 1px solid #2D3338;
+
+                    @media screen and (max-width: 1024px) {
+                        padding-left: 20px;
+                    }
+
+                    &.active {
+                        box-shadow: inset 0px 0px 6px rgba(39, 39, 39, 0.65);
+                        text-shadow: 0px 0px 5px black;
+                        color: $g-link-color;
+                        font-weight: bold;
+                        border-top: 1px solid #273747;
+                        border-bottom: 1px solid #132C44;
+                        border-left: 2px solid #05da73;
+                        background-image: -moz-linear-gradient(90deg, #2E4050 0%, #354E63 100%);
+                        background-image: -webkit-linear-gradient(90deg, #2E4050 0%, #354E63 100%);
+                        background-image: -ms-linear-gradient(90deg, #2E4050 0%, #354E63 100%);
+                    }
+
+                    &.active:hover {
+                        text-decoration: none;
+                    }
+                }
+
+
+            }
+
+        }
+    }
+    // 側邊欄 END
+
+
+    // 主內容 START
+    .w-container {
+        left: $w-sidebar-width;
+        min-height: 500px;
+
+        // 讓外主內容和外邊距有一些差距
+        margin-left: $w-sidebar-width + 20;
+        margin-right: 20px;
+        margin-top: 20px;
+
+        @media screen and (max-width: 1024px) {
+            margin-left: $w-sidebar-width + 20 - 60;
+        }
+
+        .wrap {
+            padding-bottom: 20px;
+        }
+
+
+        // 文章與應用
+        .m-article-edit, .m-application-edit, .m-product-edit {
+
+            // 主要 START
+            .w-main {
+
+                // 標題
+                .m-title {
+                    margin-bottom: 20px;
+
+                    .input-text {
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: #222;
+                        width: 98%;
+                        padding: 10px 1%;
+                    }
+                }
+
+                // 引言
+                .m-description {
+                    margin-bottom: 20px;
+
+                    label {
+                        display: block;
+                        font-size: 14px;
+                        margin-bottom: 5px;
+
+                        em {
+                            font-style: normal;
+                            color: #777;
+                        }
+                    }
+
+                    textarea {
+                        width: 98%;
+                        height: 50px;
+                        padding: 1% 1%;
+                        display: block;
+                    }
+                }
+
+                // 編輯器
+                .m-editor {
+
+                    .toolbar {
+                        .g-btn-group {
+                            margin-bottom: 5px;
+                            .g-btn {
+                                font-weight: normal;
+                            }
+                        }
+
+                        .add-func {
+                            .fa-file {
+                                margin: 0 2px;
+                            }
+
+
+
+                        }
+
+                        .fn-right {
+                            .g-btn-group {
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+
+
+
+                    .m-editor-text {
+                        width: 98%;
+                        padding: 1%;
+                        display: block;
+                        line-height: 1.8;
+
+                    }
+
+                    .m-editor-ace {
+                        display: block;
+                        width: 100%;
+                        min-height: 600px;
+                        padding: 0;
+                        border: 1px solid #ccc;
+                    }
+
+                    .mce-tinymce {
+                        width: 100%;
+                        display: block;
+                    }
+                }
+
+                // 編輯器擴展項目
+                .m-editor-ext {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                    margin-top: -1px;
+                    font-size: 12px;
+                    width: 100%;
+                    padding: 8px 0;
+                    background: #fff;
+                    margin-bottom: 20px;
+                    border: 1px solid #ccc;
+
+                    span {
+                        margin: 0 10px;
+                    }
+
+                    .input-text {
+                        width: 24px;
+                        padding: 3px 5px;
+                        margin: 0 5px;
+                    }
+                }
+
+                .m-app-dowload-box {
+                    margin-bottom: 20px;
+
+                    table.g-table {
+                        thead {
+                        }
+
+                        td {
+                            .g-btn {
+                                font-weight: normal;
+                            }
+                        }
+                    }
+                }
+
+                .m-app-attr {
+                    .section {
+                    }
+
+                    .field {
+                        label {
+                            width: 40px;
+                        }
+
+                        .input-text {
+                            // width: 100px;
+                        }
+                    }
+                }
+
+                // 各種功能按鈕
+                .m-func {
+                }
+            }
+            // 主要 END
+
+
+
+            // 邊欄 START
+            .w-ext {
+
+                .m-banner {
+                    position: relative;
+                    overflow: hidden;
+                    width: 298px;
+                    height: 140px;
+                    border: 1px solid #181818;
+                    border-radius: 3px;
+                    margin-bottom: 30px;
+
+                    .swfupload {
+                        font-size: 12px;
+                    }
+
+                    .action {
+                        position: absolute;
+                        z-index: 2;
+                        bottom: 5px;
+                        right: 8px;
+
+                        span.lable-input {
+                            font-size: 12px;
+                            display: inline-block;
+                            zoom: 1;
+                            overflow: hidden;
+                            vertical-align: top;
+                            border: 1px solid #9e9e9e;
+                            border-radius: 2px;
+                            background: #fff;
+                            padding: 1px 8px;
+                            color: #333;
+
+                            .input-text {
+                                width: 16px;
+                                padding: 0 4px;
+                                text-align: center;
+                                font-size: 12px;
+                                line-height: 1em;
+                                margin: 0 0 0 .2em;
+                            }
+
+                        }
+                    }
+                }
+
+                .m-app-icon {
+                    margin-bottom: 30px;
+                    position: relative;
+
+                    .m-app-icon-img {
+                        margin-left: 15px;
+
+                        img {
+                            width: 144px;
+                            height: 144px;
+                            // border: 1px solid #111;
+                            border-radius: 35px;
+                        }
+
+                    }
+
+                    .m-app-icon-btn {
+                        position: absolute;
+                        right: 5px;
+                        top: 0;
+
+                    }
+                }
+
+
+                .m-widget {
+                    margin-bottom: 30px;
+
+                    h4 {
+                        margin: 0;
+                        padding: 0;
+                        margin-bottom: 8px;
+                        font-size: 14px;
+                    }
+
+                    .m-box {
+                        background: #fff;
+                        padding: 10px;
+                        font-size: 14px;
+                        border: 1px solid #ccc;
+                        border-radius: $g-border-radius;
+                    }
+
+                    ul.list-tags, ul.list-category {
+                        margin: 0;
+                        padding: 0;
+
+                        li {
+                            list-style: inside none;
+                            float: left;
+                            margin: 5px 10px 5px 0;
+
+                            a {
+                                @extend .g-btn;
+                                font-weight: normal !important;
+                                font-size: 14px !important;
+                                padding: 4px 5px !important;
+                            }
+
+                            &:last-child {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+
+
+                .m-widget-advanced {
+                    position: relative;
+
+                    .m-box {
+                        position: absolute;
+                        bottom: 45px;
+
+                        .section {
+                            margin-bottom: 20px;
+
+                            .field {
+                                label {
+                                    width: auto;
+                                    text-align: left;
+                                    display: inline;
+                                }
+
+                            }
+
+                        }
+
+                        .more-opt {
+                            ul {
+                                li {
+                                    float: left;
+                                    list-style-type: none;
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                .m-widget-app, .m-widget-product {
+
+                    a.btn-app, a.btn-product {
+                        float: left;
+                        position: relative;
+                        margin: 5px 10px;
+
+                        img {
+                            width: 64px;
+                            height: 64px;
+                            border-radius: $g-border-radius;
+                        }
+
+                        // 这个是删除按钮
+                        i.fa-times {
+                            position: absolute;
+                            right: -7px;
+                            top: -6px;
+                            font-size: 14px;
+                            padding: 4px;
+                            width: 13px;
+                            height: 9px;
+                            line-height: 9px;
+                            text-align: center;
+                            background: #fff;
+                            color: #FF4C4C;
+                            border: 1px solid #F3F3F3;
+                            border-radius: 50px;
+
+                            &:hover {
+                                background: #FF4C4C;
+                                color: #fff;
+                                border: 1px solid #FF1717;
+                            }
+                        }
+
+                    }
+
+                    a.add-app, a.add-product {
+                        width: 62px;
+                        height: 62px;
+                        border: 1px solid #E2DFDF;
+                        border-radius: $g-border-radius;
+
+                        i.fa {
+                            padding: 17px 20px 14px 18px;
+                            font-size: 32px;
+                            color: #E0E0E0;
+
+                            &:hover {
+                                color: $g-link-color;
+                            }
+                        }
+
+                        &:hover {
+                            border-color: $g-link-color;
+
+                        }
+                    }
+                }
+
+
+                .m-widget-tags, .m-widget-category {
+                    .g-btn-mini {
+                        padding: 5px 8px;
+                    }
+
+                }
+
+                .m-widget-tags {
+
+                    .recb-tags {
+                        margin-top: 10px;
+                        font-size: 12px;
+
+                        span {
+                            @extend .g-btn, .g-btn-mini;
+                            padding: 3px;
+                            margin-bottom: 5px;
+                        }
+                    }
+
+                    .w-add-tage {
+                        margin-top: 5px;
+                    }
+
+                }
+
+
+                .m-widget-category {
+                    .add-category {
+                        margin-top: 5px;
+                    }
+
+                }
+            }
+            // 邊欄 END
+
+        }
+
+
+
+        // 部分table问题，布需要td有padding的，不然会被撑开
+        .m-article-edit, .m-application-edit, .m-product-edit, .m-plugin-ad {
+            table{
+                td {
+                    padding: 10px 0;
+                }
+                th {
+                    padding: 10px 0;
+                    text-align: center;
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 针对取色器调节一下
+        .m-plugin-ad {
+
+            table {
+                td {
+                    img {
+                        max-width: 120px;
+                        max-height: 60px;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            .col-color {
+                position: relative;
+            }
+
+            .review-color {
+                position: absolute;
+                right: 15px;
+                bottom: 32px;
+            }
+
+            .colorPicker {
+                position: absolute;
+                left: -23px;
+                top: 51px;
+                z-index: 3;
+                width: 180px;
+
+                .twod, .twod .bg {
+                    width: 120px;
+                    height: 120px;
+                }
+
+                .oned, .oned .bg {
+                    width: 20px;
+                    height: 120px;
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 用户模块
+        .m-role {
+            .section{
+                .field {
+                    label {
+
+                    }
+
+                    .user-avatar {
+                        display: inline-block;
+                        img {
+                            vertical-align: top;
+                            border-radius: $g-border-radius;
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+
+
+    }
+    // 主內容 END
+
+}

@@ -1,0 +1,157 @@
+.album-tage-bg {
+  background: url(../img/bg_albumtag_husk.png);
+}
+
+.album-tag .m-post {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.album-tag .m-post .post-title {
+  display: none;
+}
+
+.last-edit {
+  margin-top: 1em;
+  clear: both;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+}
+
+.m-album-list {
+  overflow: hidden;
+  *zoom: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.m-album-list li {
+  margin: 15px 0.9%;
+  float: left;
+  list-style: none;
+  width: 31.4%;
+  background: #fff;
+  position: relative;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  overflow: hidden;
+  *zoom: 1;
+}
+.m-album-list li .title {
+  font-size: 18px;
+  margin: 5px 10px;
+}
+.m-album-list li .title a {
+  line-height: 28px;
+  border-bottom: none;
+  color: #0c77b8;
+  text-decoration: none;
+}
+.m-album-list li .desc {
+  margin: 0 10px 10px 10px;
+  font-size: 14px;
+  line-height: 22px;
+  overflow: hidden;
+}
+.m-album-list li .album-tag-img {
+  margin: 0;
+  display: block;
+  padding: 3px;
+}
+.m-album-list li .album-tag-img img {
+  width: 100%;
+}
+.m-album-list li .appinfo {
+  background: #eee;
+  padding-bottom: 40px;
+  padding-top: 12px;
+  min-height: 65px;
+}
+.m-album-list li .platforms {
+  font-size: 12px;
+  float: right;
+  margin-right: 10px;
+  position: relative;
+  z-index: 999;
+}
+.m-album-list li .platforms th, .m-album-list li .platforms td {
+  padding: 5px 0;
+}
+.m-album-list li .platforms th {
+  padding-right: 10px;
+  text-align: right;
+}
+.m-album-list li .platforms .download {
+  width: 76px;
+  padding-left: 10px;
+  height: 26px;
+  float: right;
+  text-align: center;
+  color: #222;
+  opacity: 0.9;
+  text-decoration: none;
+}
+.m-album-list li .platforms .download:hover {
+  opacity: 1;
+}
+.m-album-list li .platforms .iphone, .m-album-list li .platforms .ipad, .m-album-list li .platforms .windows_phone, .m-album-list li .platforms .android {
+  width: 76px;
+  padding-left: 10px;
+  height: 26px;
+  line-height: 26px;
+  background: url(../img/sp_download_platform.png) no-repeat;
+  color: #fff;
+  text-shadow: 1px 1px 1px #333;
+}
+.m-album-list li .platforms .iphone {
+  background-position: 0 -30px;
+}
+.m-album-list li .platforms .ipad {
+  background-position: 0 -60px;
+}
+.m-album-list li .platforms .windows_phone {
+  background-position: 0 -90px;
+}
+.m-album-list li .platforms .icon-download {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  line-height: 14px;
+  vertical-align: text-top;
+  background: url(../img/glyphicons-halflings.png) -96px -24px no-repeat;
+}
+.m-album-list li .share {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+}
+.m-album-list li .share img {
+  display: block;
+}
+.m-album-list li .share .qrcode {
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  bottom: 0;
+  left: 0;
+}
+.m-album-list li .share .sns-and-read-more {
+  float: right;
+  margin-right: 10px;
+  position: absolute;
+  margin-bottom: 10px;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  text-align: right;
+}
+.m-album-list li .share .ssp-btn-more {
+  float: right;
+  line-height: 1.6em;
+  margin-left: .5em;
+}

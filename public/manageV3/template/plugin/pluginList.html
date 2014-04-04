@@ -1,0 +1,131 @@
+ <!--中栏或(中栏+右侧栏) 开始-->
+    <div class="wrap g-moudel-list m-plugin m-plugin-pluginList">
+        <!-- 主要内容开始 -->
+        <div class="w-main m-block">
+
+
+            <div class="section">
+                <h2>已启用的插件</h2>
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th class="col-check"><input type="checkbox" class="input-checkbox"></th>
+                            <th class="col-name">插件</th>
+                            <th class="col-description">插件描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="js_enablePlugListContent">
+                            {{each actived}}
+                                <tr class="active">
+                                    <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                                    <td class="col-name">
+                                        <strong>{{$value.name}}</strong>
+                                        <div class="actions">
+                                             <span class="g-btn g-btn-mini" name="{{$value.plugin_name}}" operate="enable">启用</span>
+                                             |
+                                             <span class="g-btn g-btn-mini" name="{{$value.plugin_name}}">安装</span>
+                                             |
+                                             <span class="g-btn g-btn-mini act-uninstall" name="{{$value.plugin_name}}" operate="disable">停用</span>
+                                             |
+                                             <span class="g-btn g-btn-mini act-uninstall" name="{{$value.plugin_name}}">卸载</span>
+                                        </div>
+                                    </td>
+                                    <td class="col-description">
+                                        <p>
+                                            {{$value.description}}
+                                        </p>
+                                        <div class="info">
+                                            <!-- {{$value.version}}版本 | 作者为{{$value.author}} | <a href="">访问插件主页</a> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>未启用</h2>
+
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th class="col-checkbox"><input type="checkbox" class="input-checkbox"></th>
+                            <th class="col-name">插件</th>
+                            <th class="col-description">插件描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="js_disablePluginListContent">
+                            {{each disabled}}
+                                <tr class="inactive">
+                                    <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                                    <td class="col-name">
+                                        <strong>{{$value.name}}</strong>
+                                        <div class="actions">
+                                             <span class="g-btn g-btn-mini" name="{{$value.plugin_name}}" operate="enable">启用</span>
+                                             |
+                                             <span class="g-btn g-btn-mini" name="{{$value.plugin_name}}">安装</span>
+                                             |
+                                             <span class="g-btn g-btn-mini act-uninstall" name="{{$value.plugin_name}}" operate="disable">停用</span>
+                                             |
+                                             <span class="g-btn g-btn-mini act-uninstall" name="{{$value.plugin_name}}">卸载</span>
+                                        </div>
+                                    </td>
+                                    <td class="col-description">
+                                        <p>
+                                            {{$value.description}}
+                                        </p>
+                                        <div class="info">
+                                            <!-- {{$value.version}}版本 | 作者为{{$value.author}} | <a href="">访问插件主页</a> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>未安装的插件</h2>
+
+                <table class="g-table">
+                    <thead>
+                        <tr>
+                            <th class="col-checkbox"><input type="checkbox" class="input-checkbox"></th>
+                            <th class="col-name">插件</th>
+                            <th class="col-description">插件描述</th>
+                        </tr>
+                    </thead>
+                    <tbody id="js_uninstalledPluginListContent">
+                            {{each uninstall}}
+                                <tr class="inactive">
+                                    <td class="col-checkbox"><input type="checkbox" class="input-checkbox"></td>
+                                    <td class="col-name">
+                                        <strong>{{$value.name}}</strong>
+                                        <div class="actions">
+                                             <span class="g-btn g-btn-mini" name="{{$value.plugin_name}}" operate="enable">启用</span>
+                                             |
+                                             <span class="g-btn g-btn-mini" name="{{$value.plugin_name}}">安装</span>
+                                             |
+                                             <span class="g-btn g-btn-mini act-uninstall" name="{{$value.plugin_name}}" operate="disable">停用</span>
+                                             |
+                                             <span class="g-btn g-btn-mini act-uninstall" name="{{$value.plugin_name}}">卸载</span>
+                                        </div>
+                                    </td>
+                                    <td class="col-description">
+                                        <p>
+                                            {{$value.description}}
+                                        </p>
+                                        <div class="info">
+                                            <!-- {{$value.version}}版本 | 作者为{{$value.author}} | <a href="">访问插件主页</a> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 主要内容结束 -->
+    </div>
+    <!-- 中栏或(中栏+右侧栏) 结束

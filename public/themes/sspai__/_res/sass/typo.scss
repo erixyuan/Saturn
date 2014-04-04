@@ -1,0 +1,333 @@
+@import "variable";
+
+.typo {
+
+    // 兼容原来的表格
+    // 多数是用来 在同一行里放 2张 50%的图
+
+    overflow: hidden;
+    margin-bottom: 2em;
+    @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+    }
+
+
+    h1, h2, h3, h4 {
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            font-family: $yahei;
+        }
+    }
+
+
+    h1 {
+        margin: 15px 0 5px 0 ;
+
+    }
+
+    h2 {
+        font-size: 1.6em;
+        margin: 15px 0 10px 0;
+        padding-top: 15px;
+        border-bottom: 1px solid #D3D3D3;
+        padding-bottom: 9px;
+    }
+
+    h3 {
+        font-size: 1.2em;
+        margin: 10px 0 5px 0;
+        color: #000000;
+        padding-top: 10px;
+
+    }
+
+    h4 {
+
+    }
+
+    // blockquote {
+    //     background: #f5f5f5;
+    //     padding: 15px 12px;
+    //     margin: 0 10px 20px 20px;
+
+    // }
+
+
+    blockquote{
+        background-color: #F7F7F7;
+        padding: 18px;
+        padding-left: 50px;
+        margin: 0 0px 15px 0px;
+        position: relative;
+        line-height: 1.8;
+        text-indent: 0px;
+        border-left: 4px solid #ccc;
+
+        &:before, &:after{
+            font-family: Arial,serif;
+            font-size: 5em;
+            line-height: 1em;
+            font-weight: bold;
+            color: #ddd;
+            position: absolute;
+
+        }
+        &:before {
+            content: "“";
+            left: 12px;
+            top: 0;
+        }
+
+        &:after {
+            content: "”";
+            right: 12px;
+            bottom: -31px;
+        }
+
+
+    }
+
+    table {
+        margin: 1em 0;
+        background-color: #f9f9f9;
+        border: 1px #aaa solid;
+        border-collapse: collapse;
+        color: black;
+
+        th, tr, td {
+            padding: 0.3em;
+
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+            border: 1px #aaa solid;
+        }
+
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+
+        td {
+            border: 1px #aaa solid;
+        }
+    }
+
+    a {
+        background: transparent;
+        color: rgb(21, 37, 219);
+        text-decoration: none;
+        border-bottom: 1px dotted #030CE9;
+        margin: 0 3px;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 20px;
+        line-height: 1.8;
+        font-size: 1.18em;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            font-size: 1em;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        margin-bottom: 15px;
+
+        @media screen and (min-width: $desktopWidth) and (orientation: landscape) {
+            max-width: 640px;
+        }
+    }
+
+
+
+
+
+    $grid6_width: 48%;
+    $grid4_width: 31.3%;
+    $grid3_width: 23%;
+
+
+    // ROW START 開始 以下是放格顯示圖片
+    .row {
+        position: relative;
+        width: 97.7%;
+        padding: 1%;
+        *zoom: 1;
+        clear: both;
+        display: table;
+        margin-bottom: 0.5em;
+        background: #F8F8F8;
+        border: solid 1px #DDDDDD;
+        border-radius: 2px;
+
+        // 手機版grid都統一。上圖下文 100%寬。
+        .grid3, .grid4, .grid6 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 0.5em;
+            float: left;
+            margin: 1%;
+
+            img {
+                max-width: 100%;
+                box-shadow:1px 1px 1px rgba(88,88,88,0.43);
+                margin: 0;
+            }
+
+        }
+
+
+        // 電腦版，2圖
+        .grid6 {
+            width: $grid6_width;
+
+            img {
+                *width: $grid6_width;
+            }
+        }
+
+        // 電腦版，3圖
+        .grid4 {
+            width: $grid4_width;
+
+            img {
+                *width: $grid4_width;
+            }
+        }
+
+        // 電腦版，4圖
+        .grid3 {
+                width: $grid3_width;
+
+            img {
+                *width: $grid4_width;
+            }
+        }
+
+    }
+
+// 兼容旧文章
+.grid2 {
+    list-style-type: none;
+    overflow: hidden;
+    clear: both;
+}
+
+
+    // ROW START 結束
+
+    // // ####################################################################
+    // // #    标题设置
+    // // ####################################################################
+
+    // h1, h2, h3, h4, h5, h6 {
+    //     line-height: 1.5em;
+    //     margin-top: 0;
+    //     margin-bottom: 0.4em;
+    // }
+
+    // h1 {
+    //     font-weight: bold;
+    //     font-size: 1.7em;
+    // }
+
+    // h2 {
+    //     font-weight: bold;
+    //     font-size: 1.5em;
+    // }
+
+    // h3 {
+    //     font-size: 1.3em;
+    // }
+
+    // h4 {
+    //     font-size: 1.2em;
+    // }
+
+    // h5, h6 {
+    //     font-size: 1em;
+    // }
+
+
+    // // ####################################################################
+    // // #    代码块
+    // // ####################################################################
+    // code {
+    //     display: block;
+    //     clear: both;
+    //     overflow-x: auto;
+    //     white-space: pre;
+    //     font-family: Consolas, "Liberation Mono", Courier, monospace;
+    //     font-style: 12px;
+    //     direction: ltr;
+    //     -moz-tab-size: 4;
+    //     -o-tab-size: 4;
+    //     tab-size: 4;
+    //     -webkit-hyphens: none;
+    //     -moz-hyphens: none;
+    //     -ms-hyphens: none;
+    //     background: #fff;
+    //     color: #666;
+    //     background-color: #f0f3f7;
+    //     background-image: url(../img/blueprint-dark.png);
+    //     border: 1px solid #5088c5;
+    //     padding: 10px;
+    //     margin-bottom: .5em;
+    //     border-left: 6px solid rgba(0,83,159,0.65);
+
+    // }
+
+
+    // // ####################################################################
+    // // #    引用块
+    // // ####################################################################
+    // blockquote {
+    //     margin-left: 0;
+    //     padding-left: 15px;
+    //     border-left: 5px solid #e5e5e5;
+    //     font-style: italic;
+
+    //     p {
+    //         font-style: normal;
+    //     }
+    // }
+
+
+
+    // // ####################################################################
+    // // #    输入框
+    // // ####################################################################
+    // .input-text {
+    //     font-size: 14px;
+    //     padding: 7px;
+    //     line-height: 1em;
+    //     border: 1px solid #d4d4d4;
+    //     border-radius: 1px;
+    //     box-shadow: inset 0px 1px 3px rgba(244,244,244,1);
+    //     outline: none;
+    //     box-sizing: content-box;
+    // }
+
+
+
+    // // ####################################################################
+    // // #    文本区域
+    // // ####################################################################
+    // textarea {
+    //     box-shadow: inset 0px 1px 3px rgba(244,244,244,1);
+    //     border: 1px solid #d4d4d4;
+    //     border-radius: 1px;
+    //     outline: none;
+    //     padding: 9px 8px;
+    //     box-sizing: content-box;
+    // }
+
+
+
+
+}

@@ -1,0 +1,81 @@
+
+<div class="wrap g-moudel-page m-plugin m-plugin-ad">
+
+    <div class="w-main">
+
+        <div class="section">
+            <h2>
+                广告编辑区域
+            </h2>
+
+            <div class="field">
+                <label>Key：</label>
+                <input class="input-text" type="text" name="key" value="{{key}}">
+                <em>( 英文数字 或 _- )</em>
+            </div>
+
+            <div class="field">
+                <label>名称：</label>
+                <input class="input-text" type="text" name="name" value="{{name}}">
+            </div>
+
+            <div class="field">
+                <label>广告类型:</label>
+                <select name="" id="js_adType">
+                    <option value="standard">标准</option>
+                    <option value="color">自动底色切换</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="section g-moudel-list">
+            <h2>广告管理区域</h2>
+
+            <div class="fn-clear g-moudel-list-header">
+                <div class="fn-left">
+                    <span class="g-btn g-btn-primary" id="js_addItem">添加</span>
+                    <span class="g-btn" id="js_adImgBtn">添加新图片</span>
+                </div>
+
+                <div class="g-modal" style="" id="js_imgListContent">
+
+                    <div class="g-modal-dialog">
+                        <a href="javascript:void(0)" class="close" id="js_imgListClose">
+                            <i class="fa fa-times"></i>
+                        </a>
+
+                        <div class="fn-clear g-modal-dialog-header">
+                            <h5 class="fn-left">请选择图片</h5>
+                        </div>
+
+                        <div class="fn-clear g-modal-dialog-container">
+                            <ul class="attachment-list" id="js_imgList" style="overflow-y: auto;max-height: 400px;"></ul>
+                        </div>
+
+                        <div class="fn-clear g-modal-dialog-footer">
+                            <div class="fn-clear g-pagination" id="js_pagination"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="rgbPicker"></div>
+            <table class="fn-clear g-moudel-list-container g-table" id="js_itemList">
+
+
+
+            </table>
+
+
+            <div class="fn-clear g-moudel-list-footer">
+                <div class="fn-left m-function">
+                    <span class="g-btn g-btn-primary" id="js_update">保存</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
